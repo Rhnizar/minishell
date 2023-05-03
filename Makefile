@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/02 15:43:51 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/03 16:31:48 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = minishell
 
 LIBFT = libft/libft.a
 
-SRCS = test.c
+SRCS = test.c expansion.c
 
 # SRCS_B = 
 
@@ -38,7 +38,7 @@ $(LIBFT):
 %.o : %.c
 	$(CCe) $(FLAGS) -c $< -o $@
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) minishell.h
 	$(CCe) $(FLAGS) $(RDL) $(OBJS) $(LIBFT) -o $(NAME)
 
 # bonus: $(LIBFT) $(NAME_B)

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/03 08:46:49 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:30:15 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int main()
 	while (1)
 	{
     	read_line = readline("minishell> ");
+		printf("%s\n", quotes_handler(read_line));
 		add_history(read_line);
 	}
 	return 0;
