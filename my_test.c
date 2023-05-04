@@ -6,29 +6,29 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:51:57 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/04 11:03:31 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:49:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fill_cmdshell(t_cmdshell *cmdshell, char *line, int *i)
+void	fill_cmdshell(t_cmdshell *cmdshell, char *line)
 {
 	// cmdshell->cmd = command(line);
-	if (line[*i] == '|')
-		(*i)++;
-	while (line[*i] && line[*i] != '|')
+	(void)cmdshell;
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] != '|')
 	{
-		(*i)++;
+		i++;
 	}
-	if (line[*i] == '|')
-		cmdshell->pip = 5;
 }
 
-void	create_list(t_list **list, t_cmdshell *cmdshell)
+void	create_list(t_listt **list, t_cmdshell *cmdshell)
 {	
-	t_list	*new;
-	t_list	*tmp;
+	t_listt	*new;
+	t_listt	*tmp;
 	
 	new = malloc(sizeof(t_list));
 	if (!new)
@@ -46,7 +46,7 @@ void	create_list(t_list **list, t_cmdshell *cmdshell)
 	tmp->next = new;
 }
 
-void	print_list2(t_list *lst)
+void	print_list2(t_listt *lst)
 {
 	while (lst)
 	{
@@ -71,26 +71,38 @@ int	count_cmd(char *line)
 	return(count);
 }
 
+char	**split_in_pip(char *line)
+{
+	return (ft_split(line, '|'));
+}
+
 int main(void)
 {
-	t_list		*lst;
+	t_listt		*lst;
 	t_cmdshell	*shell;
 	int			count;
-	int			i;
-	int			index;
+	// int			i;
+	// int			index;
 
 	lst = NULL;
-	i = 0;
-	index = 0;
-	count = count_cmd("cat Makefile | grep minishell  wc -l") + 1;
-	shell = malloc(sizeof(t_cmdshell) * count);
+	// i = 0;
+	// index = 0;
+	count = count_cmd("cat Makefile | grep minishell | wc -l");
+	shell = malloc(sizeof(t_cmdshell));
 	if (!shell)
 		return (1);
-	while (i++ < count)
+
+	char	**sp_pip;
+	int		i = 0;
+	sp_pip = split_in_pip("cat Makefile | grep minishell | wc -l");
+	while (sp_pip[i])
 	{
-		fill_cmdshell(shell, "cat Makefile | grep minishell  wc -l", &index);
-		create_list(&lst, shell);
+		// shell->pip = 1;
+		// fill_cmdshell(shell, sp_pip[i]);
+		// create_list(&lst, shell);
+		printf("%s\n", sp_pip[i]);
+		i++;
 	}
-	print_list2(lst);
+	// print_list2(lst);
 	return (0);
 }
