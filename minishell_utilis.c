@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   minishell_utilis.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:40:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/03 08:46:49 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/03 15:58:33 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/05/03 16:32:28 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main()
+void	print_list(t_list *lst)
 {
-	char *read_line;
-	while (1)
-	{
-    	read_line = readline("minishell> ");
-		add_history(read_line);
-	}
-	return 0;
+	printf("\n--------------------------------------------\n");
+	printf("\n CMD ==> %s\n", lst->cmd);
+	printf("\n OPT ==> %s\n", lst->opt);
+	printf("\n ARG ==> %s\n", lst->arg);
+	printf("\n--------------------------------------------\n");
 }

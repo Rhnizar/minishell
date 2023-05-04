@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
+#    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/02 15:43:51 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/03 16:33:46 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = minishell
 
 LIBFT = libft/libft.a
 
-SRCS = test.c
+SRCS = minishell.c minishell_utilis.c fill_list.c
 
 # SRCS_B = 
 
