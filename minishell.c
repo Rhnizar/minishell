@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/04 07:33:23 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/04 08:06:02 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int main(void)
 {
 	char	*read_line;
-	t_list	*lst;
+	t_cmdshell	*lst;
 
-	lst = malloc(sizeof(t_list));
+	lst = malloc(sizeof(t_cmdshell));
 	while (1)
 	{
 		read_line = readline("minishell ~ "); 

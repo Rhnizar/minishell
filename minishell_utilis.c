@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:58:33 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/03 16:32:28 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/04 08:06:20 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_list(t_list *lst)
+void	print_list(t_cmdshell *lst)
 {
 	printf("\n--------------------------------------------\n");
 	printf("\n CMD ==> %s\n", lst->cmd);

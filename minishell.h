@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/03 16:58:39 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/04 08:08:30 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 //////////////// struct ///////////////
 
-typedef struct s_list
+typedef struct s_cmdshell
 {
 	char	*cmd;
 	char	*opt;
@@ -38,22 +38,22 @@ typedef struct s_list
 	char	*red_out;
 	int		and;
 	int		or;
-}				t_list;
+}				t_cmdshell;
 
 ///////////////// end struct ///////////
 
 
 ////// linked list /////
 
-typedef struct s_test
+typedef struct s_list
 {
-	t_list			*lst;
-	struct s_test	*next;
-}			t_test;
+	t_cmdshell			*cmdshell;
+	struct s_list		*next;
+}				t_list;
 
 //// end linked list //////
 
-void	print_list(t_list *lst);
+void	print_list(t_cmdshell *lst);
 
 /////// fill list /////
 void	*command(char *line);

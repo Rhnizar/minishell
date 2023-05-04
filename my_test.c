@@ -6,48 +6,36 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:51:57 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/03 15:56:50 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/04 08:20:03 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*option(char *line)
+void	create_list(t_list **list, t_cmdshell *cmdshell)
 {
-	int		i;
-	int		tmp;
-	int		j;
-	int		len;
-	char	*opt;
-
-	i = 0;
-	len = 0;
-	j = 0;
-	while (line[i] && line[i] != '-')
-		i++;
-	if (line[i] == '-')
-	{
-		tmp = i;
-		
-		while(line[i] && line[i++] != ' ')
-		{
-			// i++;
-			len++;
-		}
-		opt = malloc(sizeof(char) * len + 1);
-		if (!opt)
-			return (NULL);
-		while (j < len)
-			opt[j++] = line[tmp++];
-		opt[j] = '\0';
-		return (opt);
-	}
-	return (NULL);
+	t_list	*new;
+	
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->cmdshell = cmdshell;
+	new->next = NULL;
+	*list = new;
 }
-
 
 int main(void)
 {
-	printf("just test   %s\n", option("hello -r "));
+	t_list	*lst;
+	t_cmdshell	*shell1;
+
+	shell1 = malloc(sizeof(t_cmdshell));
+	lst = malloc(sizeof(t_list));
+	lst->cmdshell = shell1;
+	lst->next = NULL;
+	
+	printf("====>%d\n", lst->cmdshell->pip);
+	// printf("====>%d", lst->next->cmdshell->pip);
+
 	return (0);
 }
