@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/03 16:31:48 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/04 16:17:57 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ NAME = minishell
 
 LIBFT = libft/libft.a
 
-SRCS = test.c expansion.c
+EXECUTION = execution/print_error.c
+
+SRCS = minishell.c expansion.c $(EXECUTION)
 
 # SRCS_B = 
 
@@ -26,7 +28,8 @@ OBJS = $(SRCS:.c=.o)
 
 RDL = -lreadline
 
-FLAGS = -Wall -Wextra -Werror
+#
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 CCe = cc
 
