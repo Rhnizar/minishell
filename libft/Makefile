@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/13 18:50:25 by rrhnizar          #+#    #+#              #
-#    Updated: 2022/10/17 13:29:38 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/05 17:54:43 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 
 FLAGS = -Wall -Werror -Wextra -I.
 
-CC = gcc $(FLAGS)
+CC = cc $(FLAGS)
 
 SRCS =	ft_bzero.c \
 		ft_atoi.c \
