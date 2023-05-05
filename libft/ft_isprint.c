@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 14:47:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/09/28 16:42:56 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/09/29 10:25:45 by rrhnizar          #+#    #+#             */
+/*   Updated: 2022/09/29 18:26:19 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,10 @@
 
 int	ft_isprint(int c)
 {
-	return (c >= ' ' && c < 127);
+	return (c >= 32 && c <= 126);
 }
+/*int main(void)
+{
+    int r = ft_isprint(' ');
+    printf("%d",r);
+}*/

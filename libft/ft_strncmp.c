@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 07:05:13 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/10 11:54:07 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/10/01 16:46:19 by rrhnizar          #+#    #+#             */
+/*   Updated: 2022/10/14 22:22:18 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*p_s1;
-	unsigned char	*p_s2;
+	size_t	i;
 
-	p_s1 = (unsigned char *)s1;
-	p_s2 = (unsigned char *)s2;
 	i = 0;
-	while (i < n && (p_s1[i] || p_s2[i]))
+	while ((((unsigned char *)s1)[i] || ((unsigned char *)s2)[i]) && i < n)
 	{
-		if (p_s1[i] != p_s2[i])
-			return (p_s1[i] - p_s2[i]);
+		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
 		i++;
 	}
 	return (0);
 }
+// int main(void)
+// {
+// 	char s1[] = "";
+// 	char s2[] = "";
+// 	printf("%d",strncmp(s1, s2, 2));
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 15:51:28 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/07 09:41:36 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/09/29 20:03:34 by rrhnizar          #+#    #+#             */
+/*   Updated: 2022/10/14 22:20:29 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	s_len;
+	int	l;
 
-	s_len = ft_strlen(s);
-	while (s[s_len] != (char)c)
+	l = ft_strlen(s);
+	while (l >= 0)
 	{
-		if (s_len == 0)
-			return (0);
-		s_len--;
+		if (s[l] == (char)c)
+			return ((char *)&s[l]);
+		l--;
 	}
-	return ((char *)&s[s_len]);
+	return (NULL);
 }
+// int main(void)
+// {
+//    char a[] = "karim";
+//    puts(ft_strrchr(a, 'r'));
+// }

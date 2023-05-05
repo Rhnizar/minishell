@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 14:43:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/09/28 14:45:48 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/09/28 16:23:37 by rrhnizar          #+#    #+#             */
+/*   Updated: 2022/09/29 12:13:21 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,3 +16,8 @@ int	ft_isascii(int c)
 {
 	return (c >= 0 && c <= 127);
 }
+/*int main(void)
+{
+    int r = ft_isascii('Y');
+    printf("%d", r);
+}*/

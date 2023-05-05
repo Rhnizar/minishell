@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 10:53:07 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/11 07:39:58 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/10/13 22:42:49 by rrhnizar          #+#    #+#             */
+/*   Updated: 2022/10/14 23:02:32 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,31 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (!lst)
+	if (!lst || !f)
 		return ;
-	if (f)
+	while (lst)
 	{
-		while (lst)
-		{
-			f(lst->content);
-			lst = lst->next;
-		}
+		f(lst->content);
+		lst = lst->next;
 	}
 }
+
+// void	f(void *r)
+// {
+// 	char *s = ft_strdup(r);
+// 	s = "Where is this";
+// 	printf("%s\n", s);
+// }
+
+// int main(void)
+// {
+// 	t_list *no1;
+// 		no1 = ft_lstnew("Hi");
+// 	t_list *no2;
+// 		no2 = ft_lstnew("Friend");
+
+// 	no1->next = no2;
+
+// 	ft_lstiter(no1 , f);
+
+// }

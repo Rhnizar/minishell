@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/30 15:13:37 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/07 09:29:37 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/10/05 17:01:01 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/05/05 12:38:28 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,26 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		s1_len;
-	int		s2_len;
-	int		i;
-	char	*joined_str;
+	char	*p;
+	size_t	lens1;
+	size_t	lens2;
+	size_t	i;
+	size_t	j;
 
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
 	i = 0;
-	joined_str = (char *)malloc(s1_len + s2_len + 1);
-	if (!joined_str)
-		return (0);
-	while (i < s1_len)
+	j = 0;
+	lens1 = ft_strlen(s1);
+	lens2 = ft_strlen(s2);
+	p = malloc(sizeof(char) * ((lens1 + lens2) + 1));
+	if (!p)
+		return (NULL);
+	while (s1[i])
 	{
-		joined_str[i] = s1[i];
+		p[i] = (s1[i]);
 		i++;
 	}
-	i = 0;
-	while (i < s2_len)
-	{
-		joined_str[s1_len + i] = s2[i];
-		i++;
-	}
-	joined_str[s1_len + i] = '\0';
-	return (joined_str);
+	while (s2[j])
+		p[i++] = s2[j++];
+	p[i] = '\0';
+	return (p);
 }
-
-// int main()
-// {
-// 	char str1[] = "Hello my ";
-// 	char str2[] = "name is karim";
-// 	puts(ft_strjoin(str1,str2));
-// 	return (0);
-// }

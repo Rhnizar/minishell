@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/04 11:58:02 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 12:27:28 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,31 @@
 
 
 
+// #define BONUS 0
+
+#define PIPE 0
+#define RED_IN 1
+#define RED_OUT 2
+#define PAR_OPEN 3
+#define PAR_CLOSE 4
+#define WLDC 5
+#define SEMC 6
+
+#define APP 8
+#define CMD 9
+#define AND 10
+#define OR  11
+#define HER 12
+#define	ARG 13
+#define OPT	14
+
+
+// typedef struct s_tokens
+// {
+// 	char	*str = "|"
+// 	int		type = PIPE;
+	
+// }	t_tokens;
 
 //////////////// struct ///////////////
 
@@ -32,11 +57,7 @@ typedef struct s_cmdshell
 	char	*opt;
 	char	*arg;
 	int		pip;
-	char	*herdoc;
-	char	*append;
-	char	*variable;
-	char	*red_in;
-	char	*red_out;
+	char	**reds; // ==> append red_in red_out herdoc
 	int		and;
 	int		or;
 }				t_cmdshell;

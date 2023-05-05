@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 07:23:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/08 08:58:12 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/10/13 21:50:48 by rrhnizar          #+#    #+#             */
+/*   Updated: 2022/10/14 22:52:15 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	ft_lstsize(t_list *lst)
 {
 	int	count;
 
-	if (!lst)
-		return (0);
 	count = 0;
 	while (lst)
 	{
@@ -26,3 +24,14 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (count);
 }
+
+// int main(void)
+// {
+// 	t_list *no1;
+// 		no1 = ft_lstnew("test1");
+
+// 	t_list *no2;
+// 		no2 = ft_lstnew("test2");
+// 	no1->next = no2;
+// 	printf("%d\n", ft_lstsize(no1));
+// }

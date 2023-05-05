@@ -3,20 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 17:39:49 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/11 06:49:11 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/10/13 22:21:44 by rrhnizar          #+#    #+#             */
+/*   Updated: 2022/10/14 22:56:13 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	if (!lst)
+	if (!lst || !del)
 		return ;
-	if (del)
-		del(lst->content);
-	free(lst);
+	del (lst->content);
+	free (lst);
 }
+
+// void del(void *content)
+// {
+// 	free(content);
+// }
+
+// int main(void)
+// {
+// 	t_list *no1;
+// 		no1 = ft_lstnew(ft_strdup("test1"));
+
+// 	t_list *no2;
+// 		no2 = ft_lstnew(ft_strdup("test2"));	 
+// 	no1->next = no2;
+// 	ft_lstdelone(no1, del);
+// 	while(no1)
+// 	{
+// 		printf("%s\n", no1->content);
+// 		no1 = no1->next;
+// 	}
+// }

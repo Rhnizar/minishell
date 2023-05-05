@@ -6,24 +6,33 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:51:57 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/04 11:49:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 12:19:08 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fill_cmdshell(t_cmdshell *cmdshell, char *line)
+void	cheack_pip(t_cmdshell *cmdshell, char *line)
 {
-	// cmdshell->cmd = command(line);
-	(void)cmdshell;
 	int	i;
 
 	i = 0;
 	while (line[i] && line[i] != '|')
-	{
 		i++;
-	}
+	if (line[i] == '|')
+		cmdshell->pip = 1;
 }
+// void	fill_cmdshell(t_cmdshell *cmdshell, char *line)
+// {
+// 	cmdshell->cmd = command(line);
+// 	int	i;
+
+// 	i = 0;
+// 	while (line[i] && line[i] != '|')
+// 	{
+// 		i++;
+// 	}
+// }
 
 void	create_list(t_listt **list, t_cmdshell *cmdshell)
 {	
@@ -50,7 +59,8 @@ void	print_list2(t_listt *lst)
 {
 	while (lst)
 	{
-		printf("\n\n ======= >>>>    %d\n\n", lst->cmdshell->pip);
+		printf("\n ======= >>>>    %d\n", lst->cmdshell->pip);
+		printf("\n\n ======= >>>>    %s\n\n", lst->cmdshell->cmd);
 		lst = lst->next;
 	}
 }
@@ -71,9 +81,34 @@ int	count_cmd(char *line)
 	return(count);
 }
 
+int	len_dou_poi(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 char	**split_in_pip(char *line)
 {
-	return (ft_split(line, '|'));
+	char	**sp_pip;
+	// char	**sp_and;
+	// char	**sp_or;
+	int		i;
+	int		len;
+
+	i = 0;
+	sp_pip = ft_split(line, '|');
+	len = len_dou_poi(sp_pip) - 1;
+	while (len != 0)
+	{
+		sp_pip[i] = ft_strjoin(sp_pip[i], "|");
+		i++;
+		len--;
+	}
+	return (sp_pip);
 }
 
 int main(void)
@@ -97,12 +132,38 @@ int main(void)
 	sp_pip = split_in_pip("cat Makefile | grep minishell | wc -l");
 	while (sp_pip[i])
 	{
-		// shell->pip = 1;
+		// cheack_pip(shell, sp_pip[i]);
+		// shell->cmd = sp_pip[i];
 		// fill_cmdshell(shell, sp_pip[i]);
-		// create_list(&lst, shell);
+		create_list(&lst, shell);
 		printf("%s\n", sp_pip[i]);
 		i++;
 	}
-	// print_list2(lst);
+	print_list2(lst);
 	return (0);
 }
+// [ "<<", ">>", "||", "&&"]
+
+// [';', '<', '>', '(', ')', '*', '|']
+
+
+
+// echo CMD
+// test
+// && AND
+// echo
+// lala 
+// > RED_OUT
+// lala /ARG_RED_IN
+// > RED_OUT
+// baba /ARG_RED_IN
+// > RED_OUT
+// tata /ARG_RED_IN
+// | PIPE
+// ls 
+// ( PREN
+
+// cat
+// -t -e
+// <
+// tata 

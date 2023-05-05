@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 16:58:29 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/03 17:25:51 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/10/09 19:28:23 by rrhnizar          #+#    #+#             */
+/*   Updated: 2022/10/14 23:12:49 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int		i;
-	char	*ret_s;
+	char			*str;
+	unsigned int	i;
+	unsigned int	len;
 
-	ret_s = (char *)malloc(ft_strlen(s) * sizeof(char) + 1);
-	if (!ret_s)
-		return (0);
+	len = ft_strlen (s);
+	str = malloc(sizeof(char ) * len + 1);
+	if (!str)
+		return (NULL);
 	i = 0;
-	while (s[i])
+	while (i < len)
 	{
-		ret_s[i] = f(i, s[i]);
+		str[i] = f(i, s[i]);
 		i++;
 	}
-	ret_s[i] = '\0';
-	return (ret_s);
+	str[i] = '\0';
+	return (str);
 }
+
+// int main(void)
+// {
+// 	puts(ft_strmapi("hello", f));
+// }

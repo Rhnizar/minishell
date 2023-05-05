@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/03 16:33:46 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/05 12:35:13 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ CCe = cc
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -C libft && make clean -C libft 
+	make -C libft && make clean -C libft
 
 %.o : %.c
 	$(CCe) $(FLAGS) -c $< -o $@
@@ -49,8 +49,8 @@ $(NAME): $(OBJS)
 clean:
 	rm -rf $(OBJS) $(OBJS_B)
 
-fclean: clean
-	rm -rf $(NAME) $(NAME_B) $(LIBFT)
+fclean: clean 
+	rm -rf $(NAME) $(NAME_B) $(LIBFT) && make clean -C libft
 
 re : fclean all
 

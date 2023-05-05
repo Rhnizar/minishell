@@ -3,53 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 14:49:35 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/12 15:50:38 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/10/09 19:44:25 by rrhnizar          #+#    #+#             */
+/*   Updated: 2022/10/17 15:18:46 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_nbrs(int x)
+static	int	countint(int n)
 {
-	int	counter;
+	int	count;
 
-	counter = 0;
-	if (x < 0)
-		counter++;
-	while (x != 0)
+	count = 0;
+	if (n < 0)
 	{
-		counter++;
-		x /= 10;
+		n *= -1;
+		count++;
 	}
-	return (counter);
+	while (n > 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return (count);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*ret_num;
+	char	*res;
 	int		len;
 
-	len = count_nbrs(n);
-	if (n == 0 || n == -0)
-		return (ft_strdup("0"));
+	len = countint(n);
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	ret_num = (char *)malloc(sizeof(char) * (len + 1));
-	if (!ret_num)
-		return (0);
+	if (n == 0)
+		return (ft_strdup("0"));
+	res = malloc(sizeof(char) * len + 1);
+	if (!res)
+		return (NULL);
 	if (n < 0)
 	{
+		res[0] = '-';
 		n *= -1;
-		ret_num[0] = '-';
 	}
-	ret_num[len--] = '\0';
+	res[len] = '\0';
 	while (n != 0)
 	{
-		ret_num[len--] = n % 10 + '0';
-		n /= 10;
+		res[len -1] = n % 10 + '0';
+		n = n / 10;
+		len--;
 	}
-	return (ret_num);
+	return (res);
 }

@@ -3,36 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 09:30:18 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/12 10:40:30 by kchaouki         ###   ########.fr       */
+/*   Created: 2022/10/09 21:15:44 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/01/10 19:18:35 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t	i;
-	char	*p_dest;
-	char	*p_src;
 
 	i = 0;
-	p_dest = (char *)dst;
-	p_src = (char *)src;
 	if (!dst && !src)
 		return (0);
-	if (p_dest > p_src)
+	if (dst > src)
+	{
 		while (len--)
-			(p_dest[len] = p_src[len]);
+		((char *)dst)[len] = ((char *)src)[len];
+	}
 	else
 	{
 		while (i < len)
 		{
-			(p_dest[i] = p_src[i]);
+			((char *)dst)[i] = ((char *)src)[i];
 			i++;
 		}
 	}
 	return (dst);
 }
+
+// int main()
+// {
+//   char str[40] = "1337 is a school of 42";
+//   // dst = cdef 
+//   // src = abcdef
+//   memmove(str + 5, str + 2, 7);  //ababaf
+//   puts(str +5);
+//   return (0);
+// }
+// 1337 is a school of 42
+// memmove(str + 5, str + 2, 7);
+// str +5 ==> dst = is a sc)hool of 42
+// str +2 ==> src = 37 is a school of 42
+// 7 src ==> 37 is a
+// 7 dst ==> is a sc
