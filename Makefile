@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/05 15:51:35 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/05 16:12:26 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = minishell
 
 LIBFT = libft/libft.a
 
-SRCS = second_idea.c
+SRCS = second_idea.c split_with_my_char.c
 
 # SRCS_B = 
 
@@ -26,7 +26,7 @@ OBJS = $(SRCS:.c=.o)
 
 RDL = -lreadline
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 CCe = cc
 

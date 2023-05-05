@@ -6,17 +6,17 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:58:33 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/04 08:06:20 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:09:32 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishell.h"
 
-void	print_list(t_cmdshell *lst)
-{
-	printf("\n--------------------------------------------\n");
-	printf("\n CMD ==> %s\n", lst->cmd);
-	printf("\n OPT ==> %s\n", lst->opt);
-	printf("\n ARG ==> %s\n", lst->arg);
-	printf("\n--------------------------------------------\n");
-}
+// void	print_list(t_cmdshell *lst)
+// {
+// 	printf("\n--------------------------------------------\n");
+// 	printf("\n CMD ==> %s\n", lst->cmd);
+// 	printf("\n OPT ==> %s\n", lst->opt);
+// 	printf("\n ARG ==> %s\n", lst->arg);
+// 	printf("\n--------------------------------------------\n");
+// }

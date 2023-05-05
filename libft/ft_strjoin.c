@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:01:01 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:27:32 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:18:08 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	lens1 = ft_strlen(s1);
 	lens2 = ft_strlen(s2);
-	p = malloc(sizeof(char) * ((lens1 + lens2) + 2));
+	p = malloc(sizeof(char) * ((lens1 + lens2) + 1));
 	if (!p)
 		return (NULL);
 	while (s1 && s1[i])
@@ -34,8 +34,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	while (s2 && s2[j])
 		p[i++] = s2[j++];
-	p[i] = ' ';
-	p[i + 1] = '\0';
+	p[i] = '\0';
 	free(s1);
 	return (p);
 }

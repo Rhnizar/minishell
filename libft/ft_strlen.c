@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:48:09 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:30:16 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:17:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,3 @@ size_t	ft_strlen(const char *s)
 		count++;
 	return (count);
 }
-// int main(void)
-// {
-// 	char str[] = "Hello";
-// 	printf("%lu", ft_strlen(str));
-// }

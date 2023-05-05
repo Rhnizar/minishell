@@ -6,11 +6,22 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:56:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:57:57 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:36:16 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	*fill_arr_char()
+{
+	char *arr;
+
+	arr = malloc(sizeof(char) * 7);
+	if (!arr)
+		return (NULL);
+	arr = "|<>()*";
+	return (arr);
+}
 
 static int	str_count(char *str, char c)
 {

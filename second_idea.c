@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:37:10 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:55:01 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:09:26 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int main(void)
 	i = 0;
 	while(split_space[i])
 		printf("%s\n", split_space[i++]);
+	printf("%s\n", fill_arr_char());
 	return (0);
 }
