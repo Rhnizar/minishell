@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/05 12:27:28 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:31:25 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ typedef struct s_cmdshell
 	char	*arg;
 	int		pip;
 	char	**reds; // ==> append red_in red_out herdoc
-	int		and;
-	int		or;
 }				t_cmdshell;
 
 ///////////////// end struct ///////////
