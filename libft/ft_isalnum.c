@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:12:38 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/02 12:12:54 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:50:01 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,3 @@ int	ft_isalnum(int c)
 	return ((c >= '0' && c <= '9')
 		|| (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
 }
-
-/*int main(void)
-{
-    int r = ft_isalnum(':');
-    printf("%d", r);
-}*/

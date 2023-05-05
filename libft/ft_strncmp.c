@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:46:19 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 22:22:18 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:47:03 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
-// int main(void)
-// {
-// 	char s1[] = "";
-// 	char s2[] = "";
-// 	printf("%d",strncmp(s1, s2, 2));
-// }

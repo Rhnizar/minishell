@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:47:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/17 15:25:22 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:46:32 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,3 @@ char	**ft_split(char const *str, char c)
 	split[j] = 0;
 	return (split);
 }
-
-// int main(void)
-// {
-//    int i;
-//    i = 0;
-//    char **spl = ft_split("                 ", ' ');
-//    while(spl[i])
-//    {
-// 	   printf("%s\n", spl[i]);
-// 	   i++;
-//    }
-// }

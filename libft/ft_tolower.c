@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:02:14 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 18:22:22 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:47:46 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,3 @@ int	ft_tolower(int c)
 	c += 32;
 	return (c);
 }
-/*int main(void)
-{
-    int r = ft_tolower('A');
-    printf("%c", r);
-}*/

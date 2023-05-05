@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:50:55 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/01/10 19:19:04 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:50:05 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,3 @@ void	*ft_calloc(size_t count, size_t size)
 	ft_bzero(p, (count * size));
 	return (p);
 }
-
-// int main(void)
-// {
-// 	puts(ft_calloc(2, sizeof(char)));
-// 	return (0);
-// }

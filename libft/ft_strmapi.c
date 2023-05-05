@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 19:28:23 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 23:12:49 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:46:58 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
-
-// int main(void)
-// {
-// 	puts(ft_strmapi("hello", f));
-// }

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 14:39:17 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/03 14:43:17 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:50:09 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,3 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
-
-// int main(void)
-// {
-// 	char str[] = "Hello";
-// 	ft_bzero(str, 2);
-// 	puts(str);
-// }

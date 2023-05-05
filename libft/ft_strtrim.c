@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:56:42 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/01/10 19:19:51 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:47:16 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	res[j] = '\0';
 	return (res);
 }
-
-// int main(void)
-// {
-
-// 	// printf("%d\n", lenorigine("    123  hello  ", " "));
-// 	// printf("%d\n", Start("    123  hello  ", " "));
-// 	//printf("%s\n", ft_strtrim("   xxxtripouille   xxx", " x"));
-// 	printf("%s\n", ft_strtrim("   xxx   xxx", " x"));
-
-// 	//printf("%zu", ft_strlen("  Hello  "));
-// }

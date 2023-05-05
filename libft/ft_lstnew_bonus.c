@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:34:37 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 22:50:17 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:49:03 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,3 @@ t_list	*ft_lstnew(void *content)
 	new->next = NULL;
 	return (new);
 }
-
-// int main(void)
-// {
-// 	t_list *no1;
-// 		no1 = ft_lstnew("Hello rida");
-// 	printf("%s\n", no1->content);
-// }

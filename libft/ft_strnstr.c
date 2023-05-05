@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 19:52:24 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 22:26:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:47:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,3 @@ char	*ft_strnstr(const char *str1, const char *str2, size_t len)
 	}
 	return (0);
 }
-
-// int main(void)
-// {
-// 	// char str1[] = "hello my name is rida";
-// 	// char str2[] = "name is";
-// 	puts(ft_strnstr("hellorida", "ll", 0));
-// }

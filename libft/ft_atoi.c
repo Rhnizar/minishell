@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 10:06:33 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/17 10:59:49 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:50:17 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,3 @@ int	ft_atoi(const char *str)
 	}
 	return (res * sign);
 }
-
-// int main(void)
-// {
-// 	char str[] = "	448518";
-// 	printf("%d", ft_atoi(str));
-// }

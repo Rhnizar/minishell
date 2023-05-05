@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   second_idea.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 21:56:01 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:49:16 by rrhnizar         ###   ########.fr       */
+/*   Created: 2023/05/05 15:37:10 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/05/05 15:51:05 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int main(void)
 {
-	while (lst)
-	{
-		if (lst->next == NULL)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
+	char	**split_space;
+	split_space = ft_split("echo hello", ' ');
+	int i;
+	i = 0;
+	while(split_space[i])
+		printf("%s\n", split_space[i++]);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/05 15:31:25 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:38:23 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@
 #define OPT	14
 
 
-// typedef struct s_tokens
-// {
-// 	char	*str = "|"
-// 	int		type = PIPE;
-	
-// }	t_tokens;
+typedef struct s_tokens
+{
+	char			*str;
+	int				type;
+	struct s_tokens	*next;
+}				t_tokens;
 
 //////////////// struct ///////////////
 

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:59:38 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 18:21:24 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:47:52 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,3 @@ int	ft_toupper(int c)
 	return (c);
 }
 
-/*int main (void)
-{
-    int r = ft_toupper('r');
-     printf("%c", r);
-}*/

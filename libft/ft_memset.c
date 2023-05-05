@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:26:56 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 11:38:10 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:48:25 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,3 @@ void	*ft_memset(void *b, int c, size_t len)
 		((char *)b)[i++] = c;
 	return (b);
 }
-
-// int main(void)
-// {
-// 	char str[] = "Hello";
-// 	ft_memset(str, 'A', 2);
-// 	printf("%s", str);
-// }

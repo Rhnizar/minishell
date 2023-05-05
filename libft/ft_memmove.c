@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:15:44 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/01/10 19:18:35 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:48:30 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,3 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
-
-// int main()
-// {
-//   char str[40] = "1337 is a school of 42";
-//   // dst = cdef 
-//   // src = abcdef
-//   memmove(str + 5, str + 2, 7);  //ababaf
-//   puts(str +5);
-//   return (0);
-// }
-// 1337 is a school of 42
-// memmove(str + 5, str + 2, 7);
-// str +5 ==> dst = is a sc)hool of 42
-// str +2 ==> src = 37 is a school of 42
-// 7 src ==> 37 is a
-// 7 dst ==> is a sc

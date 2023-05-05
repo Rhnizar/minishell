@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:55:39 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 22:38:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:46:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,3 @@ char	*ft_strdup(const char *s1)
 	p[i] = '\0';
 	return (p);
 }
-
-// int main(void)
-// {
-// 	char str[] = "Hello";
-// 	//printf("%d", !strcmp(str, ""));
-// 	puts(ft_strdup(str));
-// }

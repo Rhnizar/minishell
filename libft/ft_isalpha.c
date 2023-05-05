@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:29:36 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 22:01:20 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:49:57 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,3 @@ int	ft_isalpha(int c)
 {
 	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
 }
-
-/*int main (void)
-{
-    int r = ft_isalpha('{');
-    printf("%d", r);
-}*/

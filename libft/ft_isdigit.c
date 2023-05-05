@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:25:55 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/01 22:08:01 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:49:49 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,3 @@ int	ft_isdigit(int c)
 {
 	return (c >= 48 && c <= 57);
 }
-// int main(void)
-// {
-//     int r = ft_isdigit(':');
-//     printf("%d", r);
-// }

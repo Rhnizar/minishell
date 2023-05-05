@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 20:03:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/14 22:20:29 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:47:11 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (NULL);
 }
-// int main(void)
-// {
-//    char a[] = "karim";
-//    puts(ft_strrchr(a, 'r'));
-// }

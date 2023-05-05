@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 18:46:28 by rrhnizar          #+#    #+#             */
-/*   Updated: 2022/10/16 21:04:54 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:46:48 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	}
 	return (lenf);
 }
-// int main(void)
-// {
-// 	char dst[100] = "hello";
-// 	char src[] = "1337";
-// 	printf("%lu\n", strlcat(dst, src, 0));
-// 	puts(dst);
-// }
