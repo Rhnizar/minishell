@@ -6,11 +6,12 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:37:10 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:51:05 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:55:01 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 int main(void)
 {
