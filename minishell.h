@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/04 12:58:50 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/07 14:13:31 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,37 +31,46 @@
 # define ECNF ": command not found\n"
 # define EPD ": Permission denied\n"
 
-typedef struct s_cmdshell
+// #define BONUS 0
+
+# define PIPE 0
+# define RED_IN 1
+# define RED_OUT 2
+# define PAR_OPEN 3
+# define PAR_CLOSE 4
+# define WLDC 5
+
+# define APP 6
+# define CMD 7
+# define AND 8
+# define OR  9
+# define HERE_DOC 10
+# define	ARG 11
+
+typedef struct s_tokens
 {
-	char	*cmd;
-	char	*opt;
-	char	*arg;
-	int		pip;
-	char	*herdoc;
-	char	*append;
-	char	*variable;
-	char	*red_in;
-	char	*red_out;
-	int		and;
-	int		or;
-}				t_cmdshell;
+	char			*str;
+	int				type;
+	struct s_tokens	*prev;
+	struct s_tokens	*next;
+}	t_tokens;
 
-////// linked list /////
-
-typedef struct s_list
+//////// struct for environment variables //////////
+typedef struct s_env
 {
-	t_cmdshell			*cmdshell;
-	struct s_list		*next;
-}				t_list;
+	char	*content;
+	struct s_env	*next;
+}	t_env;
 
-/////// global struct /////
-
-typedef struct s_global
-{
-	t_list		*lst;
-	pid_t		*pids;
-	int			num_pips;
-}				t_global;
+// typedef struct s_cmdshell
+// {
+// 	char	*cmd; /bin/cat
+// 	char	**args; ["cat", "-e", "filename"]
+// 	t_env	*env;
+// 	// int		pip;
+// 	// char	**reds; // ==> append red_in red_out herdoc
+// 	t_cmdshell	*next;
+// }	t_cmdshell;
 
 char	*quotes_handler(char *str);
 void	print_error(char *msg, char *arg, int status);

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:06 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/04 16:51:28 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:24:00 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,39 @@ char	*quotes_handler(char *str)
 	is_dolar = 0;
 	while (str[++i])
 	{
+		// printf("####%s\n", &str[i]);
 		while (str[i] && is_quote(str[i]) == 0)
 			output = join_to_str(output, str[i++]);
-		if (str[i])
-		{
-			quote = is_quote(str[i]);
-			// if (str[i + 1] == '$' && quote == 2)
-			// {
-			// 	is_dolar = 1;
-			// 	output = join_to_str(output, '\"');
-			// }
-			i++;
-		}
+		quote = is_quote(str[i]);
+		output = ft_strjoin(output, handle_dollar(&str[i]));
+		i++;
+		// if (str[i])
+		// {
+		// 	if (quote == 2 && str[i + 1] == '$')
+		// 	{
+		// 		is_dolar = 1;
+		// 		output = join_to_str(output, '\"');
+		// 	}
+		// 	i++;
+		// }
 		while (str[i] && quote != is_quote(str[i]))
 			output = join_to_str(output, str[i++]);
-		// if (is_dolar == 1)
+		// if (quote == 2 && str[i + 1] == '$')
+		// {
+		// 	is_dolar = 1;
+		// 	output = join_to_str(output, '\"');
+		// 	i++;
+		// 	while (str[i] && quote != is_quote(str[i]))
+		// 		output = join_to_str(output, str[i++]);
+		// }
+		// if (is_dolar == 1) 
 		// {
 		// 	output = join_to_str(output, '\"');
 		// 	is_dolar = 0;
+		// 	quote = 0;
 		// }
-		if (str[i] && quote != is_quote(str[i]))
+		if (str[i] == '\0' && quote != is_quote(str[i]))
 			return (free (output), NULL);
-		
 	}
 	return (output);
 }
