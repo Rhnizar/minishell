@@ -6,94 +6,137 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:56:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/08 07:53:56 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/08 10:46:17 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*fill_arr_char(void)
-{
-	char *arr;
+// char	*fill_arr_char(void)
+// {
+// 	char *arr;
 
-	arr = malloc(sizeof(char) * 7);
-	if (!arr)
-		return (NULL);
-	arr = "|<>()*";
-	return (arr);
-}
+// 	arr = malloc(sizeof(char) * 7);
+// 	if (!arr)
+// 		return (NULL);
+// 	arr = "|<>()*";
+// 	return (arr);
+// }
 
-static int	str_count(char *str, char c)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		while (str[i] && str[i] == c)
-			i++;
-		while (str[i] && str[i] != c)
-		{
-			i++;
-			if (str[i] == c || str[i] == '\0')
-				count++;
-		}
-	}
-	return (count);
-}
-
-static char	*word(char *str, char c)
+int char_in_string(char *str, char *ref)
 {
 	int		i;
-	int		count;
 	int		j;
-	char	*wostr;
 
 	i = 0;
-	count = 0;
-	j = 0;
-	while (str[i] && str[i] == c)
-	i++;
-	while (str[i] && str[i] != c)
+	while (str[i])
 	{
-		count++;
+		j = 0;
+		while (ref[j])
+		{
+			if (str[i] == ref[j])
+				return (j);
+			j++;
+		}
 		i++;
 	}
-	i = 0;
-	wostr = malloc (sizeof(char ) * count +1);
-	if (!wostr)
-		return (NULL);
-	while (str[i] && str[i] == c)
-	i++;
-	while (str[i] && str[i] != c)
-		wostr[j++] = str[i++];
-	wostr[j] = '\0';
-	return (wostr);
+	return (-1);
+}
+char	*cheack_str(int token)
+{
+	if (token == 0)
+		return (ft_strdup("|"));
+	else if (token == 1)
+		return (ft_strdup("<"));
+	else if (token == 2)
+		return (ft_strdup(">"));
+	else if (token == 3)
+		return (ft_strdup("("));
+	else if (token == 4)
+		return (ft_strdup(")"));
+	else if (token == 5)
+		return (ft_strdup("*"));
+	else
+		return ("none");
 }
 
-char	**ft_split(char const *str, char c)
-{	int		i;
-	int		j;
-	char	**split;
+void	ft_free_split(char **split)
+{
+	int	i;
 
 	i = 0;
-	j = 0;
-	split = malloc (sizeof(char *) * (str_count((char *)str, c) + 1));
-	if (!split)
-		return (NULL);
-	while (str[i] && str[i] == c)
-		i++;
-	while (str[i] && str[i] != c && j < str_count((char *)str, c))
+	while (split[i])
 	{
-		split[j] = word((char *)&str[i], c);
-		while (str[i] && str[i] != c)
-			i++;
-		while (str[i] && str[i] == c)
-			i++;
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+void	split_with_char(char *str, t_tokens **token)
+{
+	char	ref[7] = "|<>()*";
+	int		re;
+	char	**sp;
+	int		i;
+
+	re = char_in_string(str, ref);
+	i = 0;
+	if (re != -1)
+	{
+		sp = ft_split(str, ref[re]);
+		create_list(token, cheack_str(re), re);
+		while (sp[i])
+		{
+			// if (char_in_string(sp[i], ref) == -1 )
+				create_list(token, sp[i++], -55);
+		}
+	}
+	else
+		create_list(token, str, 0);
+}
+
+void	create_list(t_tokens **tokens, char *str, int type)
+{
+	t_tokens	*new;
+	t_tokens	*tmp;
+
+	new = malloc(sizeof(t_tokens));
+	if (!new)
+		return;
+	new->str = str;
+	new->type = type;
+	new->next = NULL;
+	new->prev = NULL;
+	if (!*tokens)
+	{
+		*tokens = new;
+		return ;
+	}
+	tmp = *tokens;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	new->prev = tmp;
+}
+
+
+
+{["echo", "hello;"] , ">", "rrr", ">", "r", ">", ">>", "rr", "|", ["ls", "-la"] , "&&", ["cd", "/home"]}
+
+while (sp1[i])
+{
+	j = 0;
+	sp2 = ft_split(sp1[i]);
+	while (sp2[j])
+	{
+		add_to_list(sp2[j]);
 		j++;
 	}
-	split[j] = 0;
-	return (split);
+	ft_free_split(sp2);
+	i++;
 }
+
+echo
+"test"
+>
+td;ls

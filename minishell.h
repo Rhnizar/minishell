@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 07:50:57 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/08 09:29:31 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_cmdshell
 	// int		exit_status;
 	// int		pip;
 	// char	**reds; // ==> append red_in red_out herdoc
-	t_cmdshell	*next;
+	struct s_cmdshell	*next;
 }	t_cmdshell;
 
 ///////////////// end struct ///////////
@@ -93,10 +93,12 @@ typedef struct s_cmdshell
 
 
 // void	print_list(t_cmdshell *lst);
-char	*fill_arr_char(void);
+// char	*fill_arr_char(void);
 /////// fill list /////
 void	*command(char *line);
 void	*option(char *line);
 void	*argument(char *line);
+void	create_list(t_tokens **tokens, char *str, int type);
+void	split_with_char(char *str, t_tokens **token);
 
 # endif
