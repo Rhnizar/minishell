@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:56:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/08 10:46:17 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:04:41 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int char_in_string(char *str, char *ref)
 	}
 	return (-1);
 }
+
 char	*cheack_str(int token)
 {
 	if (token == 0)

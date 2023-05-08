@@ -6,16 +6,19 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:51:56 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/08 07:53:39 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:50:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <string.h>
 
 int main(void)
 {
-	while (1)
-		;
-	printf("just test\n");	
+	// while (1)
+	// 	;
+	char	str[] = "karim\x07rida";
+	printf("%s\n", "\x07");
+	// printf("[\x07]\n");	
 	return (0);
 }
