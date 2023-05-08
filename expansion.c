@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:06 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/05 10:24:00 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/08 08:05:33 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ static char	*join_to_str(char *str, char c)
 	free (str);
 	return (output);
 }
+
+// char	*dollar_handler(char *str)
+// {
+	
+// }
 
 char	*quotes_handler(char *str)
 {

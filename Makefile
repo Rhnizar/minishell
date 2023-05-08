@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/07 14:15:29 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/08 08:57:02 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT = libft/libft.a
 
 # EXECUTION = execution/print_error.c execution/expansion.c
 
-SRCS = minishell.c $(EXECUTION)
+SRCS = minishell.c $(EXECUTION) ft_free.c
 
 # SRCS_B = 
 
@@ -30,7 +30,7 @@ RDL = -lreadline
 
 #-fsanitize=address
 
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror
 CCe = cc
 
 all: $(LIBFT) $(NAME)

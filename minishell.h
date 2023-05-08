@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/07 14:13:31 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/08 08:59:55 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define ENSFD ": No such file or directory\n"
 # define ECNF ": command not found\n"
 # define EPD ": Permission denied\n"
+# define ESYNTX ": syntax error near unexpected token "
+# define EAMBGRD ": ambiguous redirect" 
 
 // #define BONUS 0
 
@@ -45,7 +47,7 @@
 # define AND 8
 # define OR  9
 # define HERE_DOC 10
-# define	ARG 11
+# define ARG 11
 
 typedef struct s_tokens
 {
@@ -71,6 +73,11 @@ typedef struct s_env
 // 	// char	**reds; // ==> append red_in red_out herdoc
 // 	t_cmdshell	*next;
 // }	t_cmdshell;
+
+char	**env_to_double_ptr(t_env *env);
+t_env	*create_env(char **envp);
+void	free_env(t_env *env);
+
 
 char	*quotes_handler(char *str);
 void	print_error(char *msg, char *arg, int status);
