@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:56:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/05 16:36:16 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/08 07:53:56 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*fill_arr_char()
+char	*fill_arr_char(void)
 {
 	char *arr;
 
@@ -74,8 +74,7 @@ static char	*word(char *str, char c)
 }
 
 char	**ft_split(char const *str, char c)
-{
-	int		i;
+{	int		i;
 	int		j;
 	char	**split;
 

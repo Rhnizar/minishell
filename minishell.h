@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/05 17:51:33 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/08 07:50:57 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,19 @@ typedef struct s_tokens
 //////// struct for environment variables //////////
 typedef struct s_env
 {
-	char	*str;
-	t_env	*next;
+	char			*str;
+	struct s_env	*next;
 }	t_env;
 
 //////////////// struct ///////////////
 
 typedef struct s_cmdshell
 {
-	char	*cmd; /bin/cat
-	char	**args; ["cat", "-e", "filename"]
+	char	*cmd;        //   /bin/cat
+	int		is_builtin;
+	char	**args;     //["cat", "-e", "filename"]
 	t_env	*env;
+	// int		exit_status;
 	// int		pip;
 	// char	**reds; // ==> append red_in red_out herdoc
 	t_cmdshell	*next;
@@ -91,7 +93,7 @@ typedef struct s_cmdshell
 
 
 // void	print_list(t_cmdshell *lst);
-void	*fill_arr_char();
+char	*fill_arr_char(void);
 /////// fill list /////
 void	*command(char *line);
 void	*option(char *line);
