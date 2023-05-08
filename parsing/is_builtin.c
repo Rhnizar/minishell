@@ -6,11 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:10:32 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 13:10:52 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:19:11 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 //   echo with option -n
 // ◦ cd with only a relative or absolute path
