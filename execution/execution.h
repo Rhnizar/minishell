@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:40:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 11:03:44 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/08 09:12:21 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef	EXECUTION_H
+# define EXECUTION_H
 
-int main()
-{
-	char *read_line;
-	char *quote;
-	while (1)
-	{
-    	read_line = readline("minishell> ");
-		quote = quotes_handler(read_line);
-		printf("%s\n", quote);
-		add_history(read_line);
-	}
-	return 0;
-}
+char	*valid_command_path(char **paths, char *cmd);
+char	**get_paths(char **env);
+
+
+int		input_redirection(char *infile);
+int		output_redirection(char *outfile);
+int		append_output(char *outfile);
+
+void	print_error(char *msg, char *arg, int status);
+
+
+# endif

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 08:59:55 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:01:06 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_env	*create_env(char **envp);
 void	free_env(t_env *env);
 
 
-char	*quotes_handler(char *str);
+char	*quotes_handler(char *token);
 void	print_error(char *msg, char *arg, int status);
 
 # endif

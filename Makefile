@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/08 08:57:02 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/08 11:06:51 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ NAME = minishell
 LIBFT = libft/libft.a
 
 # EXECUTION = execution/print_error.c execution/expansion.c
+PARSING = parsing/environment.c parsing/expansion.c
 
-SRCS = minishell.c $(EXECUTION) ft_free.c
+SRCS = minishell.c ft_free.c parsing/expansion.c
 
 # SRCS_B = 
 

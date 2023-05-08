@@ -6,11 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:06 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 08:05:33 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:07:07 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static int	is_quote(char c)
 {
@@ -44,12 +44,12 @@ static char	*join_to_str(char *str, char c)
 	return (output);
 }
 
-// char	*dollar_handler(char *str)
+// char	*dollar_handler(char *token)
 // {
 	
 // }
 
-char	*quotes_handler(char *str)
+char	*quotes_handler(char *token)
 {
 	char	*output;
 	int		quote;
@@ -60,13 +60,13 @@ char	*quotes_handler(char *str)
 	quote = 0;
 	output = NULL;
 	is_dolar = 0;
-	while (str[++i])
+	while (token[++i])
 	{
 		// printf("####%s\n", &str[i]);
-		while (str[i] && is_quote(str[i]) == 0)
-			output = join_to_str(output, str[i++]);
-		quote = is_quote(str[i]);
-		output = ft_strjoin(output, handle_dollar(&str[i]));
+		while (token[i] && is_quote(token[i]) == 0)
+			output = join_to_str(output, token[i++]);
+		quote = is_quote(token[i]);
+		// output = ft_strjoin(output, handle_dollar(&token[i]));
 		i++;
 		// if (str[i])
 		// {
@@ -77,8 +77,8 @@ char	*quotes_handler(char *str)
 		// 	}
 		// 	i++;
 		// }
-		while (str[i] && quote != is_quote(str[i]))
-			output = join_to_str(output, str[i++]);
+		while (token[i] && quote != is_quote(token[i]))
+			output = join_to_str(output, token[i++]);
 		// if (quote == 2 && str[i + 1] == '$')
 		// {
 		// 	is_dolar = 1;
@@ -93,8 +93,9 @@ char	*quotes_handler(char *str)
 		// 	is_dolar = 0;
 		// 	quote = 0;
 		// }
-		if (str[i] == '\0' && quote != is_quote(str[i]))
+		if (token[i] == '\0' && quote != is_quote(token[i]))
 			return (free (output), NULL);
 	}
 	return (output);
 }
+

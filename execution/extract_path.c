@@ -6,13 +6,14 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/04 13:09:44 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/08 09:18:05 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "execution.h"
 #include "../minishell.h"
 
-int	ft_len(char	*str)
+static int	ft_len(char	*str)
 {
 	int	count;
 
@@ -23,7 +24,7 @@ int	ft_len(char	*str)
 }
 
 /* join a given path with a given command */
-char	*ft_join_command_path(char *path, char *cmd)
+static char	*ft_join_command_path(char *path, char *cmd)
 {
 	char	*output;
 	int		i;
@@ -66,8 +67,15 @@ char	**get_paths(char **env)
 {
 	while (*env && ft_strncmp("PATH", *env, 4))
 		env++;
-	if (*env == NULL)
-		*env = PATH;
+	// i think when unseting PATH it shouldn't work
+	// if (*env == NULL)
+	// 	*env = PATH;
 	return (ft_split(*env + 5, ':'));
 }
 
+
+
+
+
+if (token = "|")
+	type = PIPE;
