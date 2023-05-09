@@ -22,6 +22,7 @@ void	free_env(t_env *env)
 	{
 		tmp2 = tmp->next;
 		free (tmp->content);
+		free (tmp);
 		tmp = tmp2;
 	}
 }
