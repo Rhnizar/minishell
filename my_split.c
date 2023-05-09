@@ -6,34 +6,11 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:01:09 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/09 16:36:26 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:14:32 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*join_to_str(char *str, char c)
-{
-	char	*output;
-	int		i;
-
-	if (!str)
-		output = malloc(2);
-	else
-		output = malloc(ft_strlen(str) + 2);
-	if (!output)
-		return (NULL);
-	i = 0;
-	while (str && str[i])
-	{
-		output[i] = str[i];
-		i++;
-	}
-	output[i++] = c;
-	output[i] = '\0';
-	free (str);
-	return (output);
-}
 
 char	**fill_with_null(int len)
 {
@@ -94,21 +71,64 @@ char	**my_split(char *str)
 	return (split);
 }
 
+t_tokens	*split_and_fill_list(char **split)
+{
+	t_tokens	*list;
+	char		**sp2;
+	int			i;
+	int			j;
+
+	i = 0;
+	list = NULL;
+	while (split[i])
+	{
+		sp2 = ft_split(split[i], ' ');
+		j = 0;
+		while (sp2[j])
+		{
+			create_tokens(&list, ft_strdup(sp2[j]), 0);
+			j++;
+		}
+		free_double_ptr(sp2);
+		i++;
+	}
+	return(list);
+}
+
+void	free_tokens(t_tokens *tokens)
+{
+	t_tokens	*tmp;
+	t_tokens	*tmp2;
+
+	tmp = tokens;
+	while (tmp)
+	{
+		tmp2 = tmp->next;
+		free (tmp->str);
+		free (tmp);
+		tmp = tmp2;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	char	**sp;
-	int		i;
+	t_tokens *lst;
+	t_tokens *tmp;
 
 	(void) ac;
 	if (ac == 2)
 	{
-		i = 0;
 		sp = my_split(av[1]);
-		while (sp[i])
+		lst = split_and_fill_list(sp);
+		free_double_ptr(sp);
+		tmp = lst;
+		while (tmp)
 		{
-			printf("%s\n", sp[i]);
-			i++;
+			printf("%s\n", tmp->str);
+			tmp = tmp->next;
 		}
+		free_tokens(lst);
 	}
 	return (0);
 }

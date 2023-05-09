@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/09 16:15:15 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/09 19:00:07 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,18 @@ NAME = minishell
 
 LIBFT = libft/libft.a
 
-SRCS = my_split.c len_first_split.c
-
+SRCS = my_split.c len_first_split.c minishell_utils.c create_tokens.c
 # SRCS_B = 
 
 OBJS = $(SRCS:.c=.o)
 
 # OBJS_B = $(SRCS_B:.c=.o)
 
+#-fsanitize=address
+
 RDL = -lreadline
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 CCe = cc
 
