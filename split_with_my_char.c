@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:56:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/08 11:04:41 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/09 09:41:06 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void	create_list(t_tokens **tokens, char *str, int type)
 
 
 {["echo", "hello;"] , ">", "rrr", ">", "r", ">", ">>", "rr", "|", ["ls", "-la"] , "&&", ["cd", "/home"]}
+
+// echo hello > rrr >r>rr|ls -la && cd /home
 
 while (sp1[i])
 {
