@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:01:09 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/09 16:13:28 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:36:26 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**fill_with_null(int len)
 
 void	check2(char *str, char **split, int *i, int *j)
 {
-	if (char_in_string(str[*i], "&|<>()*") != -1 && \
+	while (char_in_string(str[*i], "&|<>()*") != -1 && \
 		char_in_string(str[*i + 1], "&|<>()*") != -1)
 	{
 		split[*j] = ft_strdup("\x07");
@@ -76,6 +76,7 @@ char	**my_split(char *str)
 		return (NULL);
 	i = 0;
 	j = 0;
+	printf("%d\n", len_first_split(str));
 	while (str[i])
 	{
 		if (char_in_string(str[i], "&|<>()*") != -1)
