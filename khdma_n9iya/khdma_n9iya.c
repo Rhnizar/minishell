@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:14:44 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/09 10:59:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:17:37 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int char_in_string(char c, char *ref)
 {
-	int		i;
 	int		j;
 
-	i = 0;
 	j = 0;
 	while (ref[j])
 	{
@@ -37,7 +35,7 @@ int		count_split(char *str)
 	count = 0;
 	while (str[i])
 	{
-		if (char_in_string(str[i], "|<>()*") != -1)
+		if (char_in_string(str[i], "&|<>()*") != -1)
 			count++;
 		i++;
 	}
@@ -50,7 +48,7 @@ int	cheack_sp_char(char *str)
 	i = 0;
 	while (str[i] && str[i] == ' ')
 		i++;
-	if (char_in_string(str[i], "|<>()*") == -1)
+	if (char_in_string(str[i], "&|<>()*") == -1)
 		return (1);
 	else
 		return (0);
@@ -59,10 +57,11 @@ int	cheack_sp_char(char *str)
 int	len_first_split(char *str)
 {
 	int	len;
+
 	len = count_split(str);
 	if (cheack_sp_char(str) == 0)
 	{
-		if (char_in_string(str[0], "|<>()*") != -1)
+		if (char_in_string(str[0], "&|<>()*") != -1)
 			return (len * 2);
 		else
 			return (len * 2 + 1);
@@ -94,29 +93,43 @@ static char	*join_to_str(char *str, char c)
 	return (output);
 }
 
+char	**fill_with_null(int len)
+{
+	char	**split;
+	int		i;
+
+	split = malloc(sizeof(char *) * (len + 1));
+	if (!split)
+		return (NULL);
+	i = 0;
+	while (i < len + 1)
+	{
+		split[i] = NULL;
+		i++;
+	}
+	return (split);
+}
+
 char	**my_split(char *str)
 {
 	char	**split;
 	int		i;
-	int		len;
 	int		j;
 
-	i = 0;
-	j = 0;
-	len = len_first_split(str);
-	printf("===>%d\n", len);
-	split = malloc(sizeof(char *) * len + 1);
+	split = fill_with_null(len_first_split(str));
 	if (!split)
 		return (NULL);
+	i = 0;
+	j = 0;
 	while (str[i])
 	{
-		if (char_in_string(str[i], "|<>()*") != -1)
+		if (char_in_string(str[i], "&|<>()*") != -1)
 		{
 			if (i != 0)
 				j++;
 			split[j] = join_to_str(split[j], str[i]);
 			j++;
-			if (char_in_string(str[i], "|<>()*") != -1 && char_in_string(str[i + 1], "|<>()*") != -1)
+			if (char_in_string(str[i], "&|<>()*") != -1 && char_in_string(str[i + 1], "&|<>()*") != -1)
 			{
 				split[j++] = ft_strdup("\x07");
 				split[j] = join_to_str(split[j], str[i + 1]);
@@ -131,17 +144,21 @@ char	**my_split(char *str)
 	return (split);
 }
 
-int main(void)
+int main(int ac, char **av)
 {
+	(void) ac;
 	char	**sp;
 	int		i;
 
-	i = 0;
-	sp = my_split("  <echo");
-	while (sp[i])
+	if (ac == 2)
 	{
-		printf("%s\n", sp[i]);
-		i++;
+		i = 0;
+		sp = my_split(av[1]);
+		while (sp[i])
+		{
+			printf("%s\n", sp[i]);
+			i++;
+		}
 	}
 	return (0);
 }

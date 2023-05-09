@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/09 09:41:52 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/09 16:15:15 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = minishell
 
 LIBFT = libft/libft.a
 
-SRCS = minishell.c
+SRCS = my_split.c len_first_split.c
 
 # SRCS_B = 
 

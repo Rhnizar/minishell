@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_ctl_d.c                                       :+:      :+:    :+:   */
+/*   todo                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 11:51:56 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/08 16:50:42 by rrhnizar         ###   ########.fr       */
+/*   Created: 2023/05/09 14:53:54 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/05/09 14:55:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
 
-int main(void)
+while (sp1[i])
 {
-	// while (1)
-	// 	;
-	char	str[] = "karim\x07rida";
-	printf("%s\n", "\x07");
-	// printf("[\x07]\n");	
-	return (0);
+	j = 0;
+	sp2 = ft_split(sp1[i]);
+	while (sp2[j])
+	{
+		add_to_list(sp2[j]);
+		j++;
+	}
+	ft_free_split(sp2);
+	i++;
 }
+
+the while to split to espace and add to list

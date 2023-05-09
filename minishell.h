@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 09:29:31 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:06:30 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,7 @@ typedef struct s_cmdshell
 // 	int			num_pips;	
 // }				t_global;
 
-
-// void	print_list(t_cmdshell *lst);
-// char	*fill_arr_char(void);
-/////// fill list /////
-void	*command(char *line);
-void	*option(char *line);
-void	*argument(char *line);
-void	create_list(t_tokens **tokens, char *str, int type);
-void	split_with_char(char *str, t_tokens **token);
+int	len_first_split(char *str);
+int	char_in_string(char c, char *ref);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:56:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/09 09:41:06 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:54:14 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,24 +122,24 @@ void	create_list(t_tokens **tokens, char *str, int type)
 
 
 
-{["echo", "hello;"] , ">", "rrr", ">", "r", ">", ">>", "rr", "|", ["ls", "-la"] , "&&", ["cd", "/home"]}
+// {["echo", "hello;"] , ">", "rrr", ">", "r", ">", ">>", "rr", "|", ["ls", "-la"] , "&&", ["cd", "/home"]}
 
 // echo hello > rrr >r>rr|ls -la && cd /home
 
-while (sp1[i])
-{
-	j = 0;
-	sp2 = ft_split(sp1[i]);
-	while (sp2[j])
-	{
-		add_to_list(sp2[j]);
-		j++;
-	}
-	ft_free_split(sp2);
-	i++;
-}
+// while (sp1[i])
+// {
+// 	j = 0;
+// 	sp2 = ft_split(sp1[i]);
+// 	while (sp2[j])
+// 	{
+// 		add_to_list(sp2[j]);
+// 		j++;
+// 	}
+// 	ft_free_split(sp2);
+// 	i++;
+// }
 
-echo
-"test"
->
-td;ls
+// echo
+// "test"
+// >
+// td;ls
