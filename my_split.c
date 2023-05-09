@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:01:09 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/08 18:01:53 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/09 09:02:15 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ char	**my_split(char *str)
 	split = malloc(sizeof(char *) * len + 1);
 	if (!split)
 		return (NULL);
-	while (str[i])
+	int len2 = ft_strlen(str) + 1;
+	while (len2 != 0)
 	{
 		// if (char_in_string(str[i], "|<>()*") != -1)
 		// {
@@ -138,7 +139,10 @@ char	**my_split(char *str)
 		// 	// split[j++] = word(&str[i], str[i]);
 		// 	// printf("%s\n", split[j]);
 		// }
-		if (char_in_string(str[i], "|<>()*") != -1)
+		while (str[i] == ' ')
+			i++;
+		// printf("pp %c\n", str[i]);
+		if (char_in_string(str[i], "|<>()*") != -1 || str[i] == ' ' || str[i] == '\0')
 		{
 			split[j] = malloc(sizeof(char) * count + 1);
 			while (str[r] && str[r] != ' ' && char_in_string(str[r], "|<>()*") == -1)
@@ -150,6 +154,7 @@ char	**my_split(char *str)
 			count = 0;
 		}
 		count++;
+		len2--;
 		i++;
 	}
 	return (split);
