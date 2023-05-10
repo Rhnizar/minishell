@@ -34,6 +34,8 @@ export VAR=karim
 inside the here_doc i write for examles => test from $VAR
 the $VAR will expande normaly and the output will be -> test from karim
 
+
+==> ls (<<eof)
 ---------------
 another examples need to be handled:
 
