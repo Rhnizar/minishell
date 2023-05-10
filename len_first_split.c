@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:02:31 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/09 15:03:10 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:51:20 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	count_split(char *str)
 	count = 0;
 	while (str[i])
 	{
-		if (char_in_string(str[i], "&|<>()*") != -1)
+		if (char_in_string(str[i], "|<>()*&") != -1)
 			count++;
 		i++;
 	}
@@ -49,7 +49,7 @@ int	cheack_sp_char(char *str)
 	i = 0;
 	while (str[i] && str[i] == ' ')
 		i++;
-	if (char_in_string(str[i], "&|<>()*") == -1)
+	if (char_in_string(str[i], "|<>()*&") == -1)
 		return (1);
 	else
 		return (0);
@@ -62,7 +62,7 @@ int	len_first_split(char *str)
 	len = count_split(str);
 	if (cheack_sp_char(str) == 0)
 	{
-		if (char_in_string(str[0], "&|<>()*") != -1)
+		if (char_in_string(str[0], "|<>()*&") != -1)
 			return (len * 2);
 		else
 			return (len * 2 + 1);

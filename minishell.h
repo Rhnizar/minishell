@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/09 16:56:38 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:50:08 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@
 #define PAR_CLOSE 4
 #define WLDC 5
 
-#define APP 6
-#define CMD 7
-#define AND 8
+#define AND 6
+#define APP 7
+#define CMD 8
 #define OR  9
 #define HERE_DOC 10
 #define	ARG 11
@@ -97,5 +97,7 @@ char	*join_to_str(char *str, char c);
 char	**my_split(char *str);
 void	free_double_ptr(char **str);
 void	create_tokens(t_tokens **lst, char *str, int type);
+t_tokens	*split_and_fill_list(char **split);
+void		free_tokens(t_tokens *tokens);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:01:09 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/09 19:14:32 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:56:55 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,34 @@ char	**fill_with_null(int len)
 
 void	check2(char *str, char **split, int *i, int *j)
 {
-	while (char_in_string(str[*i], "&|<>()*") != -1 && \
-		char_in_string(str[*i + 1], "&|<>()*") != -1)
+	while (char_in_string(str[*i], "|<>()*&") != -1 && \
+		char_in_string(str[*i + 1], "|<>()*&") != -1)
 	{
 		split[*j] = ft_strdup("\x07");
 		(*j)++;
 		split[*j] = join_to_str(split[*j], str[*i + 1]);
 		(*j)++;
 		(*i)++;
+	}
+}
+
+int	check_syntax(char *str)
+{
+	int	i;
+
+	i = 0;
+	int	r;
+	int	r_tmp;
+	while (str[i])
+	{
+		r = char_in_string(str[i], "|<>()*&");
+		r_tmp = r;
+		while (r != -1)
+		{
+			i++;
+			r = char_in_string(str[i], "|<>()*&");
+		}
+		i++;
 	}
 }
 
@@ -56,7 +76,7 @@ char	**my_split(char *str)
 	printf("%d\n", len_first_split(str));
 	while (str[i])
 	{
-		if (char_in_string(str[i], "&|<>()*") != -1)
+		if (char_in_string(str[i], "|<>()*&") != -1)
 		{
 			if (i != 0)
 				j++;
@@ -110,25 +130,31 @@ void	free_tokens(t_tokens *tokens)
 	}
 }
 
-int	main(int ac, char **av)
-{
-	char	**sp;
-	t_tokens *lst;
-	t_tokens *tmp;
+// int	main(int ac, char **av)
+// {
+// 	char	**sp;
+// 	t_tokens *lst;
+// 	t_tokens *tmp;
 
-	(void) ac;
-	if (ac == 2)
-	{
-		sp = my_split(av[1]);
-		lst = split_and_fill_list(sp);
-		free_double_ptr(sp);
-		tmp = lst;
-		while (tmp)
-		{
-			printf("%s\n", tmp->str);
-			tmp = tmp->next;
-		}
-		free_tokens(lst);
-	}
-	return (0);
-}
+// 	(void) ac;
+// 	if (ac == 2)
+// 	{
+// 		sp = my_split(av[1]);
+// 		lst = split_and_fill_list(sp);
+// 		// free_double_ptr(sp);
+// 		tmp = lst;
+// 		while (tmp)
+// 		{
+// 			printf("%s\n", tmp->str);
+// 			// if (ft_strncmp(tmp->str, "\x07", 4) == 0)
+// 			// {
+// 			// 	printf("me\n");
+// 			// 	exit(1);
+// 			// }
+			
+// 			tmp = tmp->next;
+// 		}
+// 		// free_tokens(lst);
+// 	}
+// 	return (0);
+// }

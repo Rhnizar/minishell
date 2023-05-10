@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/09 19:00:07 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/10 12:12:00 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = minishell
 
 LIBFT = libft/libft.a
 
-SRCS = my_split.c len_first_split.c minishell_utils.c create_tokens.c
+SRCS = my_split.c len_first_split.c minishell_utils.c create_tokens.c what_do_you_represent_string.c
 # SRCS_B = 
 
 OBJS = $(SRCS:.c=.o)
@@ -27,7 +27,7 @@ OBJS = $(SRCS:.c=.o)
 
 RDL = -lreadline
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 CCe = cc
 
