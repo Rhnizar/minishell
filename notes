@@ -36,6 +36,14 @@ the $VAR will expande normaly and the output will be -> test from karim
 
 
 ==> ls (<<eof)
+==> ls;(cat <<eof))
+==> echo test && (cat <<eof))
+it need another 9aws at the end:
+==> echo test && ((cat <<eof)
+==> echo test &&$(cat <<eof))
+==> echo test &&(<<-)
+==> echo test && $(echo <<eof) ls
+==> echo test && $((<<eof)) ls
 ---------------
 another examples need to be handled:
 
