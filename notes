@@ -25,3 +25,41 @@ echo hi | > >>
 echo hi | < |
 echo hi |   |
 echo hi |  "|"
+';; test'
+'| test'
+'echo > <'
+'echo | |'
+'<'
+;
+;;
+;;;
+; ;
+>>>>
+<
+< >
+| echo
+echo | |
+cat < >
+echo '
+echo "
+---------------------------
+syntax error near unexpected token: This error occurs when Bash encounters an unexpected token or character, such as a misplaced operator or unmatched quote.
+
+command not found: This error occurs when Bash encounters a command or program that it does not recognize or cannot find in its search path.
+
+ambiguous redirect: This error occurs when Bash encounters a redirection operator that is not properly formatted, or when it cannot determine the input or output source of a command.
+
+missing argument: This error occurs when a command or operator is missing a required argument.
+
+unterminated quoted string: This error occurs when a quoted string is not properly terminated, such as when a closing quote is missing.
+
+unexpected end of file: This error occurs when Bash encounters the end of a script or command before it has finished parsing all of the necessary syntax.
+
+invalid arithmetic operator: This error occurs when an arithmetic operator, such as + or -, is used in an invalid context or with an invalid operand.
+
+missing parentheses: This error occurs when parentheses are mismatched or improperly nested in an expression or command.
+
+invalid command name: This error occurs when a command or function name is invalid or improperly formatted.
+
+unary operator expected: This error occurs when a unary operator, such as ! or -, is expected but not found in an expression or command.
+---------------------
