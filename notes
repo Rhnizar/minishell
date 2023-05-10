@@ -6,4 +6,22 @@ the $VAR will expande normaly and the output will be -> test from karim
 
 ---------------
 another examples need to be handled:
+
 cat <<eof||<<eof2 wc -l
+|
+| echo oi
+| |
+| $
+| >
+>
+>>
+>>>
+<
+<<
+echo hi <
+cat    <| ls
+echo hi | >
+echo hi | > >>
+echo hi | < |
+echo hi |   |
+echo hi |  "|"
