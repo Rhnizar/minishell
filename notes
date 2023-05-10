@@ -1,0 +1,5 @@
+another case to handle for example:
+export VAR=karim
+<<eof
+inside the here_doc i write for examles => test from $VAR
+the $VAR will expande normaly and the output will be -> test from karim
