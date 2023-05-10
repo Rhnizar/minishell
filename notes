@@ -1,4 +1,5 @@
 "Writing Your Own Shell" by Vivek G. Gite
+https://tldp.org/LDP/abs/html/
 
 --------------------------------
 
@@ -41,8 +42,6 @@ echo hi |  "|"
 >>>>
 <
 < >
-| echo
-echo | |
 cat < >
 echo '
 echo "
