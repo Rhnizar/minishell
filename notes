@@ -1,3 +1,7 @@
+"Writing Your Own Shell" by Vivek G. Gite
+
+--------------------------------
+
 another case to handle for example:
 export VAR=karim
 <<eof
