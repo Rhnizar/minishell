@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/08 11:06:51 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/12 19:41:01 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,10 @@ NAME = minishell
 LIBFT = libft/libft.a
 
 # EXECUTION = execution/print_error.c execution/expansion.c
-PARSING = parsing/environment.c parsing/expansion.c
+# PARSING = parsing/environment.c parsing/expansion.c 
+PARSING = ft_free.c parsing/expansion.c parsing/parsing_utils.c execution/print_error.c
 
-SRCS = minishell.c ft_free.c parsing/expansion.c
+SRCS = minishell.c $(PARSING)
 
 # SRCS_B = 
 
@@ -31,7 +32,7 @@ RDL = -lreadline
 
 #-fsanitize=address
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 CCe = cc
 
 all: $(LIBFT) $(NAME)

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 09:12:21 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:32:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	**get_paths(char **env);
 int		input_redirection(char *infile);
 int		output_redirection(char *outfile);
 int		append_output(char *outfile);
+void	here_doc(char *delimiter);
 
 void	print_error(char *msg, char *arg, int status);
 
