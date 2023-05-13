@@ -1,0 +1,103 @@
+Parentheses are used in Bash for two main purposes: to define a subshell and to define an array.
+
+Subshells:
+A subshell is a child process that is created and runs in a separate environment from the parent shell. The subshell inherits all the environment variables and settings of the parent shell, but any changes made to these variables or settings within the subshell do not affect the parent shell.
+To define a subshell in Bash, you enclose a list of commands within parentheses. For example:
+This creates a subshell that changes its working directory to /path/to/directory and then lists the contents of that directory.
+
+The subshell inherits all the environment variables and settings of the parent shell, but any changes made to these variables or settings within the subshell do not affect the parent shell.
+
+The subshell is useful when you want to execute a series of commands that should not affect the environment of the parent shell or when you want to run a set of commands in a separate process. When the subshell finishes executing, any changes made to the environment within the subshell will not be visible in the parent shell.
+
+Keep in mind that when you define a subshell, any variables or settings that you define within the subshell will not be available in the parent shell. If you want to pass values from the subshell to the parent shell, you can use command substitution or other mechanisms for inter-process communication.
+
+
+(cd /Desktop/minishell && ls)
+echo $(ls)
+
+Arithmetic expansion: 
+$((2+3))
+
+command grouping with parentheses:
+(cd /path/to/directory && ls && echo "Done")
+
+--------------------------------------
+
+"Writing Your Own Shell" by Vivek G. Gite
+https://tldp.org/LDP/abs/html/
+
+--------------------------------
+
+another case to handle for example:
+export VAR=karim
+<<eof
+inside the here_doc i write for examles => test from $VAR
+the $VAR will expande normaly and the output will be -> test from karim
+
+
+==> ls (<<eof)
+==> ls;(cat <<eof))
+==> echo test && (cat <<eof))
+it need another 9aws at the end:
+==> echo test && ((cat <<eof)
+==> echo test &&$(cat <<eof))
+==> echo test &&(<<-)
+==> echo test && $(echo <<eof) ls
+==> echo test && $((<<eof)) ls
+---------------
+another examples need to be handled:
+
+cat <<eof||<<eof2 wc -l
+|
+| echo oi
+| |
+| $
+| >
+>
+>>
+>>>
+<
+<<
+echo hi <
+cat    <| ls
+echo hi | >
+echo hi | > >>
+echo hi | < |
+echo hi |   |
+echo hi |  "|"
+';; test'
+'| test'
+'echo > <'
+'echo | |'
+'<'
+;
+;;
+;;;
+; ;
+>>>>
+<
+< >
+cat < >
+echo '
+echo "
+---------------------------
+syntax error near unexpected token: This error occurs when Bash encounters an unexpected token or character, such as a misplaced operator or unmatched quote.
+
+command not found: This error occurs when Bash encounters a command or program that it does not recognize or cannot find in its search path.
+
+ambiguous redirect: This error occurs when Bash encounters a redirection operator that is not properly formatted, or when it cannot determine the input or output source of a command.
+
+missing argument: This error occurs when a command or operator is missing a required argument.
+
+unterminated quoted string: This error occurs when a quoted string is not properly terminated, such as when a closing quote is missing.
+
+unexpected end of file: This error occurs when Bash encounters the end of a script or command before it has finished parsing all of the necessary syntax.
+
+invalid arithmetic operator: This error occurs when an arithmetic operator, such as + or -, is used in an invalid context or with an invalid operand.
+
+missing parentheses: This error occurs when parentheses are mismatched or improperly nested in an expression or command.
+
+invalid command name: This error occurs when a command or function name is invalid or improperly formatted.
+
+unary operator expected: This error occurs when a unary operator, such as ! or -, is expected but not found in an expression or command.
+---------------------
