@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:07:41 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/12 18:17:17 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/13 10:37:25 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,25 @@ char	*ft_join_strings(char *s1, char *s2)
 	return (output);
 }
 
-//i need to chang the exit status inside the struct
-// so i need to pass the struct
-void	print_syntx_error(char *arg, int exit_status)
+char	*join_to_str(char *str, char c)
 {
-	(void) exit_status;
-	ft_putstr_fd(ESYNTX, 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd("\'\n", 2);
+	char	*output;
+	int		i;
+
+	if (!str)
+		output = malloc(2);
+	else
+		output = malloc(ft_strlen(str) + 2);
+	if (!output)
+		return (NULL);
+	i = 0;
+	while (str && str[i])
+	{
+		output[i] = str[i];
+		i++;
+	}
+	output[i++] = c;
+	output[i] = '\0';
+	free (str);
+	return (output);
 }

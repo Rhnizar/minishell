@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:10:32 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 13:19:11 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/13 10:25:25 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,7 @@
 // ◦ env with no options or arguments
 // ◦ exit with no options
 
-static char	*token_tolower(char *token)
-{
-	int	i;
-
-	i = -1;
-	while (token[++i])
-		token[i] = ft_tolower(token[i]);
-	return (token);
-}
-
-int	double_check(char *token, char *builtin)
+static int	double_check(char *token, char *builtin)
 {
 	char	*exact_token;
 
@@ -43,13 +33,13 @@ int	double_check(char *token, char *builtin)
 
 int	is_builtin(char *token)
 {
-	if (double_check(token_tolower(token), "echo"))
+	if (double_check(token, "echo"))
 		return (1);
-	else if (double_check(token_tolower(token), "cd"))
+	else if (double_check(token, "cd"))
 		return (1);
-	else if (double_check(token_tolower(token), "pwd"))
+	else if (double_check(token, "pwd"))
 		return (1);
-	else if (double_check(token_tolower(token), "env"))
+	else if (double_check(token, "env"))
 		return (1);
 	else if (double_check(token, "export"))
 		return (1);

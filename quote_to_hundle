@@ -6,3 +6,4 @@ echo ~ = echo $PATH
 "jjj"jj$"
 
 "$test"'
+~ => bash: /Users/kchaouki: is a directory

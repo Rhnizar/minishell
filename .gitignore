@@ -1,3 +1,5 @@
 a.out
 .vscode
 .DS_Store
+*.o
+minishell

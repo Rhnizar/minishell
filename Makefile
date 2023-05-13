@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/12 19:41:01 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/13 12:31:46 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT = libft/libft.a
 
 # EXECUTION = execution/print_error.c execution/expansion.c
 # PARSING = parsing/environment.c parsing/expansion.c 
-PARSING = ft_free.c parsing/expansion.c parsing/parsing_utils.c execution/print_error.c
+PARSING = ft_free.c parsing/quotes_handler.c parsing/error_checker.c parsing/parsing_utils.c execution/print_error.c
 
 SRCS = minishell.c $(PARSING)
 

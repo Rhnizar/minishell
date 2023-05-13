@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/12 19:08:12 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/13 10:42:44 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
 
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\
 /usr/local/munki"
-# define EARGS "Invalid argumments\n"
+// # define EARGS "Invalid argumments\n"
 # define ENSFD ": No such file or directory\n"
 # define ECNF ": command not found\n"
 # define EPD ": Permission denied\n"
 # define ESYNTX "minishell: syntax error near unexpected token `"
-# define EAMBGRD ": ambiguous redirect" 
+# define EAMBGRD ": ambiguous redirect"
 #define BONUS 0
 
 # define PIPE 0
@@ -77,9 +77,10 @@ char	**env_to_double_ptr(t_env *env);
 t_env	*create_env(char **envp);
 void	free_env(t_env *env);
 
+char	*join_to_str(char *str, char c);
 char	*ft_join_strings(char *s1, char *s2);
-void	print_syntx_error(char *arg, int exit_status);
 char	*quotes_handler(char *arg);
+int		snytx_error_checker(char *arg);
 
 
 void	print_error(char *msg, char *arg, int status);
