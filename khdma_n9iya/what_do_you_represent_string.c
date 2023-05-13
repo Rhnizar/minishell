@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 07:58:07 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/10 16:33:39 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:53:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,36 +46,36 @@ int		check_cmd3(char *str1, char *str2, char *str3, char *ref)
 	return (0);
 }
 
-int		check_cmd(t_tokens *token, char *ref)
-{
-	// if (token && token->next && token->next->next)
-	if (token->prev && token->next)
-	{
-		if (check_str(token->str, ref) != -1)
-		{
-			if (ft_strncmp(token->next->str, "\x07", 4) == 0)
-			{
-				check_str(token->next->next->str, ref) != -1 &&)
-			}
-		}
-	}
-	else if (token->next)
-	{
+// int		check_cmd(t_tokens *token, char *ref)
+// {
+// 	// if (token && token->next && token->next->next)
+// 	if (token->prev && token->next)
+// 	{
+// 		if (check_str(token->str, ref) != -1)
+// 		{
+// 			// if (ft_strncmp(token->next->str, "\x07", 4) == 0)
+// 			// {
+// 			// 	check_str(token->next->next->str, ref) != -1 &&)
+// 			// }
+// 		}
+// 	}
+// 	else if (token->next)
+// 	{
 		
-	}
-	else
+// 	}
+// 	else
 		
-}
+// }
 
 void	what_is_the_str(t_tokens *token)
 {
 	t_tokens	*tmp;
-	char		format[] = "|<>()*&";
+	// char		format[] = "|<>()*&";
 
 	tmp = token;
 	while (tmp)
 	{
-		check_cmd(tmp, format);
+		// check_cmd(tmp, format);
 		// if (tmp && tmp->next && tmp->next->next)
 		// 	check_cmd3(tmp->str, tmp->next->str, tmp->next->next->str, format);
 		// else if (tmp && tmp->next)
@@ -88,23 +88,27 @@ void	what_is_the_str(t_tokens *token)
 }
 int main(int argc, char **argv)
 {
-	char		**sp;
-	t_tokens	*token;
-	// t_tokens	*tmp;
+	// char		**sp;
+	// t_tokens	*token;
+	// // t_tokens	*tmp;
 
-	if (argc == 2)
-	{
-		sp = my_split(argv[1]);
-		token = split_and_fill_list(sp);
-		free_double_ptr(sp);
-		// tmp = token;
-		// while (tmp)
-		// {
-		// 	printf("%s\n", tmp->str);
-		// 	tmp = tmp->next;
-		// }
-		what_is_the_str(token);
-		// free_tokens(token);
-	}
+	// if (argc == 2)
+	// {
+	// 	sp = my_split(argv[1]);
+	// 	token = split_and_fill_list(sp);
+	// 	free_double_ptr(sp);
+	// 	// tmp = token;
+	// 	// while (tmp)
+	// 	// {
+	// 	// 	printf("%s\n", tmp->str);
+	// 	// 	tmp = tmp->next;
+	// 	// }
+	// 	what_is_the_str(token);
+	// 	// free_tokens(token);
+	// }
+
+	(void)argv;
+	(void)argc;
+	check_syntax("hello", "hjfhgh");
 	return (0);
 }

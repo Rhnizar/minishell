@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_split.c                                         :+:      :+:    :+:   */
+/*   my_split1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:01:09 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/10 16:56:55 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/11 08:28:48 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,6 @@ void	check2(char *str, char **split, int *i, int *j)
 	}
 }
 
-int	check_syntax(char *str)
-{
-	int	i;
-
-	i = 0;
-	int	r;
-	int	r_tmp;
-	while (str[i])
-	{
-		r = char_in_string(str[i], "|<>()*&");
-		r_tmp = r;
-		while (r != -1)
-		{
-			i++;
-			r = char_in_string(str[i], "|<>()*&");
-		}
-		i++;
-	}
-}
-
 char	**my_split(char *str)
 {
 	char	**split;
@@ -73,7 +53,7 @@ char	**my_split(char *str)
 		return (NULL);
 	i = 0;
 	j = 0;
-	printf("%d\n", len_first_split(str));
+	// printf("%d\n", len_first_split(str));
 	while (str[i])
 	{
 		if (char_in_string(str[i], "|<>()*&") != -1)
@@ -89,45 +69,6 @@ char	**my_split(char *str)
 		i++;
 	}
 	return (split);
-}
-
-t_tokens	*split_and_fill_list(char **split)
-{
-	t_tokens	*list;
-	char		**sp2;
-	int			i;
-	int			j;
-
-	i = 0;
-	list = NULL;
-	while (split[i])
-	{
-		sp2 = ft_split(split[i], ' ');
-		j = 0;
-		while (sp2[j])
-		{
-			create_tokens(&list, ft_strdup(sp2[j]), 0);
-			j++;
-		}
-		free_double_ptr(sp2);
-		i++;
-	}
-	return(list);
-}
-
-void	free_tokens(t_tokens *tokens)
-{
-	t_tokens	*tmp;
-	t_tokens	*tmp2;
-
-	tmp = tokens;
-	while (tmp)
-	{
-		tmp2 = tmp->next;
-		free (tmp->str);
-		free (tmp);
-		tmp = tmp2;
-	}
 }
 
 // int	main(int ac, char **av)

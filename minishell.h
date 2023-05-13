@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/10 14:50:08 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:52:35 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <string.h>
+# include <string.h>
+# include <fcntl.h>
+# include <sys/errno.h>
+# include <signal.h>
 
-
-
-// #define BONUS 0
+#ifndef BONUS
+# define BONUS 100
+#endif
 
 #define PIPE 0
 #define RED_IN 1
@@ -99,5 +103,6 @@ void	free_double_ptr(char **str);
 void	create_tokens(t_tokens **lst, char *str, int type);
 t_tokens	*split_and_fill_list(char **split);
 void		free_tokens(t_tokens *tokens);
+int	check_syntax(char *str, char *ref);
 
 # endif

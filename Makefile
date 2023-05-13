@@ -6,22 +6,23 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/10 12:12:00 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/13 17:27:38 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-# NAME_B = minishell_bonus
+NAME_B = minishell_bonus
 
 LIBFT = libft/libft.a
 
-SRCS = my_split.c len_first_split.c minishell_utils.c create_tokens.c what_do_you_represent_string.c
-# SRCS_B = 
+SRCS_M = my_split1.c my_split2.c len_first_split.c minishell_utils.c minishell.c create_tokens.c
 
-OBJS = $(SRCS:.c=.o)
+SRCS_B = minishell_bonus.c check_syntax.c
 
-# OBJS_B = $(SRCS_B:.c=.o)
+OBJS_M = $(SRCS_M:.c=.o)
+
+OBJS_B = $(SRCS_B:.c=.o)
 
 #-fsanitize=address
 
@@ -31,24 +32,36 @@ FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 CCe = cc
 
+DFINE = -D BONUS=100
+DFINE2 = 0
+
+ifeq ($(MAKECMDGOALS), bonus)
+    override DFINE = -D BONUS=200
+	override DFINE2 = 1
+endif
+
+# ifeq ($(DFINE2), 1)
+# 	make fclean
+# endif
+
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
 	make -C libft && make clean -C libft
 
 %.o : %.c
-	$(CCe) $(FLAGS) -c $< -o $@
+	$(CCe) $(FLAGS) $(DFINE) -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CCe) $(FLAGS) $(RDL) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS_M) minishell.h
+	$(CCe) $(FLAGS) $(RDL) $(OBJS_M) $(LIBFT) -o $(NAME)
 
-# bonus: $(LIBFT) $(NAME_B)
+bonus: $(LIBFT) $(NAME_B)
 
-# $(NAME_B) : $(OBJS_B)
-# 	$(CCe) $(FLAGS) $(OBJS_B) $(LIBFT) -o $(NAME_B)
+$(NAME_B) : $(OBJS_B) minishell.h
+	$(CCe) $(FLAGS) $(RDL) $(OBJS_B) $(LIBFT) -o $(NAME)
 
 clean:
-	rm -rf $(OBJS) $(OBJS_B)
+	rm -rf $(OBJS_M) $(OBJS_B)
 
 fclean: clean 
 	rm -rf $(NAME) $(NAME_B) $(LIBFT) && make clean -C libft

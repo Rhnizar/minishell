@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_creat_list.c                                  :+:      :+:    :+:   */
+/*   minishell_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 17:23:17 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/09 17:26:40 by rrhnizar         ###   ########.fr       */
+/*   Created: 2023/05/11 08:38:32 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/05/11 10:05:44 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,10 @@
 
 int main(void)
 {
-	// printf("me\n");
-	t_tokens	*list;
-	list = NULL;
-	create_tokens(&list, "hello", 0);
-	create_tokens(&list, "Rida", 0);
-	create_tokens(&list, "Rhnizar", 0);
-
-	while (list)
-	{
-		printf("%s\n", list->str);
-		list = list->next;
-	}
-	
+	char ref[] = "|<>()*&";
+	check_syntax("hello", ref);
+	// printf("just test bonus here \n");
+	// if (BONUS == 200)
+	// 	printf("this is bonus\n");
 	return (0);
 }
