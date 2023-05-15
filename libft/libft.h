@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:53:52 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/04 12:16:11 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/14 15:05:01 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		ft_isprint(int c);
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);

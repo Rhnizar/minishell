@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/14 17:09:09 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/04 12:16:37 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/14 15:04:36 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c \
 	   ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 	   ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
 	   ft_strchr.c ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c \
-	   ft_strncmp.c ft_strnstr.c ft_strrchr.c \
+	   ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strcmp.c \
 	   ft_tolower.c ft_toupper.c \
 	   ft_substr.c ft_strjoin.c ft_strtrim.c \
 	   ft_split.c ft_itoa.c \

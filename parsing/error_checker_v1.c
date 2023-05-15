@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_checker.c                                    :+:      :+:    :+:   */
+/*   error_checker_v1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:36:17 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/15 11:56:25 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:39:59 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,12 +160,8 @@ int	separator_checker(char *arg, int *i)
 	if (ret && !arg[j])
 		return (syntx_error("newline"), 1);
 	ret = find_separator(sep, &arg[j], &sp_id);
-	// if ((sp_id < 4 || sp_id == )&& !arg[j + ft_arg_len(sep[sp_id])])
-	// {
-		
-	// }
-	// 	return (syntx_error("newline"), 1);
-	printf("value is: %s\n", &arg[j]);
+	if (sp_id < 4 && !arg[j + ft_arg_len(sep[sp_id])])
+		return (syntx_error("newline"), 1);
 	if (ret)
 		return (syntx_error(sep[sp_id]), 1);
 	return (((*i) = j), 0);

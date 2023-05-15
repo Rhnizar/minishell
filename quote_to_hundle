@@ -7,3 +7,10 @@ echo ~ = echo $PATH
 
 "$test"'
 ~ => bash: /Users/kchaouki: is a directory
+
+--------
+embiguous redirect: need to be checked after expantion
+s="one test"
+echo test > $s
+
+echo test >$ajkfgejbfgk

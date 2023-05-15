@@ -6,13 +6,13 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:07:41 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/13 10:37:25 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:19:45 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static size_t	ft_arg_len(char *s)
+size_t	ft_arg_len(char *s)
 {
 	size_t	count;
 

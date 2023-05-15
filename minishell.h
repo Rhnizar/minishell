@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/13 10:42:44 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:19:56 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define EPD ": Permission denied\n"
 # define ESYNTX "minishell: syntax error near unexpected token `"
 # define EAMBGRD ": ambiguous redirect"
-#define BONUS 0
+#define BONUS 1
 
 # define PIPE 0
 # define RED_IN 1
@@ -77,6 +77,7 @@ char	**env_to_double_ptr(t_env *env);
 t_env	*create_env(char **envp);
 void	free_env(t_env *env);
 
+size_t	ft_arg_len(char *s);
 char	*join_to_str(char *str, char c);
 char	*ft_join_strings(char *s1, char *s2);
 char	*quotes_handler(char *arg);

@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:40:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/15 09:50:04 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/14 15:04:06 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/14 15:04:20 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main()
+int	ft_strcmp(char *s1, char *s2)
 {
-	char *read_line;
-	// char *quote;
-	int	exit_status;
-	while (1)
-	{
-    	read_line = readline("minishell> ");
-		// quote = quotes_handler(read_line);
-		exit_status = snytx_error_checker(read_line);
-		add_history(read_line);
-		printf("%d\n", exit_status);
-		// printf("%s\n", quote);
-		free(read_line);
-	}
-	return 0;
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
