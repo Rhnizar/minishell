@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/11 11:52:35 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/13 20:21:14 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,9 @@ void	create_tokens(t_tokens **lst, char *str, int type);
 t_tokens	*split_and_fill_list(char **split);
 void		free_tokens(t_tokens *tokens);
 int	check_syntax(char *str, char *ref);
+char	**fill_with_null(int len);
+int check_quote(char *str);
+int count_quote(char *str, int r);
+char **split_quote(char *str, int r);
 
 # endif

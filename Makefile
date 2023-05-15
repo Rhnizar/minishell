@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/13 17:27:38 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/15 14:38:22 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME_B = minishell_bonus
 
 LIBFT = libft/libft.a
 
-SRCS_M = my_split1.c my_split2.c len_first_split.c minishell_utils.c minishell.c create_tokens.c
+SRCS_M = split_utils.c my_split1.c my_split2.c len_first_split.c minishell_utils.c minishell.c \
+			create_tokens.c 
 
 SRCS_B = minishell_bonus.c check_syntax.c
 

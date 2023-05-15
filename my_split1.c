@@ -12,23 +12,6 @@
 
 #include "minishell.h"
 
-char	**fill_with_null(int len)
-{
-	char	**split;
-	int		i;
-
-	split = malloc(sizeof(char *) * (len + 1));
-	if (!split)
-		return (NULL);
-	i = 0;
-	while (i < len + 1)
-	{
-		split[i] = NULL;
-		i++;
-	}
-	return (split);
-}
-
 void	check2(char *str, char **split, int *i, int *j)
 {
 	while (char_in_string(str[*i], "|<>()*&") != -1 && \
@@ -53,7 +36,6 @@ char	**my_split(char *str)
 		return (NULL);
 	i = 0;
 	j = 0;
-	// printf("%d\n", len_first_split(str));
 	while (str[i])
 	{
 		if (char_in_string(str[i], "|<>()*&") != -1)
