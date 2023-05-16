@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/13 20:21:14 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:20:10 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ typedef struct s_tokens
 	struct s_tokens	*prev;
 	struct s_tokens	*next;
 }	t_tokens;
+
+//////// struct t9sam token ///////
+
+typedef struct s_check
+{
+	char *str;
+	char *output;
+	char **split;
+	int	dq;
+	int sq;
+	int sp_id;
+}			t_check;
 
 //////// struct for environment variables //////////
 typedef struct s_env
@@ -108,5 +120,11 @@ char	**fill_with_null(int len);
 int check_quote(char *str);
 int count_quote(char *str, int r);
 char **split_quote(char *str, int r);
+
+////// utils global split ///////
+int		find_separator(char **sep, char *str);
+int		str_in_string(char *str);
+void	init_check(t_check	*check, char *read_line);
+char	**globa_split(t_check *check, char *output);
 
 # endif
