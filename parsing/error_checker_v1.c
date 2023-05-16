@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:36:17 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/15 11:39:59 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:20:22 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,3 +195,47 @@ int	snytx_error_checker(char *arg)
 	}
 	return (0);
 }
+
+
+/*	separator_checker v_2 */
+
+// int	separator_checker(char *arg, int *i)
+// {
+// 	char	**sep;
+// 	char	*ret;
+// 	int		sp_id;
+// 	int		j;
+
+// 	sp_id = 0;
+// 	j = -1;
+// 	sep = create_separator();
+// 	while (arg[++j] && is_quote(arg[j]) == 0)
+// 	{
+// 		ret = find_separator(sep, &arg[j], &sp_id);
+// 		if (ret)
+// 			break ;
+// 	}
+// 	if (j == 0 && sp_id > 3 && sp_id != 8)
+// 		return (syntx_error(sep[sp_id]), 1);
+// 	if (ret && !arg[j + ft_arg_len(sep[sp_id])])
+// 		return (syntx_error("newline"), 1);
+// 	if (arg[j + ft_arg_len(sep[sp_id])])
+// 		j += ft_arg_len(sep[sp_id]);
+// 	while (arg[j] && arg[j] == ' ')
+// 		j++;
+// 	if (ret && !arg[j])
+// 		return (syntx_error("newline"), 1);
+// 	ret = find_separator(sep, &arg[j], &sp_id);
+// 	if ((sp_id < 4 || sp_id == 8)&& !arg[j + ft_arg_len(sep[sp_id])])
+// 	{
+// 		printf("here\n");
+// 		j += ft_arg_len(sep[sp_id]);
+// 		if (!arg[j + 1])
+// 			return (syntx_error("newline"), 1);	
+// 	}
+// 	// 	return (syntx_error("newline"), 1);
+// 	// printf("value is: %s\n", &arg[j]);
+// 	// if (ret)
+// 	// 	return (syntx_error(sep[sp_id]), 1);
+// 	return (((*i) = j), 0);
+// }

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/15 10:19:56 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/16 20:19:09 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,13 @@ char	**env_to_double_ptr(t_env *env);
 t_env	*create_env(char **envp);
 void	free_env(t_env *env);
 
-size_t	ft_arg_len(char *s);
+int		arg_len(char *s);
 char	*join_to_str(char *str, char c);
 char	*ft_join_strings(char *s1, char *s2);
 char	*quotes_handler(char *arg);
-int		snytx_error_checker(char *arg);
+void	free_double_ptr(char **str);
+int		syntax_error_handler(char *arg);
+void	here_doc(char *delimiter);
 
 
 void	print_error(char *msg, char *arg, int status);

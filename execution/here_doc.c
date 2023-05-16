@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:38:27 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 13:30:40 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:40:45 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static void	write_to_pipe(int fd, char *delimiter)
 
 	while (1)
 	{
-		ft_putstr_fd("> ", 1);
-		line = get_next_line(STDIN_FILENO);
+		line = readline("> ");
 		if (ft_strncmp(line, delimiter, ft_strlen(line) - 1) == 0)
 			break ;
 		ft_putstr_fd(line, fd);

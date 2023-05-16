@@ -6,20 +6,18 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:07:41 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/15 10:19:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:22:48 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-size_t	ft_arg_len(char *s)
+int	arg_len(char *s)
 {
-	size_t	count;
+	int	count;
 
-	if (!s)
-		return (0);
 	count = 0;
-	while (s[count])
+	while (s && s[count])
 		count++;
 	return (count);
 }
@@ -28,16 +26,16 @@ char	*ft_join_strings(char *s1, char *s2)
 {
 	char	*output;
 	char	*p_s1;
-	char	*p_s2;
+	// char	*p_s2;
 	int		i;
 
-	p_s2 = s2;
-	while (*p_s2 == ' ')
-		p_s2++;
-	if (*p_s2 == '\0')
-		return (NULL);
+	// p_s2 = s2;
+	// while (*p_s2 == ' ')
+	// 	p_s2++;
+	// if (*p_s2 == '\0')
+	// 	return (NULL);
 	p_s1 = s1;
-	output = malloc(ft_arg_len(s1) + ft_arg_len(s2) + 1);
+	output = malloc(arg_len(s1) + arg_len(s2) + 1);
 	if (!output)
 		return (NULL);
 	i = 0;

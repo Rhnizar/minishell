@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/15 09:50:04 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:38:21 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ int main()
 	char *read_line;
 	// char *quote;
 	int	exit_status;
+	int	i = 0;
 	while (1)
 	{
     	read_line = readline("minishell> ");
 		// quote = quotes_handler(read_line);
-		exit_status = snytx_error_checker(read_line);
+		if (read_line)
+			exit_status = syntax_error_handler(read_line);
 		add_history(read_line);
 		printf("%d\n", exit_status);
-		// printf("%s\n", quote);
 		free(read_line);
+		i++;
 	}
 	return 0;
 }
