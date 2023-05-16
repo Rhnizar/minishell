@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 12:55:36 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:10:01 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	init_check(t_check	*check, char *read_line)
 	char	*output;
 	char	**split;
 
-	output = NULL;
+	output = ft_strdup("");
 	split = ft_split(">> << || && > < |", ' ');
-	check->str = read_line;
+	if (read_line)
+		check->str = read_line;
+	else
+		check->str = NULL;
 	check->ot = output;
 	check->split = split;
 	check->dq = 0;

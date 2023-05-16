@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 12:57:29 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:12:16 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_quotee(t_check *check, int *i)
+void	check_quote(t_check *check, int *i)
 {
 	if (check->str[*i] == '"' && check->sq == 0 && check->dq == 0)
 		dq_sq(check, i, &check->dq);
@@ -51,7 +51,7 @@ void	fill_with_nonpr_char(t_check *check)
 	{
 		check->sid = str_in_string(&check->str[i]);
 		if (check->str[i] == '"' || check->str[i] == '\'')
-			check_quotee(check, &i);
+			check_quote(check, &i);
 		else if (check->sid != -1 && check->sq == 0 && check->dq == 0)
 		{
 			check->ot = join_to_str(check->ot, '\x07');
@@ -74,5 +74,6 @@ char	**globa_split(t_check *check, char *output)
 	init_check(check, output);
 	fill_with_nonpr_char(check);
 	split = ft_split(check->ot, '\x07');
+	free(check->ot);
 	return (split);
 }
