@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/16 10:20:10 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:48:52 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ typedef struct s_tokens
 typedef struct s_check
 {
 	char *str;
-	char *output;
+	char *ot;
 	char **split;
 	int	dq;
 	int sq;
-	int sp_id;
+	int sid;
 }			t_check;
 
 //////// struct for environment variables //////////

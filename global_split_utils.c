@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 10:21:02 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:53:22 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	init_check(t_check	*check, char *read_line)
 	char	**split;
 
 	output = NULL;
-	split = ft_split(">> << || && > < | * ( )", ' ');
+	split = ft_split(">> << || && > < | ( )", ' ');
 	check->str = read_line;
-	check->output = output;
+	check->ot = output;
 	check->split = split;
 	check->dq = 0;
 	check->sq = 0;
-	check->sp_id = 0;
+	check->sid = 0;
 }
 
 int	find_separator(char **sep, char *str)
@@ -50,9 +50,9 @@ int	find_separator(char **sep, char *str)
 
 int	str_in_string(char *str)
 {
-	int i;
-	int	sp_id;
-	char **sp;
+	int		i;
+	int		sp_id;
+	char	**sp;
 
 	i = 0;
 	sp = ft_split(">> << || && > < | *", ' ');
