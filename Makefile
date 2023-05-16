@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/16 13:15:11 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/16 20:07:32 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,11 @@ OBJS_M = $(SRCS_M:.c=.o)
 
 OBJS_B = $(SRCS_B:.c=.o)
 
-#-fsanitize=address
+#
 
 RDL = -lreadline
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 CCe = cc
 

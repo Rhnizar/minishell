@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:58 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:39:56 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ void	init_check(t_check	*check, char *read_line);
 char	**globa_split(t_check *check, char *output);
 void	dq_sq(t_check *check, int *i, int *dq_or_sq);
 void	join_str(t_check *check, int i);
+int		check_par(char *str);
 
 # endif

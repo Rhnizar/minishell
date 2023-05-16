@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:16 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 20:19:40 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,67 @@ void	check_space_tab(t_check *check, int *i)
 			(*i)++;
 	check->ot = join_to_str(check->ot, '\x07');
 	if (check->str[*i] != '"' && check->str[*i] != '\'' \
-		&& str_in_string(&check->str[*i]) == -1)
+		&& str_in_string(&check->str[*i]) == -1 \
+		&& check_par(&check->str[*i]) == 0)
 		check->ot = join_to_str(check->ot, check->str[*i]);
 	else
 		(*i)--;
 }
 
+int	check_par(char *str)
+{
+	int	i;
+	int	count;
+	int	count2;
+
+	i = 0;
+	count = 0;
+	count2 = 0;
+	while (str[i])
+	{
+		if (str_in_string(&str[i]) != -1 && count == count2)
+			break;
+		if (str[i] == '(')
+			count++;
+		if (str[i] == ')')
+			count2++;
+		i++;
+	}
+	return (count);
+}
+
+int	check2_par(char c, int *count)
+{
+	if (c == ')')
+		(*count)--;
+	if (*count == 0)
+		return (1);
+	else
+		return (0);
+}
+
 void	fill_with_nonpr_char(t_check *check)
 {
 	int	i;
+	int	par;
 
 	i = -1;
+	par = 0;
 	while (check->str[++i])
 	{
+		if (check->str[i] == '(')
+			par = check_par(&check->str[i]);
 		check->sid = str_in_string(&check->str[i]);
 		if (check->str[i] == '"' || check->str[i] == '\'')
 			check_quote(check, &i);
+		else if (par != 0 && check->sq == 0 && check->dq == 0)
+		{
+			check->ot = join_to_str(check->ot, '\x07');
+			while (check2_par(check->str[i], &par) == 0)
+				check->ot = join_to_str(check->ot, check->str[i++]);
+			check->ot = join_to_str(check->ot, check->str[i]);
+			check->ot = join_to_str(check->ot, '\x07');
+		}
 		else if (check->sid != -1 && check->sq == 0 && check->dq == 0)
 		{
 			check->ot = join_to_str(check->ot, '\x07');
@@ -77,3 +122,6 @@ char	**globa_split(t_check *check, char *output)
 	free(check->ot);
 	return (split);
 }
+
+
+//(ls&&(ls))&&(ls -la) ===> hadi khsha thandla
