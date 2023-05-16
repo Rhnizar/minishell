@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 12:03:10 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:55:36 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,21 @@ int	str_in_string(char *str)
 	return (sp_id);
 }
 
-void	join_str(t_check **check, int i)
+void	join_str(t_check *check, int i)
 {
-	(*check)->ot = join_to_str((*check)->ot, (*check)->str[i]);
-	if ((*check)->str[i + 1])
+	check->ot = join_to_str(check->ot, check->str[i]);
+	if (check->str[i + 1])
 	{
-		if (str_in_string(&(*check)->str[i + 1]) != -1)
+		if (str_in_string(&check->str[i + 1]) != -1)
 		{
-			if ((*check)->dq == 0 && (*check)->sq == 0)
-				(*check)->ot = join_to_str((*check)->ot, '\x07');
+			if (check->dq == 0 && check->sq == 0)
+				check->ot = join_to_str(check->ot, '\x07');
 		}
 	}
 }
 
-void	dq_sq(t_check **check, int *i, int *dq_or_sq)
+void	dq_sq(t_check *check, int *i, int *dq_or_sq)
 {
-	(*check)->ot = join_to_str((*check)->ot, (*check)->str[*i]);
+	check->ot = join_to_str(check->ot, check->str[*i]);
 	*dq_or_sq = 1;
 }
