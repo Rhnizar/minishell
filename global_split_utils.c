@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 10:53:22 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:03:10 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_check(t_check	*check, char *read_line)
 	char	**split;
 
 	output = NULL;
-	split = ft_split(">> << || && > < | ( )", ' ');
+	split = ft_split(">> << || && > < |", ' ');
 	check->str = read_line;
 	check->ot = output;
 	check->split = split;
@@ -55,8 +55,27 @@ int	str_in_string(char *str)
 	char	**sp;
 
 	i = 0;
-	sp = ft_split(">> << || && > < | *", ' ');
+	sp = ft_split(">> << || && > < |", ' ');
 	sp_id = find_separator(sp, &str[i]);
 	free_double_ptr(sp);
 	return (sp_id);
+}
+
+void	join_str(t_check **check, int i)
+{
+	(*check)->ot = join_to_str((*check)->ot, (*check)->str[i]);
+	if ((*check)->str[i + 1])
+	{
+		if (str_in_string(&(*check)->str[i + 1]) != -1)
+		{
+			if ((*check)->dq == 0 && (*check)->sq == 0)
+				(*check)->ot = join_to_str((*check)->ot, '\x07');
+		}
+	}
+}
+
+void	dq_sq(t_check **check, int *i, int *dq_or_sq)
+{
+	(*check)->ot = join_to_str((*check)->ot, (*check)->str[*i]);
+	*dq_or_sq = 1;
 }

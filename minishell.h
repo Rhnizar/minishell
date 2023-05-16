@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/16 10:48:52 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:02:19 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,7 @@ int		find_separator(char **sep, char *str);
 int		str_in_string(char *str);
 void	init_check(t_check	*check, char *read_line);
 char	**globa_split(t_check *check, char *output);
+void	dq_sq(t_check **check, int *i, int *dq_or_sq);
+void	join_str(t_check **check, int i);
 
 # endif

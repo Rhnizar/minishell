@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 10:54:54 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:58:27 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(void)
 	char	*read_line;
 	char	**split;
 
-	i = 0;
 	check = malloc(sizeof(t_check));
 	while (1)
 	{
@@ -27,6 +26,7 @@ int	main(void)
 		if (read_line[0] != 0)
 			add_history(read_line);
 		split = globa_split(check, read_line);
+		i = 0;
 		while (split[i])
 		{
 			printf("%s\n", split[i]);
