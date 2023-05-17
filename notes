@@ -101,3 +101,21 @@ invalid command name: This error occurs when a command or function name is inval
 
 unary operator expected: This error occurs when a unary operator, such as ! or -, is expected but not found in an expression or command.
 ---------------------
+
+dfa  || <<
+(ls | (wc -l)) should't work
+((ls)) should't work
+"jdhigi "  | ifjgi  should't work
+(hads("ls")fuhg) error 
+''  >> crash biiiig problem
+(.(ls))
+(ls(lslsda))
+(a)ij errror
+'./nvnb' || need to be newline
+
+letters befor 9AWS
+example lerh(ls)
+don't forgot the opposite is already handled
+-------
+ls >|<df
+ls <|>df

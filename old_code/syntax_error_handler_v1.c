@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_checker.c                                    :+:      :+:    :+:   */
+/*   syntax_error_handler_v1.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:36:17 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/16 22:40:15 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/17 08:53:24 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,36 @@ int	skip_spaces(char *str)
 	return (i);
 }
 
+
+// separator_checker v1
+// int	separator_checker(char **sep, char *arg, int sp_id, int *i)
+// {
+// 	int		j;
+
+// 	j = 0;
+// 	j = skip_spaces(&arg[j]);
+// 	if (sp_id < 4 || sp_id == 7)
+// 	{
+// 		j += arg_len(sep[sp_id]) + skip_spaces(&arg[j + arg_len(sep[sp_id])]);
+// 		if (!arg[j])
+// 			return (syntx_error("newline"), 1);
+// 		find_separator(sep, &arg[j], &sp_id);
+// 		if (sp_id < 9)
+// 			return (syntx_error(sep[sp_id]), 1);
+// 	}	
+// 	else if (sp_id > 3 && sp_id != 7 && sp_id < 9)
+// 	{
+// 		if (j > 0 || *i == 0)
+// 			return (syntx_error(sep[sp_id]), 1);
+// 		j += arg_len(sep[sp_id]) + skip_spaces(&arg[j + arg_len(sep[sp_id])]);
+// 		if (!arg[j])
+// 			return (syntx_error("newline"), 1);
+// 		find_separator(sep, &arg[j], &sp_id);
+// 		if (sp_id > 3 && sp_id != 7 && sp_id < 9)
+// 			return (syntx_error(sep[sp_id]), 1);
+// 	}
+// 	return (((*i) += j), 0);
+// }
 int	separator_checker(char **sep, char *arg, int sp_id, int *i)
 {
 	int		j;

@@ -6,20 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:06 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/14 11:43:55 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:34:40 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static int	is_quote(char c)
-{
-	if (c == '\'')
-		return (1);
-	else if (c == '\"')
-		return (2);
-	return (0);
-}
 
 static char	*dollar_handler(char *arg, int *i)
 {

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 13:20:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:02:40 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*ft_join_command_path(char *path, char *cmd)
 	char	*output;
 	int		i;
 
-	output = malloc(ft_len(cmd) + ft_len(path) + 1);
+	output = malloc(ft_len(cmd) + ft_len(path) + 2);
 	if (!output)
 		return (NULL);
 	i = 0;
@@ -49,6 +49,8 @@ char	*valid_command_path(char **paths, char *cmd)
 
 	if (access(cmd, F_OK) == 0 && ft_strchr(cmd, '/'))
 		return (cmd);
+	else if (ft_strchr(cmd, '/'))
+		return (NULL);
 	else
 	{
 		while (*paths)

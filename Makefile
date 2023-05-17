@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/16 22:35:45 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/17 16:53:00 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,13 @@ NAME = minishell
 
 LIBFT = libft/libft.a
 
+SNTX_ERROR_CHECKER = parsing/syntax_error_checker/syntax_error_handler.c \
+					 parsing/syntax_error_checker/check_parentheses.c \
+					 parsing/syntax_error_checker/here_doc_error_case.c
+
 # EXECUTION = execution/print_error.c execution/expansion.c
 # PARSING = parsing/environment.c parsing/expansion.c 
-PARSING = ft_free.c parsing/quotes_handler.c parsing/error_checker.c parsing/parsing_utils.c execution/print_error.c
+PARSING = ft_free.c parsing/quotes_handler.c parsing/parsing_utils.c parsing/parsing_utils_2.c execution/print_error.c $(SNTX_ERROR_CHECKER)
 
 SRCS = minishell.c $(PARSING)
 
@@ -32,7 +36,7 @@ RDL = -lreadline
 
 #-fsanitize=address
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 CCe = cc
 
 all: $(LIBFT) $(NAME)
