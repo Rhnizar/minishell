@@ -6,28 +6,11 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 10:55:14 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:43:52 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	**fill_with_null(int len)
-{
-	char	**split;
-	int		i;
-
-	split = malloc(sizeof(char *) * (len + 1));
-	if (!split)
-		return (NULL);
-	i = 0;
-	while (i < len + 1)
-	{
-		split[i] = NULL;
-		i++;
-	}
-	return (split);
-}
 
 char	*join_to_str(char *str, char c)
 {

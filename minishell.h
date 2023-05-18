@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/16 19:39:56 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:39:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,11 @@ int		str_in_string(char *str);
 void	init_check(t_check	*check, char *read_line);
 char	**globa_split(t_check *check, char *output);
 void	dq_sq(t_check *check, int *i, int *dq_or_sq);
-void	join_str(t_check *check, int i);
 int		check_par(char *str);
+void	fill_with_nonpr_char(t_check *check);
+void	check_quote(t_check *check, int *i);
+int		check2_par(char c, int *count);
+int		check_par(char *str);
+void	check_space_tab(t_check *check, int *i);
 
 # endif
