@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/18 10:39:07 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:05:01 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ char	*join_to_str(char *str, char c);
 char	**my_split(char *str);
 void	free_double_ptr(char **str);
 void	create_tokens(t_tokens **lst, char *str, int type);
-t_tokens	*split_and_fill_list(char **split);
 void		free_tokens(t_tokens *tokens);
 int	check_syntax(char *str, char *ref);
 char	**fill_with_null(int len);
@@ -124,13 +123,9 @@ char **split_quote(char *str, int r);
 int		find_separator(char **sep, char *str);
 int		str_in_string(char *str);
 void	init_check(t_check	*check, char *read_line);
-char	**globa_split(t_check *check, char *output);
+t_tokens	*split_and_fill_list(char *output);
 void	dq_sq(t_check *check, int *i, int *dq_or_sq);
-int		check_par(char *str);
-void	fill_with_nonpr_char(t_check *check);
 void	check_quote(t_check *check, int *i);
-int		check2_par(char c, int *count);
-int		check_par(char *str);
 void	check_space_tab(t_check *check, int *i);
 
 # endif

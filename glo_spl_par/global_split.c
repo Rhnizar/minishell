@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:11:58 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/19 12:56:41 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,55 +39,52 @@ void	check_space_tab(t_check *check, int *i)
 			check->ot = join_to_str(check->ot, check->str[(*i)++]);
 	check->ot = join_to_str(check->ot, '\x07');
 	if (check->str[*i] != '"' && check->str[*i] != '\'' \
-		&& str_in_string(&check->str[*i]) == -1)
+		&& str_in_string(&check->str[*i]) == -1 \
+		&& check_par(&check->str[*i]) == 0)
 		check->ot = join_to_str(check->ot, check->str[*i]);
 	else
 		(*i)--;
 }
 
-void	fill_with_nonpr_char(t_check *check)
+int	check_par(char *str)
 {
 	int	i;
+	int	count;
+	int	count2;
 
-	i = -1;
-	while (check->str[++i])
+	i = 0;
+	count = 0;
+	count2 = 0;
+	while (str[i])
 	{
-		check->sid = str_in_string(&check->str[i]);
-		if (check->str[i] == '"' || check->str[i] == '\'')
-			check_quote(check, &i);
-		else if (check->sid != -1 && check->sq == 0 && check->dq == 0)
-		{
-			check->ot = join_to_str(check->ot, '\x07');
-			check->ot = ft_strjoin(check->ot, check->split[check->sid]);
-			check->ot = join_to_str(check->ot, '\x07');
-			i += ft_strlen(check->split[check->sid]) - 1;
-		}
-		else if ((check->str[i] == ' ' || check->str[i] == '\t') \
-			&& (check->sq == 0 && check->dq == 0))
-			check_space_tab(check, &i);
-		else
-			check->ot = join_to_str(check->ot, check->str[i]);
+		if (str_in_string(&str[i]) != -1 && count == count2)
+			break ;
+		if (str[i] == '(')
+			count++;
+		if (str[i] == ')')
+			count2++;
+		i++;
 	}
-	free_double_ptr(check->split);
+	return (count);
 }
 
-t_tokens	*split_and_fill_list(char *output)
+int	check2_par(char c, int *count)
 {
-	char		**split;
-	int			i;
-	t_tokens	*lst;
-	t_check		*check;
+	if (c == ')')
+		(*count)--;
+	if (*count == 0)
+		return (1);
+	else
+		return (0);
+}
 
-	lst = NULL;
-	i = 0;
-	check = malloc(sizeof(t_check));
+char	**globa_split(t_check *check, char *output)
+{
+	char	**split;
+
 	init_check(check, output);
 	fill_with_nonpr_char(check);
 	split = ft_split(check->ot, '\x07');
 	free(check->ot);
-	free(check);
-	while (split[i])
-		create_tokens(&lst, ft_strdup(split[i++]), 0);
-	free_double_ptr(split);
-	return (lst);
+	return (split);
 }

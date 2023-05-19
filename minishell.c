@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 17:29:11 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:09:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	main(void)
 {
-	t_check	*check;
-	int		i;
 	char	*read_line;
-	char	**split;
+	t_tokens	*lst;
 
-	check = malloc(sizeof(t_check));
 	while (1)
 	{
 		read_line = readline("minishell ~ ");
@@ -27,19 +24,16 @@ int	main(void)
 		{
 			if (read_line[0] != 0)
 				add_history(read_line);
-			split = globa_split(check, read_line);
-			i = 0;
-			while (split[i])
+			lst = split_and_fill_list(read_line);
+			while(lst)
 			{
-				printf("%s\n", split[i]);
-				i++;
+				printf("%s\n", lst->str);
+				lst = lst->next;
 			}
-			free_double_ptr(split);
 		}
 		else
 			break ;
 	}
-	free(check);
 	printf("exit\n");
 	return (0);
 }

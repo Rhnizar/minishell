@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 08:09:52 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/18 10:36:41 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/19 12:42:45 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	ft_call(t_check *check, int *i)
 	int	par;
 
 	par = 0;
-	if (check->str[*i] == '(')
-		par = check_par(&check->str[*i]);
+	// if (check->str[*i] == '(')
+	// 	par = check_par(&check->str[*i]);
 	check->sid = str_in_string(&check->str[*i]);
 	if (check->str[*i] == '"' || check->str[*i] == '\'')
 		check_quote(check, i);
-	else if (par != 0 && check->sq == 0 && check->dq == 0)
-		parenthesis(check, &par, i);
+	// else if (par != 0 && check->sq == 0 && check->dq == 0)
+	// 	parenthesis(check, &par, i);
 	else if (check->sid != -1 && check->sq == 0 && check->dq == 0)
 	{
 		check->ot = join_to_str(check->ot, '\x07');
