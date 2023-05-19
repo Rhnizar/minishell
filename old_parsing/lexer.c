@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:40:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/19 19:46:18 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/13 10:29:01 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/13 10:29:24 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	main(void)
-{
-	char	*read_line;
-	t_tokens	*lst;
-	t_tokens	*tmp;
+// char	*lexer(char *arg)
+// {
+// 	char	*outfile;
+// 	int		i;
 
-	while (1)
-	{
-		read_line = readline("minishell ~ ");
-		if (read_line)
-		{
-			if (read_line[0] != 0)
-				add_history(read_line);
-			lst = split_and_fill_list(read_line);
-			tmp = lst;
-			while(tmp)
-			{
-				printf("%s\n", tmp->str);
-				tmp = tmp->next;
-			}
-		}
-		else
-			break ;
-	}
-	printf("exit\n");
-	return (0);
-}
+// 	i = -1;
+// 	while (arg[++i])
+// 	{	
+// 	}	
+// 	return (outfile);	
+// }

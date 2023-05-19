@@ -14,3 +14,7 @@ s="one test"
 echo test > $s
 
 echo test >$ajkfgejbfgk
+
+
+don't forgot this case:
+ls > file0 > file1 > file2 < file3 > file4

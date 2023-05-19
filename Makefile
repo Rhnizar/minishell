@@ -6,36 +6,35 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/17 16:53:00 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/19 20:05:46 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-
-# NAME_B = minishell_bonus
+NAME_B = minishell_bonus
 
 LIBFT = libft/libft.a
 
-SNTX_ERROR_CHECKER = parsing/syntax_error_checker/syntax_error_handler.c \
-					 parsing/syntax_error_checker/check_parentheses.c \
-					 parsing/syntax_error_checker/here_doc_error_case.c
+# parsing/quotes_handler.c
+# execution/print_error.c
 
-# EXECUTION = execution/print_error.c execution/expansion.c
-# PARSING = parsing/environment.c parsing/expansion.c 
-PARSING = ft_free.c parsing/quotes_handler.c parsing/parsing_utils.c parsing/parsing_utils_2.c execution/print_error.c $(SNTX_ERROR_CHECKER)
+PARSING = parsing/create_tokens.c \
+		  parsing/global_split_utils.c \
+		  parsing/global_split.c \
 
-SRCS = minishell.c $(PARSING)
+SRCS = minishell.c minishell_utils.c $(PARSING)
 
-# SRCS_B = 
+# SRCS_B =
 
 OBJS = $(SRCS:.c=.o)
 
-# OBJS_B = $(SRCS_B:.c=.o)
+OBJS_B = $(SRCS_B:.c=.o)
 
-RDL = -lreadline
+RDL = -lreadline \
+	  -L/goinfre/kchaouki/brew/opt/readline/lib \
+	  -I/goinfre/kchaouki/brew/opt/readline/include
 
 #-fsanitize=address
-
 FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 CCe = cc
 
@@ -50,10 +49,10 @@ $(LIBFT):
 $(NAME): $(OBJS) minishell.h
 	$(CCe) $(FLAGS) $(RDL) $(OBJS) $(LIBFT) -o $(NAME)
 
-# bonus: $(LIBFT) $(NAME_B)
+$(NAME_B): $(OBJS_B) minishell.h
+	$(CCe) $(FLAGS) $(RDL) $(OBJS_B) $(LIBFT) -o $(NAME_B)
 
-# $(NAME_B) : $(OBJS_B)
-# 	$(CCe) $(FLAGS) $(OBJS_B) $(LIBFT) -o $(NAME_B)
+bonus: $(LIBFT) $(NAME_B)
 
 clean:
 	rm -rf $(OBJS) $(OBJS_B)

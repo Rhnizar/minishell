@@ -1,23 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   expantion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 08:08:40 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 08:55:36 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/14 14:03:07 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	free_double_ptr(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		free (str[i++]);
-	free(str);
-}

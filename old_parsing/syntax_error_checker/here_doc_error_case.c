@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/17 13:22:36 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:57:16 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,12 @@ void	run_here_docs(char *str)
 	char	**here_docs;
 	int		i;
 
-	here_docs = ft_split(str, ' ');
-	i = 0;
-	while (here_docs[i])
-		here_doc_error_case(here_docs[i++]);
-	free_double_ptr(here_docs);
+	if (str)
+	{
+		here_docs = ft_split(str, ' ');
+		i = 0;
+		while (here_docs[i])
+			here_doc_error_case(here_docs[i++]);
+		free_double_ptr(here_docs);
+	}
 }
