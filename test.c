@@ -1,4 +1,3 @@
-
 # include "minishell.h"
 
 int main()
@@ -21,11 +20,22 @@ int main()
 	// 	while (1);
 	// }
 	// waitpid(-1, NULL, 0);
-	char **str = ft_calloc(3, sizeof(char *));
+	// char **str = ft_calloc(3, sizeof(char *));
 
-	printf("%s\n", str[0]);
-	printf("%s\n", str[1]);
-	printf("%s\n", str[2]);
+	// printf("%s\n", str[0]);
+	// printf("%s\n", str[1]);
+	// printf("%s\n", str[2]);
+
+
+	char *arg[] = {"", "ls", NULL};
+	int fd = open("Makefile", O_RDONLY);
+
+	dup2(fd, 0);
+
+	dup2();
+	execve("/bin/cat", arg, NULL);
+
+	return (0);
 }
 // if (str[i] == '(')
 // 	is_parenthesise = 1;

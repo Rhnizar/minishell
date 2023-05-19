@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/19 16:05:01 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/19 19:36:20 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@
 # include <sys/errno.h>
 # include <signal.h>
 
-#ifndef BONUS
-# define BONUS 100
-#endif
 
 #define PIPE 0
 #define RED_IN 1
@@ -120,12 +117,12 @@ int count_quote(char *str, int r);
 char **split_quote(char *str, int r);
 
 ////// utils global split ///////
-int		find_separator(char **sep, char *str);
-int		str_in_string(char *str);
-void	init_check(t_check	*check, char *read_line);
+int			find_separator(char **sep, char *str);
+int			str_in_string(char *str);
+void		init_check(t_check	*check, char *read_line);
 t_tokens	*split_and_fill_list(char *output);
-void	dq_sq(t_check *check, int *i, int *dq_or_sq);
-void	check_quote(t_check *check, int *i);
-void	check_space_tab(t_check *check, int *i);
+void		dq_sq(t_check *check, int *i, int *dq_or_sq);
+void		check_quote(t_check *check, int *i);
+void		check_space_tab(t_check *check, int *i);
 
 # endif

@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/19 16:06:12 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/19 19:37:00 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,18 +31,6 @@ RDL = -lreadline
 FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 CCe = cc
-
-DFINE = -D BONUS=100
-DFINE2 = 0
-
-ifeq ($(MAKECMDGOALS), bonus)
-    override DFINE = -D BONUS=200
-	override DFINE2 = 1
-endif
-
-# ifeq ($(DFINE2), 1)
-# 	make fclean
-# endif
 
 all: $(LIBFT) $(NAME)
 
