@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/19 20:05:46 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/20 10:09:22 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,19 @@ LIBFT = libft/libft.a
 # parsing/quotes_handler.c
 # execution/print_error.c
 
+ANALYSER =  parsing/analyser/here_doc_error_case.c \
+			parsing/analyser/syntax_error.c
+		  
+
 PARSING = parsing/create_tokens.c \
 		  parsing/global_split_utils.c \
 		  parsing/global_split.c \
+		  $(ANALYSER)
 
-SRCS = minishell.c minishell_utils.c $(PARSING)
+SRCS = minishell.c \
+	   minishell_utils.c \
+	   execution/print_error.c \
+	   $(PARSING) 
 
 # SRCS_B =
 
@@ -35,7 +43,7 @@ RDL = -lreadline \
 	  -I/goinfre/kchaouki/brew/opt/readline/include
 
 #-fsanitize=address
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 CCe = cc
 
 all: $(LIBFT) $(NAME)

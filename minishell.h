@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/19 20:03:19 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/20 10:44:15 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ void	free_double_ptr(char **str);
 
 //create tokens
 void	create_tokens(t_tokens **lst, char *str, int type);
+int		count_tokens(t_tokens *tokens);
+void	free_tokens(t_tokens *tokens);
 
 
 ////// utils global split ///////
@@ -125,6 +127,12 @@ t_tokens	*split_and_fill_list(char *output);
 void		dq_sq(t_check *check, int *i, int *dq_or_sq);
 void		check_quote(t_check *check, int *i);
 void		check_space_tab(t_check *check, int *i);
+
+
+// analyser
+int		syntax_error_handler(t_tokens *tokens);
+void	run_here_docs(t_tokens	*here_docs);
+
 
 
 

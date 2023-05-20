@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/19 20:01:30 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/20 11:30:16 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	check_quote(t_check *check, int *i)
 
 void	check_space_tab(t_check *check, int *i)
 {
-	check->ot = join_to_str(check->ot, '\x07');
+	// check->ot = join_to_str(check->ot, '\x07');
 	while (check->str[*i] && (check->str[*i] == ' ' || check->str[*i] == '\t'))
-			check->ot = join_to_str(check->ot, check->str[(*i)++]);
+		(*i)++;
+			// check->ot = join_to_str(check->ot, check->str[(*i)++]);
 	check->ot = join_to_str(check->ot, '\x07');
 	if (check->str[*i] != '"' && check->str[*i] != '\'' \
 		&& str_in_string(&check->str[*i]) == -1)
