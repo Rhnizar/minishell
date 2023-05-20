@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/19 19:36:20 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:11:57 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,38 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+////////////////// struct the comands shell ///////////
+
+typedef struct s_cmds
+{
+	char	**spl_redi;
+	char	**spl_sp_char;
+	char	*cmd;        //   /bin/cat
+	int		is_builtin;
+	char	**args;
+	char	*sp_char;
+	char	**redi;
+	int		red_id;
+	int		sp_id;
+	char	*subshell;
+}				t_cmds;
+
 //////////////// struct ///////////////
 
 typedef struct s_cmdshell
 {
-	char	*cmd;        //   /bin/cat
-	int		is_builtin;
-	char	**args;     //["cat", "-e", "filename"]
-	t_env	*env;
 	// int		exit_status;
-	// int		pip;
-	// char	**reds; // ==> append red_in red_out herdoc
-	struct s_cmdshell	*next;
+	t_cmds	*cmds;
+	// t_env	*env;
+	struct s_cmdshell	*next;                                 
 }	t_cmdshell;
+
+typedef struct s_globale
+{
+	int		exit_status;
+	t_env		*env;
+	t_cmdshell *all_commands;
+}	t_globale;
 
 ///////////////// end struct ///////////
 
@@ -124,5 +143,12 @@ t_tokens	*split_and_fill_list(char *output);
 void		dq_sq(t_check *check, int *i, int *dq_or_sq);
 void		check_quote(t_check *check, int *i);
 void		check_space_tab(t_check *check, int *i);
+
+///////// utils fill struct commands /////
+int			check_quote_cmd(char *str);
+int			check_sep_or_red(char *str, char **str_to_check);
+void		init_cmd(t_cmds **cmds, t_tokens *tokens);
+t_cmdshell	*fill_list_cmds(t_cmdshell *lst, t_tokens *token);
+int			check_subshell(char *str);
 
 # endif

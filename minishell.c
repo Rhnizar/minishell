@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:09:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:43:57 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	main(void)
 {
 	char	*read_line;
-	t_tokens	*lst;
+	t_tokens	*tokens;
+	t_cmdshell *lst_cmd;
 
+	lst_cmd = NULL;
 	while (1)
 	{
 		read_line = readline("minishell ~ ");
@@ -24,12 +26,19 @@ int	main(void)
 		{
 			if (read_line[0] != 0)
 				add_history(read_line);
-			lst = split_and_fill_list(read_line);
-			while(lst)
+			tokens = split_and_fill_list(read_line);
+			lst_cmd = fill_list_cmds(lst_cmd, tokens);
+			// printf("%s\n", lst_cmd->cmds->cmd);
+			while (lst_cmd)
 			{
-				printf("%s\n", lst->str);
-				lst = lst->next;
+				printf("%s\n", lst_cmd->cmds->cmd);
+				lst_cmd = lst_cmd->next;
 			}
+			// while(lst)
+			// {
+			// 	printf("%s\n", lst->str);
+			// 	lst = lst->next;
+			// }
 		}
 		else
 			break ;

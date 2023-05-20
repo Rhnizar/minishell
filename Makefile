@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/19 19:37:00 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/20 15:54:26 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ NAME_B = minishell_bonus
 
 LIBFT = libft/libft.a
 
-SRCS_M = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c
-
+SRCS_M = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
+		create_cmds.c init_cmd.c
 SRCS_B = minishell_bonus.c check_syntax.c
 
 OBJS_M = $(SRCS_M:.c=.o)
@@ -28,7 +28,7 @@ OBJS_B = $(SRCS_B:.c=.o)
 
 RDL = -lreadline
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 CCe = cc
 
