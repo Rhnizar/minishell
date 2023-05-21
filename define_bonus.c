@@ -6,14 +6,32 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/19 20:14:29 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/21 09:54:10 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(void)
+
+
+t_cmdshell	*fill_list_cmds(t_cmdshell *lst, t_tokens *token)
 {
-	printf("just test define mandaory\n");
-	return (0);
+	t_tokens	*tmp;
+	t_cmds		*cmds;
+
+	tmp = token;
+	cmds = NULL;
+	lst = NULL;
+	while (tmp)
+	{
+		init_cmd(&cmds, tmp);
+		tmp = fill_struct_cmds(&cmds, tmp);
+		create_cmds(&lst, cmds);
+		free_double_ptr(cmds->args);
+		free_double_ptr(cmds->redi);
+		free_double_ptr(cmds->spl_redi);
+		free_double_ptr(cmds->spl_sp_char);
+		free(cmds);
+	}
+	return (lst);
 }

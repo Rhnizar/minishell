@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:47:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:16:45 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/21 08:53:06 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	create_tokens(t_tokens **lst, char *str, int type)
+void	create_tokens(t_tokens **lst, char *str)
 {
 	t_tokens	*new;
 	t_tokens	*tmp;
@@ -21,7 +21,6 @@ void	create_tokens(t_tokens **lst, char *str, int type)
 	if (!new)
 		return ;
 	new->str = str;
-	new->type = type;
 	new->next = NULL;
 	new->prev = NULL;
 	if (!(*lst))

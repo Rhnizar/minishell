@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:21:57 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/21 13:27:28 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	check_space_tab(t_check *check, int *i)
 {
 	check->ot = join_to_str(check->ot, '\x07');
 	while (check->str[*i] && (check->str[*i] == ' ' || check->str[*i] == '\t'))
-			check->ot = join_to_str(check->ot, check->str[(*i)++]);
+		(*i)++;
+			// check->ot = join_to_str(check->ot, check->str[(*i)++]);
 	check->ot = join_to_str(check->ot, '\x07');
 	if (check->str[*i] != '"' && check->str[*i] != '\'' \
 		&& str_in_string(&check->str[*i]) == -1)
@@ -87,7 +88,7 @@ t_tokens	*split_and_fill_list(char *output)
 	free(check->ot);
 	free(check);
 	while (split[i])
-		create_tokens(&lst, ft_strdup(split[i++]), 0);
+		create_tokens(&lst, ft_strdup(split[i++]));
 	free_double_ptr(split);
 	return (lst);
 }

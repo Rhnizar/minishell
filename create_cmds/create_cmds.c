@@ -12,27 +12,6 @@
 
 #include "minishell.h"
 
-void	create_cmds(t_cmdshell **lst, t_cmds *cmds)
-{
-	t_cmdshell	*new;
-	t_cmdshell	*tmp;
-
-	new = malloc(sizeof(t_tokens));
-	if (!new)
-		return ;
-	new->cmds = cmds;
-	new->next = NULL;
-	if (!(*lst))
-	{
-		*lst = new;
-		return ;
-	}
-	tmp = *lst;
-	while(tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-}
-
 int	check_sep_or_red(char *str, char **str_to_check)
 {
 	int re;
@@ -96,6 +75,7 @@ t_cmdshell	*fill_list_cmds(t_cmdshell *lst, t_tokens *token)
 
 	tmp = token;
 	cmds = NULL;
+	lst = NULL;
 	while (tmp)
 	{
 		init_cmd(&cmds, tmp);
