@@ -6,53 +6,34 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:12:05 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/21 14:51:02 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:28:41 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// int init1(t_utils **utils, t_args **args, t_redis **redis)
-// {
-// 	*utils = malloc(sizeof(t_utils));
-// 	if (!(*utils))
-// 		return (-1);
-// 	(*utils)->spl_redi = ft_split("<< < > >>", ' ');
-// 	(*utils)->spl_sp_char = ft_split("|| && |", ' ');
-// 	return (0);
-// }
-
 int	init_struct_cmds(t_cmds **cmds)
 {
-	// *cmds = malloc(sizeof(t_cmds));
-	// if (!(*cmds))
-	// 	return (-1);
 	(*cmds)->redis = NULL;
 	(*cmds)->args = NULL;
-	(*cmds)->utils = malloc(sizeof(t_utils));
-	if (!((*cmds)->utils))
-		return (-1);
-	// (*cmds)->utils->spl_redi = ft_split("<< < > >>", ' ');
-	(*cmds)->utils->spl_redi = ft_split(">> << < >", ' ');
-	(*cmds)->utils->spl_sp_char = ft_split("|| && |", ' ');
-	(*cmds)->sp_id = -1;
-	(*cmds)->red_id = -1;
 	(*cmds)->subshell = NULL;
 	(*cmds)->cmd = NULL;
 	return (0);
 }
 
-int	init_cmds(t_cmdshell *cmdshell)
+int	init_struct_utils(t_utils **utils)
 {
-	cmdshell = malloc(sizeof(t_cmdshell));
-	if (!cmdshell)
+	*utils = malloc(sizeof(t_utils));
+	if (!(*utils))
 		return (-1);
-	init_struct_cmds(&cmdshell->cmds);
-	// cmdshell->cmds = malloc(sizeof(t_cmds));
-	// if (!cmdshell->cmds)
-	// 	return (-1);
-	// if (init1(cmdshell->cmds->utils, cmdshell->cmds->args, cmdshell->cmds->redis) == -1)
-	// 	return (-1);
+	(*utils)->spl_redi = ft_split(">> << < >", ' ');
+	if (!((*utils)->spl_redi))
+		return (-1);
+	(*utils)->spl_sp_char = ft_split("|| && |", ' ');
+	if (!((*utils)->spl_sp_char))
+		return (-1);
+	(*utils)->sp_id = -1;
+	(*utils)->red_id = -1;
 	return (0);
 }
 

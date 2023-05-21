@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/21 15:16:56 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:13:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,20 +123,20 @@ void	fill_list_redis(t_redis **lst, char *str, int type)
 	tmp->next = new;
 }
 
-void	check_node1(t_cmds **cmd, t_tokens *tmp)
+void	check_node1(t_cmds **cmd, t_tokens *tmp, t_utils	*utils)
 {
-	if ((*cmd)->red_id != -1)
+	if (utils->red_id != -1)
 	{
-		fill_list_redis(&(*cmd)->redis, ft_strdup(tmp->next->str), (*cmd)->red_id);
-		(*cmd)->red_id = -1;
+		fill_list_redis(&(*cmd)->redis, ft_strdup(tmp->next->str), utils->red_id);
+		utils->red_id = -1;
 	}
-	else if ((*cmd)->sp_id != -1)
+	else if (utils->sp_id != -1)
 		(*cmd)->cmd = ft_strdup(tmp->next->str);
 	else
 		(*cmd)->cmd = ft_strdup(tmp->str);
 }
 
-t_tokens *fill_struct_cmds(t_cmds *cmds, t_tokens *tokens)
+t_tokens *fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils	*utils)
 {
 	t_tokens	*tmp;
 	int			red_id_prev;
@@ -145,26 +145,32 @@ t_tokens *fill_struct_cmds(t_cmds *cmds, t_tokens *tokens)
 	tmp = tokens;
 	red_id_prev = -1;
 	sp_id_prev = -1;
-	while (tmp && cmds->sp_id == -1)
+	(void)cmds;
+	while (tmp && utils->sp_id == -1)
 	{
-		cmds->red_id = check_sep_or_red(tmp->str, cmds->utils->spl_redi);
-		cmds->sp_id = check_sep_or_red(tmp->str, cmds->utils->spl_sp_char);
-		if (tmp->prev)
-		{
-			red_id_prev = check_sep_or_red(tmp->prev->str, cmds->utils->spl_redi);
-			sp_id_prev = check_sep_or_red(tmp->prev->str, cmds->utils->spl_sp_char);
-		}
-		if (check_subshell(tmp->str) == 1)
-			cmds->subshell = ft_strdup(tmp->str);
-		else if ((tmp->prev == NULL || cmds->sp_id != -1) && cmds->cmd == NULL)
-			check_node1(&cmds, tmp);
-		else if (cmds->red_id != -1)
-		{
-			fill_list_redis(&cmds->redis, ft_strdup(tmp->next->str), cmds->red_id);
-			cmds->red_id = -1;
-		}
-		else if (tmp->prev != NULL && red_id_prev == -1 && cmds->sp_id == -1 && sp_id_prev == -1)
-			fill_list_args(&cmds->args, ft_strdup(tmp->str));
+		utils->red_id = check_sep_or_red(tmp->str, utils->spl_redi);
+		utils->sp_id = check_sep_or_red(tmp->str, utils->spl_sp_char);
+		printf("%d\n", utils->sp_id);
+		// if (utils->sp_id != -1)
+		// 	cmds->cmd = ft_strdup(tmp->next->str);
+		// else
+		// 	cmds->cmd = ft_strdup("me");
+		// if (tmp->prev)
+		// {
+		// 	red_id_prev = check_sep_or_red(tmp->prev->str, utils->spl_redi);
+		// 	sp_id_prev = check_sep_or_red(tmp->prev->str, utils->spl_sp_char);
+		// }
+		// if (check_subshell(tmp->str) == 1)
+		// 	cmds->subshell = ft_strdup(tmp->str);
+		// else if ((tmp->prev == NULL || utils->sp_id != -1) && cmds->cmd == NULL)
+		// 	check_node1(&cmds, tmp, utils);
+		// else if (utils->red_id != -1)
+		// {
+		// 	fill_list_redis(&cmds->redis, ft_strdup(tmp->next->str), utils->red_id);
+		// 	utils->red_id = -1;
+		// }
+		// else if (tmp->prev != NULL && red_id_prev == -1 && utils->sp_id == -1 && sp_id_prev == -1)
+		// 	fill_list_args(&cmds->args, ft_strdup(tmp->str));
 		tmp = tmp->next;
 	}
 	return(tmp);
@@ -195,25 +201,29 @@ t_cmdshell	*fill_list_cmds(t_cmdshell *lst, t_tokens *tokens)
 {
 	t_tokens	*tmp;
 	t_cmds		*cmds;
+	t_utils		*utils;
 
 	tmp = tokens;
 	lst = NULL;
 	cmds = malloc(sizeof(t_cmds));
+	init_struct_utils(&utils);
 	while (tmp)
 	{
+		utils->sp_id = -1;
 		init_struct_cmds(&cmds);
-		tmp = fill_struct_cmds(cmds, tmp);
-		// printf("heeeere  %s\n", tmp->str);
-		// exit(1);
+		tmp = fill_struct_cmds(cmds, tmp, utils);
+		// printf("%s\n", tmp->str);
+		// 	exit(1);
 		create_cmds(&lst, cmds);
-		free_double_ptr(cmds->utils->spl_sp_char);
-		free_double_ptr(cmds->utils->spl_redi);
 		// free_redis(cmds->redis);
 		// free_args(cmds->args);
-		free(cmds->cmd);
-		free(cmds->subshell);
+		// free(cmds);
+		// free(cmds->subshell);
 	}
 	free_tokens(tokens);
+	free_double_ptr(utils->spl_sp_char);
+	free_double_ptr(utils->spl_redi);
+	free(utils);
 	return (lst);
 }
 
@@ -222,8 +232,6 @@ int	main(void)
 	char	*read_line;
 	t_tokens	*tokens;
 	t_cmdshell *lst_cmd;
-	int			nred = 1;
-	int			narg = 1;
 	// t_global	*glob;
 
 	lst_cmd = NULL;
@@ -252,7 +260,6 @@ int	main(void)
 				printf("\n=======  all arguments  =======\n");
 				while(lst_cmd->cmds->args)
 				{
-					printf("=======  argument %d =======\n", narg++);
 					printf("arg : %s\n", lst_cmd->cmds->args->str);
 					
 					lst_cmd->cmds->args = lst_cmd->cmds->args->next;
@@ -260,9 +267,9 @@ int	main(void)
 				printf("\n======= all redirections =======\n");
 				while(lst_cmd->cmds->redis)
 				{
-					printf("======= redirection %d =======\n", nred++);
 					printf("red : %s\n", lst_cmd->cmds->redis->str);
 					printf("type red : %d\n", lst_cmd->cmds->redis->type);
+					printf("-----------------------------\n");
 					lst_cmd->cmds->redis = lst_cmd->cmds->redis->next;
 				}
 				lst_cmd = lst_cmd->next;

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/21 14:45:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:16:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ typedef	struct s_utils
 {
 	char	**spl_sp_char;
 	char	**spl_redi;
-	// int		red_id;
-	// int		sp_id;
+	int		red_id;
+	int		sp_id;
 }			t_utils;
 
 ////////////////// struct the comands shell ///////////
@@ -102,10 +102,10 @@ typedef struct s_cmds
 	t_redis	*redis;
 	int		is_builtin;
 	t_args	*args;
-	int		red_id;
-	int		sp_id;
+	// int		red_id;
+	// int		sp_id;
 	char	*subshell;
-	t_utils *utils;
+	// t_utils *utils;
 }				t_cmds;
 
 //////////////// struct ///////////////
@@ -157,5 +157,6 @@ void		check_space_tab(t_check *check, int *i);
 ////////////////////  next  idea the define ////////
 int	init_global(t_global *glob);
 int	init_struct_cmds(t_cmds **cmds);
+int	init_struct_utils(t_utils **utils);
 
 # endif
