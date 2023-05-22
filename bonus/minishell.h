@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/20 10:44:15 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:16:43 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,18 @@ typedef struct s_env
 	char	*content;
 	struct s_env	*next;
 }	t_env;
+
+//syntax_check
+typedef struct s_syntax_check
+{
+	t_tokens	*all_tokens;
+	t_tokens	*token;
+	char		**sep;
+	int			index_par;
+	int			par;
+	int			index;
+	int			sp_id;
+}	t_syntax_check;
 
 //////// struct t9sam token ///////
 typedef struct s_check
@@ -131,9 +143,14 @@ void		check_space_tab(t_check *check, int *i);
 
 // analyser
 int		syntax_error_handler(t_tokens *tokens);
-void	run_here_docs(t_tokens	*here_docs);
+int		check_separators(t_syntax_check	check, int *par, int *i_par);
+void	here_doc_befor_error(t_tokens *tokens, int index);
+int		is_separator(char *token, char **sep);
+void	syntx_error(char *arg);
 
-
+// analyzer mandatory
+int		check_separators_mandatory(t_syntax_check check);
+int		syntax_error_handler_mandatory(t_tokens *tokens);
 
 
 void	print_error(char *msg, char *arg, int status);

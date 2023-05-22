@@ -6,12 +6,13 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/20 10:46:39 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:53:56 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+//need to add signal handler and remove fork
 static void	here_doc_error_case(char *delimiter)
 {
 	pid_t	pid;
@@ -25,7 +26,7 @@ static void	here_doc_error_case(char *delimiter)
 		while (1)
 		{
 			line = readline("> ");
-			if (ft_strncmp(line, delimiter, ft_strlen(line) - 1) == 0)
+			if (ft_strcmp(line, delimiter) == 0)
 				break ;
 			free(line);
 		}
@@ -35,7 +36,7 @@ static void	here_doc_error_case(char *delimiter)
 	waitpid(pid, NULL, 0);
 }
 
-void	run_here_docs(t_tokens	*here_docs)
+static void	run_here_docs(t_tokens	*here_docs)
 {
 	t_tokens	*tmp;
 
@@ -49,4 +50,28 @@ void	run_here_docs(t_tokens	*here_docs)
 		}
 	}
 	free_tokens(here_docs);
+}
+
+void	here_doc_befor_error(t_tokens *tokens, int index)
+{
+	t_tokens	*here_docs;
+	t_tokens	*tmp;
+	int			j;
+
+	tmp = tokens;
+	if (index == count_tokens(tokens))
+		return ;
+	here_docs = ((j = 0), NULL);
+	while (tmp && j < index)
+	{
+		if (ft_strnstr(tmp->str, "<<", 2))
+		{
+			tmp = tmp->next;
+			j++;
+			create_tokens(&here_docs, ft_strdup(tmp->str), 0);
+		}
+		j++;
+		tmp = tmp->next;
+	}
+	run_here_docs(here_docs);
 }

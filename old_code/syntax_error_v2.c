@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_error.c                                     :+:      :+:    :+:   */
+/*   syntax_error_v2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:56:35 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/20 19:57:36 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/21 08:44:49 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,25 +203,25 @@ int	syntax_error_handler(t_tokens *tokens)
 			here_doc_befor_error(tokens, index);
 			return (free_double_ptr(sep), 258);
 		}
-		if (check_separators(sep, tokens, tmp, index))
-			return (free_double_ptr(sep), 258);
-		if (!ft_strcmp(tmp->str, "("))
-			par++;
-		if (!ft_strcmp(tmp->str, ")"))
-			par--;
+		// if (check_separators(sep, tokens, tmp, index))
+		// 	return (free_double_ptr(sep), 258);
+		// if (!ft_strcmp(tmp->str, "("))
+		// 	par++;
+		// if (!ft_strcmp(tmp->str, ")"))
+		// 	par--;
 		tmp = tmp->next;
 		index++;
 	}
-	if (par > 0)
-	{
-		here_doc_befor_error(tokens, index);
-		syntx_error("(");
-	}
-	if (par < 0)
-	{
-		here_doc_befor_error(tokens, index);
-		syntx_error(")");
-	}
+	// if (par > 0)
+	// {
+	// 	here_doc_befor_error(tokens, index);
+	// 	syntx_error("(");
+	// }
+	// if (par < 0)
+	// {
+	// 	here_doc_befor_error(tokens, index);
+	// 	syntx_error(")");
+	// }
 	return (free_double_ptr(sep), 0);
 }
 

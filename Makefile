@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/20 10:09:22 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/22 21:26:32 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,21 +18,36 @@ LIBFT = libft/libft.a
 # parsing/quotes_handler.c
 # execution/print_error.c
 
-ANALYSER =  parsing/analyser/here_doc_error_case.c \
-			parsing/analyser/syntax_error.c
-		  
+EXECUTION = execution/print_error.c
 
-PARSING = parsing/create_tokens.c \
-		  parsing/global_split_utils.c \
-		  parsing/global_split.c \
-		  $(ANALYSER)
+ANALYSER_M =  parsing/analyser_mandatory/here_doc_error_case.c \
+			  parsing/analyser_mandatory/syntax_error_m.c \
+			  parsing/analyser_mandatory/check_separators.c  
 
+ANALYSER_B =  parsing/analyser/here_doc_error_case.c \
+			  parsing/analyser/syntax_error.c \
+			  parsing/analyser/check_separators.c
+
+SHARED_PARSING = parsing/create_tokens.c \
+		 		 parsing/global_split_utils.c \
+		 		 parsing/global_split.c
+
+SHARED = minishell.c \
+	   	 
+
+PARSING_M = $(SHARED_PARSING) $(ANALYSER_M)
+
+PARSING_B = $(SHARED_PARSING) $(ANALYSER_B)
+
+
+# SRCS = minishell_mandatory.c
 SRCS = minishell.c \
 	   minishell_utils.c \
-	   execution/print_error.c \
-	   $(PARSING) 
+	   $(PARSING_M) $(EXECUTION)
 
-# SRCS_B =
+SRCS_B = minishell.c \
+		 minishell_utils.c \
+		 $(PARSING_B) $(EXECUTION)
 
 OBJS = $(SRCS:.c=.o)
 

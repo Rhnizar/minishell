@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/20 19:25:20 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:40:24 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_check(t_check	*check, char *read_line)
 	char	**split;
 
 	output = ft_strdup("");
-	split = ft_split(">> << || && > < | ( )", ' ');
+	split = ft_split(">> << > < |", ' ');
 	if (read_line)
 		check->str = read_line;
 	else
@@ -58,7 +58,7 @@ int	str_in_string(char *str)
 	char	**sp;
 
 	i = 0;
-	sp = ft_split(">> << || && > < | ( )", ' ');
+	sp = ft_split(">> << > < |", ' ');
 	sp_id = find_separator(sp, &str[i]);
 	free_double_ptr(sp);
 	return (sp_id);
