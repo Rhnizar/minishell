@@ -6,11 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:29:32 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 19:51:54 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:25:51 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../minishell_bonus.h"
 
 static int	check_redirections(t_syntax_check check)
 {

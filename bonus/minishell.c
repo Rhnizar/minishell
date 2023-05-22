@@ -6,17 +6,16 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 20:24:33 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:25:00 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_bonus.h"
 
 int	main(void)
 {
 	char	*read_line;
 	t_tokens	*lst;
-	// t_tokens	*tmp;
 
 	while (1)
 	{
@@ -26,7 +25,7 @@ int	main(void)
 			if (read_line[0] != 0)
 				add_history(read_line);
 			lst = split_and_fill_list(read_line);
-			printf("%d\n", syntax_error_handler_mandatory(lst));
+			printf("%d\n", syntax_error_handler(lst));
 			// printf("%d\n", syntax_error_handler(lst));
 			// exit(1);
 			// printf("%d\n", count_tokens(lst));

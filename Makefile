@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/22 21:26:32 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/22 22:32:01 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,35 +18,49 @@ LIBFT = libft/libft.a
 # parsing/quotes_handler.c
 # execution/print_error.c
 
-EXECUTION = execution/print_error.c
+# EXECUTION = execution/print_error.c
 
-ANALYSER_M =  parsing/analyser_mandatory/here_doc_error_case.c \
-			  parsing/analyser_mandatory/syntax_error_m.c \
-			  parsing/analyser_mandatory/check_separators.c  
+# ANALYSER_M =  parsing/analyser_mandatory/here_doc_error_case.c \
+# 			  parsing/analyser_mandatory/syntax_error_m.c \
+# 			  parsing/analyser_mandatory/check_separators.c  
 
-ANALYSER_B =  parsing/analyser/here_doc_error_case.c \
-			  parsing/analyser/syntax_error.c \
-			  parsing/analyser/check_separators.c
+# ANALYSER_B =  parsing/analyser/here_doc_error_case.c \
+# 			  parsing/analyser/syntax_error.c \
+# 			  parsing/analyser/check_separators.c
 
-SHARED_PARSING = parsing/create_tokens.c \
-		 		 parsing/global_split_utils.c \
-		 		 parsing/global_split.c
+# SHARED_PARSING = parsing/create_tokens.c \
+# 		 		 parsing/global_split_utils.c \
+# 		 		 parsing/global_split.c
 
-SHARED = minishell.c \
+# SHARED = minishell.c
 	   	 
+PARSING_M = mandatory/parsing/create_tokens.c \
+			mandatory/parsing/global_split_utils.c \
+			mandatory/parsing/global_split.c \
+			mandatory/parsing/analyzer/check_separators.c \
+			mandatory/parsing/analyzer/here_doc_error_case.c \
+			mandatory/parsing/analyzer/syntax_error.c 
 
-PARSING_M = $(SHARED_PARSING) $(ANALYSER_M)
+PARSING_B = bonus/parsing/create_tokens.c \
+			bonus/parsing/global_split_utils.c \
+			bonus/parsing/global_split.c \
+			bonus/parsing/analyzer/check_separators.c \
+			bonus/parsing/analyzer/here_doc_error_case.c \
+			bonus/parsing/analyzer/syntax_error.c 
 
-PARSING_B = $(SHARED_PARSING) $(ANALYSER_B)
+			
+
+# PARSING_B = $(SHARED_PARSING) $(ANALYSER_B)
 
 
-# SRCS = minishell_mandatory.c
-SRCS = minishell.c \
-	   minishell_utils.c \
-	   $(PARSING_M) $(EXECUTION)
+SRCS = mandatory/minishell.c \
+	   mandatory/minishell_utils.c \
+	   mandatory/execution/print_error.c \
+	   $(PARSING_M)
 
-SRCS_B = minishell.c \
-		 minishell_utils.c \
+SRCS_B = bonus/minishell.c \
+		 bonus/minishell_utils.c \
+	   	 bonus/execution/print_error.c \
 		 $(PARSING_B) $(EXECUTION)
 
 OBJS = $(SRCS:.c=.o)
@@ -69,10 +83,10 @@ $(LIBFT):
 %.o : %.c
 	$(CCe) $(FLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) minishell.h
+$(NAME): $(OBJS) mandatory/minishell.h
 	$(CCe) $(FLAGS) $(RDL) $(OBJS) $(LIBFT) -o $(NAME)
 
-$(NAME_B): $(OBJS_B) minishell.h
+$(NAME_B): $(OBJS_B) bonus/minishell_bonus.h
 	$(CCe) $(FLAGS) $(RDL) $(OBJS_B) $(LIBFT) -o $(NAME_B)
 
 bonus: $(LIBFT) $(NAME_B)

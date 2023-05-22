@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/18 10:43:52 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:24:55 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_bonus.h"
 
 char	*join_to_str(char *str, char c)
 {

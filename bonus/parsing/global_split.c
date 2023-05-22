@@ -6,11 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/20 11:30:16 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:26:30 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../minishell_bonus.h"
 
 void	check_quote(t_check *check, int *i)
 {

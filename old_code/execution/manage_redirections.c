@@ -1,25 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   manage_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 10:29:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 22:26:39 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/04 11:41:16 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/04 11:41:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell_bonus.h"
+#include "../minishell.h"
 
-// char	*lexer(char *arg)
-// {
-// 	char	*outfile;
-// 	int		i;
-
-// 	i = -1;
-// 	while (arg[++i])
-// 	{	
-// 	}	
-// 	return (outfile);	
-// }

@@ -6,11 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:47:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/20 09:06:58 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:26:11 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../minishell_bonus.h"
 
 void	create_tokens(t_tokens **lst, char *str, int type)
 {

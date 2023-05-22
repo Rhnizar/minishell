@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 10:29:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 22:26:39 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/08 13:32:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell_bonus.h"
+#ifndef	EXECUTION_H
+# define EXECUTION_H
 
-// char	*lexer(char *arg)
-// {
-// 	char	*outfile;
-// 	int		i;
+char	*valid_command_path(char **paths, char *cmd);
+char	**get_paths(char **env);
 
-// 	i = -1;
-// 	while (arg[++i])
-// 	{	
-// 	}	
-// 	return (outfile);	
-// }
+
+int		input_redirection(char *infile);
+int		output_redirection(char *outfile);
+int		append_output(char *outfile);
+void	here_doc(char *delimiter);
+
+void	print_error(char *msg, char *arg, int status);
+
+
+# endif

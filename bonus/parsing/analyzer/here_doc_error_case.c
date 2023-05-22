@@ -6,11 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 19:53:56 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:25:47 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../minishell_bonus.h"
 
 //need to add signal handler and remove fork
 static void	here_doc_error_case(char *delimiter)

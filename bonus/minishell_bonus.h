@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 20:16:43 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:32:47 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/libft.h" 
+# include "../libft/libft.h" 
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
@@ -31,24 +31,6 @@
 # define EPD ": Permission denied\n"
 # define ESYNTX "minishell: syntax error near unexpected token `"
 # define EAMBGRD ": ambiguous redirect"
-
-# ifndef BONUS
-#  define BONUS 0
-# endif
-
-# define PIPE 0
-# define RED_IN 1
-# define RED_OUT 2
-# define PAR_OPEN 3
-# define PAR_CLOSE 4
-# define WLDC 5
-
-# define APP 6
-# define CMD 7
-# define AND 8
-# define OR  9
-# define HERE_DOC 10
-# define ARG 11
 
 typedef struct s_tokens
 {
@@ -147,10 +129,6 @@ int		check_separators(t_syntax_check	check, int *par, int *i_par);
 void	here_doc_befor_error(t_tokens *tokens, int index);
 int		is_separator(char *token, char **sep);
 void	syntx_error(char *arg);
-
-// analyzer mandatory
-int		check_separators_mandatory(t_syntax_check check);
-int		syntax_error_handler_mandatory(t_tokens *tokens);
 
 
 void	print_error(char *msg, char *arg, int status);

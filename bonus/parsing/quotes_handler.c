@@ -6,11 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:06 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/17 16:34:40 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:26:44 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../minishell_bonus.h"
 
 static char	*dollar_handler(char *arg, int *i)
 {

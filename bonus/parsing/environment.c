@@ -6,11 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 18:05:08 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/08 09:06:06 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:26:15 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../minishell_bonus.h"
 
 void	free_env(t_env *env)
 {
