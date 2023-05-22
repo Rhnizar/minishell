@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/21 16:25:54 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/22 19:05:37 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,10 @@ NAME_B = minishell_bonus
 LIBFT = libft/libft.a
 
 SRCS_M = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
-	init_cmds.c
-SRCS_B = minishell_bonus.c check_syntax.c
+		shared_utils_define.c shared_utils_define2.c define_mandatory.c
+
+SRCS_B = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
+		shared_utils_define.c shared_utils_define2.c define_bonus.c
 
 OBJS_M = $(SRCS_M:.c=.o)
 

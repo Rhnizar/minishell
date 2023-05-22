@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 14:50:46 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:01:20 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,27 @@
 
 /////// redirection ///////
 // >> << < >
-#define APP 0
-#define HERE_DOC 1
-#define RED_IN 2
-#define RED_OUT 3
+// #define APPEND 0
+// #define HERE_DOC 1
+// #define RED_IN 2
+// #define RED_OUT 3
 
-////// end /////////
-// || && |
-#define OR  0
-#define AND 1
-#define PIPE 2
+typedef enum e_redirtypes
+{
+	FILE_APPEND,
+	HEREDOC,
+	FILE_IN,
+	FILE_OUT,
+	OR,
+	AND,
+	PIPE
+}	t_rtype;
 
-// #define PAR_OPEN 3
-// #define PAR_CLOSE 4
-// #define WLDC 5
-// #define CMD 8
-// #define	ARG 11
+// |
+
+// #define OR  0
+// #define AND 1
+// #define PIPE 2
 
 typedef struct s_tokens
 {
@@ -105,6 +110,7 @@ typedef struct s_cmds
 	t_redis	*redis;
 	int		is_builtin;
 	t_args	*args;
+	int		operator;
 	char	*subshell;
 }				t_cmds;
 
@@ -159,4 +165,16 @@ int	init_global(t_global *glob);
 int	init_struct_cmds(t_cmds **cmds);
 int	init_struct_utils(t_utils **utils);
 
+///////////////// shared utils define /////////////
+
+void	check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils);
+void	fill_list_redis(t_redis **lst, char *str, int type);
+void	fill_list_args(t_args **lst, char *str);
+void	free_redis(t_redis *redis);
+void	free_args(t_args *args);
+void	add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds);
+
+////////////// in file define bonus //////////////
+void	check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
+t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
 # endif

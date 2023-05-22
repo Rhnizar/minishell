@@ -1,7 +1,32 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 17:46:02 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/05/22 18:07:40 by rrhnizar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+
+// typedef enum e_redirtypes
+// {
+// 	HEREDOC,
+// 	FILE_IN,
+// 	FILE_OUT,
+// 	FILE_APPEND
+// } t_rtype;
 
 int main()
 {
+	printf("%d\n", FILE_APPEND);
+	printf("%d\n", HEREDOC);
+	printf("%d\n", FILE_IN);
+	printf("%d\n", FILE_OUT);
 	// pid_t  pid;
 
 	// int i = 0;
@@ -27,21 +52,14 @@ int main()
 	// printf("%s\n", str[2]);
 
 
-	char *arg[] = {"cat", "-e", "Makefile", NULL};
+	// char *arg[] = {"ls", "( ls )", NULL};
 	// int fd = open("Makefile", O_RDONLY);
 
 	// dup2(fd, 0);
 
+
 	// dup2();
-	execve("/bin/cat", arg, NULL);
+	// execve("/bin/ls", arg, NULL);
 
 	return (0);
 }
-// if (str[i] == '(')
-// 	is_parenthesise = 1;
-
-// if (is_parenthesise && str[i] = ')')
-// 	is_parenthesise = 0;
-// ("ls -la") && pwd
-
-// (ls -la && (ls -la))

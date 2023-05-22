@@ -6,32 +6,89 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/21 09:54:10 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 18:59:44 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
-t_cmdshell	*fill_list_cmds(t_cmdshell *lst, t_tokens *token)
+int	check_subshell(char *str)
 {
-	t_tokens	*tmp;
-	t_cmds		*cmds;
+	int	i;
 
-	tmp = token;
-	cmds = NULL;
-	lst = NULL;
-	while (tmp)
+	i = 0;
+	while (str[i])
 	{
-		init_cmd(&cmds, tmp);
-		tmp = fill_struct_cmds(&cmds, tmp);
-		create_cmds(&lst, cmds);
-		free_double_ptr(cmds->args);
-		free_double_ptr(cmds->redi);
-		free_double_ptr(cmds->spl_redi);
-		free_double_ptr(cmds->spl_sp_char);
-		free(cmds);
+		if (str[i] == '(')
+			return (1);
+		i++;
 	}
-	return (lst);
+	return (0);
+}
+
+int	init_struct_utils(t_utils **utils)
+{
+	*utils = malloc(sizeof(t_utils));
+	if (!(*utils))
+		return (-1);
+	(*utils)->spl_redi = ft_split(">> << < >", ' ');
+	if (!((*utils)->spl_redi))
+		return (-1);
+	(*utils)->spl_sp_char = ft_split("|| && |", ' ');
+	if (!((*utils)->spl_sp_char))
+		return (-1);
+	(*utils)->sp_id = -1;
+	(*utils)->red_id = -1;
+	(*utils)->red_id_prev = -1;
+	(*utils)->sp_id_prev = -1;
+	(*utils)->red_id_prev_prev = -1;
+	return (0);
+}
+
+void	check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
+{
+	if (check_subshell(tokens->str) == 1)
+		cmds->subshell = ft_strdup(tokens->str);
+	else if (tokens->prev == NULL || utils->sp_id_prev != -1)
+		check_node1(&cmds, tokens, utils);
+	else if (utils->red_id != -1)
+	{
+		fill_list_redis(&cmds->redis, \
+			ft_strdup(tokens->next->str), utils->red_id);
+		utils->red_id = -1;
+	}
+	else if (utils->red_id_prev_prev != -1 && utils->red_id == -1 \
+		&& utils->sp_id == -1 && cmds->cmd == NULL)
+			cmds->cmd = ft_strdup(tokens->str);
+	else if (tokens->prev != NULL && utils->red_id_prev == -1 \
+		&& utils->sp_id == -1 && utils->sp_id_prev == -1)
+		fill_list_args(&cmds->args, ft_strdup(tokens->str));
+}
+
+t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
+{
+	int			i;
+
+	i = 0;
+	while (tokens && utils->sp_id == -1)
+	{
+		utils->red_id = find_separator(utils->spl_redi, tokens->str);
+		utils->sp_id = find_separator(utils->spl_sp_char, tokens->str);
+		if (utils->sp_id != -1)
+			utils->sp_id += 4;
+		if (tokens->prev)
+		{
+			utils->red_id_prev = find_separator(utils->spl_redi, \
+				tokens->prev->str);
+			utils->sp_id_prev = find_separator(utils->spl_sp_char, \
+				tokens->prev->str);
+		}
+		if (i++ >= 2)
+			utils->red_id_prev_prev = find_separator(utils->spl_redi, \
+				tokens->prev->prev->str);
+		check_define(cmds, tokens, utils);
+		cmds->operator = utils->sp_id;
+		tokens = tokens->next;
+	}
+	return (tokens);
 }
