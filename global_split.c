@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/21 15:41:45 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:23:38 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,25 @@ void	fill_with_nonpr_char(t_check *check)
 	free_double_ptr(check->split);
 }
 
-t_tokens	*split_and_fill_list(char *output)
+int	split_and_fill_list(char *output, t_tokens **tokens)
 {
 	char		**split;
 	int			i;
-	t_tokens	*lst;
 	t_check		*check;
 
-	lst = NULL;
+	*tokens = NULL;
 	i = 0;
 	check = malloc(sizeof(t_check));
-	init_check(check, output);
+	if (!check)
+		return (-1);
+	if (init_check(check, output) == -1)
+		return (-1);
 	fill_with_nonpr_char(check);
 	split = ft_split(check->ot, '\x07');
 	free(check->ot);
 	free(check);
 	while (split[i])
-		create_tokens(&lst, ft_strdup(split[i++]));
+		create_tokens(tokens, ft_strdup(split[i++]));
 	free_double_ptr(split);
-	return (lst);
+	return (0);
 }

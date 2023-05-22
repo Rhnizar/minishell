@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 20:14:04 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:24:34 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ int	fill_global_struct(t_global **global, char *line, char **environment)
 	*global = malloc(sizeof(t_global));
 	if (!(*global))
 		return (-1);
-	tokens = split_and_fill_list(line);
-	if (fill_list_cmds(&lst_cmd, tokens) == -1)
+	if (split_and_fill_list(line, &tokens) == -1)
 		return (-1);
+	if (fill_list_cmds(&lst_cmd, tokens) == -1)
+	{
+		free_tokens(tokens);
+		return (-1);
+	}
 	env = create_env(environment);
 	(*global)->env = env;
 	(*global)->all_commands = lst_cmd;

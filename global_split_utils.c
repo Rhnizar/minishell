@@ -6,19 +6,23 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/21 17:00:40 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:19:35 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_check(t_check	*check, char *read_line)
+int	init_check(t_check	*check, char *read_line)
 {
 	char	*output;
 	char	**split;
 
 	output = ft_strdup("");
+	if (!output)
+		return (-1);
 	split = ft_split(">> << || && > < | ( )", ' ');
+	if (!split)
+		return (-1);
 	if (read_line)
 		check->str = read_line;
 	else
@@ -28,6 +32,7 @@ void	init_check(t_check	*check, char *read_line)
 	check->dq = 0;
 	check->sq = 0;
 	check->sid = 0;
+	return (0);
 }
 
 int	find_separator(char **sep, char *str)

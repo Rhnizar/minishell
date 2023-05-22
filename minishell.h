@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 19:34:43 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:21:44 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,10 @@ char **split_quote(char *str, int r);
 ////// utils global split ///////
 int			find_separator(char **sep, char *str);
 int			str_in_string(char *str);
-void		init_check(t_check	*check, char *read_line);
-t_tokens	*split_and_fill_list(char *output);
+// void		init_check(t_check	*check, char *read_line);
+int			init_check(t_check	*check, char *read_line);
+// t_tokens	*split_and_fill_list(char *output);
+int			split_and_fill_list(char *output, t_tokens **tokens);
 void		dq_sq(t_check *check, int *i, int *dq_or_sq);
 void		check_quote(t_check *check, int *i);
 void		check_space_tab(t_check *check, int *i);
