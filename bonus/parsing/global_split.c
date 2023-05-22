@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 22:26:30 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:58:27 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_tokens	*split_and_fill_list(char *output)
 	free(check->ot);
 	free(check);
 	while (split[i])
-		create_tokens(&lst, ft_strdup(split[i++]), 0);
+		create_tokens(&lst, ft_strdup(split[i++]));
 	free_double_ptr(split);
 	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 22:25:47 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 23:45:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	here_doc_befor_error(t_tokens *tokens, int index)
 		{
 			tmp = tmp->next;
 			j++;
-			create_tokens(&here_docs, ft_strdup(tmp->str), 0);
+			create_tokens(&here_docs, ft_strdup(tmp->str));
 		}
 		j++;
 		tmp = tmp->next;

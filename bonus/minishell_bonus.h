@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 22:32:47 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 23:54:58 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	*join_to_str(char *str, char c);
 void	free_double_ptr(char **str);
 
 //create tokens
-void	create_tokens(t_tokens **lst, char *str, int type);
+void	create_tokens(t_tokens **lst, char *str);
 int		count_tokens(t_tokens *tokens);
 void	free_tokens(t_tokens *tokens);
 
@@ -124,11 +124,16 @@ void		check_space_tab(t_check *check, int *i);
 
 
 // analyser
-int		syntax_error_handler(t_tokens *tokens);
-int		check_separators(t_syntax_check	check, int *par, int *i_par);
-void	here_doc_befor_error(t_tokens *tokens, int index);
-int		is_separator(char *token, char **sep);
-void	syntx_error(char *arg);
+int			syntax_error_handler(t_tokens *tokens);
+int			check_separators(t_syntax_check	check, int *par, int *i_par);
+void		here_doc_befor_error(t_tokens *tokens, int index);
+int			is_separator(char *token, char **sep);
+void		syntx_error(char *arg);
+char		*quotes_handler(char *token);
+t_tokens	*analyzer(t_tokens *tokens, int	*exit_status);
+int			is_quote(char c);
+char		*ft_join_strings(char *s1, char *s2);
+char		*join_with_space(char *old, char *arg);
 
 
 void	print_error(char *msg, char *arg, int status);

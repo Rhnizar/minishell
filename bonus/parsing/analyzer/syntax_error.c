@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:56:35 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 22:25:43 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 23:49:12 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,37 +99,3 @@ int	syntax_error_handler(t_tokens *tokens)
 		syntx_error("("), 258);
 	return (free_double_ptr(check.sep), 0);
 }
-
-// |:
-//     first token: syntax error near unexpected token `|'
-//     after '|'  : syntax error near unexpected token `|'
-//     after '('  : syntax error near unexpected token `|'
-//     after '&&' : syntax error near unexpected token `|'
-//     after '||' : syntax error near unexpected token `|'
-//     after >/<  : syntax error near unexpected token `|'
-//     last token : syntax error: unexpected end of file
-// (:
-//     after ')'  : syntax error near unexpected token `('
-//     after word : syntax error near unexpected token `(' # bash would expect a fucntion
-//     after >/<  : syntax error near unexpected token `|'
-//     last token : syntax error: unexpected end of file
-// ):
-//     first token: syntax error near unexpected token `)'
-//     after '|'  : syntax error near unexpected token `)'
-//     after '('  : syntax error near unexpected token `)'
-//     after '&&' : syntax error near unexpected token `)'
-//     after '||' : syntax error near unexpected token `)'
-//     after >/<  : syntax error near unexpected token `|'
-// &&/||:
-//     first token: syntax error near unexpected token `|'
-//     after '|'  : syntax error near unexpected token `|'
-//     after '('  : syntax error near unexpected token `|'
-//     after '&&' : syntax error near unexpected token `|'
-//     after '||' : syntax error near unexpected token `|'
-//     after >/<  : syntax error near unexpected token `|'
-//     last token : syntax error: unexpected end of file
-// word:
-//     after ')'  : syntax error near unexpected token `word'
-// >/<:    
-//     after >/<  : syntax error near unexpected token `|'
-//     last token : syntax error: unexpected end of file

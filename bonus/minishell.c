@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 22:25:00 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 23:48:45 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	main(void)
 {
 	char	*read_line;
 	t_tokens	*lst;
+	t_tokens	*new_list;
+	int			exit_status;
 
 	while (1)
 	{
@@ -25,7 +27,9 @@ int	main(void)
 			if (read_line[0] != 0)
 				add_history(read_line);
 			lst = split_and_fill_list(read_line);
-			printf("%d\n", syntax_error_handler(lst));
+			new_list = analyzer(lst, &exit_status);
+			printf("exit status is: %d\n", exit_status);
+			// printf("%d\n", syntax_error_handler(lst));
 			// printf("%d\n", syntax_error_handler(lst));
 			// exit(1);
 			// printf("%d\n", count_tokens(lst));

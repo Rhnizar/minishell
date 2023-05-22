@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 22:11:10 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:58:52 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	*join_to_str(char *str, char c);
 void	free_double_ptr(char **str);
 
 //create tokens
-void	create_tokens(t_tokens **lst, char *str, int type);
+void	create_tokens(t_tokens **lst, char *str);
 int		count_tokens(t_tokens *tokens);
 void	free_tokens(t_tokens *tokens);
 

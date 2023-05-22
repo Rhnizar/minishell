@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/22 22:32:01 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/22 23:53:53 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,19 +34,22 @@ LIBFT = libft/libft.a
 
 # SHARED = minishell.c
 	   	 
-PARSING_M = mandatory/parsing/create_tokens.c \
-			mandatory/parsing/global_split_utils.c \
-			mandatory/parsing/global_split.c \
-			mandatory/parsing/analyzer/check_separators.c \
-			mandatory/parsing/analyzer/here_doc_error_case.c \
-			mandatory/parsing/analyzer/syntax_error.c 
+# PARSING_M = mandatory/parsing/create_tokens.c \
+# 			mandatory/parsing/global_split_utils.c \
+# 			mandatory/parsing/global_split.c \
+# 			mandatory/parsing/analyzer/check_separators.c \
+# 			mandatory/parsing/analyzer/here_doc_error_case.c \
+# 			mandatory/parsing/analyzer/syntax_error.c 
 
 PARSING_B = bonus/parsing/create_tokens.c \
 			bonus/parsing/global_split_utils.c \
 			bonus/parsing/global_split.c \
+			bonus/parsing/parsing_utils.c \
+			bonus/parsing/quotes_handler.c \
+			bonus/parsing/analyzer/analyzer.c \
 			bonus/parsing/analyzer/check_separators.c \
 			bonus/parsing/analyzer/here_doc_error_case.c \
-			bonus/parsing/analyzer/syntax_error.c 
+			bonus/parsing/analyzer/syntax_error.c
 
 			
 
