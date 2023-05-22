@@ -6,28 +6,29 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 18:51:56 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:14:04 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmdshell	*fill_list_cmds(t_cmdshell *lst, t_tokens *tokens)
+int	fill_list_cmds(t_cmdshell **lst, t_tokens *tokens)
 {
 	t_tokens	*tmp;
 	t_cmds		*cmds;
 	t_utils		*utils;
 
 	tmp = tokens;
-	lst = NULL;
-	init_struct_utils(&utils);
+	*lst = NULL;
+	if (init_struct_utils(&utils) == -1)
+		return (-1);
 	while (tmp)
 	{
 		cmds = malloc(sizeof(t_cmds));
 		utils->sp_id = -1;
 		init_struct_cmds(&cmds);
 		tmp = fill_struct_cmds(cmds, tmp, utils);
-		add_cmd_to_list(&lst, cmds);
+		add_cmd_to_list(lst, cmds);
 		// free_redis(cmds->redis);
 		// free_args(cmds->args);
 		// free(cmds);
@@ -37,55 +38,68 @@ t_cmdshell	*fill_list_cmds(t_cmdshell *lst, t_tokens *tokens)
 	free_double_ptr(utils->spl_sp_char);
 	free_double_ptr(utils->spl_redi);
 	free(utils);
-	return (lst);
+	return (0);
 }
 
-int	main(void)
+int	fill_global_struct(t_global **global, char *line, char **environment)
 {
-	char	*read_line;
 	t_tokens	*tokens;
 	t_cmdshell *lst_cmd;
-	// t_global	*glob;
+	t_env		*env;
+	int			exit_status;
 
+	exit_status = 255;
 	lst_cmd = NULL;
+	*global = malloc(sizeof(t_global));
+	if (!(*global))
+		return (-1);
+	tokens = split_and_fill_list(line);
+	if (fill_list_cmds(&lst_cmd, tokens) == -1)
+		return (-1);
+	env = create_env(environment);
+	(*global)->env = env;
+	(*global)->all_commands = lst_cmd;
+	(*global)->exit_status = exit_status;
+	return (0);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	(void)argc;
+	(void)argv;
+	char		*line;
+	t_global	*global;
+
 	while (1)
 	{
-		read_line = readline("minishell ~ ");
-		if (read_line)
+		line = readline("minishell ~ ");
+		if (line)
 		{
-			if (read_line[0] != 0)
-				add_history(read_line);
-			tokens = split_and_fill_list(read_line);
-			// while (tokens)
-			// {
-			// 	printf("%s\n", tokens->str);
-			// 	tokens = tokens->next;
-			// }
-			// glob = malloc(sizeof(t_global));
-			// if (!glob)
-			// 	return (-1);
-			lst_cmd = fill_list_cmds(lst_cmd, tokens);
+			if (line[0] != 0)
+				add_history(line);
+			if (fill_global_struct(&global, line, env) == -1)
+				return (-1);
 			printf("\n--------------------------------------------------------------------------\n");
-			while (lst_cmd)
+			while (global->all_commands)
 			{
-				printf("cmd ==> %s\n", lst_cmd->cmds->cmd);
-				printf("subshell ===> %s\n", lst_cmd->cmds->subshell);
-				printf("operator ===> %d\n", lst_cmd->cmds->operator);
+				printf("cmd ==> %s\n", global->all_commands->cmds->cmd);
+				printf("subshell ===> %s\n", global->all_commands->cmds->subshell);
+				printf("operator ===> %d\n", global->all_commands->cmds->operator);
 				printf("\n=======  all arguments  =======\n");
-				while(lst_cmd->cmds->args)
+				while(global->all_commands->cmds->args)
 				{
-					printf("arg : %s\n", lst_cmd->cmds->args->str);
-					lst_cmd->cmds->args = lst_cmd->cmds->args->next;
+					printf("arg : %s\n", global->all_commands->cmds->args->str);
+					global->all_commands->cmds->args = global->all_commands->cmds->args->next;
 				}
 				printf("\n======= all redirections =======\n");
-				while(lst_cmd->cmds->redis)
+				while(global->all_commands->cmds->redis)
 				{
-					printf("red : %s\n", lst_cmd->cmds->redis->str);
-					printf("type red : %d\n", lst_cmd->cmds->redis->type);
+					printf("red : %s\n", global->all_commands->cmds->redis->str);
+					printf("type red : %d\n", global->all_commands->cmds->redis->type);
 					printf("-----------------------------\n");
-					lst_cmd->cmds->redis = lst_cmd->cmds->redis->next;
+					global->all_commands->cmds->redis = global->all_commands->cmds->redis->next;
 				}
-				lst_cmd = lst_cmd->next;
+				global->all_commands = global->all_commands->next;
 				printf("\n---------------------------------END CMD-----------------------------------------\n");
 			}
 		}

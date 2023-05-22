@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:13:31 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 19:09:28 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:26:06 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 
 t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (tokens && utils->sp_id == -1)

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 19:01:20 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 19:34:43 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@
 # include <sys/errno.h>
 # include <signal.h>
 
-/////// redirection ///////
-// >> << < >
-// #define APPEND 0
-// #define HERE_DOC 1
-// #define RED_IN 2
-// #define RED_OUT 3
-
 typedef enum e_redirtypes
 {
 	FILE_APPEND,
@@ -42,12 +35,6 @@ typedef enum e_redirtypes
 	AND,
 	PIPE
 }	t_rtype;
-
-// |
-
-// #define OR  0
-// #define AND 1
-// #define PIPE 2
 
 typedef struct s_tokens
 {
@@ -72,7 +59,7 @@ typedef struct s_check
 
 typedef struct s_env
 {
-	char			*str;
+	char			*content;
 	struct s_env	*next;
 }	t_env;
 
@@ -130,8 +117,6 @@ typedef struct s_global
 }			t_global;
 
 ///////////////// end struct ///////////
-
-
 int		len_first_split(char *str);
 int		char_in_string(char c, char *ref);
 char	*join_to_str(char *str, char c);
@@ -177,4 +162,8 @@ void	add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds);
 ////////////// in file define bonus //////////////
 void	check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
 t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
+
+/////////// environment //////////////
+t_env	*create_env(char **envp);
+
 # endif

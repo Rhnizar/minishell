@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/22 19:05:37 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/22 19:34:00 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,12 @@ NAME_B = minishell_bonus
 
 LIBFT = libft/libft.a
 
-SRCS_M = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
-		shared_utils_define.c shared_utils_define2.c define_mandatory.c
+SHARED = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
+		shared_utils_define.c shared_utils_define2.c environment.c
 
-SRCS_B = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
-		shared_utils_define.c shared_utils_define2.c define_bonus.c
+SRCS_M =  $(SHARED) define_mandatory.c
+
+SRCS_B = $(SHARED) define_bonus.c
 
 OBJS_M = $(SRCS_M:.c=.o)
 
@@ -38,7 +39,6 @@ all: $(LIBFT) $(NAME)
 
 $(LIBFT):
 	make -C libft && make clean -C libft
-
 %.o : %.c
 	$(CCe) $(FLAGS) $(DFINE) -c $< -o $@
 
