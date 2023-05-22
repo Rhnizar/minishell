@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/21 16:16:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:50:46 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ typedef	struct s_utils
 	char	**spl_redi;
 	int		red_id;
 	int		sp_id;
+	int		red_id_prev;
+	int		sp_id_prev;
+	int		red_id_prev_prev;
 }			t_utils;
 
 ////////////////// struct the comands shell ///////////
@@ -102,10 +105,7 @@ typedef struct s_cmds
 	t_redis	*redis;
 	int		is_builtin;
 	t_args	*args;
-	// int		red_id;
-	// int		sp_id;
 	char	*subshell;
-	// t_utils *utils;
 }				t_cmds;
 
 //////////////// struct ///////////////

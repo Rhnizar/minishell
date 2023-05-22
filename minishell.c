@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/21 17:13:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:00:11 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_sep_or_red(char *str, char **str_to_check)
 	int re;
 
 	re = -1;
-	if (check_quote_cmd(str) == 0)
+	// if (check_quote_cmd(str) == 0)
 		re = find_separator(str_to_check, str);
 	return(re);
 }
@@ -123,15 +123,13 @@ void	fill_list_redis(t_redis **lst, char *str, int type)
 	tmp->next = new;
 }
 
-void	check_node1(t_cmds **cmd, t_tokens *tmp, t_utils	*utils)
+void	check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils)
 {
 	if (utils->red_id != -1)
 	{
 		fill_list_redis(&(*cmd)->redis, ft_strdup(tmp->next->str), utils->red_id);
 		utils->red_id = -1;
 	}
-	else if (utils->sp_id != -1)
-		(*cmd)->cmd = ft_strdup(tmp->next->str);
 	else
 		(*cmd)->cmd = ft_strdup(tmp->str);
 }
@@ -139,38 +137,34 @@ void	check_node1(t_cmds **cmd, t_tokens *tmp, t_utils	*utils)
 t_tokens *fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils	*utils)
 {
 	t_tokens	*tmp;
-	int			red_id_prev;
-	int			sp_id_prev;
+	int			i;
 
 	tmp = tokens;
-	red_id_prev = -1;
-	sp_id_prev = -1;
-	(void)cmds;
+	i = 0;
 	while (tmp && utils->sp_id == -1)
 	{
 		utils->red_id = check_sep_or_red(tmp->str, utils->spl_redi);
 		utils->sp_id = check_sep_or_red(tmp->str, utils->spl_sp_char);
-		printf("%d\n", utils->sp_id);
-		// if (utils->sp_id != -1)
-		// 	cmds->cmd = ft_strdup(tmp->next->str);
-		// else
-		// 	cmds->cmd = ft_strdup("me");
-		// if (tmp->prev)
-		// {
-		// 	red_id_prev = check_sep_or_red(tmp->prev->str, utils->spl_redi);
-		// 	sp_id_prev = check_sep_or_red(tmp->prev->str, utils->spl_sp_char);
-		// }
-		// if (check_subshell(tmp->str) == 1)
-		// 	cmds->subshell = ft_strdup(tmp->str);
-		// else if ((tmp->prev == NULL || utils->sp_id != -1) && cmds->cmd == NULL)
-		// 	check_node1(&cmds, tmp, utils);
-		// else if (utils->red_id != -1)
-		// {
-		// 	fill_list_redis(&cmds->redis, ft_strdup(tmp->next->str), utils->red_id);
-		// 	utils->red_id = -1;
-		// }
-		// else if (tmp->prev != NULL && red_id_prev == -1 && utils->sp_id == -1 && sp_id_prev == -1)
-		// 	fill_list_args(&cmds->args, ft_strdup(tmp->str));
+		if (tmp->prev)
+		{
+			utils->red_id_prev = check_sep_or_red(tmp->prev->str, utils->spl_redi);
+			utils->sp_id_prev = check_sep_or_red(tmp->prev->str, utils->spl_sp_char);
+		}
+		if (i++ >= 2)
+			utils->red_id_prev_prev =  check_sep_or_red(tmp->prev->prev->str, utils->spl_redi);
+		if (check_subshell(tmp->str) == 1)
+			cmds->subshell = ft_strdup(tmp->str);
+		else if (tmp->prev == NULL || utils->sp_id_prev != -1)
+			check_node1(&cmds, tmp, utils);
+		else if (utils->red_id != -1)
+		{
+			fill_list_redis(&cmds->redis, ft_strdup(tmp->next->str), utils->red_id);
+			utils->red_id = -1;
+		}
+		else if (utils->red_id_prev_prev != -1 && utils->red_id == -1 && utils->sp_id == -1 && cmds->cmd == NULL)
+			cmds->cmd = ft_strdup(tmp->str);
+		else if (tmp->prev != NULL && utils->red_id_prev == -1 && utils->sp_id == -1 && utils->sp_id_prev == -1)
+			fill_list_args(&cmds->args, ft_strdup(tmp->str));
 		tmp = tmp->next;
 	}
 	return(tmp);
@@ -205,15 +199,13 @@ t_cmdshell	*fill_list_cmds(t_cmdshell *lst, t_tokens *tokens)
 
 	tmp = tokens;
 	lst = NULL;
-	cmds = malloc(sizeof(t_cmds));
 	init_struct_utils(&utils);
 	while (tmp)
 	{
+		cmds = malloc(sizeof(t_cmds));
 		utils->sp_id = -1;
 		init_struct_cmds(&cmds);
 		tmp = fill_struct_cmds(cmds, tmp, utils);
-		// printf("%s\n", tmp->str);
-		// 	exit(1);
 		create_cmds(&lst, cmds);
 		// free_redis(cmds->redis);
 		// free_args(cmds->args);
@@ -261,7 +253,6 @@ int	main(void)
 				while(lst_cmd->cmds->args)
 				{
 					printf("arg : %s\n", lst_cmd->cmds->args->str);
-					
 					lst_cmd->cmds->args = lst_cmd->cmds->args->next;
 				}
 				printf("\n======= all redirections =======\n");
@@ -273,8 +264,8 @@ int	main(void)
 					lst_cmd->cmds->redis = lst_cmd->cmds->redis->next;
 				}
 				lst_cmd = lst_cmd->next;
+				printf("\n---------------------------------END CMD-----------------------------------------\n");
 			}
-			printf("\n--------------------------------------------------------------------------\n");
 		}
 		else
 			break ;

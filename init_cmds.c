@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:12:05 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/21 16:28:41 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:00:30 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ int	init_struct_utils(t_utils **utils)
 		return (-1);
 	(*utils)->sp_id = -1;
 	(*utils)->red_id = -1;
+	(*utils)->red_id_prev = -1;
+	(*utils)->sp_id_prev = -1;
+	(*utils)->red_id_prev_prev = -1;
 	return (0);
 }
 

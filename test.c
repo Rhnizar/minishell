@@ -27,12 +27,12 @@ int main()
 	// printf("%s\n", str[2]);
 
 
-	char *arg[] = {"", "ls", NULL};
-	int fd = open("Makefile", O_RDONLY);
+	char *arg[] = {"cat", "-e", "Makefile", NULL};
+	// int fd = open("Makefile", O_RDONLY);
 
-	dup2(fd, 0);
+	// dup2(fd, 0);
 
-	dup2();
+	// dup2();
 	execve("/bin/cat", arg, NULL);
 
 	return (0);
