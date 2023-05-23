@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 19:42:58 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:05:12 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	fill_with_nonpr_char(t_check *check)
 			check_space_tab(check, &i);
 		else
 			check->ot = join_to_str(check->ot, check->str[i]);
-		i++;
+		if (check->str[i])
+			i++;
 	}
 	free_double_ptr(check->split);
 }
