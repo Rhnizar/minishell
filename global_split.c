@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 20:23:38 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:21:22 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ void	check_quote(t_check *check, int *i)
 
 void	check_space_tab(t_check *check, int *i)
 {
-	// check->ot = join_to_str(check->ot, '\x07');
 	while (check->str[*i] && (check->str[*i] == ' ' || check->str[*i] == '\t'))
 		(*i)++;
-			// check->ot = join_to_str(check->ot, check->str[(*i)++]);
 	check->ot = join_to_str(check->ot, '\x07');
 	if (check->str[*i] != '"' && check->str[*i] != '\'' \
-		&& str_in_string(&check->str[*i]) == -1)
+		&& find_separator(check->split, &check->str[*i]) == -1)
 		check->ot = join_to_str(check->ot, check->str[*i]);
 	else
 		(*i)--;
@@ -53,7 +51,7 @@ void	fill_with_nonpr_char(t_check *check)
 	i = -1;
 	while (check->str[++i])
 	{
-		check->sid = str_in_string(&check->str[i]);
+		check->sid = find_separator(check->split, &check->str[i]);
 		if (check->str[i] == '"' || check->str[i] == '\'')
 			check_quote(check, &i);
 		else if (check->sid != -1 && check->sq == 0 && check->dq == 0)

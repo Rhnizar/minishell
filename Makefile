@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/22 19:34:00 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/23 12:26:21 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ LIBFT = libft/libft.a
 SHARED = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
 		shared_utils_define.c shared_utils_define2.c environment.c
 
-SRCS_M =  $(SHARED) define_mandatory.c
+SRCS_M =  $(SHARED) define_mandatory.c synt_error_mandatory.c
 
-SRCS_B = $(SHARED) define_bonus.c
+SRCS_B = $(SHARED) define_bonus.c synt_error_bonus.c
 
 OBJS_M = $(SRCS_M:.c=.o)
 

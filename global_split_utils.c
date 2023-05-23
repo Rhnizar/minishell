@@ -6,34 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 20:19:35 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:25:02 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	init_check(t_check	*check, char *read_line)
-{
-	char	*output;
-	char	**split;
 
-	output = ft_strdup("");
-	if (!output)
-		return (-1);
-	split = ft_split(">> << || && > < | ( )", ' ');
-	if (!split)
-		return (-1);
-	if (read_line)
-		check->str = read_line;
-	else
-		check->str = NULL;
-	check->ot = output;
-	check->split = split;
-	check->dq = 0;
-	check->sq = 0;
-	check->sid = 0;
-	return (0);
-}
 
 int	find_separator(char **sep, char *str)
 {
@@ -56,18 +35,18 @@ int	find_separator(char **sep, char *str)
 	return (sp_id);
 }
 
-int	str_in_string(char *str)
-{
-	int		i;
-	int		sp_id;
-	char	**sp;
+// int	str_in_string(char *str)
+// {
+// 	int		i;
+// 	int		sp_id;
+// 	char	**sp;
 
-	i = 0;
-	sp = ft_split(">> << || && > < | ( )", ' ');
-	sp_id = find_separator(sp, &str[i]);
-	free_double_ptr(sp);
-	return (sp_id);
-}
+// 	i = 0;
+// 	sp = ft_split(">> << || && > < | ( )", ' ');
+// 	sp_id = find_separator(sp, &str[i]);
+// 	free_double_ptr(sp);
+// 	return (sp_id);
+// }
 
 void	dq_sq(t_check *check, int *i, int *dq_or_sq)
 {

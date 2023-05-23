@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:58:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 17:12:15 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:51:43 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils)
 {
 	if (utils->red_id != -1)
 	{
-		fill_list_redis(&(*cmd)->redis, ft_strdup(tmp->next->str), utils->red_id);
+		if (tmp->next)
+			fill_list_redis(&(*cmd)->redis, ft_strdup(tmp->next->str), utils->red_id);
 		utils->red_id = -1;
 	}
 	else
