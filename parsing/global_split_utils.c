@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   global_split_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 12:25:02 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:29:24 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-
+#include "../minishell.h"
 
 int	find_separator(char **sep, char *str)
 {

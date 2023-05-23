@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shared_utils_define.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:58:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 11:51:43 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:29:55 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds)
 {

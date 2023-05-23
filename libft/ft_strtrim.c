@@ -3,78 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 11:56:42 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:47:16 by rrhnizar         ###   ########.fr       */
+/*   Created: 2022/09/30 15:37:18 by kchaouki          #+#    #+#             */
+/*   Updated: 2022/10/14 17:09:42 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int	checkset(char *s1, char c)
+static int	check_charset(char c, char *charset)
 {
 	int	i;
 
 	i = 0;
-	while (s1[i])
+	while (charset[i])
 	{
-		if (s1[i] == c)
+		if (charset[i] == c)
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-static	int	ft_start(char *s1, char *set)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i])
-	{
-		while (s1[i] && checkset(set, s1[i]))
-			i++;
-		if (s1[i] && !checkset(set, s1[i]))
-			break ;
-	}
-	return (i);
-}
-
-static	int	lenorigine(char *s1, char *set)
-{
-	int	len;
-	int	start;
-
-	start = ft_start (s1, set);
-	len = ft_strlen (s1) -1;
-	while (s1[len] && len > start)
-	{
-		while (s1[len] && checkset(set, s1[len]))
-			len--;
-		if (s1[len] && !checkset(set, s1[len]))
-			break ;
-	}
-	return (len);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*res;
-	int		start;
-	int		end;
-	int		j;
+	char	*ret_str;
+	size_t	start;
+	size_t	end;
 
-	if (!s1 || !set)
+	start = 0;
+	end = ft_strlen(s1) - 1;
+	if (!s1)
 		return (NULL);
-	start = ft_start((char *)s1, (char *)set);
-	end = lenorigine((char *)s1, (char *)set);
-	j = 0;
-	res = malloc(sizeof(char) * ((end +1) - (start)) + 1);
-	if (!res)
-		return (0);
-	while (start <= end)
-		res[j++] = s1[start++];
-	res[j] = '\0';
-	return (res);
+	if (!set)
+		return (ft_strdup(s1));
+	while (s1[start] && check_charset(s1[start], (char *)set))
+		start++;
+	if (start >= end)
+		return (ft_strdup(""));
+	while (check_charset(s1[end], (char *)set))
+		end--;
+	ret_str = ft_substr(s1, start, (end - start + 1));
+	return (ret_str);
 }

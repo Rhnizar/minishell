@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 12:29:30 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:21:06 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ int	fill_list_cmds(t_cmdshell **lst, t_tokens *tokens)
 int	fill_global_struct(t_global **global, char *line, char **environment)
 {
 	t_tokens	*tokens;
+	t_tokens	*tmp_new_token;
+	t_tokens	*update_tokens;
 	t_cmdshell *lst_cmd;
-	t_env		*env;
+	// t_env		*env;
 
 	lst_cmd = NULL;
 	*global = malloc(sizeof(t_global));
@@ -58,20 +60,25 @@ int	fill_global_struct(t_global **global, char *line, char **environment)
 		return (-1);
 	if (split_and_fill_list(line, &tokens) == -1)
 		return (-1);
-	while(tokens)
+	///// 
+	(*global)->exit_status = 0;
+	update_tokens = analyzer(tokens, &(*global)->exit_status);
+	tmp_new_token = update_tokens;
+	while(tmp_new_token)
 	{
-		printf("%s\n", tokens->str);
-		tokens = tokens->next;
+		printf("%s\n", tmp_new_token->str);
+		tmp_new_token = tmp_new_token->next;
 	}
-	if (fill_list_cmds(&lst_cmd, tokens) == -1)
-	{
-		free_tokens(tokens);
-		return (-1);
-	}
-	env = create_env(environment);
-	(*global)->env = env;
-	(*global)->all_commands = lst_cmd;
-	(*global)->exit_status = 255;
+	(void)**environment;
+	// exit(1);
+	// if (fill_list_cmds(&lst_cmd, update_tokens) == -1)
+	// {
+	// 	free_tokens(tokens);
+	// 	return (-1);
+	// }
+	// env = create_env(environment);
+	// (*global)->env = env;
+	// (*global)->all_commands = lst_cmd;
 	return (0);
 }
 
@@ -79,6 +86,7 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
+	(void)env;
 	char		*line;
 	t_global	*global;
 
@@ -89,6 +97,8 @@ int	main(int argc, char **argv, char **env)
 		{
 			if (line[0] != 0)
 				add_history(line);
+			else
+				continue ;
 			if (fill_global_struct(&global, line, env) == -1)
 				return (-1);
 			// printf("\n--------------------------------------------------------------------------\n");

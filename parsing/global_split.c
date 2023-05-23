@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   global_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 12:21:22 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:42:58 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	check_quote(t_check *check, int *i)
 {
@@ -48,8 +48,8 @@ void	fill_with_nonpr_char(t_check *check)
 {
 	int	i;
 
-	i = -1;
-	while (check->str[++i])
+	i = 0;
+	while (check->str[i])
 	{
 		check->sid = find_separator(check->split, &check->str[i]);
 		if (check->str[i] == '"' || check->str[i] == '\'')
@@ -66,6 +66,7 @@ void	fill_with_nonpr_char(t_check *check)
 			check_space_tab(check, &i);
 		else
 			check->ot = join_to_str(check->ot, check->str[i]);
+		i++;
 	}
 	free_double_ptr(check->split);
 }
@@ -84,6 +85,8 @@ int	split_and_fill_list(char *output, t_tokens **tokens)
 	if (init_check(check, output) == -1)
 		return (-1);
 	fill_with_nonpr_char(check);
+	if (!check->ot)
+		return (-1);
 	split = ft_split(check->ot, '\x07');
 	free(check->ot);
 	free(check);

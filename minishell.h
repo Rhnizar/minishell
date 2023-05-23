@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 20:21:44 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:41:59 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 # include <fcntl.h>
 # include <sys/errno.h>
 # include <signal.h>
+
+# define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\
+/usr/local/munki"
+# define ENSFD ": No such file or directory\n"
+# define ECNF ": command not found\n"
+# define EPD ": Permission denied\n"
+# define ESYNTX "minishell: syntax error near unexpected token `"
+# define EAMBGRD ": ambiguous redirect"
 
 typedef enum e_redirtypes
 {
@@ -116,29 +124,47 @@ typedef struct s_global
 	t_cmdshell	*all_commands;
 }			t_global;
 
+//syntax_check
+typedef struct s_syntax_check
+{
+	t_tokens	*all_tokens;
+	t_tokens	*token;
+	char		**sep;
+	int			index_par;
+	int			par;
+	int			index;
+	int			sp_id;
+}	t_syntax_check;
+
 ///////////////// end struct ///////////
 int		len_first_split(char *str);
 int		char_in_string(char c, char *ref);
 char	*join_to_str(char *str, char c);
 char	**my_split(char *str);
+
 void	free_double_ptr(char **str);
+
+//		tokens funtions
 void	create_tokens(t_tokens **lst, char *str);
-void		free_tokens(t_tokens *tokens);
-int	check_syntax(char *str, char *ref);
+void	free_tokens(t_tokens *tokens);
+int		count_tokens(t_tokens *tokens);
+
+
+int		check_syntax(char *str, char *ref);
 char	**fill_with_null(int len);
-int count_quote(char *str, int r);
-char **split_quote(char *str, int r);
+int		count_quote(char *str, int r);
+char	**split_quote(char *str, int r);
 
 ////// utils global split ///////
-int			find_separator(char **sep, char *str);
-int			str_in_string(char *str);
+int		find_separator(char **sep, char *str);
+int		str_in_string(char *str);
 // void		init_check(t_check	*check, char *read_line);
-int			init_check(t_check	*check, char *read_line);
+int		init_check(t_check	*check, char *read_line);
 // t_tokens	*split_and_fill_list(char *output);
-int			split_and_fill_list(char *output, t_tokens **tokens);
-void		dq_sq(t_check *check, int *i, int *dq_or_sq);
-void		check_quote(t_check *check, int *i);
-void		check_space_tab(t_check *check, int *i);
+int		split_and_fill_list(char *output, t_tokens **tokens);
+void	dq_sq(t_check *check, int *i, int *dq_or_sq);
+void	check_quote(t_check *check, int *i);
+void	check_space_tab(t_check *check, int *i);
 
 ///////// utils fill struct commands /////
 // int			check_quote_cmd(char *str);
@@ -148,9 +174,9 @@ void		check_space_tab(t_check *check, int *i);
 // int			check_subshell(char *str);
 
 ////////////////////  next  idea the define ////////
-int	init_global(t_global *glob);
-int	init_struct_cmds(t_cmds **cmds);
-int	init_struct_utils(t_utils **utils);
+int		init_global(t_global *glob);
+int		init_struct_cmds(t_cmds **cmds);
+int		init_struct_utils(t_utils **utils);
 
 ///////////////// shared utils define /////////////
 
@@ -162,10 +188,34 @@ void	free_args(t_args *args);
 void	add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds);
 
 ////////////// in file define bonus //////////////
-void	check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
+void		check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
 t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
 
 /////////// environment //////////////
-t_env	*create_env(char **envp);
+t_env		*create_env(char **envp);
+
+
+
+
+
+
+void		print_error(char *msg, char *arg, int status);
+
+// analyzer aka "syntax error check"
+
+t_tokens		*analyzer(t_tokens *tokens, int	*exit_status);
+t_syntax_check	fill_syntax_check(t_tokens *all_tokens, t_tokens *token);
+int				syntax_error_handler(t_tokens *tokens);
+int				is_separator(char *token, char **sep);
+void			syntx_error(char *arg);
+void			here_doc_befor_error(t_tokens *tokens, int index);
+int				check_separators(t_syntax_check	check, int *par, int *i_par);
+int				check_redirections(t_syntax_check check);
+int				check_operators(t_syntax_check check);
+int				is_builtin(char *token);
+int				is_quote(char c);
+char			*quotes_handler(char *token);
+char			*handle_subshell(t_tokens **tmp);
+char			*join_with_space(char *old, char *arg);
 
 # endif

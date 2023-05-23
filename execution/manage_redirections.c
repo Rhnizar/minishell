@@ -1,22 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shared_utils_define2.c                             :+:      :+:    :+:   */
+/*   manage_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 19:03:26 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 19:03:50 by rrhnizar         ###   ########.fr       */
+/*   Created: 2023/05/04 11:41:16 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/04 11:41:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	init_struct_cmds(t_cmds **cmds)
-{
-	(*cmds)->redis = NULL;
-	(*cmds)->args = NULL;
-	(*cmds)->subshell = NULL;
-	(*cmds)->cmd = NULL;
-	return (0);
-}

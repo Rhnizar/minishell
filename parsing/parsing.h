@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 21:34:37 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:49:03 by rrhnizar         ###   ########.fr       */
+/*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/08 09:13:36 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef	PARSING_H
+# define PARSING_H
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*new;
 
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
-		return (0);
-	new->content = content;
-	new->next = NULL;
-	return (new);
-}
+# endif

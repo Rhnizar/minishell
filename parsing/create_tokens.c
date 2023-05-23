@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:47:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/21 08:53:06 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:28:31 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	create_tokens(t_tokens **lst, char *str)
 {
@@ -48,4 +48,19 @@ void	free_tokens(t_tokens *tokens)
 		free (tmp);
 		tmp = tmp2;
 	}
+}
+
+int	count_tokens(t_tokens *tokens)
+{
+	t_tokens	*tmp;
+	int			count;
+
+	tmp = tokens;
+	count = 0;
+	while (tmp)
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	return (count);
 }

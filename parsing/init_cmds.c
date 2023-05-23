@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:12:05 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 19:03:45 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:29:35 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 // int	init_struct_cmds(t_cmds **cmds)
 // {

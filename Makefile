@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
+#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/23 12:26:21 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/23 19:12:13 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,29 @@ LIBFT = libft/libft.a
 SHARED = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
 		shared_utils_define.c shared_utils_define2.c environment.c
 
-SRCS_M =  $(SHARED) define_mandatory.c synt_error_mandatory.c
+PARSING = parsing/analyzer/syntax_error.c \
+		  parsing/analyzer/here_doc_error_case.c \
+		  parsing/analyzer/check_separators.c \
+		  parsing/quotes_handler.c \
+		  parsing/create_tokens.c \
+		  parsing/environment.c \
+		  parsing/global_split_utils.c \
+		  parsing/global_split.c \
+		  parsing/init_cmds.c \
+		  parsing/parsing_utils.c \
+		  parsing/shared_utils_define.c \
+		  parsing/shared_utils_define2.c \
+		  parsing/print_error.c 
+		  
 
-SRCS_B = $(SHARED) define_bonus.c synt_error_bonus.c
+SRCS_M = minishell.c $(PARSING) \
+		 parsing/define_mandatory.c \
+		 parsing/synt_error_mandatory.c
+
+SRCS_B = minishell.c $(PARSING) \
+		 parsing/define_bonus.c \
+		 parsing/synt_error_bonus.c \
+		 parsing/analyzer/analyzer_bonus.c
 
 OBJS_M = $(SRCS_M:.c=.o)
 
@@ -29,9 +49,11 @@ OBJS_B = $(SRCS_B:.c=.o)
 
 #-fsanitize=address
 
-RDL = -lreadline
+RDL = -lreadline \
+	  -L/goinfre/kchaouki/brew/opt/readline/lib \
+	  -I/goinfre/kchaouki/brew/opt/readline/include
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 CCe = cc
 

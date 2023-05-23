@@ -1,40 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/30 15:13:37 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 12:55:07 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/05/23 16:29:42 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*join_to_str(char *str, char c)
 {
-	char	*p;
-	size_t	lens1;
-	size_t	lens2;
-	size_t	i;
-	size_t	j;
+	char	*output;
+	int		i;
 
-	i = 0;
-	j = 0;
-	lens1 = ft_strlen(s1);
-	lens2 = ft_strlen(s2);
-	p = malloc(sizeof(char) * ((lens1 + lens2) + 1));
-	if (!p)
+	if (!str)
+		output = malloc(2);
+	else
+		output = malloc(ft_strlen(str) + 2);
+	if (!output)
 		return (NULL);
-	while (s1 && s1[i])
+	i = 0;
+	while (str && str[i])
 	{
-		p[i] = s1[i];
+		output[i] = str[i];
 		i++;
 	}
-	while (s2 && s2[j])
-		p[i++] = s2[j++];
-	p[i] = '\0';
-	free(s1);
-	return (p);
+	output[i++] = c;
+	output[i] = '\0';
+	free (str);
+	return (output);
+}
+
+void	free_double_ptr(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		free (str[i++]);
+	free(str);
 }

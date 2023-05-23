@@ -3,87 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 11:47:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/16 17:00:10 by rrhnizar         ###   ########.fr       */
+/*   Created: 2022/09/30 16:33:16 by kchaouki          #+#    #+#             */
+/*   Updated: 2022/10/14 17:11:03 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	str_count(char *str, char c)
+static int	word_count(char *str, char c)
 {
-	int	i;
 	int	count;
+	int	i;
 
-	i = 0;
 	count = 0;
+	i = 0;
 	while (str[i])
 	{
-		while (str[i] && str[i] == c)
+		while (str[i] == c)
 			i++;
-		while (str[i] && str[i] != c)
-		{
+		if (str[i])
+			count++;
+		while (str[i] != c && str[i])
 			i++;
-			if (str[i] == c || str[i] == '\0')
-				count++;
-		}
 	}
 	return (count);
 }
 
-static char	*word(char *str, char c)
+static char	*alloc_word_mem(char *str, char c)
 {
 	int		i;
-	int		count;
-	int		j;
-	char	*wostr;
+	int		count_letters;
+	char	*ret_word;
 
+	count_letters = 0;
+	while (str[count_letters] != c && str[count_letters])
+		count_letters++;
+	ret_word = (char *)malloc(count_letters * sizeof(char) + 1);
+	if (!ret_word)
+		return (0);
 	i = 0;
-	count = 0;
-	j = 0;
-	while (str[i] && str[i] == c)
-	i++;
-	while (str[i] && str[i] != c)
+	while (i < count_letters)
 	{
-		count++;
+		ret_word[i] = str[i];
 		i++;
 	}
-	i = 0;
-	wostr = malloc (sizeof(char ) * count +1);
-	if (!wostr)
-		return (NULL);
-	while (str[i] && str[i] == c)
-	i++;
-	while (str[i] && str[i] != c)
-		wostr[j++] = str[i++];
-	wostr[j] = '\0';
-	return (wostr);
+	ret_word[i] = '\0';
+	return (ret_word);
 }
 
-char	**ft_split(char const *str, char c)
+char	**mem_free(char **ret, int j)
 {
+	while (j > 0)
+	{
+		j--;
+		free(ret[j]);
+	}
+	free(ret);
+	return (NULL);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**ret_split;
 	int		i;
 	int		j;
-	char	**split;
 
 	i = 0;
 	j = 0;
-	split = malloc (sizeof(char *) * (str_count((char *)str, c) + 1));
-	if (!split)
-		return (NULL);
-	while (str[i] && str[i] == c)
-		i++;
-	while (str[i] && str[i] != c && j < str_count((char *)str, c))
+	ret_split = malloc(sizeof(char *) * (word_count((char *)s, c) + 1));
+	if (!ret_split)
+		return (0);
+	while (s[i])
 	{
-		split[j] = word((char *)&str[i], c);
-		while (str[i] && str[i] != c)
+		while (s[i] == c)
 			i++;
-		while (str[i] && str[i] == c)
+		if (s[i])
+		{
+			ret_split[j] = alloc_word_mem((char *)&s[i], c);
+			if (!ret_split[j])
+				return (mem_free(ret_split, j));
+			j++;
+		}
+		while (s[i] && s[i] != c)
 			i++;
-		j++;
 	}
-	split[j] = 0;
-	return (split);
+	ret_split[j] = 0;
+	return (ret_split);
 }
