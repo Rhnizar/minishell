@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:13:31 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:29:05 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:31:41 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ t_tokens	*analyzer(t_tokens *tokens, int	*exit_status)
 {	
 	*exit_status = syntax_error_handler(tokens);
 	if (*exit_status == 258)
+	{
+		free_tokens(tokens);
 		return (NULL);
+	}
 	return (tokens);
 }

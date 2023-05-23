@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:24:33 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 19:48:18 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:41:02 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	init_check(t_check	*check, char *read_line)
 	check->split = ft_split(">> << || && > < | ( )", ' ');
 	if (!check->split)
 		return (-1);
-		// print_error("Error in allocation", NULL, 1);
 	check->str = read_line;
 	check->ot = NULL;
 	check->dq = 0;

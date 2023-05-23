@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/23 19:12:13 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/23 20:35:54 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ LIBFT = libft/libft.a
 SHARED = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
 		shared_utils_define.c shared_utils_define2.c environment.c
 
-PARSING = parsing/analyzer/syntax_error.c \
+PARSING = parsing/parser.c \
+		  parsing/analyzer/syntax_error.c \
 		  parsing/analyzer/here_doc_error_case.c \
 		  parsing/analyzer/check_separators.c \
 		  parsing/quotes_handler.c \

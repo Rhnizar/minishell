@@ -6,24 +6,14 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 16:41:59 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:55:31 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <string.h>
-# include <string.h>
-# include <fcntl.h>
-# include <sys/errno.h>
-# include <signal.h>
+# include "parsing/parsing.h" 
 
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\
 /usr/local/munki"
@@ -44,97 +34,13 @@ typedef enum e_redirtypes
 	PIPE
 }	t_rtype;
 
-typedef struct s_tokens
-{
-	char			*str;
-	struct s_tokens	*prev;
-	struct s_tokens	*next;
-}	t_tokens;
-
-//////// struct t9sam token ///////
-
-typedef struct s_check
-{
-	char 	*str;
-	char	*ot;
-	char	**split;
-	int		dq;
-	int		sq;
-	int		sid;
-}			t_check;
-
-//////// struct for environment variables //////////
-
-typedef struct s_env
-{
-	char			*content;
-	struct s_env	*next;
-}	t_env;
-
-typedef struct s_redis
-{
-	char			*str;
-	int				type;
-	struct s_redis	*next;
-}		t_redis;
-
-typedef struct s_args
-{
-	char			*str;
-	struct s_args	*next;
-}		t_args;
-
-//// utils the fill struct commands ///////////
-
-typedef	struct s_utils
-{
-	char	**spl_sp_char;
-	char	**spl_redi;
-	int		red_id;
-	int		sp_id;
-	int		red_id_prev;
-	int		sp_id_prev;
-	int		red_id_prev_prev;
-}			t_utils;
-
-////////////////// struct the comands shell ///////////
-
-typedef struct s_cmds
-{
-	char	*cmd;        //   /bin/cat
-	t_redis	*redis;
-	int		is_builtin;
-	t_args	*args;
-	int		operator;
-	char	*subshell;
-}				t_cmds;
-
-//////////////// struct ///////////////
-
-typedef struct s_cmdshell
-{
-	t_cmds	*cmds;
-	struct s_cmdshell	*next;                               
-}	t_cmdshell;
-
 typedef struct s_global
 {
 	int			exit_status;
+	int			pipe[2];
 	t_env		*env;
 	t_cmdshell	*all_commands;
 }			t_global;
-
-//syntax_check
-typedef struct s_syntax_check
-{
-	t_tokens	*all_tokens;
-	t_tokens	*token;
-	char		**sep;
-	int			index_par;
-	int			par;
-	int			index;
-	int			sp_id;
-}	t_syntax_check;
 
 ///////////////// end struct ///////////
 int		len_first_split(char *str);
@@ -217,5 +123,9 @@ int				is_quote(char c);
 char			*quotes_handler(char *token);
 char			*handle_subshell(t_tokens **tmp);
 char			*join_with_space(char *old, char *arg);
+
+
+int	fill_global_struct(t_global **global, char *line, char **environment);
+
 
 # endif
