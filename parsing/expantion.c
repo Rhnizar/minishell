@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   expantion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 17:41:35 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/11 07:38:28 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/23 16:29:18 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
-{
-	t_list	*new;
-
-	if (!lst)
-		return ;
-	while (*lst)
-	{
-		new = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = new;
-	}
-}
+$USER
+"$USER"
+'$USER'
+"'$USER'"
+'"$USER"'

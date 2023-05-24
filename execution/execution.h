@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 17:39:49 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/11 06:49:11 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
+/*   Updated: 2023/05/08 13:32:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef	EXECUTION_H
+# define EXECUTION_H
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (!lst)
-		return ;
-	if (del)
-		del(lst->content);
-	free(lst);
-}
+char	*valid_command_path(char **paths, char *cmd);
+char	**get_paths(char **env);
+
+
+int		input_redirection(char *infile);
+int		output_redirection(char *outfile);
+int		append_output(char *outfile);
+void	here_doc(char *delimiter);
+
+void	print_error(char *msg, char *arg, int status);
+
+
+# endif
