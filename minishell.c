@@ -3,23 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 20:34:25 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:30:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/// handle signal
+
+void	sig_handl(int sig)
+{
+	if (sig == SIGINT)
+		write(1, "\nminishell ~ ", 14);
+}
 int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-	(void)env;
 	char		*line;
 	t_global	*global;
 
+	signal(SIGINT, sig_handl);
 	while (1)
 	{
 		line = readline("minishell ~ ");
