@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 20:31:58 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:04:37 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 		cmds->operator = utils->sp_id;
 		tokens = tokens->next;
 	}
+	if (cmds->cmd)
+		cmds->is_builtin = is_builtin(cmds->cmd);
 	return (tokens);
 }
 
