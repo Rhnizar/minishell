@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/23 21:06:01 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/24 12:04:01 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,9 @@ OBJS_B = $(SRCS_B:.c=.o)
 
 #-fsanitize=address
 
-RDL = -lreadline 
-# -L/goinfre/kchaouki/brew/opt/readline/lib 
-# -I/goinfre/kchaouki/brew/opt/readline/include
+RDL = -lreadline \
+	-L/goinfre/rrhnizar/brew/opt/readline/lib \
+  	-I/goinfre/rrhnizar/brew/opt/readline/include
 
 FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
