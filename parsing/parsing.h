@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 20:53:04 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:06:52 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <sys/errno.h>
+# include <sys/wait.h>
 # include <signal.h>
 
 /*--------------tokens's linked list-------------*/
