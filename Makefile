@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
+#    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/24 12:06:21 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/26 12:36:42 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ PARSING = parsing/parser.c \
 		  parsing/parsing_utils.c \
 		  parsing/shared_utils_define.c \
 		  parsing/shared_utils_define2.c \
-		  parsing/print_error.c 
+		  parsing/print_error.c
 		  
 
 SRCS_M = minishell.c $(PARSING) \
@@ -51,12 +51,12 @@ OBJS_B = $(SRCS_B:.c=.o)
 #-fsanitize=address
 
 RDL = -lreadline \
-	  -L/goinfre/kchaouki/brew/opt/readline/lib \
-	  -I/goinfre/kchaouki/brew/opt/readline/include
-# -L/goinfre/rrhnizar/brew/opt/readline/lib
-# -I/goinfre/rrhnizar/brew/opt/readline/include
+	-L/goinfre/rrhnizar/brew/opt/readline/lib \
+	-I/goinfre/rrhnizar/brew/opt/readline/include
+#   -L/goinfre/kchaouki/brew/opt/readline/lib
+#   -I/goinfre/kchaouki/brew/opt/readline/include
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 CCe = cc
 

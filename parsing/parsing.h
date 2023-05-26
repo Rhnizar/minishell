@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/24 12:06:52 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:03:19 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ typedef struct s_cmdshell
 }	t_cmdshell;
 
 
-
-
+// int                rl_replace_line(char *str, int i);
+void				sig_handl(int sig);
 
 
 

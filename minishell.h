@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 20:55:31 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:00:35 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "parsing/parsing.h" 
+# include "parsing/parsing.h"
 
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\
 /usr/local/munki"
@@ -126,6 +126,5 @@ char			*join_with_space(char *old, char *arg);
 
 
 int	fill_global_struct(t_global **global, char *line, char **environment);
-
 
 # endif
