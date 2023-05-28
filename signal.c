@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 09:59:24 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/26 20:18:23 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:19:01 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ void	f(void)
 // CTRL + D ===> EOF and SIGQUIT
 // CTRL + \ ===> SIGQUIT
 
-int	stop_her = 0;
+int stop_her = 0;
 
 void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
 	{
+		stop_her = 1;
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -45,8 +46,8 @@ void	herdoc(char *delimiter)
 {
 	char	*line;
 
-	
-	while (1)
+	stop_her = 0;
+	while (!stop_her)
 	{
 		line = readline("> ");
 		if (line == NULL)
@@ -55,14 +56,12 @@ void	herdoc(char *delimiter)
 			break ;
 		free(line);
 	}
-	// rl_catch_signals = 0;
-	free(line);
 }
 
 int main(void)
 {
 	char	*line;
-	// f();
+	f();
 	signal(SIGINT, sig_handl);
 	signal(SIGQUIT, sig_handl);
 	// rl_catch_signals = 1;

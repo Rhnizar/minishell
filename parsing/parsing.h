@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/26 13:03:19 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/28 14:51:43 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,49 @@ typedef struct s_cmdshell
 }	t_cmdshell;
 
 
-// int                rl_replace_line(char *str, int i);
+/*========= start token =============*/
+int		split_and_fill_list(char *output, t_tokens **tokens);
+int		init_check(t_check	*check, char *read_line);
+void	fill_with_nonpr_char(t_check *check);
+int		find_separator(char **sep, char *str);
+void	check_quote(t_check *check, int *i);
+char	*join_to_str(char *str, char c);
+void	check_space_tab(t_check *check, int *i);
+void	free_double_ptr(char **str);
+void	create_tokens(t_tokens **lst, char *str);
+void	dq_sq(t_check *check, int *i, int *dq_or_sq);
+/*========= end token =============*/
+
+/*========= start analyzer =============*/
+t_tokens		*analyzer(t_tokens *tokens, int	*exit_status);
+void			free_tokens(t_tokens *tokens);
+int				syntax_error_handler(t_tokens *tokens);
+t_syntax_check	fill_syntax_check(t_tokens *all_tokens, t_tokens *token);
+void			print_error(char *msg, char *arg, int status);
+void			here_doc_befor_error(t_tokens *tokens, int index);
+int				is_separator(char *token, char **sep);
+int				check_separators(t_syntax_check	check, int *par, int *i_par);
+int				count_tokens(t_tokens *tokens);
+void			syntx_error(char *arg);
+int				check_redirections(t_syntax_check check);
+int				check_operators(t_syntax_check check);
+char			*handle_subshell(t_tokens **tmp);
+/*========= end analyzer =============*/
+
+/*========= start parser =============*/
+int			init_struct_utils(t_utils **utils);
+int			init_struct_cmds(t_cmds **cmds);
+int			find_separator(char **sep, char *str);
+int			is_builtin(char *token);
+void		add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds);
+t_env		*create_env(char **envp);
+void		check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils);
+void		fill_list_redis(t_redis **lst, char *str, int type);
+void		fill_list_args(t_args **lst, char *str);
+t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
+/*========= end parser =============*/
+
+int                rl_replace_line(char *str, int i);
 void				sig_handl(int sig);
-
-
 
 # endif
