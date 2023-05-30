@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/26 12:36:42 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/30 11:06:31 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,10 +53,8 @@ OBJS_B = $(SRCS_B:.c=.o)
 RDL = -lreadline \
 	-L/goinfre/rrhnizar/brew/opt/readline/lib \
 	-I/goinfre/rrhnizar/brew/opt/readline/include
-#   -L/goinfre/kchaouki/brew/opt/readline/lib
-#   -I/goinfre/kchaouki/brew/opt/readline/include
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 CCe = cc
 
@@ -68,12 +66,12 @@ $(LIBFT):
 	$(CCe) $(FLAGS) $(DFINE) -c $< -o $@
 
 $(NAME): $(OBJS_M) minishell.h
-	$(CCe) $(FLAGS) $(RDL) $(OBJS_M) $(LIBFT) -o $(NAME)
+	$(CCe) $(FLAGS) $(OBJS_M) $(RDL) $(LIBFT) -o $(NAME)
 
 bonus: $(LIBFT) $(NAME_B)
 
 $(NAME_B) : $(OBJS_B) minishell.h
-	$(CCe) $(FLAGS) $(RDL) $(OBJS_B) $(LIBFT) -o $(NAME_B)
+	$(CCe) $(FLAGS) $(OBJS_B) $(RDL) $(LIBFT) -o $(NAME_B)
 
 clean:
 	rm -rf $(OBJS_M) $(OBJS_B)

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/28 14:51:43 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:51:49 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -151,7 +152,8 @@ void		fill_list_args(t_args **lst, char *str);
 t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
 /*========= end parser =============*/
 
-int                rl_replace_line(char *str, int i);
-void				sig_handl(int sig);
+// int                rl_replace_line(char *str, int i);
 
-# endif
+char	*get_next_line(int fd);
+
+# endif 
