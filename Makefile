@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
+#    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/24 12:06:21 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/05/30 11:47:08 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,6 @@ NAME = minishell
 NAME_B = minishell_bonus
 
 LIBFT = libft/libft.a
-
-SHARED = minishell.c minishell_utils.c global_split.c global_split_utils.c create_tokens.c \
-		shared_utils_define.c shared_utils_define2.c environment.c
 
 PARSING = parsing/parser.c \
 		  parsing/analyzer/syntax_error.c \
@@ -51,10 +48,8 @@ OBJS_B = $(SRCS_B:.c=.o)
 #-fsanitize=address
 
 RDL = -lreadline \
-	  -L/goinfre/kchaouki/brew/opt/readline/lib \
-	  -I/goinfre/kchaouki/brew/opt/readline/include
-# -L/goinfre/rrhnizar/brew/opt/readline/lib
-# -I/goinfre/rrhnizar/brew/opt/readline/include
+	-L/goinfre/rrhnizar/brew/opt/readline/lib \
+	-I/goinfre/rrhnizar/brew/opt/readline/include
 
 FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
@@ -68,12 +63,12 @@ $(LIBFT):
 	$(CCe) $(FLAGS) $(DFINE) -c $< -o $@
 
 $(NAME): $(OBJS_M) minishell.h
-	$(CCe) $(FLAGS) $(RDL) $(OBJS_M) $(LIBFT) -o $(NAME)
+	$(CCe) $(FLAGS) $(OBJS_M) $(RDL) $(LIBFT) -o $(NAME)
 
 bonus: $(LIBFT) $(NAME_B)
 
 $(NAME_B) : $(OBJS_B) minishell.h
-	$(CCe) $(FLAGS) $(RDL) $(OBJS_B) $(LIBFT) -o $(NAME_B)
+	$(CCe) $(FLAGS) $(OBJS_B) $(RDL) $(LIBFT) -o $(NAME_B)
 
 clean:
 	rm -rf $(OBJS_M) $(OBJS_B)

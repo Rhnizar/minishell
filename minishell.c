@@ -6,18 +6,36 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/24 16:30:42 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:42:33 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/// handle signal
+void	f(void)
+{
+	struct termios	ter;
+
+	tcgetattr(0, &ter);
+	ter.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, 0, &ter);
+}
+
+// CTRL + C ===> SIGINT
+// CTRL + D ===> EOF and SIGQUIT
+// CTRL + \ ===> SIGQUIT
 
 void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
-		write(1, "\nminishell ~ ", 14);
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	if (sig == SIGQUIT)
+		rl_redisplay();
 }
 int	main(int argc, char **argv, char **env)
 {
@@ -27,6 +45,8 @@ int	main(int argc, char **argv, char **env)
 	t_global	*global;
 
 	signal(SIGINT, sig_handl);
+	signal(SIGQUIT, sig_handl);
+	f();
 	while (1)
 	{
 		line = readline("minishell ~ ");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 20:05:12 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:17:39 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	split_and_fill_list(char *output, t_tokens **tokens)
 	if (init_check(check, output) == -1)
 		return (-1);
 	fill_with_nonpr_char(check);
-	if (!check->ot)
-		return (-1);
 	split = ft_split(check->ot, '\x07');
 	free(check->ot);
 	free(check);
