@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 16:26:46 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:50:05 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	main(int argc, char **argv, char **env)
 	char		*line;
 	t_global	*global;
 	t_cmdshell	*commands;
-	t_args		*tmp_args;
-	t_redis		*tmp_redis;
+	// t_args		*tmp_args;
+	// t_redis		*tmp_redis;
 
 	signal(SIGINT, sig_handl);
 	signal(SIGQUIT, sig_handl);
@@ -64,33 +64,39 @@ int	main(int argc, char **argv, char **env)
 				continue ;
 			commands = global->all_commands;
 			printf("\n--------------------------------------------------------------------------\n");
-			while (commands)
+			while (global->env)
 			{
-				tmp_args = commands->cmds->args;
-				tmp_redis = commands->cmds->redis;
-				if (tmp_args)
-					printf("cmd ==> %s\n", tmp_args->str);
-				else
-					printf("cmd ==> (null)\n");
-				printf("subshell ===> %s\n", commands->cmds->subshell);
-				printf("operator ===> %d\n", commands->cmds->operator);
-				printf("\n=======  all arguments  =======\n");
-				while(tmp_args)
-				{
-					printf("arg : %s\n", tmp_args->str);
-					tmp_args = tmp_args->next;
-				}
-				printf("\n======= all redirections =======\n");
-				while(tmp_redis)
-				{
-					printf("red : %s\n", tmp_redis->str);
-					printf("type red : %d\n", tmp_redis->type);
-					printf("-----------------------------\n");
-					tmp_redis = tmp_redis->next;
-				}
-				commands = commands->next;
-				printf("\n---------------------------------END CMD-----------------------------------------\n");
+				printf("%s=%s\n", global->env->var, global->env->value);
+				global->env = global->env->next;
 			}
+			
+			// while (commands)
+			// {
+			// 	tmp_args = commands->cmds->args;
+			// 	tmp_redis = commands->cmds->redis;
+			// 	if (tmp_args)
+			// 		printf("cmd ==> %s\n", tmp_args->str);
+			// 	else
+			// 		printf("cmd ==> (null)\n");
+			// 	printf("subshell ===> %s\n", commands->cmds->subshell);
+			// 	printf("operator ===> %d\n", commands->cmds->operator);
+			// 	printf("\n=======  all arguments  =======\n");
+			// 	while(tmp_args)
+			// 	{
+			// 		printf("arg : %s\n", tmp_args->str);
+			// 		tmp_args = tmp_args->next;
+			// 	}
+			// 	printf("\n======= all redirections =======\n");
+			// 	while(tmp_redis)
+			// 	{
+			// 		printf("red : %s\n", tmp_redis->str);
+			// 		printf("type red : %d\n", tmp_redis->type);
+			// 		printf("-----------------------------\n");
+			// 		tmp_redis = tmp_redis->next;
+			// 	}
+			// 	commands = commands->next;
+			// 	printf("\n---------------------------------END CMD-----------------------------------------\n");
+			// }
 			all_free_parsing(global);
 		}
 		else

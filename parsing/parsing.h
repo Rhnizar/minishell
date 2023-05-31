@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/31 16:49:22 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:46:35 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ typedef struct s_check
 /*------linked list of environment variables------*/
 typedef struct s_env
 {
-	char			*content;
+	char			*var;
+	char			*value;
+	struct s_env	*prev;
 	struct s_env	*next;
-}	t_env;
+}			t_env;
 
 /*---------linked list for redirections--------*/
 typedef struct s_redis

@@ -1,43 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shared_utils_define2.c                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 19:03:26 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 19:44:18 by rrhnizar         ###   ########.fr       */
+/*   Created: 2023/05/31 18:32:55 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/05/31 18:33:28 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds)
+int main()
 {
-	t_cmdshell	*new;
-	t_cmdshell	*tmp;
-
-	new = malloc(sizeof(t_tokens));
-	if (!new)
-		return ;
-	new->cmds = cmds;
-	new->next = NULL;
-	if (!(*lst))
-	{
-		*lst = new;
-		return ;
-	}
-	tmp = *lst;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-}
-
-int	init_struct_cmds(t_cmds **cmds)
-{
-	(*cmds)->redis = NULL;
-	(*cmds)->args = NULL;
-	(*cmds)->subshell = NULL;
-	(*cmds)->operator = -1;
+	printf("test builtins\n");
 	return (0);
 }
