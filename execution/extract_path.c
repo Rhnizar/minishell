@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/17 17:02:40 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:02:25 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,20 @@ char	*valid_command_path(char **paths, char *cmd)
 
 
 // has to be handled
-char	**get_paths(char **env)
+char	**get_paths(t_env *env)
 {
-	while (*env && ft_strncmp("PATH", *env, 4))
-		env++;
+	while (env)
+	{
+		if (!ft_strcmp(env->var, "PATH"))
+			break ;
+		env = env->next;
+	}
+	if (!env)
+		return (NULL);
 	// i think when unseting PATH it shouldn't work
 	// if (*env == NULL)
 	// 	*env = PATH;
 	// if (!(*env))
 	// 	return (NULL);
-	return (ft_split(*env + 5, ':'));
+	return (ft_split(env->value, ':'));
 }

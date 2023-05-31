@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:03:26 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:29:59 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/31 12:16:51 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	init_struct_cmds(t_cmds **cmds)
 	(*cmds)->redis = NULL;
 	(*cmds)->args = NULL;
 	(*cmds)->subshell = NULL;
-	(*cmds)->cmd = NULL;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 20:33:58 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 20:35:16 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:59:41 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static int	fill_list_cmds(t_cmdshell **lst, t_tokens *tokens)
 
 int	fill_global_struct(t_global **global, char *line, char **environment)
 {
+	(void) environment;
 	t_tokens	*tokens;
 	t_tokens	*updated_tokens;
 	t_cmdshell	*lst_cmd;

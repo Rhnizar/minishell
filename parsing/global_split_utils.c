@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:29:24 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:43:41 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	find_separator(char **sep, char *str)
 // 	char	**sp;
 
 // 	i = 0;
-// 	sp = ft_split(">> << || && > < | ( )", ' ');
+	// sp = ft_split(">> << || && > < | ( )", ' ');
 // 	sp_id = find_separator(sp, &str[i]);
 // 	free_double_ptr(sp);
 // 	return (sp_id);

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:56:35 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 19:29:07 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:15:06 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_quotes(char *token)
 
 	i = -1;
 	quote = NULL;
-	while (token[++i])
+	while (token && token[++i])
 	{
 		while (token[i] && !ft_strchr("\"'", token[i]))
 			i++;

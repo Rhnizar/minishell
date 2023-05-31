@@ -118,3 +118,8 @@ don't forgot the opposite is already handled
 -------
 ls >|<df
 ls <|>df
+
+
+
+export var='*'
+ls $var

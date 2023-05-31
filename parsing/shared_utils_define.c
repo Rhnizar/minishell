@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:58:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:29:55 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/31 20:25:21 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void	check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils)
 		utils->red_id = -1;
 	}
 	else
-		(*cmd)->cmd = ft_strdup(tmp->str);
+		fill_list_args(&(*cmd)->args, ft_strdup(tmp->str));
+		// (*cmd)->cmd = ft_strdup(tmp->str);
 }
 
 void	free_redis(t_redis *redis)

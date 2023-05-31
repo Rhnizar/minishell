@@ -6,11 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:56:33 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/22 23:17:03 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:14:44 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mandatory/minishell.h"
+#include "../minishell.h"
 
 static void	write_to_pipe(int fd, char *delimiter)
 {
