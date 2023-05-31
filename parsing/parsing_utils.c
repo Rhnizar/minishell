@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 09:40:05 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 12:26:55 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	all_free_parsing(t_global *global)
 		tmp = global->all_commands;
 		free_redis(global->all_commands->cmds->redis);
 		free_args(global->all_commands->cmds->args);
-		free(global->all_commands->cmds->cmd);
 		free(global->all_commands->cmds->subshell);
 		free(global->all_commands->cmds);
 		global->all_commands = global->all_commands->next;

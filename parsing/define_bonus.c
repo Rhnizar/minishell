@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 09:45:16 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 12:43:41 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 		utils->red_id = -1;
 	}
 	else if (utils->red_id_prev_prev != -1 && utils->red_id == -1 \
-		&& utils->sp_id == -1 && cmds->cmd == NULL)
-			cmds->cmd = ft_strdup(tokens->str);
+		&& utils->sp_id == -1 && cmds->args == NULL)
+			fill_list_args(&cmds->args, ft_strdup(tokens->str));
 	else if (tokens->prev != NULL && utils->red_id_prev == -1 \
 		&& utils->sp_id == -1 && utils->sp_id_prev == -1)
 		fill_list_args(&cmds->args, ft_strdup(tokens->str));
@@ -90,8 +90,8 @@ t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 		cmds->operator = utils->sp_id;
 		tokens = tokens->next;
 	}
-	if (cmds->cmd)
-		cmds->is_builtin = is_builtin(cmds->cmd);
+	if (cmds->args)
+		cmds->is_builtin = is_builtin(cmds->args->str);
 	return (tokens);
 }
 

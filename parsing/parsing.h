@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/31 09:48:55 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 12:05:43 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ typedef struct s_utils
 /*-------------command's struct---------------*/
 typedef struct s_cmds
 {
-	char	*cmd;
 	t_redis	*redis;
 	t_args	*args;
 	int		is_builtin;

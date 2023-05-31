@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 09:21:24 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 12:40:03 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ int	main(int argc, char **argv, char **env)
 			printf("\n--------------------------------------------------------------------------\n");
 			while (commands)
 			{
-				printf("cmd ==> %s\n", commands->cmds->cmd);
+				if (commands->cmds->args)
+					printf("cmd ==> %s\n", commands->cmds->args->str);
+				else
+					printf("cmd ==> %s\n", NULL);
 				printf("subshell ===> %s\n", commands->cmds->subshell);
 				printf("operator ===> %d\n", commands->cmds->operator);
 				printf("\n=======  all arguments  =======\n");

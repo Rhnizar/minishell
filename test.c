@@ -6,60 +6,73 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:46:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/22 18:07:40 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:49:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-// typedef enum e_redirtypes
-// {
-// 	HEREDOC,
-// 	FILE_IN,
-// 	FILE_OUT,
-// 	FILE_APPEND
-// } t_rtype;
-
-int main()
+void	ctl_echo(void)
 {
-	printf("%d\n", FILE_APPEND);
-	printf("%d\n", HEREDOC);
-	printf("%d\n", FILE_IN);
-	printf("%d\n", FILE_OUT);
-	// pid_t  pid;
+	struct termios ter;
 
-	// int i = 0;
-	// while (++i < 4)
-	// {
-	// 	pid = fork();
-	// 	if (pid == 0)
-	// 	{
-	// 		printf("child\n");
-	// 		// while (1);
-	// 	}
-	// 		// break ;
-	// }
-	// if (pid == 0)
-	// {
-	// 	while (1);
-	// }
-	// waitpid(-1, NULL, 0);
-	// char **str = ft_calloc(3, sizeof(char *));
+	tcgetattr(0, &ter);
+	ter.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, 0, &ter);
+}
 
-	// printf("%s\n", str[0]);
-	// printf("%s\n", str[1]);
-	// printf("%s\n", str[2]);
+void	sig_handl(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	if (sig == SIGQUIT)
+		rl_redisplay();
+}
 
+void	herdoc(char *del)
+{
+	char *line;
 
-	// char *arg[] = {"ls", "( ls )", NULL};
-	// int fd = open("Makefile", O_RDONLY);
+	while(1)
+	{
+		line = readline("herdoc> ");
+		if (line)
+		{
+			if (ft_strncmp(del, line, ft_strlen(del)) == 0)
+				break;
+		}
+		else
+			break;
+	}
+}
 
-	// dup2(fd, 0);
+int main(void)
+{
+	char	*line;
 
-
-	// dup2();
-	// execve("/bin/ls", arg, NULL);
-
+	ctl_echo();
+	signal(SIGINT, sig_handl);
+	signal(SIGQUIT, sig_handl);
+	while (1)
+	{
+		line = readline("minishell ~ ");
+		if (line)
+		{
+			if (line[0] != 0)
+				add_history(line);
+			else
+				continue ;
+			if (ft_strncmp("<<", line, 2) == 0)
+				herdoc("eof");
+		}
+		else
+			break;
+	}
+	printf("exit\n");
 	return (0);
 }
