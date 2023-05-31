@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:30:32 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 18:45:39 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:42:06 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_env	*create_env(char **envp)
 	env = NULL;
 	while (*envp)
 	{
-		add_to_env(&env, ft_strdup(ft_substr(*envp, 0, find_equale(*envp))), \
+		add_to_env(&env, ft_substr(*envp, 0, find_equale(*envp)), \
 		ft_strdup(ft_strchr(*envp, '=') + 1));
 		envp++;
 	}
