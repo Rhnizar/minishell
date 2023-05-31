@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:13:31 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 12:28:44 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:23:33 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 	}
 	else if (utils->red_id_prev_prev != -1 && utils->red_id == -1 \
 		&& utils->sp_id == -1 && cmds->args == NULL)
-			fill_list_args(&cmds->args, ft_strdup(tokens->str));
+		fill_list_args(&cmds->args, ft_strdup(tokens->str));
 	else if (tokens->prev != NULL && utils->red_id_prev == -1 \
 		&& utils->sp_id == -1 && utils->sp_id_prev == -1)
 		fill_list_args(&cmds->args, ft_strdup(tokens->str));
@@ -71,8 +71,7 @@ t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 		if (i++ >= 2)
 			utils->red_id_prev_prev = find_separator(utils->spl_redi, \
 				tokens->prev->prev->str);
-		check_define(cmds, tokens, utils);
-		cmds->operator = utils->sp_id;
+		cmds->operator = ((check_define(cmds, tokens, utils)), utils->sp_id);
 		tokens = tokens->next;
 	}
 	if (cmds->args)

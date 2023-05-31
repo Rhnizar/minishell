@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 12:40:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:26:46 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	main(int argc, char **argv, char **env)
 	char		*line;
 	t_global	*global;
 	t_cmdshell	*commands;
+	t_args		*tmp_args;
+	t_redis		*tmp_redis;
 
 	signal(SIGINT, sig_handl);
 	signal(SIGQUIT, sig_handl);
@@ -59,30 +61,32 @@ int	main(int argc, char **argv, char **env)
 			else
 				continue ;
 			if (fill_global_struct(&global, line, env) == -1)
-				return (-1);
+				continue ;
 			commands = global->all_commands;
 			printf("\n--------------------------------------------------------------------------\n");
 			while (commands)
 			{
-				if (commands->cmds->args)
-					printf("cmd ==> %s\n", commands->cmds->args->str);
+				tmp_args = commands->cmds->args;
+				tmp_redis = commands->cmds->redis;
+				if (tmp_args)
+					printf("cmd ==> %s\n", tmp_args->str);
 				else
-					printf("cmd ==> %s\n", NULL);
+					printf("cmd ==> (null)\n");
 				printf("subshell ===> %s\n", commands->cmds->subshell);
 				printf("operator ===> %d\n", commands->cmds->operator);
 				printf("\n=======  all arguments  =======\n");
-				while(commands->cmds->args)
+				while(tmp_args)
 				{
-					printf("arg : %s\n", commands->cmds->args->str);
-					commands->cmds->args = commands->cmds->args->next;
+					printf("arg : %s\n", tmp_args->str);
+					tmp_args = tmp_args->next;
 				}
 				printf("\n======= all redirections =======\n");
-				while(commands->cmds->redis)
+				while(tmp_redis)
 				{
-					printf("red : %s\n", commands->cmds->redis->str);
-					printf("type red : %d\n", commands->cmds->redis->type);
+					printf("red : %s\n", tmp_redis->str);
+					printf("type red : %d\n", tmp_redis->type);
 					printf("-----------------------------\n");
-					commands->cmds->redis = commands->cmds->redis->next;
+					tmp_redis = tmp_redis->next;
 				}
 				commands = commands->next;
 				printf("\n---------------------------------END CMD-----------------------------------------\n");

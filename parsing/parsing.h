@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/31 12:05:43 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:26:57 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,10 @@ t_tokens		*fill_struct_cmds(t_cmds *cmds, \
 	t_tokens *tokens, t_utils *utils);
 /*========= end parser =============*/
 
-int			rl_replace_line(char *str, int i);
-
+// int				rl_replace_line(char *str, int i);
 char			*get_next_line(int fd);
 void			free_redis(t_redis *redis);
 void			free_args(t_args *args);
+void			free_token_utils(t_utils *utils, t_tokens *tokens);
 
 #endif

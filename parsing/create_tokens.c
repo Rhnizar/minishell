@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:47:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 09:23:55 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:00:58 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	free_tokens(t_tokens *tokens)
 	while (tmp)
 	{
 		tmp2 = tmp->next;
-		free (tmp->str);
-		free (tmp);
+		free(tmp->str);
+		free(tmp);
 		tmp = tmp2;
 	}
 }
