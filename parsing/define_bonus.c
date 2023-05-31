@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/24 16:50:33 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:45:16 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_tokens	*analyzer(t_tokens *tokens, int	*exit_status)
 {
 	t_tokens	*new_tokens;
 	t_tokens	*tmp;
-	
+
 	*exit_status = syntax_error_handler(tokens);
 	if (*exit_status == 258)
 	{
@@ -111,7 +111,7 @@ t_tokens	*analyzer(t_tokens *tokens, int	*exit_status)
 	while (tmp)
 	{	
 		if (ft_strcmp(tmp->str, "(") != 0)
-		create_tokens(&new_tokens, ft_strdup(tmp->str));
+			create_tokens(&new_tokens, ft_strdup(tmp->str));
 		else
 			create_tokens(&new_tokens, handle_subshell(&tmp));
 		tmp = tmp->next;

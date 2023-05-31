@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   analyzer_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 22:36:28 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 16:41:36 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:44:41 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ char	*handle_subshell(t_tokens **tmp)
 			break ;
 		(*tmp) = (*tmp)->next;
 	}
-	return (output);	
+	return (output);
 }

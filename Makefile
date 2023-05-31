@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/05/30 11:47:08 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/05/30 13:38:51 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,13 @@ OBJS_B = $(SRCS_B:.c=.o)
 
 #-fsanitize=address
 
+#214 leaks the readline
+
 RDL = -lreadline \
 	-L/goinfre/rrhnizar/brew/opt/readline/lib \
 	-I/goinfre/rrhnizar/brew/opt/readline/include
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 CCe = cc
 

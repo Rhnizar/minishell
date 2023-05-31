@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 20:33:58 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 20:35:16 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:49:56 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	free_token_utils(t_utils *utils, t_tokens *tokens)
+{
+	free_tokens(tokens);
+	free_double_ptr(utils->spl_redi);
+	free_double_ptr(utils->spl_sp_char);
+	free(utils);
+}
 
 static int	fill_list_cmds(t_cmdshell **lst, t_tokens *tokens)
 {
@@ -29,22 +37,15 @@ static int	fill_list_cmds(t_cmdshell **lst, t_tokens *tokens)
 		cmds = malloc(sizeof(t_cmds));
 		if (!cmds)
 		{
-			//// free all
+			free_token_utils(utils, tokens);
 			return (-1);
 		}
 		utils->sp_id = -1;
 		init_struct_cmds(&cmds);
 		tmp = fill_struct_cmds(cmds, tmp, utils);
 		add_cmd_to_list(lst, cmds);
-		// free_redis(cmds->redis);
-		// free_args(cmds->args);
-		// free(cmds);
-		// free(cmds->subshell);
 	}
-	free_tokens(tokens);
-	free_double_ptr(utils->spl_sp_char);
-	free_double_ptr(utils->spl_redi);
-	free(utils);
+	free_token_utils(utils, tokens);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   synt_error_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:24:33 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 20:41:02 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:44:14 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_syntax_check	fill_syntax_check(t_tokens *all_tokens, t_tokens *token)
 	sntx_check.par = 0;
 	return (sntx_check);
 }
-
 
 static int	check_open_par(t_syntax_check check, int *par, int *i_par)
 {

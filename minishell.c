@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/30 11:42:33 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:21:24 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ void	sig_handl(int sig)
 	if (sig == SIGQUIT)
 		rl_redisplay();
 }
+
 int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
 	char		*line;
 	t_global	*global;
+	t_cmdshell	*commands;
 
 	signal(SIGINT, sig_handl);
 	signal(SIGQUIT, sig_handl);
@@ -58,32 +60,37 @@ int	main(int argc, char **argv, char **env)
 				continue ;
 			if (fill_global_struct(&global, line, env) == -1)
 				return (-1);
+			commands = global->all_commands;
 			printf("\n--------------------------------------------------------------------------\n");
-			while (global->all_commands)
+			while (commands)
 			{
-				printf("cmd ==> %s\n", global->all_commands->cmds->cmd);
-				printf("subshell ===> %s\n", global->all_commands->cmds->subshell);
-				printf("operator ===> %d\n", global->all_commands->cmds->operator);
+				printf("cmd ==> %s\n", commands->cmds->cmd);
+				printf("subshell ===> %s\n", commands->cmds->subshell);
+				printf("operator ===> %d\n", commands->cmds->operator);
 				printf("\n=======  all arguments  =======\n");
-				while(global->all_commands->cmds->args)
+				while(commands->cmds->args)
 				{
-					printf("arg : %s\n", global->all_commands->cmds->args->str);
-					global->all_commands->cmds->args = global->all_commands->cmds->args->next;
+					printf("arg : %s\n", commands->cmds->args->str);
+					commands->cmds->args = commands->cmds->args->next;
 				}
 				printf("\n======= all redirections =======\n");
-				while(global->all_commands->cmds->redis)
+				while(commands->cmds->redis)
 				{
-					printf("red : %s\n", global->all_commands->cmds->redis->str);
-					printf("type red : %d\n", global->all_commands->cmds->redis->type);
+					printf("red : %s\n", commands->cmds->redis->str);
+					printf("type red : %d\n", commands->cmds->redis->type);
 					printf("-----------------------------\n");
-					global->all_commands->cmds->redis = global->all_commands->cmds->redis->next;
+					commands->cmds->redis = commands->cmds->redis->next;
 				}
-				global->all_commands = global->all_commands->next;
+				commands = commands->next;
 				printf("\n---------------------------------END CMD-----------------------------------------\n");
 			}
+			all_free_parsing(global);
 		}
 		else
+		{
+			free(line);
 			break ;
+		}
 	}
 	printf("exit\n");
 	return (0);

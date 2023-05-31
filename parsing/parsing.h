@@ -6,11 +6,11 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/30 11:48:32 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:48:55 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PARSING_H
+#ifndef PARSING_H
 # define PARSING_H
 
 # include "../libft/libft.h"
@@ -49,7 +49,7 @@ typedef struct s_syntax_check
 /*-------------check for global split------------*/
 typedef struct s_check
 {
-	char 	*str;
+	char	*str;
 	char	*ot;
 	char	**split;
 	int		dq;
@@ -80,7 +80,7 @@ typedef struct s_args
 }		t_args;
 
 /*-------utils to fill commands's struct------*/
-typedef	struct s_utils
+typedef struct s_utils
 {
 	char	**spl_sp_char;
 	char	**spl_redi;
@@ -96,8 +96,8 @@ typedef struct s_cmds
 {
 	char	*cmd;
 	t_redis	*redis;
-	int		is_builtin;
 	t_args	*args;
+	int		is_builtin;
 	int		operator;
 	char	*subshell;
 }				t_cmds;
@@ -105,22 +105,21 @@ typedef struct s_cmds
 /*----------linked list of commands--------*/
 typedef struct s_cmdshell
 {
-	t_cmds	*cmds;
-	struct s_cmdshell	*next;                               
+	t_cmds				*cmds;
+	struct s_cmdshell	*next;
 }	t_cmdshell;
 
-
 /*========= start token =============*/
-int		split_and_fill_list(char *output, t_tokens **tokens);
-int		init_check(t_check	*check, char *read_line);
-void	fill_with_nonpr_char(t_check *check);
-int		find_separator(char **sep, char *str);
-void	check_quote(t_check *check, int *i);
-char	*join_to_str(char *str, char c);
-void	check_space_tab(t_check *check, int *i);
-void	free_double_ptr(char **str);
-void	create_tokens(t_tokens **lst, char *str);
-void	dq_sq(t_check *check, int *i, int *dq_or_sq);
+int				split_and_fill_list(char *output, t_tokens **tokens);
+int				init_check(t_check	*check, char *read_line);
+void			fill_with_nonpr_char(t_check *check);
+int				find_separator(char **sep, char *str);
+void			check_quote(t_check *check, int *i);
+char			*join_to_str(char *str, char c);
+void			check_space_tab(t_check *check, int *i);
+void			free_double_ptr(char **str);
+void			create_tokens(t_tokens **lst, char *str);
+void			dq_sq(t_check *check, int *i, int *dq_or_sq);
 /*========= end token =============*/
 
 /*========= start analyzer =============*/
@@ -140,20 +139,23 @@ char			*handle_subshell(t_tokens **tmp);
 /*========= end analyzer =============*/
 
 /*========= start parser =============*/
-int			init_struct_utils(t_utils **utils);
-int			init_struct_cmds(t_cmds **cmds);
-int			find_separator(char **sep, char *str);
-int			is_builtin(char *token);
-void		add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds);
-t_env		*create_env(char **envp);
-void		check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils);
-void		fill_list_redis(t_redis **lst, char *str, int type);
-void		fill_list_args(t_args **lst, char *str);
-t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils);
+int				init_struct_utils(t_utils **utils);
+int				init_struct_cmds(t_cmds **cmds);
+int				find_separator(char **sep, char *str);
+int				is_builtin(char *token);
+void			add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds);
+t_env			*create_env(char **envp);
+void			check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils);
+void			fill_list_redis(t_redis **lst, char *str, int type);
+void			fill_list_args(t_args **lst, char *str);
+t_tokens		*fill_struct_cmds(t_cmds *cmds, \
+	t_tokens *tokens, t_utils *utils);
 /*========= end parser =============*/
 
 int			rl_replace_line(char *str, int i);
 
-char	*get_next_line(int fd);
+char			*get_next_line(int fd);
+void			free_redis(t_redis *redis);
+void			free_args(t_args *args);
 
-# endif
+#endif
