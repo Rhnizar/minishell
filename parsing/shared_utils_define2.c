@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:03:26 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 12:27:04 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:49:08 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,6 @@ int	init_struct_cmds(t_cmds **cmds)
 	(*cmds)->args = NULL;
 	(*cmds)->subshell = NULL;
 	(*cmds)->operator = -1;
-	(*cmds)->is_builtin = -1;
 	return (0);
 }
 
-///// command is builtin ////
-int	is_builtin(char *token)
-{
-	if (ft_strcmp(token, "echo"))
-		return (1);
-	else if (ft_strcmp(token, "cd"))
-		return (1);
-	else if (ft_strcmp(token, "pwd"))
-		return (1);
-	else if (ft_strcmp(token, "env"))
-		return (1);
-	else if (ft_strcmp(token, "export"))
-		return (1);
-	else if (ft_strcmp(token, "unset"))
-		return (1);
-	else if (ft_strcmp(token, "exit"))
-		return (1);
-	return (0);
-}

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/31 16:26:57 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:49:22 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct s_cmds
 {
 	t_redis	*redis;
 	t_args	*args;
-	int		is_builtin;
 	int		operator;
 	char	*subshell;
 }				t_cmds;
@@ -141,7 +140,6 @@ char			*handle_subshell(t_tokens **tmp);
 int				init_struct_utils(t_utils **utils);
 int				init_struct_cmds(t_cmds **cmds);
 int				find_separator(char **sep, char *str);
-int				is_builtin(char *token);
 void			add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds);
 t_env			*create_env(char **envp);
 void			check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils);
@@ -151,7 +149,7 @@ t_tokens		*fill_struct_cmds(t_cmds *cmds, \
 	t_tokens *tokens, t_utils *utils);
 /*========= end parser =============*/
 
-// int				rl_replace_line(char *str, int i);
+int				rl_replace_line(char *str, int i);
 char			*get_next_line(int fd);
 void			free_redis(t_redis *redis);
 void			free_args(t_args *args);

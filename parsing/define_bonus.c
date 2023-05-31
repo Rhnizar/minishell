@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 16:24:05 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:43:43 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,10 @@ t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 		if (i++ >= 2)
 			utils->red_id_prev_prev = find_separator(utils->spl_redi, \
 				tokens->prev->prev->str);
-		cmds->operator = ((check_define(cmds, tokens, utils)), utils->sp_id);
+		check_define(cmds, tokens, utils);
+		cmds->operator = utils->sp_id;
 		tokens = tokens->next;
 	}
-	if (cmds->args)
-		cmds->is_builtin = is_builtin(cmds->args->str);
 	return (tokens);
 }
 
