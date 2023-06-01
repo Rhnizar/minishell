@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 15:10:58 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:20:55 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PARSING_H
 
 # include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
