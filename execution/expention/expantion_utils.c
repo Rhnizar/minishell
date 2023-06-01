@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/31 20:17:53 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:40:16 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,6 @@ char	*remove_quotes(char *str)
 	return (output);
 }
 
-t_tokens	*expantion_tokenizer(char *token)
-{
-	t_tokens	*tokens;
-	char		**output;
-	char		*to_split;
-	int			i;
-	
-	to_split = ((i = 0), NULL);
-	while (token[i])
-	{
-		if (ft_strchr("\"'$", token[i]))
-		{
-			to_split = join_to_str(to_split, '\x07');
-			to_split = join_to_str(to_split, token[i]);
-			to_split = join_to_str(to_split, '\x07');
-		}
-		else
-			to_split = join_to_str(to_split, token[i]);
-		i++;			
-	}
-	i = 0;
-	tokens = NULL;
-	output = ft_split(to_split, '\x07');
-	while (output[i])
-		create_tokens(&tokens, ft_strdup(output[i++]));
-	return (free(to_split), free_double_ptr(output), tokens);
-}
-
 char	*get_value(char *to_expand, t_env *env)
 {
 	char	*output;
@@ -83,22 +55,50 @@ char	*get_value(char *to_expand, t_env *env)
 	return (output);
 }
 
+char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old)
+{
+	char	*output;
+	char	*value;
+
+	output = NULL;
+	if (!(*tmp)->next)
+		output = ft_strjoin(output, (*tmp)->str);
+	else if (ft_strcmp((*tmp)->next->str, "$") \
+	&& ft_strcmp((*tmp)->next->str, "'") \
+	&& ft_strcmp((*tmp)->next->str, "\""))
+	{
+		(*tmp) = (*tmp)->next;
+		value = get_value((*tmp)->str, env);
+		if (ft_strlen(value) == 0 && !old)
+			return (NULL);
+		output = ft_strjoin(output, value);
+		free(value);
+	}
+	return (ft_strjoin(old, output));
+}
+
 static char	*double_quote_case(t_tokens **tmp, t_env *env)
 {
 	char	*output;
+	char	*value;
 
 	output = NULL;
+	output = ft_strjoin(output, (*tmp)->str);
+	(*tmp) = (*tmp)->next;
 	while ((*tmp) && ft_strcmp((*tmp)->str, "\""))
 	{
 		if (!ft_strcmp((*tmp)->str, "$"))
 		{
 			(*tmp) = (*tmp)->next;
-			output = ft_strjoin(output, get_value((*tmp)->str, env));
+			value = get_value((*tmp)->str, env);
+			output = ft_strjoin(output, value);
+			free (value);
 		}
 		else
 			output = ft_strjoin(output, (*tmp)->str);
 		(*tmp) = (*tmp)->next;
 	}
+	output = ft_strjoin(output, (*tmp)->str);
 	return (output);
 }
 
@@ -109,17 +109,16 @@ char	*expantion_quote_case(t_tokens **tmp, t_env *env, char *old)
 	output = NULL;
 	if (!ft_strcmp((*tmp)->str, "'"))
 	{
+		output = ft_strjoin(output, (*tmp)->str);
 		(*tmp) = (*tmp)->next;
 		while ((*tmp) && ft_strcmp((*tmp)->str, "'"))
 		{
 			output = ft_strjoin(output, (*tmp)->str);
 			(*tmp) = (*tmp)->next;
 		}
+		output = ft_strjoin(output, (*tmp)->str);
 	}
 	if (!ft_strcmp((*tmp)->str, "\""))
-	{
-		(*tmp) = (*tmp)->next;
 		output = double_quote_case(tmp, env);
-	}
 	return (ft_strjoin(old, output));
 }

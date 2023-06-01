@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:47:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:28:31 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:42:09 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,10 @@ void	create_tokens(t_tokens **lst, char *str)
 		return ;
 	}
 	tmp = *lst;
-	while(tmp->next)
+	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
 	new->prev = tmp;
-}
-
-void	free_tokens(t_tokens *tokens)
-{
-	t_tokens	*tmp;
-	t_tokens	*tmp2;
-
-	tmp = tokens;
-	while (tmp)
-	{
-		tmp2 = tmp->next;
-		free (tmp->str);
-		free (tmp);
-		tmp = tmp2;
-	}
 }
 
 int	count_tokens(t_tokens *tokens)

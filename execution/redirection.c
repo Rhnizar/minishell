@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   io_redirection.c                                   :+:      :+:    :+:   */
+/*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:15:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/31 09:56:49 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 09:13:57 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int	append_output(char *outfile)
 	return (fd);
 }
 
-int	here_doc(char *delimiter)
+int	here_doc(char *delimiter, t_env	*env)
 {
+	(void)	env;
 	char	*line;
 	int		fd;
 

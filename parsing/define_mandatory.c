@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_mandatory.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:13:31 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 16:42:48 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 13:13:37 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 	}
 	else if (utils->red_id_prev_prev != -1 && utils->red_id == -1 \
 		&& utils->sp_id == -1 && cmds->args == NULL)
-			fill_list_args(&cmds->args, ft_strdup(tokens->str));
+		fill_list_args(&cmds->args, ft_strdup(tokens->str));
 	else if (tokens->prev != NULL && utils->red_id_prev == -1 \
 		&& utils->sp_id == -1 && utils->sp_id_prev == -1)
 		fill_list_args(&cmds->args, ft_strdup(tokens->str));

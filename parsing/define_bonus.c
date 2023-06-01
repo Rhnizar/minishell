@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 16:45:33 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:52:49 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	check_define(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 	}
 	else if (utils->red_id_prev_prev != -1 && utils->red_id == -1 \
 		&& utils->sp_id == -1 && cmds->args == NULL)
-			fill_list_args(&cmds->args, ft_strdup(tokens->str));
+		fill_list_args(&cmds->args, ft_strdup(tokens->str));
 	else if (tokens->prev != NULL && utils->red_id_prev == -1 \
 		&& utils->sp_id == -1 && utils->sp_id_prev == -1)
 		fill_list_args(&cmds->args, ft_strdup(tokens->str));
@@ -97,7 +97,7 @@ t_tokens	*analyzer(t_tokens *tokens, int	*exit_status)
 {
 	t_tokens	*new_tokens;
 	t_tokens	*tmp;
-	
+
 	*exit_status = syntax_error_handler(tokens);
 	if (*exit_status == 258)
 	{
@@ -109,7 +109,7 @@ t_tokens	*analyzer(t_tokens *tokens, int	*exit_status)
 	while (tmp)
 	{	
 		if (ft_strcmp(tmp->str, "(") != 0)
-		create_tokens(&new_tokens, ft_strdup(tmp->str));
+			create_tokens(&new_tokens, ft_strdup(tmp->str));
 		else
 			create_tokens(&new_tokens, handle_subshell(&tmp));
 		tmp = tmp->next;

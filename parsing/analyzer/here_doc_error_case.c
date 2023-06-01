@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/26 11:57:52 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:04:33 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,25 @@
 //need to add signal handler and remove fork
 static void	here_doc_error_case(char *delimiter)
 {
-	// (void) delimiter;
-	// pid_t	pid;
+	pid_t	pid;
 	char	*line;
 
-	// pid = fork();
-	// if (pid == -1)
-	// 	print_error(NULL, NULL, 1);
-	// if (pid == 0)
-	// {
+	pid = fork();
+	if (pid == -1)
+		print_error(NULL, NULL, 1);
+	if (pid == 0)
+	{
 		while (1)
 		{
 			line = readline("> ");
-			if (!line)
-				break ;
 			if (ft_strcmp(line, delimiter) == 0)
-			{
-				printf("here\n");
 				break ;
-			}
 			free(line);
 		}
 		free(line);
-		// exit(0);
-	// }
-	// waitpid(pid, NULL, 0);
+		exit(0);
+	}
+	waitpid(pid, NULL, 0);
 }
 
 static void	run_here_docs(t_tokens	*here_docs)

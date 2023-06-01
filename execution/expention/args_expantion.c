@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/31 20:21:21 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:39:29 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,10 @@ static void	add_expanded_to_args(t_args **args, char *expended)
 	i = 0;
 	if (!expended)
 		return ;
-	split = ft_split(expended, ' ');
+	split = split_expended(expended);
 	while (split[i])
-		fill_list_args(args, ft_strdup(split[i++]));
+		fill_list_args(args, remove_quotes(split[i++]));
 	free_double_ptr(split);
-}
-
-static char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old)
-{
-	char	*output;
-
-	output = NULL;
-	if (!(*tmp)->next)
-		output = ft_strjoin(output, (*tmp)->str);
-	else if (ft_strcmp((*tmp)->next->str, "$") \
-	&& ft_strcmp((*tmp)->next->str, "'") \
-	&& ft_strcmp((*tmp)->next->str, "\""))
-	{
-		(*tmp) = (*tmp)->next;
-		output = ft_strjoin(output, get_value((*tmp)->str, env));
-	}
-	return (ft_strjoin(old, output));
 }
 
 static void	expanded_into_args(t_args **args, char *token, t_env *env)

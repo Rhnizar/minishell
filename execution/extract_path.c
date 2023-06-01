@@ -6,22 +6,12 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/30 12:02:25 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:08:43 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "../minishell.h"
-
-static int	ft_len(char	*str)
-{
-	int	count;
-
-	count = 0;
-	while (str && str[count])
-		count++;
-	return (count);
-}
 
 /* join a given path with a given command */
 static char	*ft_join_command_path(char *path, char *cmd)
@@ -29,7 +19,7 @@ static char	*ft_join_command_path(char *path, char *cmd)
 	char	*output;
 	int		i;
 
-	output = malloc(ft_len(cmd) + ft_len(path) + 2);
+	output = malloc(ft_strlen(cmd) + ft_strlen(path) + 2);
 	if (!output)
 		return (NULL);
 	i = 0;
@@ -66,7 +56,6 @@ char	*valid_command_path(char **paths, char *cmd)
 }
 
 
-// has to be handled
 char	**get_paths(t_env *env)
 {
 	while (env)
@@ -77,10 +66,5 @@ char	**get_paths(t_env *env)
 	}
 	if (!env)
 		return (NULL);
-	// i think when unseting PATH it shouldn't work
-	// if (*env == NULL)
-	// 	*env = PATH;
-	// if (!(*env))
-	// 	return (NULL);
 	return (ft_split(env->value, ':'));
 }

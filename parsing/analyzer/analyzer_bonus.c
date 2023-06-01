@@ -6,13 +6,13 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 22:36:28 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 16:41:36 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:50:15 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*join_with_space(char *old, char *arg)
+static char	*join_with_space(char *old, char *arg)
 {
 	char	*output;
 	int		i;
@@ -57,5 +57,5 @@ char	*handle_subshell(t_tokens **tmp)
 			break ;
 		(*tmp) = (*tmp)->next;
 	}
-	return (output);	
+	return (output);
 }
