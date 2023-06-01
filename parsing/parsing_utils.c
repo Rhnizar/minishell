@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 12:58:23 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 13:32:36 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,24 @@ void	free_double_ptr(char **str)
 	free(str);
 }
 
-void	all_free_parsing(t_global *global)
+void	free_commands(t_cmdshell *comands)
 {
 	t_cmdshell	*tmp;
 
-	while (global->all_commands)
+	while (comands)
 	{
-		tmp = global->all_commands;
-		free_redis(global->all_commands->cmds->redis);
-		free_args(global->all_commands->cmds->args);
-		free(global->all_commands->cmds->subshell);
-		free(global->all_commands->cmds);
-		global->all_commands = global->all_commands->next;
+		tmp = comands;
+		free_redis(comands->cmds->redis);
+		free_args(comands->cmds->args);
+		free(comands->cmds->subshell);
+		free(comands->cmds);
+		comands = comands->next;
 		free(tmp);
 	}
+}
+
+void	global_free(t_global *global)
+{
 	free_env(global->env);
-	free(global);
+	free_env(global->export);
 }

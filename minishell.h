@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/31 13:35:56 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 12:56:05 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ typedef struct s_global
 	int			exit_status;
 	int			pipe[2];
 	t_env		*env;
+	t_env		*export;
 	t_cmdshell	*all_commands;
 }			t_global;
 
-int	fill_global_struct(t_global **global, char *line, char **environment);
-void		all_free_parsing(t_global *global);
+int			fill_global_struct(t_global **global, char *line);
+void		free_commands(t_cmdshell *comands);
+void		global_free(t_global *global);
 void		free_env(t_env *env);
 
 #endif

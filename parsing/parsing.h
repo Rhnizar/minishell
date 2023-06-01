@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/31 19:46:35 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:26:30 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,13 @@ char			*get_next_line(int fd);
 void			free_redis(t_redis *redis);
 void			free_args(t_args *args);
 void			free_token_utils(t_utils *utils, t_tokens *tokens);
+
+/*======== enviroment =======*/
+void	add_to_env(t_env **env, char *var, char *value);
+size_t	find_equale(char *str);
+/*===== export =========*/
+t_env	*_export(t_env *env);
+void	print_export(t_env *export);
+void	add_to_export_or_print(t_env *env, t_env *export, t_args *args);
 
 #endif

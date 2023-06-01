@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:30:32 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 19:44:00 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 10:15:55 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_env(t_env *env)
 	}
 }
 
-static void	add_to_env(t_env **env, char *var, char *value)
+void	add_to_env(t_env **env, char *var, char *value)
 {
 	t_env	*new;
 	t_env	*tmp;
@@ -55,9 +55,9 @@ static void	add_to_env(t_env **env, char *var, char *value)
 	new->prev = tmp;
 }
 
-static int	find_equale(char *str)
+size_t	find_equale(char *str)
 {
-	int	count;
+	size_t	count;
 
 	count = 0;
 	while (str[count] && str[count] != '=')
