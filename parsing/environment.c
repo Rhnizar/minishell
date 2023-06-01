@@ -6,27 +6,11 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:30:32 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 10:15:55 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:08:06 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	free_env(t_env *env)
-{
-	t_env	*tmp;
-	t_env	*tmp2;
-
-	tmp = env;
-	while (tmp)
-	{
-		tmp2 = tmp->next;
-		free (tmp->var);
-		free (tmp->value);
-		free (tmp);
-		tmp = tmp2;
-	}
-}
 
 void	add_to_env(t_env **env, char *var, char *value)
 {

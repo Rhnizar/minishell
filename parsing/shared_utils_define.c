@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:58:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 16:19:15 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:05:25 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,34 +66,4 @@ void	check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils)
 	}
 	else
 		fill_list_args(&(*cmd)->args, ft_strdup(tmp->str));
-}
-
-void	free_redis(t_redis *redis)
-{
-	t_redis	*tmp;
-	t_redis	*tmp2;
-
-	tmp = redis;
-	while (tmp)
-	{
-		tmp2 = tmp->next;
-		free (tmp->str);
-		free (tmp);
-		tmp = tmp2;
-	}
-}
-
-void	free_args(t_args *args)
-{
-	t_args	*tmp;
-	t_args	*tmp2;
-
-	tmp = args;
-	while (tmp)
-	{
-		tmp2 = tmp->next;
-		free (tmp->str);
-		free (tmp);
-		tmp = tmp2;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 12:56:05 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:10:26 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ typedef struct s_global
 }			t_global;
 
 int			fill_global_struct(t_global **global, char *line);
+int			init_global(t_global **global, char **env);
+/*------- all free --------*/
+void		free_double_ptr(char **str);
 void		free_commands(t_cmdshell *comands);
 void		global_free(t_global *global);
+void		free_redis(t_redis *redis);
+void		free_args(t_args *args);
 void		free_env(t_env *env);
 
 #endif

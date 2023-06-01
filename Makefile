@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/01 08:10:53 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/06/01 15:09:21 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ PARSING = parsing/parser.c \
 		  parsing/shared_utils_define.c \
 		  parsing/shared_utils_define2.c \
 		  parsing/print_error.c \
-		  builtins/export.c
+		  builtins/export.c \
+		  minishell_utils.c \
+		  all_free.c
 		  
 
 SRCS_M = minishell.c $(PARSING) \
@@ -54,7 +56,7 @@ RDL = -lreadline \
 	-L/goinfre/rrhnizar/brew/opt/readline/lib \
 	-I/goinfre/rrhnizar/brew/opt/readline/include
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 CCe = cc
 

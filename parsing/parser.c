@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 20:33:58 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 13:21:07 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:01:02 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,3 @@ int	fill_global_struct(t_global **global, char *line)
 	(*global)->all_commands = lst_cmd;
 	return (0);
 }
-// int	fill_global_struct(t_global **global, char *line, char **environment)
-// {
-// 	t_tokens	*tokens;
-// 	t_tokens	*updated_tokens;
-// 	t_cmdshell	*lst_cmd;
-
-// 	lst_cmd = NULL;
-// 	*global = malloc(sizeof(t_global));
-// 	if (!(*global))
-// 		return (-1);
-// 	(*global)->exit_status = 0;
-// 	if (split_and_fill_list(line, &tokens) == -1)
-// 		return (-1);
-// 	updated_tokens = analyzer(tokens, &(*global)->exit_status);
-// 	if (fill_list_cmds(&lst_cmd, updated_tokens) == -1)
-// 	{
-// 		free_tokens(updated_tokens);
-// 		free(*global);
-// 		return (-1);
-// 	}
-// 	(void)environment;
-// 	(*global)->all_commands = lst_cmd;
-// 	return (0);
-// }
