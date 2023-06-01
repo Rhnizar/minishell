@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 15:10:26 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:40:11 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 # include "parsing/parsing.h"
+# include "execution/execution.h"
+
 
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\
 /usr/local/munki"
@@ -54,5 +56,7 @@ void		global_free(t_global *global);
 void		free_redis(t_redis *redis);
 void		free_args(t_args *args);
 void		free_env(t_env *env);
+void		free_tokens(t_tokens *tokens);
+void		free_token_utils(t_utils *utils, t_tokens *tokens);
 
 #endif

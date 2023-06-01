@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 13:42:27 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:57:57 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_env	*_export(t_env *env)
 {
@@ -27,7 +27,7 @@ t_env	*_export(t_env *env)
 	return (export);
 }
 
-void	print_export(t_env *export)
+static void	print_export(t_env *export)
 {
 	t_env	*tmp_export;
 

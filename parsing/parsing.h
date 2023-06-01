@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 15:20:55 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:10:45 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,12 @@ int				find_separator(char **sep, char *str);
 void			check_quote(t_check *check, int *i);
 char			*join_to_str(char *str, char c);
 void			check_space_tab(t_check *check, int *i);
-void			free_double_ptr(char **str);
 void			create_tokens(t_tokens **lst, char *str);
 void			dq_sq(t_check *check, int *i, int *dq_or_sq);
 /*========= end token =============*/
 
 /*========= start analyzer =============*/
 t_tokens		*analyzer(t_tokens *tokens, int	*exit_status);
-void			free_tokens(t_tokens *tokens);
 int				syntax_error_handler(t_tokens *tokens);
 t_syntax_check	fill_syntax_check(t_tokens *all_tokens, t_tokens *token);
 void			print_error(char *msg, char *arg, int status);
@@ -150,18 +148,14 @@ t_tokens		*fill_struct_cmds(t_cmds *cmds, \
 	t_tokens *tokens, t_utils *utils);
 /*========= end parser =============*/
 
-// int				rl_replace_line(char *str, int i);
-char			*get_next_line(int fd);
-void			free_redis(t_redis *redis);
-void			free_args(t_args *args);
-void			free_token_utils(t_utils *utils, t_tokens *tokens);
+int				rl_replace_line(char *str, int i);
 
 /*======== enviroment =======*/
-void	add_to_env(t_env **env, char *var, char *value);
-size_t	find_equale(char *str);
+void			add_to_env(t_env **env, char *var, char *value);
+size_t			find_equale(char *str);
+
 /*===== export =========*/
-t_env	*_export(t_env *env);
-void	print_export(t_env *export);
-void	add_to_export_or_print(t_env *env, t_env *export, t_args *args);
+t_env			*_export(t_env *env);
+void			add_to_export_or_print(t_env *env, t_env *export, t_args *args);
 
 #endif

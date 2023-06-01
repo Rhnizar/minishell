@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   io_redirection.c                                   :+:      :+:    :+:   */
+/*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:15:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/04 12:49:29 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 09:13:57 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,32 @@ int	append_output(char *outfile)
 	fd = open (outfile, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd == -1)
 		print_error(NULL, NULL, 1);
+	return (fd);
+}
+
+int	here_doc(char *delimiter, t_env	*env)
+{
+	(void)	env;
+	char	*line;
+	int		fd;
+
+	fd = open ("/tmp/here_doc.txt", O_CREAT|O_RDWR|O_TRUNC, 0644);
+	if (fd == -1)
+		print_error(NULL, NULL, 1);
+	while (1)
+	{
+		line = readline("> ");
+		if (ft_strcmp(line, delimiter) == 0)
+			break ;
+		ft_putstr_fd(line, fd);
+		free(line);
+	}
+	free(line);
+	if (close (fd) != -1)
+		print_error(NULL, NULL, 1);
+	fd = open ("/tmp/here_doc.txt", O_CREAT|O_RDWR|O_TRUNC, 0644);
+	if (fd == -1)
+		print_error(NULL, NULL, 1);
+	unlink ("/tmp/here_doc.txt");
 	return (fd);
 }

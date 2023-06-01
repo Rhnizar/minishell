@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 20:33:58 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 15:01:02 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:36:56 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	free_token_utils(t_utils *utils, t_tokens *tokens)
-{
-	free_tokens(tokens);
-	free_double_ptr(utils->spl_redi);
-	free_double_ptr(utils->spl_sp_char);
-	free(utils);
-}
 
 static int	fill_list_cmds(t_cmdshell **lst, t_tokens *tokens)
 {

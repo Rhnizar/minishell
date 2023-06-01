@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:03:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 15:08:09 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:38:01 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,6 @@ void	free_args(t_args *args)
 	{
 		tmp2 = tmp->next;
 		free (tmp->str);
-		free (tmp);
-		tmp = tmp2;
-	}
-}
-
-void	free_env(t_env *env)
-{
-	t_env	*tmp;
-	t_env	*tmp2;
-
-	tmp = env;
-	while (tmp)
-	{
-		tmp2 = tmp->next;
-		free (tmp->var);
-		free (tmp->value);
 		free (tmp);
 		tmp = tmp2;
 	}
