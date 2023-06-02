@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:19:01 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/02 21:24:30 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:43:15 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,15 @@ void	edit_value2(t_env *exp_or_env, char *var, size_t equal, char *str)
 	}
 	if (!tmp_exp_env)
 		add_to_env(&exp_or_env, var, ft_strdup((ft_strchr(str, '=') + 1)));
+}
+
+void	edit_value(t_env *env, t_env *export, char *str)
+{
+	char		*var;
+	size_t		equal;
+
+	equal = find_equale(str);
+	var = ft_substr(str, 0, equal);
+	edit_value2(export, var, equal, str);
+	edit_value2(env, var, equal, str);
 }

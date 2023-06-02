@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/02 20:15:42 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:36:46 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	main(int argc, char **argv, char **env)
 				add_to_export_or_print(global->env, global->export, args);
 			if (ft_strncmp("env", line, ft_strlen("env")) == 0)
 				print_env(global->env);
-			else
-				printf("not export\n");
+			// else
+			// 	printf("not export\n");
 			// free_commands(global->all_commands);
 			// free(line);
 		}

@@ -6,22 +6,11 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/02 21:32:50 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:43:05 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	edit_value(t_env *env, t_env *export, char *str)
-{
-	char		*var;
-	size_t		equal;
-
-	equal = find_equale(str);
-	var = ft_substr(str, 0, equal);
-	edit_value2(export, var, equal, str);
-	edit_value2(env, var, equal, str);
-}
 
 void	add_env_exp2(t_env *export, t_env *env, char *str, size_t equal)
 {
@@ -35,16 +24,16 @@ void	add_env_exp2(t_env *export, t_env *env, char *str, size_t equal)
 	add_to_env(&env, ft_substr(str, 0, equal), value);
 }
 
-int check_ident(char c)
+int	check_ident(char c)
 {
-	char ref[] = "=$+*[]/&?~,";
-	int	i;
+	char	ref[] = "=$+*[]/&?~,{}";
+	int		i;
 
 	i = 0;
 	while (ref[i])
 	{
 		if (ref[i] == c)
-			return(1);
+			return (1);
 		i++;
 	}
 	return (0);
