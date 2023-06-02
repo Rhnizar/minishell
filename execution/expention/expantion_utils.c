@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 11:40:16 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:10:03 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,30 @@ char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old)
 {
 	char	*output;
 	char	*value;
+	int		count_dollar;
 
 	output = NULL;
-	if (!(*tmp)->next)
-		output = ft_strjoin(output, (*tmp)->str);
-	else if (ft_strcmp((*tmp)->next->str, "$") \
-	&& ft_strcmp((*tmp)->next->str, "'") \
-	&& ft_strcmp((*tmp)->next->str, "\""))
+	count_dollar = 1;
+	while ((*tmp)->next && !ft_strcmp((*tmp)->str, "$"))
 	{
+		count_dollar++;
 		(*tmp) = (*tmp)->next;
+	}
+	if (!(*tmp)->next && count_dollar % 2 != 0 && !ft_strcmp((*tmp)->str, "$"))
+		output = ft_strjoin(output, (*tmp)->str);
+	else if (!(*tmp)->next && count_dollar % 2 == 0 && !old && !ft_strcmp((*tmp)->str, "$"))
+		return (NULL);
+	else if (ft_strcmp((*tmp)->str, "$") && ft_strcmp((*tmp)->str, "'") \
+	&& ft_strcmp((*tmp)->str, "\"") && count_dollar % 2 == 0)
+	{
 		value = get_value((*tmp)->str, env);
 		if (ft_strlen(value) == 0 && !old)
 			return (NULL);
 		output = ft_strjoin(output, value);
 		free(value);
 	}
+	else
+		output = ft_strjoin(output, (*tmp)->str);	
 	return (ft_strjoin(old, output));
 }
 

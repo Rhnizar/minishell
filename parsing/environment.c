@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:30:32 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 15:08:06 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:36:33 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,16 @@ t_env	*create_env(char **envp)
 		envp++;
 	}
 	return (env);
+}
+
+void	print_env(t_env *env)
+{
+	t_env *tmp_env;
+
+	tmp_env = env;
+	while (tmp_env)
+	{
+		printf("%s=%s\n", tmp_env->var, tmp_env->value);
+		tmp_env = tmp_env->next;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 16:10:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:36:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_env
 {
 	char			*var;
 	char			*value;
+	char			*print;
 	struct s_env	*prev;
 	struct s_env	*next;
 }			t_env;
@@ -153,6 +154,7 @@ int				rl_replace_line(char *str, int i);
 /*======== enviroment =======*/
 void			add_to_env(t_env **env, char *var, char *value);
 size_t			find_equale(char *str);
+void			print_env(t_env *env);
 
 /*===== export =========*/
 t_env			*_export(t_env *env);

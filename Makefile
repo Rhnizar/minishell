@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
+#    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/01 15:52:20 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/06/02 17:59:05 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,10 +56,10 @@ OBJS_B = $(SRCS_B:.c=.o)
 #214 leaks the readline
 
 RDL = -lreadline \
-	-L/goinfre/kchaouki/brew/opt/readline/lib \
-	-I/goinfre/kchaouki/brew/opt/readline/include
+	-L/goinfre/rrhnizar/brew/opt/readline/lib \
+	-I/goinfre/rrhnizar/brew/opt/readline/include
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 CCe = cc
 
