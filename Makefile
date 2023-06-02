@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/02 17:59:05 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/06/02 21:21:43 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ EXECUTION = execution/expention/expantion_utils.c \
 		  	execution/expention/expantion_utils2.c \
 		  	execution/expention/args_expantion.c \
 		  	execution/expention/redis_expantion.c \
-			execution/builtins/export.c
+			execution/builtins/export.c \
+			execution/builtins/export2.c
 
 SRCS_M = minishell.c $(PARSING) \
 		 parsing/define_mandatory.c \
