@@ -3,23 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:30:45 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 18:59:29 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 23:19:50 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	count_split(char **split)
+char	*get_value(char *to_expand, t_env *env)
 {
-	int	count;
+	char	*output;
+	t_env	*tmp;
 
-	count = 0;
-	while (split && split[count])
-		count++;
-	return (count);
+	output = NULL;
+	tmp = env;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->var, to_expand))
+		{
+			output = ft_strdup(tmp->value);
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	return (output);
+}
+
+char	*remove_quotes(char *str)
+{
+	char	*output;
+	char	*quote;
+	int		i;
+
+	i = -1;
+	quote = NULL;
+	output = NULL;
+	while (str[++i])
+	{
+		while (str[i] && !ft_strchr("\"'", str[i]))
+			output = join_to_str(output, str[i++]);
+		if (!str[i])
+			break ;
+		quote = ft_strchr("\"'", str[i]);
+		if (str[i + 1])
+			i++;
+		while (str[i] && quote[0] != str[i])
+			output = join_to_str(output, str[i++]);
+	}
+	return (output);
 }
 
 static int	split_quote_case(char *token, int *j, char	**to_split)
@@ -76,7 +109,6 @@ t_tokens	*expantion_tokenizer(char *token)
 	to_split = ((i = 0), NULL);
 	while (token[i])
 	{
-
 		if (!ft_isalnum(token[i]) && token[i] != '_')
 		{
 			to_split = join_to_str(to_split, '\x07');

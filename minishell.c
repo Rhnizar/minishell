@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/03 19:17:41 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 22:33:20 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **env)
 				continue ;
 			global->all_commands->cmds->args = args_expander(global);
 			args = global->all_commands->cmds->args;
-			// printf("----------------\n");
+			printf("----------------\n");
 			while(args)
 			{
 				printf("%s\n", args->str);
@@ -77,10 +77,10 @@ int	main(int argc, char **argv, char **env)
 			// 	printf("type: %d\n", redis->type);
 			// 	redis = redis->next;
 			// }
-			if (ft_strncmp("export", line, ft_strlen("export")) == 0)
-				add_to_export_or_print(global->env, global->export, args);
-			if (ft_strncmp("env", line, ft_strlen("env")) == 0)
-				print_env(global->env);
+			// if (ft_strncmp("export", line, ft_strlen("export")) == 0)
+			// 	add_to_export_or_print(global->env, global->export, args);
+			// if (ft_strncmp("env", line, ft_strlen("env")) == 0)
+			// 	print_env(global->env);
 			// printf("----------------\n");
 			// while(args)
 			// {

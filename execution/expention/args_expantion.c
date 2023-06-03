@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   args_expantion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 19:28:55 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 23:18:22 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// echo "$test test"
 static void	add_expanded_to_args(t_args **args, char *expended)
 {
 	char		**split;
@@ -39,12 +38,14 @@ static void	expanded_into_args(t_args **args, char *token, t_global *global)
 	{
 		if (!ft_strcmp(tmp->str, "$"))
 		{
-			output = expantion_dollar_case(&tmp, global->env, output, global->exit_status);
-			if (!tmp->next)
+			output = expantion_dollar_case(&tmp, global->env, \
+			output, global->exit_status);
+			if (!tmp)
 				break ;
 		}
 		else if (!ft_strcmp(tmp->str, "'") || !ft_strcmp(tmp->str, "\""))
-			output = expantion_quote_case(&tmp, global->env, output);
+			output = expantion_quote_case(&tmp, global->env, output, \
+			global->exit_status);
 		else
 			output = ft_strjoin(output, tmp->str);
 		tmp = tmp->next;

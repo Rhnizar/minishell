@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redis_expantion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 12:57:20 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 23:21:12 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int	add_expanded_to_redis(t_redis **redis, char *expended, char *token, int type)
+static int	add_expanded_to_redis(t_redis **redis, char *expended, \
+char *token, int type)
 {
 	char		**split;
 	int			i;
@@ -36,7 +37,8 @@ static int	add_expanded_to_redis(t_redis **redis, char *expended, char *token, i
 	return (0);
 }
 
-static int	expanded_into_redis(t_redis **redis, t_redis *old_redis, t_env *env, int exit_status)
+static int	expanded_into_redis(t_redis **redis, t_redis *old_redis, \
+t_env *env, int exit_status)
 {
 	t_tokens	*tokens;
 	t_tokens	*tmp;
@@ -53,12 +55,12 @@ static int	expanded_into_redis(t_redis **redis, t_redis *old_redis, t_env *env, 
 				break ;
 		}
 		else if (!ft_strcmp(tmp->str, "'") || !ft_strcmp(tmp->str, "\""))
-			output = expantion_quote_case(&tmp, env, output);
+			output = expantion_quote_case(&tmp, env, output, exit_status);
 		else
 			output = ft_strjoin(output, tmp->str);
 		tmp = tmp->next;
 	}
-	if(add_expanded_to_redis(redis, output, old_redis->str, old_redis->type))
+	if (add_expanded_to_redis(redis, output, old_redis->str, old_redis->type))
 		return (1);
 	return (free_tokens(tokens), free(output), 0);
 }
