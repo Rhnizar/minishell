@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 14:57:04 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:27:03 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,20 @@ int	main(int argc, char **argv, char **env)
 				continue ;
 			if (fill_global_struct(&global, line) == -1)
 				continue ;
-			if (ft_strncmp("export", line, ft_strlen("export")) == 0)
-				add_to_export_or_print(global->env, global->export, global->all_commands->cmds->args);
-			else
-				printf("not export\n");
+			// t_args	*tmp_args = global->all_commands->cmds->args;
+			t_args	*args = args_expander(global->all_commands->cmds->args, global->env);
+			global->all_commands->cmds->args = args;
+			t_args	*tmp_args = global->all_commands->cmds->args;
+			while (tmp_args)
+			{
+				printf("%s\n", tmp_args->str);
+				tmp_args = tmp_args->next;
+			}
+			// t_args	*args = args_expander();
+			// if (ft_strncmp("export", line, ft_strlen("export")) == 0)
+			// 	add_to_export_or_print(global->env, global->export, global->all_commands->cmds->args);
+			// else
+			// 	printf("not export\n");
 			free_commands(global->all_commands);
 			free(line);
 		}

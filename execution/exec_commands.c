@@ -6,42 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/04 11:07:08 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:54:22 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// void	create_pipes(t_pipex *pipex)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < (pipex->cmd_num - 1))
-// 	{
-// 		if (pipe(pipex->tubs + (2 * i)) == -1)
-// 		{
-// 			ft_free_all(pipex);
-// 			print_error(NULL, NULL, 1);
-// 		}
-// 		i++;
-// 	}
-// }
-
-// void	close_pipes(t_pipex *pipex)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (++i < (pipex->cmd_num - 1) * 2)
-// 	{
-// 		if (close (pipex->tubs[i]) == -1)
-// 		{
-// 			ft_free_all(pipex);
-// 			print_error(NULL, NULL, 1);
-// 		}
-// 	}
-// }
 
 // void	ft_wait(t_pipex pipex)
 // {

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 11:40:16 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:50:42 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old)
 	char	*value;
 
 	output = NULL;
+	value = NULL;
 	if (!(*tmp)->next)
 		output = ft_strjoin(output, (*tmp)->str);
 	else if (ft_strcmp((*tmp)->next->str, "$") \
@@ -74,6 +75,8 @@ char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old)
 		output = ft_strjoin(output, value);
 		free(value);
 	}
+	else if (!ft_strcmp((*tmp)->str, "$"))
+		output = ft_strjoin(output, (*tmp)->str);
 	return (ft_strjoin(old, output));
 }
 
