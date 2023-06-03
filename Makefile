@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/02 21:21:43 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/06/03 16:17:12 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ RDL = -lreadline \
 	-L/goinfre/rrhnizar/brew/opt/readline/lib \
 	-I/goinfre/rrhnizar/brew/opt/readline/include
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 CCe = cc
 

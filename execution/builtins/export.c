@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/02 21:43:05 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:47:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,43 @@ void	add_env_exp2(t_env *export, t_env *env, char *str, size_t equal)
 
 int	check_ident(char c)
 {
-	char	ref[] = "=$+*[]/&?~,{}";
+	char	*ref;
 	int		i;
 
 	i = 0;
+	ref = ft_strdup(" $+*[]/&?~,{}.-%#@!`^\\	");
 	while (ref[i])
 	{
 		if (ref[i] == c)
 			return (1);
 		i++;
 	}
+	free(ref);
 	return (0);
 }
 
-void	identifier(char *str)
+int	identifier(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
-		i++;
-	if (check_ident(str[i]) == 1)
+	if (str[i] == '_' || str[i] == '#')
+		return (1);
+	if (str[i] == '=' || ft_isdigit(str[i]))
+	{
 		printf("bash: export: `%s': not a valid identifier\n", str);
+		return (1);
+	}
+	while (str[i] && str[i] != '=')
+	{
+		if (check_ident(str[i]) == 1)
+		{
+			printf("bash: export: `%s': not a valid identifier\n", str);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 void	add_env_exp3(t_env *env, t_env *export, t_args *arg)
@@ -55,18 +70,21 @@ void	add_env_exp3(t_env *env, t_env *export, t_args *arg)
 	size_t		equal;
 	char		*var;
 
-	equal = 0;
-	while (arg)
+	while (arg && arg->str)
 	{
-		identifier(arg->str);
+		if (identifier(arg->str) == 1)
+		{
+			if (arg->str[0] == '#')
+				break ;
+			arg = arg->next;
+			continue ;
+		}
 		equal = find_equale(arg->str);
 		var = ft_substr(arg->str, 0, equal);
 		if (search_var(export, var) == 1)
 		{
 			if (ft_strchr(arg->str, '=') != NULL)
 				edit_value(env, export, arg->str);
-			else
-				return ;
 		}
 		else if (equal == ft_strlen(arg->str))
 			add_to_env(&export, ft_strdup(arg->str), NULL);
@@ -80,7 +98,7 @@ void	add_to_export_or_print(t_env *env, t_env *export, t_args *args)
 {
 	t_args		*arg;
 
-	if (!args->next)
+	if (!args->next || (args->next && args->next->str[0] == '#'))
 		print_export(export);
 	else
 	{

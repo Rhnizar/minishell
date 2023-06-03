@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 15:40:11 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:03:14 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ typedef struct s_global
 	t_cmdshell	*all_commands;
 }			t_global;
 
+t_args		*args_expander(t_global *global);
+
+
 int			fill_global_struct(t_global **global, char *line);
 int			init_global(t_global **global, char **env);
 /*------- all free --------*/
@@ -58,5 +61,7 @@ void		free_args(t_args *args);
 void		free_env(t_env *env);
 void		free_tokens(t_tokens *tokens);
 void		free_token_utils(t_utils *utils, t_tokens *tokens);
+
+
 
 #endif

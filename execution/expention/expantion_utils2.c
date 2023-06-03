@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:30:45 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/02 17:41:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 12:48:05 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_tokens	*expantion_tokenizer(char *token)
 	to_split = ((i = 0), NULL);
 	while (token[i])
 	{
-		if (ft_strchr("\"'$=", token[i]))
+		if (ft_strchr("\"'$=.+/%~^?", token[i]))
 		{
 			to_split = join_to_str(to_split, '\x07');
 			to_split = join_to_str(to_split, token[i]);

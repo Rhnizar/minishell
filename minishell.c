@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/02 21:36:46 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:39:17 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(int argc, char **argv, char **env)
 	char		*line;
 	t_global	*global;
 	t_args		*args;
+	// t_redis		*redis;
 
 	signal(SIGINT, sig_handl);
 	signal(SIGQUIT, sig_handl);
@@ -61,19 +62,28 @@ int	main(int argc, char **argv, char **env)
 				continue ;
 			if (fill_global_struct(&global, line) == -1)
 				continue ;
-			args = args_expander(global->all_commands->cmds->args, global->env);
+			global->all_commands->cmds->args = args_expander(global);
+			args = global->all_commands->cmds->args;
+			// printf("----------------\n");
 			// while(args)
 			// {
 			// 	printf("%s\n", args->str);
 			// 	args = args->next;
+			// }
+			// redis = global->all_commands->cmds->redis;
+			// while (redis)
+			// {
+			// 	printf("redis: %s\n", redis->str);
+			// 	printf("type: %d\n", redis->type);
+			// 	redis = redis->next;
 			// }
 			if (ft_strncmp("export", line, ft_strlen("export")) == 0)
 				add_to_export_or_print(global->env, global->export, args);
 			if (ft_strncmp("env", line, ft_strlen("env")) == 0)
 				print_env(global->env);
 			// else
-			// 	printf("not export\n");
-			// free_commands(global->all_commands);
+				// printf("not export\n");
+			free_commands(global->all_commands);
 			// free(line);
 		}
 		else

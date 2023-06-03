@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/02 19:50:32 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:48:26 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static void	add_expanded_to_args(t_args **args, char *expended)
 	if (!expended)
 		return ;
 	split = split_expended(expended);
-	while (split[i])
+	while (split[i] && remove_quotes(split[i]))
 		fill_list_args(args, remove_quotes(split[i++]));
 	free_double_ptr(split);
 }
 
-static void	expanded_into_args(t_args **args, char *token, t_env *env)
+static void	expanded_into_args(t_args **args, char *token, t_global *global)
 {
 	t_tokens	*tokens;
 	t_tokens	*tmp;
@@ -38,12 +38,12 @@ static void	expanded_into_args(t_args **args, char *token, t_env *env)
 	{
 		if (!ft_strcmp(tmp->str, "$"))
 		{
-			output = expantion_dollar_case(&tmp, env, output);
+			output = expantion_dollar_case(&tmp, global->env, output, global->exit_status);
 			if (!tmp->next)
 				break ;
 		}
 		else if (!ft_strcmp(tmp->str, "'") || !ft_strcmp(tmp->str, "\""))
-			output = expantion_quote_case(&tmp, env, output);
+			output = expantion_quote_case(&tmp, global->env, output);
 		else
 			output = ft_strjoin(output, tmp->str);
 		tmp = tmp->next;
@@ -53,21 +53,21 @@ static void	expanded_into_args(t_args **args, char *token, t_env *env)
 	free(output);
 }
 
-t_args	*args_expander(t_args *args, t_env *env)
+t_args	*args_expander(t_global *global)
 {
 	t_args		*tmp;
 	t_args		*new_args;
 
 	new_args = NULL;
-	tmp = args;
+	tmp = global->all_commands->cmds->args;
 	while (tmp)
 	{
 		if (ft_strchr(tmp->str, '$'))
-			expanded_into_args(&new_args, tmp->str, env);
+			expanded_into_args(&new_args, tmp->str, global);
 		else
 			fill_list_args(&new_args, remove_quotes(tmp->str));
 		tmp = tmp->next;
 	}
-	free_args(args);
+	free_args(global->all_commands->cmds->args);
 	return (new_args);
 }

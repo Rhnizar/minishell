@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/02 20:10:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 12:47:37 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_value(char *to_expand, t_env *env)
 	return (output);
 }
 
-char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old)
+char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old, int exit_status)
 {
 	char	*output;
 	char	*value;
@@ -75,11 +75,21 @@ char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old)
 	else if (ft_strcmp((*tmp)->str, "$") && ft_strcmp((*tmp)->str, "'") \
 	&& ft_strcmp((*tmp)->str, "\"") && count_dollar % 2 == 0)
 	{
-		value = get_value((*tmp)->str, env);
-		if (ft_strlen(value) == 0 && !old)
-			return (NULL);
-		output = ft_strjoin(output, value);
-		free(value);
+		if (!ft_strcmp((*tmp)->str, "=") || !ft_strcmp((*tmp)->str, ".") || !ft_strcmp((*tmp)->str, "+") || !ft_strcmp((*tmp)->str, "/") || !ft_strcmp((*tmp)->str, "%") || !ft_strcmp((*tmp)->str, "^"))
+		{
+			output = ft_strjoin(output, (*tmp)->prev->str);
+			output = ft_strjoin(output, (*tmp)->str);
+		}
+		else if (!ft_strcmp((*tmp)->str, "?"))
+			output = ft_strjoin(output, ft_itoa(exit_status));
+		else
+		{
+			value = get_value((*tmp)->str, env);
+			if (ft_strlen(value) == 0 && !old)
+				return (NULL);
+			output = ft_strjoin(output, value);
+			free(value);	
+		}
 	}
 	else
 		output = ft_strjoin(output, (*tmp)->str);	
