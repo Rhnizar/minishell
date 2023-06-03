@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:30:45 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 12:48:05 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:59:29 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	**split_expended(char *token)
 			if (!token[i])
 				break ;
 			to_split = join_to_str(to_split, '\x07');
+			to_split = join_to_str(to_split, token[i]);
 		}
 		else if (ft_strchr("\"'", token[i]))
 		{
@@ -71,11 +72,12 @@ t_tokens	*expantion_tokenizer(char *token)
 	char		**output;
 	char		*to_split;
 	int			i;
-	
+
 	to_split = ((i = 0), NULL);
 	while (token[i])
 	{
-		if (ft_strchr("\"'$=.+/%~^?", token[i]))
+
+		if (!ft_isalnum(token[i]) && token[i] != '_')
 		{
 			to_split = join_to_str(to_split, '\x07');
 			to_split = join_to_str(to_split, token[i]);
@@ -83,7 +85,7 @@ t_tokens	*expantion_tokenizer(char *token)
 		}
 		else
 			to_split = join_to_str(to_split, token[i]);
-		i++;			
+		i++;
 	}
 	i = 0;
 	tokens = NULL;

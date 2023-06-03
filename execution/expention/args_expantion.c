@@ -6,12 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 16:48:26 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 19:28:55 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+// echo "$test test"
 static void	add_expanded_to_args(t_args **args, char *expended)
 {
 	char		**split;

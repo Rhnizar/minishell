@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/03 16:39:17 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 19:17:41 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ int	main(int argc, char **argv, char **env)
 			global->all_commands->cmds->args = args_expander(global);
 			args = global->all_commands->cmds->args;
 			// printf("----------------\n");
-			// while(args)
-			// {
-			// 	printf("%s\n", args->str);
-			// 	args = args->next;
-			// }
+			while(args)
+			{
+				printf("%s\n", args->str);
+				args = args->next;
+			}
 			// redis = global->all_commands->cmds->redis;
 			// while (redis)
 			// {
@@ -81,6 +81,12 @@ int	main(int argc, char **argv, char **env)
 				add_to_export_or_print(global->env, global->export, args);
 			if (ft_strncmp("env", line, ft_strlen("env")) == 0)
 				print_env(global->env);
+			// printf("----------------\n");
+			// while(args)
+			// {
+			// 	printf("%s\n", args->str);
+			// 	args = args->next;
+			// }
 			// else
 				// printf("not export\n");
 			free_commands(global->all_commands);

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 12:47:37 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 19:28:17 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old, int exit_stat
 	char	*output;
 	char	*value;
 	int		count_dollar;
+	char	c;
 
 	output = NULL;
 	count_dollar = 1;
@@ -91,8 +92,21 @@ char	*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old, int exit_stat
 			free(value);	
 		}
 	}
+	else if (!ft_strcmp((*tmp)->str, "\"") || !ft_strcmp((*tmp)->str, "'"))
+	{
+		output = ft_strjoin(output, (*tmp)->str);
+		c = (*tmp)->str[0];
+		(*tmp) = (*tmp)->next;
+		while ((*tmp) && c != (*tmp)->str[0])
+		{
+			output = ft_strjoin(output, (*tmp)->str);
+			(*tmp) = (*tmp)->next;
+		}
+		if ((*tmp))
+			output = ft_strjoin(output, (*tmp)->str);
+	}
 	else
-		output = ft_strjoin(output, (*tmp)->str);	
+		output = ft_strjoin(output, (*tmp)->str);
 	return (ft_strjoin(old, output));
 }
 

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/03 16:47:42 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/03 19:04:32 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	identifier(char *str)
 	int	i;
 
 	i = 0;
-	if (str[i] == '_' || str[i] == '#')
+	if ((str[i] == '_' && (str[i + 1] && str[i + 1] == '=')) || str[i] == '#')
 		return (1);
 	if (str[i] == '=' || ft_isdigit(str[i]))
 	{
@@ -55,7 +55,8 @@ int	identifier(char *str)
 	}
 	while (str[i] && str[i] != '=')
 	{
-		if (check_ident(str[i]) == 1)
+		// if (check_ident(str[i]) == 1)
+		if (ft_isalnum(str[i]) == 0)
 		{
 			printf("bash: export: `%s': not a valid identifier\n", str);
 			return (1);
