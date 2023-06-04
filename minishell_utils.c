@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/03 23:16:25 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/04 14:25:17 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	init_global(t_global **global, char **env)
 		exit (-1);
 	(*global)->exit_status = 0;
 	(*global)->env = create_env(env);
+	// (void)env;
+	// (*global)->env = NULL;
 	(*global)->export = _export((*global)->env);
+	// (*global)->export = NULL;
 	return (0);
 }
 

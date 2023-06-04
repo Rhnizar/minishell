@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 23:46:27 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/04 14:42:50 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ char *old, int exit_status)
 	count_dollar = 0;
 	output = NULL;
 	if (skipp_dollar(tmp, &count_dollar, &output))
-		return (output);
+	{
+		if (!old)
+			return (output);
+		return (ft_strjoin(old, output));
+	}
 	if (!ft_isalnum((*tmp)->str[0]))
 		output = handle_non_alnum(output, tmp, exit_status);
 	else if (ft_isalnum((*tmp)->str[0]) && count_dollar % 2 != 0)

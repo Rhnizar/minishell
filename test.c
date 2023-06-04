@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:46:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 11:49:42 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/04 18:15:01 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,27 @@ void	ctl_echo(void)
 	tcsetattr(0, 0, &ter);
 }
 
+int	fd = 0;
 void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		fd=dup(0);
+		close(0);
+		rl_catch_signals = 0;
 	}
-	if (sig == SIGQUIT)
-		rl_redisplay();
 }
 
 void	herdoc(char *del)
 {
-	char *line;
+	char *linee;
 
 	while(1)
 	{
-		line = readline("herdoc> ");
-		if (line)
+		linee = readline("herdoc> ");
+		if (linee)
 		{
-			if (ft_strncmp(del, line, ft_strlen(del)) == 0)
+			if (ft_strncmp(del, linee, ft_strlen(del)) == 0)
 				break;
 		}
 		else
@@ -57,9 +55,12 @@ int main(void)
 
 	ctl_echo();
 	signal(SIGINT, sig_handl);
-	signal(SIGQUIT, sig_handl);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
+		if (fd > 0)
+			dup2(fd, 0);
+		rl_catch_signals = 1;
 		line = readline("minishell ~ ");
 		if (line)
 		{
@@ -71,8 +72,19 @@ int main(void)
 				herdoc("eof");
 		}
 		else
-			break;
+		{
+			if (rl_catch_signals == 0)
+				continue ;
+			else
+				break;
+		}
 	}
 	printf("exit\n");
 	return (0);
 }
+
+// int main(void)
+// {
+// 	printf("%zu\n", ft_strlen("He\x07llo"));
+// 	return (0);
+// }

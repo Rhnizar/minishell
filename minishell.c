@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/03 22:33:20 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:05:40 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,18 @@ void	f(void)
 // CTRL + D ===> EOF and SIGQUIT
 // CTRL + \ ===> SIGQUIT
 
+int	fd;
 void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		fd = dup(0);
+		close(0);
+		rl_catch_signals = 0;
+		// write(1, "\n", 1);
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
 	}
 	if (sig == SIGQUIT)
 		rl_redisplay();
@@ -48,11 +52,14 @@ int	main(int argc, char **argv, char **env)
 	// t_redis		*redis;
 
 	signal(SIGINT, sig_handl);
-	signal(SIGQUIT, sig_handl);
+	signal(SIGQUIT, SIG_IGN);
 	f();
 	init_global(&global, env);
 	while (1)
 	{
+		if (fd != 0)
+			dup2(fd, 0);
+		rl_catch_signals = 1;
 		line = readline("minishell ~ ");
 		if (line)
 		{
@@ -64,12 +71,12 @@ int	main(int argc, char **argv, char **env)
 				continue ;
 			global->all_commands->cmds->args = args_expander(global);
 			args = global->all_commands->cmds->args;
-			printf("----------------\n");
-			while(args)
-			{
-				printf("%s\n", args->str);
-				args = args->next;
-			}
+			// printf("----------------\n");
+			// while(args)
+			// {
+			// 	printf("%s\n", args->str);
+			// 	args = args->next;
+			// }
 			// redis = global->all_commands->cmds->redis;
 			// while (redis)
 			// {
@@ -77,23 +84,26 @@ int	main(int argc, char **argv, char **env)
 			// 	printf("type: %d\n", redis->type);
 			// 	redis = redis->next;
 			// }
-			// if (ft_strncmp("export", line, ft_strlen("export")) == 0)
-			// 	add_to_export_or_print(global->env, global->export, args);
-			// if (ft_strncmp("env", line, ft_strlen("env")) == 0)
-			// 	print_env(global->env);
-			// printf("----------------\n");
-			// while(args)
-			// {
-			// 	printf("%s\n", args->str);
-			// 	args = args->next;
-			// }
-			// else
-				// printf("not export\n");
+			if (ft_strncmp("export", line, ft_strlen("export")) == 0)
+				add_to_export_or_print(&(global->env), &(global->export), args);
+			if (ft_strncmp("env", line, ft_strlen("env")) == 0)
+				print_env(global->env);
+			printf("----------------\n");
+			while(args)
+			{
+				printf("%s\n", args->str);
+				args = args->next;
+			}
 			free_commands(global->all_commands);
-			// free(line);
+			free(line);
 		}
 		else
-			break ;
+		{
+			if (rl_catch_signals == 0)
+				continue ;
+			else
+				break ;
+		}
 	}
 	global_free(global);
 	printf("exit\n");

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
+#    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/03 19:39:58 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/06/04 19:06:37 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ PARSING = parsing/parser.c \
 		  parsing/analyzer/here_doc_error_case.c \
 		  parsing/analyzer/check_separators.c \
 		  parsing/create_tokens.c \
-		  parsing/environment.c \
 		  parsing/global_split_utils.c \
 		  parsing/global_split.c \
 		  parsing/shared_utils_define.c \
@@ -34,10 +33,11 @@ EXECUTION = execution/expention/expantion_utils.c \
 		  	execution/expention/expantion_utils2.c \
 		  	execution/expention/args_expantion.c \
 		  	execution/expention/redis_expantion.c \
+			execution/builtins/environment.c \
 			execution/builtins/export.c \
 			execution/builtins/export2.c
 
-SRCS_M = minishell.c $(PARSING) \
+SRCS_M =  $(PARSING) \
 		 parsing/define_mandatory.c \
 		 parsing/synt_error_mandatory.c \
 		 $(EXECUTION)
@@ -57,8 +57,8 @@ OBJS_B = $(SRCS_B:.c=.o)
 #214 leaks the readline
 
 RDL = -lreadline \
-	-L/goinfre/kchaouki/brew/opt/readline/lib \
-	-I/goinfre/kchaouki/brew/opt/readline/include
+	-L/goinfre/rrhnizar/brew/opt/readline/lib \
+	-I/goinfre/rrhnizar/brew/opt/readline/include
 
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
@@ -69,10 +69,13 @@ all: $(LIBFT) $(NAME)
 $(LIBFT):
 	make -C libft && make clean -C libft
 %.o : %.c
-	$(CCe) $(FLAGS) $(DFINE) -c $< -o $@
+	$(CCe) $(FLAGS) -c $< -o $@
 
-$(NAME): $(OBJS_M) minishell.h
-	$(CCe) $(FLAGS) $(OBJS_M) $(RDL) $(LIBFT) -o $(NAME)
+minishell.o : minishell.c
+	$(CCe) $(FLAGS) $(RDL) -c -o
+
+$(NAME): $(OBJS_M) minishell.o minishell.h
+	$(CCe) $(FLAGS) $(OBJS_M) minishell.o $(LIBFT) -o $(NAME)
 
 bonus: $(LIBFT) $(NAME_B)
 
