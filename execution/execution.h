@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 23:16:52 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/05 14:30:40 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char		**split_expended(char *token);
 t_redis		*redis_expander(t_redis *redis, t_env *env, int exit_status);
 /*========= end expender =============*/
 
-
+/*========== unset ==============*/
+void	unset(t_env **env, t_env **export, t_args *args);
 # endif

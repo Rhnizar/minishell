@@ -6,22 +6,28 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/04 13:54:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/05 14:30:57 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	add_env_exp2(t_env **export, t_env **env, char *str, size_t equal)
+void	add_env_exp2(t_env *export, t_env *env, char *str, size_t equal)
 {
 	char	*value;
 
-	if (str[equal + 1] == '\0')
+	value = NULL;
+	if (equal == ft_strlen(str))
+	{
+		add_to_env(&export, ft_strdup(str), NULL);
+		return ;
+	}
+	else if (str[equal + 1] == '\0')
 		value = ft_strdup("");
 	else
 		value = ft_strdup((ft_strchr(str, '=') + 1));
-	add_to_env(export, ft_substr(str, 0, equal), ft_strdup(value));
-	add_to_env(env, ft_substr(str, 0, equal), value);
+	add_to_env(&export, ft_substr(str, 0, equal), ft_strdup(value));
+	add_to_env(&env, ft_substr(str, 0, equal), value);
 }
 
 int	identifier(char *str)
@@ -52,7 +58,7 @@ int	identifier(char *str)
 	return (0);
 }
 
-void	add_env_exp3(t_env **env, t_env **export, t_args *arg)
+void	add_env_exp3(t_env *env, t_env *export, t_args *arg)
 {
 	size_t		equal;
 	char		*var;
@@ -68,13 +74,11 @@ void	add_env_exp3(t_env **env, t_env **export, t_args *arg)
 		}
 		equal = find_equale(arg->str);
 		var = ft_substr(arg->str, 0, equal);
-		if (search_var(*export, var) == 1)
+		if (search_var(export, var) == 1)
 		{
 			if (ft_strchr(arg->str, '=') != NULL)
-				edit_value(*env, *export, arg->str);
+				edit_value(env, export, arg->str);
 		}
-		else if (equal == ft_strlen(arg->str))
-			add_to_env(export, ft_strdup(arg->str), NULL);
 		else
 			add_env_exp2(export, env, arg->str, equal);
 		free(var);
@@ -82,12 +86,13 @@ void	add_env_exp3(t_env **env, t_env **export, t_args *arg)
 	}
 }
 
-void	add_to_export_or_print(t_env **env, t_env **export, t_args *args)
+void	add_to_export_or_print(t_env *env, t_env *export, t_args *args)
 {
 	t_args		*arg;
 
+	unset(&env, &export, args);
 	if (!args->next || (args->next && args->next->str[0] == '#'))
-		print_export(*export);
+		print_export(export);
 	else
 	{
 		arg = args->next;

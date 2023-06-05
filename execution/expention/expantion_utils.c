@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/04 14:42:50 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:57:29 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	skipp_dollar(t_tokens **tmp, int *count_dollar, char **output)
 	t_tokens	*tmp2;
 	t_tokens	*tmp3;
 
+	tmp3 = NULL;
 	if ((*tmp)->prev)
 		tmp3 = (*tmp)->prev;
 	while ((*tmp) && !ft_strcmp((*tmp)->str, "$"))
@@ -31,8 +32,8 @@ static int	skipp_dollar(t_tokens **tmp, int *count_dollar, char **output)
 			(*output) = ft_strjoin((*output), tmp2->str);
 		return (1);
 	}
-	else if ((*tmp) && !ft_strcmp((*tmp)->str, "\"") && \
-	tmp3 && !ft_strcmp(tmp3->str, "\""))
+	if ((*tmp) && !ft_strcmp((*tmp)->str, "\"") && 
+	 tmp3 && !ft_strcmp(tmp3->str, "\""))
 		if ((*count_dollar) % 2 != 0 && !ft_strcmp(tmp2->str, "$"))
 			(*output) = ft_strjoin((*output), tmp2->str);
 	return (0);

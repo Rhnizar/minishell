@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/04 19:05:40 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:12:20 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,18 @@ void	f(void)
 // CTRL + D ===> EOF and SIGQUIT
 // CTRL + \ ===> SIGQUIT
 
-int	fd;
+int	r;
 void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
 	{
-		fd = dup(0);
-		close(0);
+		if (r == 0)
+			write(1, "\n", 1);
+		// printf("\n");
 		rl_catch_signals = 0;
-		// write(1, "\n", 1);
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
+		close(0);
+		r = 1;
 	}
-	if (sig == SIGQUIT)
-		rl_redisplay();
 }
 
 int	main(int argc, char **argv, char **env)
@@ -49,16 +46,18 @@ int	main(int argc, char **argv, char **env)
 	char		*line;
 	t_global	*global;
 	t_args		*args;
+	int			fd;
 	// t_redis		*redis;
 
 	signal(SIGINT, sig_handl);
 	signal(SIGQUIT, SIG_IGN);
 	f();
 	init_global(&global, env);
+	fd = dup(0);
+	r = 0;
 	while (1)
 	{
-		if (fd != 0)
-			dup2(fd, 0);
+		dup2(fd, 0);
 		rl_catch_signals = 1;
 		line = readline("minishell ~ ");
 		if (line)
@@ -85,15 +84,16 @@ int	main(int argc, char **argv, char **env)
 			// 	redis = redis->next;
 			// }
 			if (ft_strncmp("export", line, ft_strlen("export")) == 0)
-				add_to_export_or_print(&(global->env), &(global->export), args);
+				add_to_export_or_print(global->env, global->export, args);
 			if (ft_strncmp("env", line, ft_strlen("env")) == 0)
 				print_env(global->env);
-			printf("----------------\n");
-			while(args)
-			{
-				printf("%s\n", args->str);
-				args = args->next;
-			}
+			if (ft_strncmp("unset", line, ft_strlen("unset")) == 0)
+				unset(&global->env, &global->export, args);
+			// while(args)
+			// {
+			// 	printf("%s\n", args->str);
+			// 	args = args->next;
+			// }
 			free_commands(global->all_commands);
 			free(line);
 		}

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/04 18:55:33 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:39:36 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,6 @@ void			print_export(t_env *export);
 int				search_var(t_env *export, char *var);
 void			edit_value(t_env *env, t_env *export, char *str);
 void			edit_value2(t_env *exp_or_env, char *var, size_t equal, char *str);
-void			add_to_export_or_print(t_env **env, t_env **export, t_args *args);
+void			add_to_export_or_print(t_env *env, t_env *export, t_args *args);
 
 #endif

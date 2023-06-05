@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/04 19:06:37 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/06/05 13:20:07 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,10 @@ EXECUTION = execution/expention/expantion_utils.c \
 		  	execution/expention/redis_expantion.c \
 			execution/builtins/environment.c \
 			execution/builtins/export.c \
-			execution/builtins/export2.c
+			execution/builtins/export2.c \
+			execution/builtins/unset.c
 
-SRCS_M =  $(PARSING) \
+SRCS_M = minishell.c $(PARSING) \
 		 parsing/define_mandatory.c \
 		 parsing/synt_error_mandatory.c \
 		 $(EXECUTION)
@@ -57,8 +58,7 @@ OBJS_B = $(SRCS_B:.c=.o)
 #214 leaks the readline
 
 RDL = -lreadline \
-	-L/goinfre/rrhnizar/brew/opt/readline/lib \
-	-I/goinfre/rrhnizar/brew/opt/readline/include
+	-L/goinfre/rrhnizar/brew/opt/readline/lib
 
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
@@ -69,13 +69,10 @@ all: $(LIBFT) $(NAME)
 $(LIBFT):
 	make -C libft && make clean -C libft
 %.o : %.c
-	$(CCe) $(FLAGS) -c $< -o $@
+	$(CCe) $(FLAGS) -I/goinfre/rrhnizar/brew/opt/readline/include -c $< -o $@
 
-minishell.o : minishell.c
-	$(CCe) $(FLAGS) $(RDL) -c -o
-
-$(NAME): $(OBJS_M) minishell.o minishell.h
-	$(CCe) $(FLAGS) $(OBJS_M) minishell.o $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS_M) minishell.h
+	$(CCe) $(FLAGS) $(OBJS_M) $(RDL) $(LIBFT) -o $(NAME)
 
 bonus: $(LIBFT) $(NAME_B)
 
