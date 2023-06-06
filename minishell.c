@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/05 16:12:20 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:28:09 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	f(void)
 // CTRL + C ===> SIGINT
 // CTRL + D ===> EOF and SIGQUIT
 // CTRL + \ ===> SIGQUIT
+/* rl_getc_function  what is ??*/
 
 int	r;
 void	sig_handl(int sig)
@@ -32,7 +33,6 @@ void	sig_handl(int sig)
 	{
 		if (r == 0)
 			write(1, "\n", 1);
-		// printf("\n");
 		rl_catch_signals = 0;
 		close(0);
 		r = 1;
@@ -89,6 +89,10 @@ int	main(int argc, char **argv, char **env)
 				print_env(global->env);
 			if (ft_strncmp("unset", line, ft_strlen("unset")) == 0)
 				unset(&global->env, &global->export, args);
+			if (ft_strncmp("exit", line, ft_strlen("exit")) == 0)
+				exitt(args);
+			if (ft_strncmp("pwd", line, ft_strlen("pwd")) == 0)
+				pwd();
 			// while(args)
 			// {
 			// 	printf("%s\n", args->str);

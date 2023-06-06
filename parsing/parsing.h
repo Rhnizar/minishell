@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/05 12:39:36 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:16:57 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_env
 {
 	char			*var;
 	char			*value;
-	char			*print;
 	struct s_env	*prev;
 	struct s_env	*next;
 }			t_env;

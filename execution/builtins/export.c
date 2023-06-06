@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/05 14:30:57 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:46:06 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	add_to_export_or_print(t_env *env, t_env *export, t_args *args)
 {
 	t_args		*arg;
 
-	unset(&env, &export, args);
 	if (!args->next || (args->next && args->next->str[0] == '#'))
 		print_export(export);
 	else

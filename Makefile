@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/05 13:20:07 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/06/06 12:28:41 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ EXECUTION = execution/expention/expantion_utils.c \
 			execution/builtins/environment.c \
 			execution/builtins/export.c \
 			execution/builtins/export2.c \
-			execution/builtins/unset.c
+			execution/builtins/unset.c \
+			execution/builtins/exit.c \
+			execution/builtins/pwd.c
 
 SRCS_M = minishell.c $(PARSING) \
 		 parsing/define_mandatory.c \
@@ -58,7 +60,7 @@ OBJS_B = $(SRCS_B:.c=.o)
 #214 leaks the readline
 
 RDL = -lreadline \
-	-L/goinfre/rrhnizar/brew/opt/readline/lib
+	  -L/goinfre/rrhnizar/brew/opt/readline/lib
 
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:30:32 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/04 11:42:17 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:12:43 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_env	*create_env(char **envp)
 
 void	print_env(t_env *env)
 {
-	t_env *tmp_env;
+	t_env	*tmp_env;
 
 	tmp_env = env;
 	while (tmp_env)

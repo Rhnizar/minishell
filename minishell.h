@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/04 18:50:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:27:34 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define EAMBGRD ": ambiguous redirect"
 
 # include <termios.h>
+# include <limits.h>
 
 typedef enum e_redirtypes
 {
@@ -65,6 +66,9 @@ void		free_env(t_env *env);
 void		free_tokens(t_tokens *tokens);
 void		free_token_utils(t_utils *utils, t_tokens *tokens);
 
-
+/*========== exit ==============*/
+void	exitt(t_args *args);
+/*========== exit ==============*/
+void	pwd();
 
 #endif
