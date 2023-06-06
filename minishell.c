@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/06 12:28:09 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:12:17 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	f(void)
 /* rl_getc_function  what is ??*/
 
 int	r;
+
 void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
