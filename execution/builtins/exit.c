@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:03:23 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/06 17:12:08 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:14:06 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-long	my_ft_atoi(const char *str)
+static long	my_ft_atoi(char *str)
 {
 	int					sign;
 	unsigned long		ret;
@@ -34,7 +34,10 @@ long	my_ft_atoi(const char *str)
 		ret = ret * 10 + str[i++] - '0';
 		if ((sign == -1 && ret - 1 > LONG_MAX) || (ret > LONG_MAX && sign == 1))
 		{
-			printf("bash: exit: %s: numeric argument required\n", str);
+			// printf("bash: exit: %s: numeric argument required\n", str);
+			ft_putstr_fd("bash: exit: ", 2);
+			ft_putstr_fd(str, 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
 			return (255);
 		}
 	}
@@ -58,19 +61,22 @@ int	check_arg(char *str)
 
 void	exitt(t_args *args)
 {
-	printf("exit\n");
-	if (!args->next)
-		exit(0);
-	if (args->next->next && check_arg(args->next->str) == 0)
+	if (args)
 	{
-		printf("bash: exit: too many arguments\n");
-		exit(1);
+		printf("exit\n");
+		if (!args->next)
+			exit(0);
+		if (args->next->next && check_arg(args->next->str) == 0)
+		{
+			printf("bash: exit: too many arguments\n");
+			exit(1);
+		}
+		if (check_arg(args->next->str) == 1)
+		{
+			printf("bash: exit: %s: numeric argument required\n", args->next->str);
+			exit(255);
+		}
+		else
+			exit(my_ft_atoi(args->next->str));
 	}
-	if (check_arg(args->next->str) == 1)
-	{
-		printf("bash: exit: %s: numeric argument required\n", args->next->str);
-		exit(255);
-	}
-	else
-		exit(my_ft_atoi(args->next->str));
 }

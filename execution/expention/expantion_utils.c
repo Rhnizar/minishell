@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 09:58:38 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:42:35 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,16 @@ static int	skipp_dollar(t_tokens **tmp, int *count_dollar, char **output)
 
 static char	*handle_non_alnum(char	*output, t_tokens **tmp, int exit_status)
 {
+	char	*status;
+
 	if (!ft_strcmp((*tmp)->str, "\"") || !ft_strcmp((*tmp)->str, "'"))
 		(*tmp) = (*tmp)->prev;
 	else if (!ft_strcmp((*tmp)->str, "?"))
-		output = ft_strjoin(output, ft_itoa(exit_status));
+	{
+		status = ft_itoa(exit_status);
+		output = ft_strjoin(output, status);
+		free (status);
+	}
 	else
 	{
 		output = ft_strjoin(output, (*tmp)->prev->str);
@@ -71,11 +77,16 @@ char *old, int exit_status)
 		output = handle_non_alnum(output, tmp, exit_status);
 	else if (ft_isalnum((*tmp)->str[0]) && count_dollar % 2 != 0)
 	{
-		value = get_value((*tmp)->str, env);
-		if (!value && !old)
-			return (NULL);
-		output = ft_strjoin(output, value);
-		free(value);
+		if (ft_isdigit((*tmp)->str[0]))
+			output = ft_strjoin(output, &(*tmp)->str[1]);
+		else
+		{
+			value = get_value((*tmp)->str, env);
+			if (!value && !old)
+				return (NULL);
+			output = ft_strjoin(output, value);
+			free(value);
+		}
 	}
 	else
 		output = ft_strjoin(output, (*tmp)->str);

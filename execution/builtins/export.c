@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/06 10:46:06 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:03:03 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	add_env_exp2(t_env *export, t_env *env, char *str, size_t equal)
 	add_to_env(&env, ft_substr(str, 0, equal), value);
 }
 
-int	identifier(char *str)
+int	identifier(char *str, char *exp_uns)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ int	identifier(char *str)
 		return (1);
 	if (str[i] == '=' || ft_isdigit(str[i]))
 	{
-		printf("bash: export: `%s': not a valid identifier\n", str);
+		printf("bash: %s: `%s': not a valid identifier\n",exp_uns, str);
 		return (1);
 	}
 	while (str[i] && str[i] != '=')
@@ -48,7 +48,7 @@ int	identifier(char *str)
 		{
 			if (str[i] != '_')
 			{
-				printf("bash: export: `%s': not a valid identifier\n", str);
+				printf("bash: %s: `%s': not a valid identifier\n",exp_uns, str);
 				return (1);
 			}
 			return (9);
@@ -65,7 +65,7 @@ void	add_env_exp3(t_env *env, t_env *export, t_args *arg)
 
 	while (arg && arg->str)
 	{
-		if (identifier(arg->str) == 1)
+		if (identifier(arg->str, "export") == 1)
 		{
 			if (arg->str[0] == '#')
 				break ;
@@ -90,11 +90,14 @@ void	add_to_export_or_print(t_env *env, t_env *export, t_args *args)
 {
 	t_args		*arg;
 
-	if (!args->next || (args->next && args->next->str[0] == '#'))
-		print_export(export);
-	else
+	if (args)
 	{
-		arg = args->next;
-		add_env_exp3(env, export, arg);
+		if (!args->next || (args->next && args->next->str[0] == '#'))
+			print_export(export);
+		else
+		{
+			arg = args->next;
+			add_env_exp3(env, export, arg);
+		}
 	}
 }

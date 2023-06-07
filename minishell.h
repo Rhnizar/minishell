@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 12:28:48 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:44:30 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,12 @@ void		free_token_utils(t_utils *utils, t_tokens *tokens);
 void	exitt(t_args *args);
 
 
-/*========== exit ==============*/
-void	pwd();
+/*========== pwd ==============*/
+void	pwd(t_global *global);
+/*========== cd ==============*/
+void	cd(t_global *global, t_args	*args);
+/*========== echo ==============*/
+void	echo(t_args *args);
 
 
 #endif
