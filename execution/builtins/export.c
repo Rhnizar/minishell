@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/07 16:03:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:45:47 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ void	add_env_exp2(t_env *export, t_env *env, char *str, size_t equal)
 	add_to_env(&env, ft_substr(str, 0, equal), value);
 }
 
+static void	error_message(char *arg, char *message)
+{
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": `", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+}
+
 int	identifier(char *str, char *exp_uns)
 {
 	int	i;
@@ -39,7 +48,7 @@ int	identifier(char *str, char *exp_uns)
 		return (1);
 	if (str[i] == '=' || ft_isdigit(str[i]))
 	{
-		printf("bash: %s: `%s': not a valid identifier\n",exp_uns, str);
+		error_message(exp_uns, str);
 		return (1);
 	}
 	while (str[i] && str[i] != '=')
@@ -48,7 +57,7 @@ int	identifier(char *str, char *exp_uns)
 		{
 			if (str[i] != '_')
 			{
-				printf("bash: %s: `%s': not a valid identifier\n",exp_uns, str);
+				error_message(exp_uns, str);
 				return (1);
 			}
 			return (9);

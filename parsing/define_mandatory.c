@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:13:31 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/02 18:04:16 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:22:40 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,13 @@ t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 }
 
 t_tokens	*analyzer(t_tokens *tokens, int	*exit_status)
-{	
-	*exit_status = syntax_error_handler(tokens);
-	if (*exit_status == 258)
+{
+	int	status;
+
+	status = syntax_error_handler(tokens);
+	if (status == 258)
 	{
+		*exit_status = status;
 		free_tokens(tokens);
 		return (NULL);
 	}

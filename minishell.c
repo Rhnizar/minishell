@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/07 16:14:01 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:23:59 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,43 @@ void	sig_handl(int sig)
 		close(0);
 		r = 1;
 	}
+}
+
+// void builtins(t_global **global, char *line)
+// {
+// 	if (ft_strncmp("export", line, ft_strlen("export")) == 0)
+// 		add_to_export_or_print((*global)->env, (*global)->export, (*global)->all_commands->cmds->args);
+// 	if (ft_strncmp("env", line, ft_strlen("env")) == 0)
+// 		print_env((*global)->env);
+// 	if (ft_strncmp("unset", line, ft_strlen("unset")) == 0)
+// 		unset(&(*global)->env, &(*global)->export, (*global)->all_commands->cmds->args);
+// 	if (ft_strncmp("exit", line, ft_strlen("exit")) == 0)
+// 		exitt((*global)->all_commands->cmds->args);
+// 	if (ft_strncmp("pwd", line, ft_strlen("pwd")) == 0)
+// 		pwd(*global);
+// 	if (ft_strncmp("cd", line, ft_strlen("cd")) == 0)
+// 		cd(*global, (*global)->all_commands->cmds->args, (*global)->export);
+// 	if (ft_strncmp("echo", line, ft_strlen("echo")) == 0)
+// 		echo((*global)->all_commands->cmds->args);
+// 	printf("[%d]\n", (*global)->exit_status);
+// }
+
+void builtins(t_global *global, char *line)
+{
+	if (ft_strncmp("export", line, ft_strlen("export")) == 0)
+		add_to_export_or_print(global->env, global->export, global->all_commands->cmds->args);
+	if (ft_strncmp("env", line, ft_strlen("env")) == 0)
+		print_env(global->env);
+	if (ft_strncmp("unset", line, ft_strlen("unset")) == 0)
+		unset(&global->env, &global->export, global->all_commands->cmds->args);
+	if (ft_strncmp("exit", line, ft_strlen("exit")) == 0)
+		exitt(global->all_commands->cmds->args);
+	if (ft_strncmp("pwd", line, ft_strlen("pwd")) == 0)
+		pwd(global);
+	if (ft_strncmp("cd", line, ft_strlen("cd")) == 0)
+		cd(global, global->all_commands->cmds->args, global->export);
+	if (ft_strncmp("echo", line, ft_strlen("echo")) == 0)
+		echo(global->all_commands->cmds->args);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -90,26 +127,12 @@ int	main(int argc, char **argv, char **env)
 			// 	printf("type: %d\n", redis->type);
 			// 	redis = redis->next;
 			// }
-			if (ft_strncmp("export", line, ft_strlen("export")) == 0)
-				add_to_export_or_print(global->env, global->export, args);
-			if (ft_strncmp("env", line, ft_strlen("env")) == 0)
-				print_env(global->env);
-			if (ft_strncmp("unset", line, ft_strlen("unset")) == 0)
-				unset(&global->env, &global->export, args);
-			if (ft_strncmp("exit", line, ft_strlen("exit")) == 0)
-				exitt(args);
-			if (ft_strncmp("pwd", line, ft_strlen("pwd")) == 0)
-				pwd(global);
-			if (ft_strncmp("cd", line, ft_strlen("cd")) == 0)
-				cd(global, args);
-			if (ft_strncmp("echo", line, ft_strlen("echo")) == 0)
-				echo(args);
+			builtins(global, line);
 			// while(args)
 			// {
 			// 	printf("%s\n", args->str);
 			// 	args = args->next;
 			// }
-			
 			free_commands(global->all_commands);
 			free(line);
 		}

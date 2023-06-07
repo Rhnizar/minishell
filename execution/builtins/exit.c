@@ -6,11 +6,18 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:03:23 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/07 15:14:06 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:20:43 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static void	error_message(char *arg)
+{
+	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
+}
 
 static long	my_ft_atoi(char *str)
 {
@@ -34,10 +41,7 @@ static long	my_ft_atoi(char *str)
 		ret = ret * 10 + str[i++] - '0';
 		if ((sign == -1 && ret - 1 > LONG_MAX) || (ret > LONG_MAX && sign == 1))
 		{
-			// printf("bash: exit: %s: numeric argument required\n", str);
-			ft_putstr_fd("bash: exit: ", 2);
-			ft_putstr_fd(str, 2);
-			ft_putstr_fd(": numeric argument required\n", 2);
+			error_message(str);
 			return (255);
 		}
 	}
@@ -63,17 +67,17 @@ void	exitt(t_args *args)
 {
 	if (args)
 	{
-		printf("exit\n");
+		ft_putstr_fd("exit\n", 2);
 		if (!args->next)
 			exit(0);
 		if (args->next->next && check_arg(args->next->str) == 0)
 		{
-			printf("bash: exit: too many arguments\n");
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 			exit(1);
 		}
 		if (check_arg(args->next->str) == 1)
 		{
-			printf("bash: exit: %s: numeric argument required\n", args->next->str);
+			error_message(args->next->str);
 			exit(255);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 12:44:30 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:39:41 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	exitt(t_args *args);
 /*========== pwd ==============*/
 void	pwd(t_global *global);
 /*========== cd ==============*/
-void	cd(t_global *global, t_args	*args);
+void	cd(t_global *global, t_args	*args, t_env *export);
 /*========== echo ==============*/
 void	echo(t_args *args);
 

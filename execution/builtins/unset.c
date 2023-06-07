@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 12:32:56 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/07 16:08:18 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:46:13 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	unset(t_env **env, t_env **export, t_args *args)
 				if (identifier(tmp_args->str, "unset") == 1)
 				{
 					if (tmp_args->str[0] == '#')
-					break ;
+						break ;
 					tmp_args = tmp_args->next;
 					continue ;
 				}

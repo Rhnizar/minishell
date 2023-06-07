@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 09:07:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/07 12:16:33 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:40:09 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	echo(t_args *args)
 			tmp_args = args->next;
 			while (tmp_args)
 			{
-				if (check_opt(args->next->str) == 1 && r == 0)
+				if (check_opt(args->str) == 1)
 				{
 					r = 1;
 					tmp_args = tmp_args->next;
