@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/06 17:15:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 07:53:22 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,4 @@ void	print_error(char *msg, char *arg, int status)
 	}
 	if (status != -1)
 		exit(status);
-}
-
-int	count_split(char **split)
-{
-	int	count;
-
-	count = 0;
-	while (split && split[count])
-		count++;
-	return (count);
 }

@@ -6,35 +6,51 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 23:21:12 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:13:54 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+static int	wildcard_into_redis(t_redis **redis, char *to_handle, int type)
+{
+	t_tokens	*tokens;
+
+	tokens = expention_wildcard_case(to_handle);
+	if (count_tokens(tokens) > 1)
+	{
+		print_error(EAMBGRD, to_handle, -1);
+		return (free_tokens(tokens), 1);
+	}
+	fill_list_redis(redis, remove_quotes(tokens->str), type);
+	free_tokens(tokens);
+	return (0);
+}
+
 static int	add_expanded_to_redis(t_redis **redis, char *expended, \
 char *token, int type)
 {
 	char		**split;
-	int			i;
 
-	i = 0;
-	if (!expended && (type == 0 || type == 3))
+	if (!expended && type <= 3 && type != 1)
 	{
 		print_error(EAMBGRD, token, -1);
 		return (1);
 	}
 	split = split_expended(expended);
-	if (count_split(split) > 1 && (type == 0 || type == 3))
+	if (type <= 3 && type != 1 && count_split(split) > 1)
 	{
 		print_error(EAMBGRD, token, -1);
-		free_double_ptr(split);
-		return (1);
+		return (free_double_ptr(split), 1);
 	}
-	while (split[i])
-		fill_list_redis(redis, remove_quotes(split[i++]), type);
-	free_double_ptr(split);
-	return (0);
+	if (ft_strchr(split[0], '*'))
+	{
+		if (wildcard_into_redis(redis, split[0], type))
+			return (free_double_ptr(split), 1);
+	}
+	else
+		fill_list_redis(redis, remove_quotes(split[0]), type);
+	return (free_double_ptr(split), 0);
 }
 
 static int	expanded_into_redis(t_redis **redis, t_redis *old_redis, \
@@ -61,7 +77,7 @@ t_env *env, int exit_status)
 		tmp = tmp->next;
 	}
 	if (add_expanded_to_redis(redis, output, old_redis->str, old_redis->type))
-		return (1);
+		return (free_tokens(tokens), free(output), 1);
 	return (free_tokens(tokens), free(output), 0);
 }
 
@@ -70,7 +86,8 @@ t_redis	*redis_expander(t_redis *redis, t_env *env, int exit_status)
 	t_redis		*new_redis;
 
 	new_redis = NULL;
-	if (redis && ft_strchr(redis->str, '$') && redis->type != 1)
+	if (redis && (ft_strchr(redis->str, '$') \
+	|| ft_strchr(redis->str, '*')) && redis->type != 1)
 	{
 		if (expanded_into_redis(&new_redis, redis, env, exit_status))
 			return (NULL);

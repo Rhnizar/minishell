@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/05 15:57:29 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 09:58:38 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	skipp_dollar(t_tokens **tmp, int *count_dollar, char **output)
 			(*output) = ft_strjoin((*output), tmp2->str);
 		return (1);
 	}
-	if ((*tmp) && !ft_strcmp((*tmp)->str, "\"") && 
-	 tmp3 && !ft_strcmp(tmp3->str, "\""))
+	if ((*tmp) && !ft_strcmp((*tmp)->str, "\"") && \
+		tmp3 && !ft_strcmp(tmp3->str, "\""))
 		if ((*count_dollar) % 2 != 0 && !ft_strcmp(tmp2->str, "$"))
 			(*output) = ft_strjoin((*output), tmp2->str);
 	return (0);
@@ -60,8 +60,7 @@ char *old, int exit_status)
 	char	*value;
 	int		count_dollar;
 
-	count_dollar = 0;
-	output = NULL;
+	output = ((count_dollar = 0), NULL);
 	if (skipp_dollar(tmp, &count_dollar, &output))
 	{
 		if (!old)
@@ -73,14 +72,15 @@ char *old, int exit_status)
 	else if (ft_isalnum((*tmp)->str[0]) && count_dollar % 2 != 0)
 	{
 		value = get_value((*tmp)->str, env);
-		if (ft_strlen(value) == 0 && !old)
+		if (!value && !old)
 			return (NULL);
 		output = ft_strjoin(output, value);
 		free(value);
 	}
 	else
 		output = ft_strjoin(output, (*tmp)->str);
-	return (ft_strjoin(old, output));
+	value = ft_strjoin(old, output);
+	return (free(output), value);
 }
 
 static char	*double_quote_case(t_tokens **tmp, t_env *env, int exit_status)

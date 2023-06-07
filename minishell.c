@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/06 17:12:17 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:16:11 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	char		*line;
 	t_global	*global;
-	t_args		*args;
+	// t_args		*args;
 	int			fd;
-	// t_redis		*redis;
+	t_redis		*redis;
 
 	signal(SIGINT, sig_handl);
 	signal(SIGQUIT, SIG_IGN);
@@ -69,8 +69,14 @@ int	main(int argc, char **argv, char **env)
 				continue ;
 			if (fill_global_struct(&global, line) == -1)
 				continue ;
-			global->all_commands->cmds->args = args_expander(global);
-			args = global->all_commands->cmds->args;
+			redis = redis_expander(global->all_commands->cmds->redis, global->env, 0);
+			while (redis)
+			{
+				printf("value: [%s]\ttype: [%d]\n", redis->str, redis->type);
+				redis = redis->next;
+			}
+			// global->all_commands->cmds->args = args_expander(global);
+			// args = global->all_commands->cmds->args;
 			// printf("----------------\n");
 			// while(args)
 			// {
@@ -84,16 +90,16 @@ int	main(int argc, char **argv, char **env)
 			// 	printf("type: %d\n", redis->type);
 			// 	redis = redis->next;
 			// }
-			if (ft_strncmp("export", line, ft_strlen("export")) == 0)
-				add_to_export_or_print(global->env, global->export, args);
-			if (ft_strncmp("env", line, ft_strlen("env")) == 0)
-				print_env(global->env);
-			if (ft_strncmp("unset", line, ft_strlen("unset")) == 0)
-				unset(&global->env, &global->export, args);
-			if (ft_strncmp("exit", line, ft_strlen("exit")) == 0)
-				exitt(args);
-			if (ft_strncmp("pwd", line, ft_strlen("pwd")) == 0)
-				pwd();
+			// if (ft_strncmp("export", line, ft_strlen("export")) == 0)
+			// 	add_to_export_or_print(global->env, global->export, args);
+			// if (ft_strncmp("env", line, ft_strlen("env")) == 0)
+			// 	print_env(global->env);
+			// if (ft_strncmp("unset", line, ft_strlen("unset")) == 0)
+			// 	unset(&global->env, &global->export, args);
+			// if (ft_strncmp("exit", line, ft_strlen("exit")) == 0)
+			// 	exitt(args);
+			// if (ft_strncmp("pwd", line, ft_strlen("pwd")) == 0)
+			// 	pwd();
 			// while(args)
 			// {
 			// 	printf("%s\n", args->str);

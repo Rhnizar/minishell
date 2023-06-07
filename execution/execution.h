@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/06 11:20:17 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 08:44:34 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ t_tokens	*expantion_tokenizer(char *token);
 char		*get_value(char *to_expand, t_env *env);
 char		*expantion_quote_case(t_tokens **tmp, t_env *env, char *old, int exit_status);
 char		*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old, int exit_status);
+t_tokens	*expention_wildcard_case(char *to_handle);
 char		**split_expended(char *token);
+int			count_split(char **split);
+int			is_wildcard(char *str);
+t_tokens	*wildcard(char	*arg);
 
 t_redis		*redis_expander(t_redis *redis, t_env *env, int exit_status);
 /*========= end expender =============*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/06 17:12:13 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:28:48 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include "execution/execution.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-
+# include <termios.h>
+# include <limits.h>
+# include <dirent.h>
 
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\
 /usr/local/munki"
@@ -25,10 +27,7 @@
 # define ECNF ": command not found\n"
 # define EPD ": Permission denied\n"
 # define ESYNTX "minishell: syntax error near unexpected token `"
-# define EAMBGRD ": ambiguous redirect"
-
-# include <termios.h>
-# include <limits.h>
+# define EAMBGRD ": ambiguous redirect\n"
 
 typedef enum e_redirtypes
 {
@@ -44,14 +43,14 @@ typedef enum e_redirtypes
 typedef struct s_global
 {
 	int			exit_status;
-	int			pipe[2];
+	pid_t		*pids;
+	int			pipe[4];
 	t_env		*env;
 	t_env		*export;
 	t_cmdshell	*all_commands;
 }			t_global;
 
 t_args		*args_expander(t_global *global);
-int			count_split(char **split);
 
 
 int			fill_global_struct(t_global **global, char *line);
@@ -72,5 +71,6 @@ void	exitt(t_args *args);
 
 /*========== exit ==============*/
 void	pwd();
+
 
 #endif

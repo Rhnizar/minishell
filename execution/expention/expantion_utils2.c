@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:30:45 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/03 23:19:50 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:04:02 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static int	split_quote_case(char *token, int *j, char	**to_split)
 char	**split_expended(char *token)
 {
 	char	*to_split;
+	char	**split;
 	int		i;
 
 	to_split = ((i = 0), NULL);
@@ -96,7 +97,8 @@ char	**split_expended(char *token)
 			to_split = join_to_str(to_split, token[i]);
 		i++;
 	}
-	return (ft_split(to_split, '\x07'));
+	split = ft_split(to_split, '\x07');
+	return (free(to_split), split);
 }
 
 t_tokens	*expantion_tokenizer(char *token)

@@ -6,54 +6,23 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/04 11:07:08 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:52:54 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// void	create_pipes(t_pipex *pipex)
-// {
-// 	int	i;
+void	ft_wait(t_global *global)
+{
+	int	status_code;
 
-// 	i = 0;
-// 	while (i < (pipex->cmd_num - 1))
-// 	{
-// 		if (pipe(pipex->tubs + (2 * i)) == -1)
-// 		{
-// 			ft_free_all(pipex);
-// 			print_error(NULL, NULL, 1);
-// 		}
-// 		i++;
-// 	}
-// }
-
-// void	close_pipes(t_pipex *pipex)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (++i < (pipex->cmd_num - 1) * 2)
-// 	{
-// 		if (close (pipex->tubs[i]) == -1)
-// 		{
-// 			ft_free_all(pipex);
-// 			print_error(NULL, NULL, 1);
-// 		}
-// 	}
-// }
-
-// void	ft_wait(t_pipex pipex)
-// {
-// 	int	status_code;
-
-// 	pipex.cmd_id = -1;
-// 	status_code = 0;
-// 	while (++(pipex.cmd_id) < pipex.cmd_num)
-// 		waitpid(pipex.pid[pipex.cmd_id], &status_code, 0);
-// 	if ((status_code >> 8) > 0)
-// 		exit(status_code >> 8);
-// }
+	pipex.cmd_id = -1;
+	status_code = 0;
+	while (++(pipex.cmd_id) < pipex.cmd_num)
+		waitpid(pipex.pid[pipex.cmd_id], &status_code, 0);
+	if ((status_code >> 8) > 0)
+		exit(status_code >> 8);
+}
 
 void	exec_commands(t_list *cmd_list)
 {
