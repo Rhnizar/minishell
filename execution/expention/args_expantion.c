@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_expantion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 16:13:21 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/08 10:25:25 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ static void	expanded_into_args(t_args **args, char *token, t_global *global)
 	free(output);
 }
 
-t_args	*args_expander(t_global *global)
+t_args	*args_expander(t_global *global, t_args	*args)
 {
 	t_args		*tmp;
 	t_args		*new_args;
 
 	new_args = NULL;
-	tmp = global->all_commands->cmds->args;
+	tmp = args;
 	while (tmp)
 	{
 		if ((ft_strchr(tmp->str, '$') || ft_strchr(tmp->str, '*')))
@@ -91,6 +91,5 @@ t_args	*args_expander(t_global *global)
 			fill_list_args(&new_args, remove_quotes(tmp->str));
 		tmp = tmp->next;
 	}
-	free_args(global->all_commands->cmds->args);
 	return (new_args);
 }

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 12:13:54 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:45:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_env *env, int exit_status)
 	return (free_tokens(tokens), free(output), 0);
 }
 
-t_redis	*redis_expander(t_redis *redis, t_env *env, int exit_status)
+t_redis	*redis_expander(t_global *global, t_redis *redis)
 {
 	t_redis		*new_redis;
 
@@ -89,8 +89,10 @@ t_redis	*redis_expander(t_redis *redis, t_env *env, int exit_status)
 	if (redis && (ft_strchr(redis->str, '$') \
 	|| ft_strchr(redis->str, '*')) && redis->type != 1)
 	{
-		if (expanded_into_redis(&new_redis, redis, env, exit_status))
+		if (expanded_into_redis(&new_redis, redis, global->env, global->exit_status))
 			return (NULL);
 	}
+	else
+		fill_list_redis(&new_redis, remove_quotes(redis->str), redis->type);
 	return (new_redis);
 }

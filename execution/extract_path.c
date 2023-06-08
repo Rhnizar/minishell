@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 16:08:43 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:55:37 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*valid_command_path(char **paths, char *cmd)
 	}
 	return (NULL);
 }
-
 
 char	**get_paths(t_env *env)
 {

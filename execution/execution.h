@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 16:03:27 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:31:06 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ char	**get_paths(t_env *env);
 int		input_redirection(char *infile);
 int		output_redirection(char *outfile);
 int		append_output(char *outfile);
-void	here_doc(char *delimiter);
+int		here_doc(char *delimiter);
 
 void	print_error(char *msg, char *arg, int status);
-
 
 /*========= start expender =============*/
 char		*remove_quotes(char *str);
@@ -38,11 +37,15 @@ int			count_split(char **split);
 int			is_wildcard(char *str);
 t_tokens	*wildcard(char	*arg);
 
-t_redis		*redis_expander(t_redis *redis, t_env *env, int exit_status);
+
 /*========= end expender =============*/
 
 /*========== unset ==============*/
 void	unset(t_env **env, t_env **export, t_args *args);
 int		identifier(char *str, char *exp_uns);
+
+
+
+
 
 # endif

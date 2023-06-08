@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 17:39:41 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:29:58 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,23 @@ typedef enum e_redirtypes
 typedef struct s_global
 {
 	int			exit_status;
-	pid_t		*pids;
-	int			pipe[4];
+	pid_t		*pid;
+	int			tube[4];
 	t_env		*env;
 	t_env		*export;
 	t_cmdshell	*all_commands;
 }			t_global;
 
-t_args		*args_expander(t_global *global);
+typedef	struct s_recipe
+{
+	char	*command;
+	char	**args;
+	char	**envp;
+}	t_recipe;
+
+
+t_args		*args_expander(t_global *global, t_args	*args);
+t_redis		*redis_expander(t_global *global, t_redis *redis);
 
 
 int			fill_global_struct(t_global **global, char *line);
@@ -75,6 +84,12 @@ void	pwd(t_global *global);
 void	cd(t_global *global, t_args	*args, t_env *export);
 /*========== echo ==============*/
 void	echo(t_args *args);
+
+
+
+void	handle_one_command(t_global *global, t_cmdshell **all_cmds);
+void	execution(t_global **global);
+
 
 
 #endif
