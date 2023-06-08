@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:28:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 19:53:20 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:03:32 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,8 @@ void builtins(t_global *global, t_cmdshell *all_cmds)
 	if (ft_strncmp("cd", command, ft_strlen("cd")) == 0)
 		cd(global, args, global->export);
 	if (ft_strncmp("echo", command, ft_strlen("echo")) == 0)
-		echo(args);
-	free_args(args);
+		echo(global, args);
+	free_args(args); //  this free is useless here becaue i'am free args in function free_commands .
 }
 
 static int	is_builtin(char *token)
@@ -289,18 +289,6 @@ int	manage_redirection(t_global *global, t_redis *redis)
 	return (0);
 }
 
-void	sig_handl2(int sig)
-{
-	if (sig == SIGINT)
-	{
-		printf("child\n");
-		// write(0, "child", 5);
-		// write(0, "\n", 1);
-		exit(130);
-	}
-}
-
-
 void	handle_one_command(t_global *global, t_cmdshell **all_cmds)
 {
 	int o_stdout;
@@ -382,8 +370,7 @@ void	handle_one_command(t_global *global, t_cmdshell **all_cmds)
 		}
 		if (pid == 0)
 		{
-			// signal(SIGINT, SIG_DFL);
-			signal(SIGINT, sig_handl2);
+			signal(SIGINT, SIG_DFL);
 			if (manage_redirection(global, (*all_cmds)->cmds->redis))
 				exit (1);
 			recipe = prepare_command(global, (*all_cmds));
@@ -394,7 +381,10 @@ void	handle_one_command(t_global *global, t_cmdshell **all_cmds)
 			}
 		}
 		waitpid(pid, &exit_status, 0);
-		global->exit_status = exit_status >> 8;
+		if (exit_status == 2)
+			global->exit_status = 130;
+		else
+			global->exit_status = exit_status >> 8;
 		signal(SIGINT, sig_handl);
 	}
 }

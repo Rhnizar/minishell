@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 08:46:44 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:11:39 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	execution(t_global **global)
 	{
 		exec_commands(global, &all_cmds);
 		if (!all_cmds)
-			break ;		
+			break ;
 		all_cmds = all_cmds->next;
 	}
 	// create_pipes(&pipex);

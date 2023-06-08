@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 19:11:55 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:10:03 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	pwd(t_global *global);
 /*========== cd ==============*/
 void	cd(t_global *global, t_args	*args, t_env *export);
 /*========== echo ==============*/
-void	echo(t_args *args);
+void	echo(t_global *global, t_args *args);
 
 
 

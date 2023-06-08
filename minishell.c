@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/08 19:16:29 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:12:02 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
 	{
-		// printf("[%d]\n", g_r);
 		if (g_r == 0)
 			write(1, "\n", 1);
 		rl_catch_signals = 0;
 		close(0);
-		g_r = 1;
+		g_r += 1;
 	}
 }
 
@@ -84,6 +83,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	char		*line;
 	t_global	*global;
+	int			tmp_gr;
 	// t_args		*args;
 	int			fd;
 	// t_redis		*redis;
@@ -94,10 +94,14 @@ int	main(int argc, char **argv, char **env)
 	init_global(&global, env);
 	fd = dup(0);
 	g_r = 0;
+	tmp_gr = 0;
 	while (1)
 	{
 		dup2(fd, 0);
 		rl_catch_signals = 1;
+		if (g_r != tmp_gr)
+			global->exit_status = 1;
+		tmp_gr = g_r;
 		line = readline("minishell ~ ");
 		if (line)
 		{
