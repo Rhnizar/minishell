@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 11:29:58 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:11:55 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\
 /usr/local/munki"
+# define EIAD ": is a directory\n"
 # define ENSFD ": No such file or directory\n"
 # define ECNF ": command not found\n"
 # define EPD ": Permission denied\n"
@@ -89,6 +90,7 @@ void	echo(t_args *args);
 
 void	handle_one_command(t_global *global, t_cmdshell **all_cmds);
 void	execution(t_global **global);
+void	sig_handl(int sig);
 
 
 

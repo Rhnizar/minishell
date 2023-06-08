@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 09:55:37 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 17:58:47 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,31 @@ char	*valid_command_path(char **paths, char *cmd)
 {
 	char	*command_path;
 
-	if (access(cmd, F_OK) == 0 && ft_strchr(cmd, '/'))
-		return (cmd);
-	else if (ft_strchr(cmd, '/'))
-		return (NULL);
-	else
+	command_path = NULL;
+	if (access(cmd, F_OK) == 0 && ft_strchr(cmd, '/') && access(cmd, X_OK) == -1)
 	{
-		while (*paths)
-		{
-			command_path = ft_join_command_path(*paths, cmd);
-			if (access(command_path, F_OK) == 0)
-				return (command_path);
-			free(command_path);
-			paths++;
-		}
+		print_error(EPD, cmd, 126);
+		return (NULL);
 	}
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(cmd, F_OK) == -1)
+			print_error(ENSFD, cmd, 127);
+		if (access(cmd, F_OK) == 0)
+			print_error(EIAD, cmd, 126);
+		return (NULL);
+	}
+	while (*paths)
+	{
+		command_path = ft_join_command_path(*paths, cmd);
+		if (access(command_path, F_OK) == 0)
+			return (command_path);
+		free(command_path);
+		command_path = NULL;
+		paths++;
+	}
+	if (!command_path)
+		print_error(ECNF, cmd, 127);
 	return (NULL);
 }
 

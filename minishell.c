@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/08 16:02:33 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:16:29 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
 	{
+		// printf("[%d]\n", g_r);
 		if (g_r == 0)
 			write(1, "\n", 1);
 		rl_catch_signals = 0;

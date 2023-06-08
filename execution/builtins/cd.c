@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 08:22:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/07 19:16:36 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:11:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	cd_no_arg(t_global *global, t_args *args, t_env *export)
 			if (ft_strcmp(tmp_exp->var, "HOME") == 0)
 			{
 				chdir(tmp_exp->value);
+				global->exit_status = 0;
 				return ;
 			}
 			tmp_exp = tmp_exp->next;
@@ -55,8 +56,12 @@ void	check_dir(t_global *global, char *dir, char *cu_wo_di, char *str)
 			error_message(str, strerror(errno));
 			global->exit_status = 1;
 		}
+		else
+			global->exit_status = 0;
 		free(dir);
 	}
+	else
+		global->exit_status = 0;
 }
 
 void	cd(t_global *global, t_args	*args, t_env *export)

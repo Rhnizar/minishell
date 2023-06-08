@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:28:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 16:01:00 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:53:20 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,12 +258,8 @@ t_recipe	prepare_command(t_global *global, t_cmdshell *all_cmds)
 
 	paths = get_paths(global->env);
 	cmd = all_cmds->cmds->args->str;
-	output.command = valid_command_path(paths, cmd);
+	output.command = valid_command_path(paths, cmd); 
 	free_double_ptr(paths);
-	if (!output.command)
-		print_error(ECNF, cmd, 127);
-	if (output.command && access(output.command, X_OK))
-		print_error(EPD, cmd, 126);
 	output.envp = get_env(global->env);
 	output.args = get_args(global, all_cmds->cmds->args);
 	return (output);
@@ -292,6 +288,18 @@ int	manage_redirection(t_global *global, t_redis *redis)
 	}
 	return (0);
 }
+
+void	sig_handl2(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("child\n");
+		// write(0, "child", 5);
+		// write(0, "\n", 1);
+		exit(130);
+	}
+}
+
 
 void	handle_one_command(t_global *global, t_cmdshell **all_cmds)
 {
@@ -365,6 +373,7 @@ void	handle_one_command(t_global *global, t_cmdshell **all_cmds)
 		pid_t		pid;
 
 		exit_status = 0;
+		signal(SIGINT, SIG_IGN);
 		pid = fork();
 		if (pid == -1)
 		{
@@ -373,18 +382,11 @@ void	handle_one_command(t_global *global, t_cmdshell **all_cmds)
 		}
 		if (pid == 0)
 		{
+			// signal(SIGINT, SIG_DFL);
+			signal(SIGINT, sig_handl2);
 			if (manage_redirection(global, (*all_cmds)->cmds->redis))
 				exit (1);
 			recipe = prepare_command(global, (*all_cmds));
-			// printf("command: %s\n", recipe.command);
-			// char **tmp1 = recipe.args;
-			// int	i = 0;
-			// while (tmp1[i])
-			// {
-			// 	printf("arg[%d]: %s\n", i, tmp1[i]);
-			// 	i++;
-			// }
-			// exit(1);
 			if (execve(recipe.command, recipe.args, recipe.envp) == -1)
 			{
 				global_free(global);
@@ -392,6 +394,7 @@ void	handle_one_command(t_global *global, t_cmdshell **all_cmds)
 			}
 		}
 		waitpid(pid, &exit_status, 0);
-		global->exit_status = exit_status;
+		global->exit_status = exit_status >> 8;
+		signal(SIGINT, sig_handl);
 	}
 }
