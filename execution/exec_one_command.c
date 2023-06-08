@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:28:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 14:47:06 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:01:00 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ int	write_to_file(t_global *global, t_redis *redis)
 		else if (tmp->type == FILE_OUT)
 		{
 			new_redi = redis_expander(global, redis);
-			printf("%s\n", new_redi->str);
 			fd = output_redirection(new_redi->str);
 			free_redis(new_redi);
 			if (fd == -1)
@@ -122,22 +121,25 @@ int	write_to_file(t_global *global, t_redis *redis)
 void builtins(t_global *global, t_cmdshell *all_cmds)
 {
 	char	*command;
+	t_args	*args;
 
+	args = args_expander(global, all_cmds->cmds->args);
 	command = all_cmds->cmds->args->str;
 	if (ft_strncmp("export", command, ft_strlen("export")) == 0)
-		add_to_export_or_print(global->env, global->export, all_cmds->cmds->args);
+		add_to_export_or_print(global->env, global->export, args);
 	if (ft_strncmp("env", command, ft_strlen("env")) == 0)
 		print_env(global->env);
 	if (ft_strncmp("unset", command, ft_strlen("unset")) == 0)
-		unset(&global->env, &global->export, all_cmds->cmds->args);
+		unset(&global->env, &global->export, args);
 	if (ft_strncmp("exit", command, ft_strlen("exit")) == 0)
-		exitt(all_cmds->cmds->args);
+		exitt(args);
 	if (ft_strncmp("pwd", command, ft_strlen("pwd")) == 0)
 		pwd(global);
 	if (ft_strncmp("cd", command, ft_strlen("cd")) == 0)
-		cd(global, all_cmds->cmds->args, global->export);
+		cd(global, args, global->export);
 	if (ft_strncmp("echo", command, ft_strlen("echo")) == 0)
-		echo(all_cmds->cmds->args);
+		echo(args);
+	free_args(args);
 }
 
 static int	is_builtin(char *token)

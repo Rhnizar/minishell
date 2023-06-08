@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/08 15:53:32 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:02:33 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char **argv, char **env)
 
 	signal(SIGINT, sig_handl);
 	signal(SIGQUIT, SIG_IGN);
-	// f();
+	f();
 	init_global(&global, env);
 	fd = dup(0);
 	g_r = 0;
