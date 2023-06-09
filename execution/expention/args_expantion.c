@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 10:25:25 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:31:31 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	add_expanded_to_args(t_args **args, char *expended)
 
 	if (!expended)
 		return ;
-	split = split_expended(expended);
+	split = split_expended(expended); 
 	i = 0;
 	while (split[i])
 	{

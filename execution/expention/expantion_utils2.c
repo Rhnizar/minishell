@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:30:45 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 15:37:16 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:24:12 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*remove_quotes(char *str)
 		while (str[i] && quote[0] != str[i])
 			output = join_to_str(output, str[i++]);
 	}
+	if (!output)
+		return (ft_strdup(""));
 	return (output);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:28:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 22:03:32 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:09:19 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,14 +254,12 @@ t_recipe	prepare_command(t_global *global, t_cmdshell *all_cmds)
 {
 	t_recipe	output;
 	char		**paths;
-	char		*cmd;
 
 	paths = get_paths(global->env);
-	cmd = all_cmds->cmds->args->str;
-	output.command = valid_command_path(paths, cmd); 
+	output.args = get_args(global, all_cmds->cmds->args);
+	output.command = valid_command_path(paths, output.args[0]); 
 	free_double_ptr(paths);
 	output.envp = get_env(global->env);
-	output.args = get_args(global, all_cmds->cmds->args);
 	return (output);
 }
 

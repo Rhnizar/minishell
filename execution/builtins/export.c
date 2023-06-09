@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/07 18:45:47 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:34:50 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	identifier(char *str, char *exp_uns)
 	i = 0;
 	if ((str[i] == '_' && (str[i + 1] && str[i + 1] == '=')) || str[i] == '#')
 		return (1);
-	if (str[i] == '=' || ft_isdigit(str[i]))
+	if (str[i] == '=' || ft_isdigit(str[i]) || str[i] == '\0')
 	{
 		error_message(exp_uns, str);
 		return (1);
