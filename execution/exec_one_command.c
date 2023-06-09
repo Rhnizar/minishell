@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:28:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/09 11:09:19 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:56:35 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void builtins(t_global *global, t_cmdshell *all_cmds)
 	char	*command;
 	t_args	*args;
 
-	args = args_expander(global, all_cmds->cmds->args);
+	args = all_cmds->cmds->args;
 	command = all_cmds->cmds->args->str;
 	if (ft_strncmp("export", command, ft_strlen("export")) == 0)
 		add_to_export_or_print(global->env, global->export, args);
@@ -139,7 +139,6 @@ void builtins(t_global *global, t_cmdshell *all_cmds)
 		cd(global, args, global->export);
 	if (ft_strncmp("echo", command, ft_strlen("echo")) == 0)
 		echo(global, args);
-	free_args(args); //  this free is useless here becaue i'am free args in function free_commands .
 }
 
 static int	is_builtin(char *token)
@@ -227,14 +226,14 @@ static int	count_args(t_args *args)
 	return (count);
 }
 
-char	**get_args(t_global	*global, t_args	*args)
+char	**get_args(t_cmdshell *cmd)
 {
 	char	**output;
 	t_args	*new_args;
 	t_args	*tmp;
 	int		i;
 
-	new_args = args_expander(global, args);
+	new_args = cmd->cmds->args;
 	output = malloc(sizeof(char *) * (count_args(new_args) + 1));
 	if (!output)
 		return (NULL);
@@ -246,7 +245,6 @@ char	**get_args(t_global	*global, t_args	*args)
 		tmp = tmp->next;
 	}
 	output[i] = NULL;
-	free_args(new_args);
 	return (output);	
 }
 
@@ -256,7 +254,7 @@ t_recipe	prepare_command(t_global *global, t_cmdshell *all_cmds)
 	char		**paths;
 
 	paths = get_paths(global->env);
-	output.args = get_args(global, all_cmds->cmds->args);
+	output.args = get_args(all_cmds);
 	output.command = valid_command_path(paths, output.args[0]); 
 	free_double_ptr(paths);
 	output.envp = get_env(global->env);
@@ -287,102 +285,103 @@ int	manage_redirection(t_global *global, t_redis *redis)
 	return (0);
 }
 
-void	handle_one_command(t_global *global, t_cmdshell **all_cmds)
+void	create_pipes(t_global *global)
 {
-	int o_stdout;
-	int o_stdin;
-	int exec_cmd;
-	int	fd1;
-	int	fd2;
-
-	o_stdout = dup(STDOUT_FILENO);
-	o_stdin = dup(STDIN_FILENO);
-	exec_cmd = 1;
-	if (is_builtin((*all_cmds)->cmds->args->str))
+	if (pipe(global->tube) == -1 || pipe(global->tube + 2) == -1)
 	{
-		fd1 = read_from_file(global, (*all_cmds)->cmds->redis);
-		if (fd1 != -2)
-		{
-			if (fd1 == -1)
-				exec_cmd = 0;
-			else
-			{
-				if (dup2(fd1, STDIN_FILENO) == -1)
-				{
-					global_free(global);
-					print_error(NULL, NULL, -1);
-				}
-			}
-		}
-		fd2 = write_to_file(global, (*all_cmds)->cmds->redis);
-		if (fd2 != -2)
-		{
-			if (fd2 == -1)
-				exec_cmd = 0;
-			else
-			{
-				if (dup2(fd2, STDOUT_FILENO) == -1)
-				{
-					global_free(global);
-					print_error(NULL, NULL, -1);
-				}
-			}
-		}
-		if (exec_cmd)
-		{
-			builtins(global, *all_cmds);
-			if (fd1 > 0)
-			{
-				if (dup2(o_stdin, STDIN_FILENO) == -1)
-				{
-					global_free(global);
-					print_error(NULL, NULL, 1);
-				}
-				close(fd1);
-			}
-			if (fd2 > 0)
-			{
-				if (dup2(o_stdout, STDOUT_FILENO) == -1)
-				{
-					global_free(global);
-					print_error(NULL, NULL, 1);
-				}
-				close(fd2);
-			}			
-		}
-		(*all_cmds) = (*all_cmds)->next;
+		global_free(global);
+		print_error(NULL, NULL, 1);
 	}
-	else
-	{
-		int			exit_status;
-		t_recipe	recipe;
-		pid_t		pid;
+}
 
-		exit_status = 0;
-		signal(SIGINT, SIG_IGN);
-		pid = fork();
-		if (pid == -1)
+void	close_pipes(t_global *global)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		if (close (global->tube[i]) == -1)
 		{
 			global_free(global);
 			print_error(NULL, NULL, 1);
 		}
-		if (pid == 0)
-		{
-			signal(SIGINT, SIG_DFL);
-			if (manage_redirection(global, (*all_cmds)->cmds->redis))
-				exit (1);
-			recipe = prepare_command(global, (*all_cmds));
-			if (execve(recipe.command, recipe.args, recipe.envp) == -1)
-			{
-				global_free(global);
-				print_error(NULL, NULL, 1);
-			}
-		}
-		waitpid(pid, &exit_status, 0);
-		if (exit_status == 2)
-			global->exit_status = 130;
-		else
-			global->exit_status = exit_status >> 8;
-		signal(SIGINT, sig_handl);
 	}
 }
+
+void	not_builtin(t_global *global, t_cmdshell *all_cmds)
+{
+	int			exit_status;
+	t_recipe	recipe;
+	pid_t		pid;
+
+	exit_status = 0;
+	signal(SIGINT, SIG_IGN);
+	pid = fork();
+	if (pid == -1)
+	{
+		global_free(global);
+		print_error(NULL, NULL, 1);
+	}
+	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		if (manage_redirection(global, all_cmds->cmds->redis))
+			exit (1);
+		recipe = prepare_command(global, all_cmds);
+		if (execve(recipe.command, recipe.args, recipe.envp) == -1)
+		{
+			global_free(global);
+			print_error(NULL, NULL, 1);
+		}
+	}
+	waitpid(pid, &exit_status, 0);
+	if (exit_status == 2)
+		global->exit_status = 130;
+	else
+		global->exit_status = exit_status >> 8;
+	signal(SIGINT, sig_handl);
+}
+void	handle_one_command(t_global *global, t_cmdshell *all_cmds)
+{
+	if (is_builtin(all_cmds->cmds->args->str))
+	{
+		builtins(global, all_cmds);
+		/*-------    blane dyal redirections ghadi itktb fi ----------------*/
+	}
+	else
+	{
+		not_builtin(global, all_cmds);
+		// int			exit_status;
+		// t_recipe	recipe;
+		// pid_t		pid;
+
+		// exit_status = 0;
+		// signal(SIGINT, SIG_IGN);
+		// pid = fork();
+		// if (pid == -1)
+		// {
+		// 	global_free(global);
+		// 	print_error(NULL, NULL, 1);
+		// }
+		// if (pid == 0)
+		// {
+		// 	signal(SIGINT, SIG_DFL);
+		// 	if (manage_redirection(global, all_cmds->cmds->redis))
+		// 		exit (1);
+		// 	recipe = prepare_command(global, all_cmds);
+		// 	if (execve(recipe.command, recipe.args, recipe.envp) == -1)
+		// 	{
+		// 		global_free(global);
+		// 		print_error(NULL, NULL, 1);
+		// 	}
+		// }
+		// waitpid(pid, &exit_status, 0);
+		// if (exit_status == 2)
+		// 	global->exit_status = 130;
+		// else
+		// 	global->exit_status = exit_status >> 8;
+		// signal(SIGINT, sig_handl);
+	}
+}
+

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 21:10:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:38:53 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,11 @@ void	echo(t_global *global, t_args *args);
 
 
 
-void	handle_one_command(t_global *global, t_cmdshell **all_cmds);
-void	execution(t_global **global);
+// void	handle_one_command(t_global *global, t_cmdshell **all_cmds);
+// void	execution(t_global **global);
+
+void	handle_one_command(t_global *global, t_cmdshell *all_cmds);
+void	execution(t_global *global);
 void	sig_handl(int sig);
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_expantion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/09 11:31:31 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:14:18 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ t_args	*args_expander(t_global *global, t_args	*args)
 			fill_list_args(&new_args, remove_quotes(tmp->str));
 		tmp = tmp->next;
 	}
+	free_args(args);
 	return (new_args);
 }

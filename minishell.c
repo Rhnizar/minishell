@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/08 22:12:02 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:49:11 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,8 @@ int	main(int argc, char **argv, char **env)
 				continue ;
 			if (fill_global_struct(&global, line) == -1)
 				continue ;
-			execution(&global);
+			execution(global);
 
-
-			
 			// redis = redis_expander(global->all_commands->cmds->redis, global->env, 0);
 			// while (redis)
 			// {
