@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/10 11:04:18 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/06/10 22:24:57 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ EXECUTION = execution/expention/expantion_utils.c \
 			execution/prepare_command.c \
 			execution/pipe.c \
 			execution/check_builtin.c \
+			execution/exec_cmd.c \
 			execution/wildcard.c
 
 			

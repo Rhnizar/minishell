@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/10 12:36:11 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/10 23:48:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,62 @@ int	count_nbr_commands(t_cmdshell *all_cmds)
 void	execution(t_global *global)
 {
 	t_cmdshell	*all_cmds;
+	pid_t		pid;
+	int			count;
+	int			i;
+	int			exit_status;
 
 	// cmd1 | cmd2 | cmd3 || cmd4 | cmd5 && cmd6 | cmd7
 	all_cmds = global->all_commands;
-		
-	// if ((*global)->all_commands->cmds->operator == pipe )
-		// tab9 pipe 
-
-	while (all_cmds)
+	exit_status = 0;
+	count = count_nbr_commands(all_cmds);
+	i = 0;
+	global->pid = malloc(sizeof(pid_t) * count);
+	while(i != count && all_cmds)
 	{
 		all_cmds->cmds->args = args_expander(global, all_cmds->cmds->args);
-		// if (all_cmds->cmds->operator == PIPE)
-		// 	create_pipes(global);
-		handle_one_command(global, all_cmds);
-		// if (all_cmds->cmds->operator == PIPE)
-		// 	close_pipes(global);
-		// exec_commands(global, &all_cmds);
+		if (count == 1)
+		{
+			exec_cmd(global, all_cmds);
+			return ;
+		}
+		// if (all_cmds->prev && all_cmds->prev->cmds->operator == PIPE)
+		// {
+		// 	global->fd = dup(global->pipe[0]);
+		// 	close(global->pipe[0]);
+		// 	close(global->pipe[1]);
+		// }
+		create_pipes(global);
+		pid = fork();
+		if (pid == -1)
+		{
+			printf("error the fork \n");
+			exit(1);
+		}
+		if (pid == 0)
+		{
+			exec_cmd_with_pipe(global, all_cmds);
+		}
+		global->pid[i++] = pid;
 		all_cmds = all_cmds->next;
 	}
+	i = 0;
+	while(i != count)
+	{
+		waitpid(global->pid[i++], NULL, 0);
+	}
+	close(global->pipe[0]);
+	close(global->pipe[1]);
+	if (exit_status == 2)
+		global->exit_status = 130;
+	else
+		global->exit_status = exit_status >> 8;
+	signal(SIGINT, sig_handl);
+		
+	// while (all_cmds)
+	// {
+	// 	all_cmds->cmds->args = args_expander(global, all_cmds->cmds->args);
+	// 	handle_one_command(global, all_cmds);
+	// 	all_cmds = all_cmds->next;
+	// }
 }

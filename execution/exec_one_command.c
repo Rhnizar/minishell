@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:28:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/10 20:11:20 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/10 23:43:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	not_builtin(t_global *global, t_cmdshell *all_cmds)
+void	not_builtinn(t_global *global, t_cmdshell *all_cmds)
 {
 	int			exit_status;
 	t_recipe	recipe;
@@ -92,7 +92,6 @@ void	handle_one_command(t_global *global, t_cmdshell *all_cmds)
 				if (pid == 0)
 				{
 					dup2(global->pipe[1], 1);
-					// if (global->fd == -1)
 					close(global->pipe[0]);
 					close(global->pipe[1]);
 					builtins(global, all_cmds);
@@ -124,7 +123,8 @@ void	handle_one_command(t_global *global, t_cmdshell *all_cmds)
 		}
 		else
 		{
-			not_builtin(global, all_cmds);
+			// printf("noo\n");
+			not_builtinn(global, all_cmds);
 		}
 	}
 }

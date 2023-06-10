@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/10 19:09:58 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/10 22:32:31 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ t_recipe	prepare_command(t_global *global, t_cmdshell *all_cmds);
 void		sig_handl(int sig);
 void		builtins(t_global *global, t_cmdshell *all_cmds);
 int			is_builtin(char *token);
+void		exec_cmd(t_global *global, t_cmdshell *all_cmds);
+void		exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds);
 /*======== pipe ===========*/
 void	create_pipes(t_global *global);
 void	close_pipes(t_global *global);
