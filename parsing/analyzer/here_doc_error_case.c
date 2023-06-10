@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_error_case.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 13:04:33 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/04 18:58:37 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,18 @@
 //need to add signal handler and remove fork
 static void	here_doc_error_case(char *delimiter)
 {
-	pid_t	pid;
 	char	*line;
 
-	pid = fork();
-	if (pid == -1)
-		print_error(NULL, NULL, 1);
-	if (pid == 0)
+	while (1)
 	{
-		while (1)
-		{
-			line = readline("> ");
-			if (ft_strcmp(line, delimiter) == 0)
-				break ;
-			free(line);
-		}
+		line = readline("> ");
+		if (!line)
+			break ;
+		if (ft_strcmp(line, delimiter) == 0)
+			break ;
 		free(line);
-		exit(0);
 	}
-	waitpid(pid, NULL, 0);
+	free(line);
 }
 
 static void	run_here_docs(t_tokens	*here_docs)

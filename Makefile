@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/01 17:28:53 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/06/09 11:07:20 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ PARSING = parsing/parser.c \
 		  parsing/analyzer/here_doc_error_case.c \
 		  parsing/analyzer/check_separators.c \
 		  parsing/create_tokens.c \
-		  parsing/environment.c \
 		  parsing/global_split_utils.c \
 		  parsing/global_split.c \
 		  parsing/shared_utils_define.c \
@@ -32,9 +31,24 @@ PARSING = parsing/parser.c \
 
 EXECUTION = execution/expention/expantion_utils.c \
 		  	execution/expention/expantion_utils2.c \
+		  	execution/expention/expantion_utils3.c \
 		  	execution/expention/args_expantion.c \
 		  	execution/expention/redis_expantion.c \
-			execution/builtins/export.c
+			execution/builtins/environment.c \
+			execution/builtins/export.c \
+			execution/builtins/export2.c \
+			execution/builtins/unset.c \
+			execution/builtins/exit.c \
+			execution/builtins/pwd.c \
+			execution/builtins/cd.c \
+			execution/builtins/echo.c \
+			execution/redirection.c \
+			execution/exec_commands.c \
+			execution/exec_one_command.c \
+			execution/extract_path.c \
+			execution/wildcard.c
+
+			
 
 SRCS_M = minishell.c $(PARSING) \
 		 parsing/define_mandatory.c \
@@ -56,8 +70,7 @@ OBJS_B = $(SRCS_B:.c=.o)
 #214 leaks the readline
 
 RDL = -lreadline \
-	-L/goinfre/kchaouki/brew/opt/readline/lib \
-	-I/goinfre/kchaouki/brew/opt/readline/include
+	  -L/goinfre/kchaouki/brew/opt/readline/lib
 
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
@@ -68,7 +81,7 @@ all: $(LIBFT) $(NAME)
 $(LIBFT):
 	make -C libft && make clean -C libft
 %.o : %.c
-	$(CCe) $(FLAGS) $(DFINE) -c $< -o $@
+	$(CCe) $(FLAGS) -I/goinfre/kchaouki/brew/opt/readline/include -c $< -o $@
 
 $(NAME): $(OBJS_M) minishell.h
 	$(CCe) $(FLAGS) $(OBJS_M) $(RDL) $(LIBFT) -o $(NAME)

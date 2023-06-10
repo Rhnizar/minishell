@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 16:10:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/07 20:04:43 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_env
 typedef struct s_redis
 {
 	char			*str;
+	int				need_expand;
 	int				type;
 	struct s_redis	*next;
 }		t_redis;
@@ -148,14 +149,20 @@ t_tokens		*fill_struct_cmds(t_cmds *cmds, \
 	t_tokens *tokens, t_utils *utils);
 /*========= end parser =============*/
 
-int				rl_replace_line(char *str, int i);
+// int				rl_replace_line(char *str, int i);
+
 
 /*======== enviroment =======*/
 void			add_to_env(t_env **env, char *var, char *value);
 size_t			find_equale(char *str);
+void			print_env(t_env *env);
 
 /*===== export =========*/
 t_env			*_export(t_env *env);
+void			print_export(t_env *export);
+int				search_var(t_env *export, char *var);
+void			edit_value(t_env *env, t_env *export, char *str);
+void			edit_value2(t_env *exp_or_env, char *var, size_t equal, char *str);
 void			add_to_export_or_print(t_env *env, t_env *export, t_args *args);
 
 #endif

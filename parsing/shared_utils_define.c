@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shared_utils_define.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:58:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 15:05:25 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:24:30 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	fill_list_args(t_args **lst, char *str)
 	t_args	*new;
 	t_args	*tmp;
 
+	if (!str)
+		return ;
 	new = malloc(sizeof(t_args));
 	if (!new)
 		return ;
@@ -38,6 +40,8 @@ void	fill_list_redis(t_redis **lst, char *str, int type)
 	t_redis	*new;
 	t_redis	*tmp;
 
+	if (!str)
+		return ;
 	new = malloc(sizeof(t_redis));
 	if (!new)
 		return ;

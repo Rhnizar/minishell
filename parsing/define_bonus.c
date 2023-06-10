@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 15:52:49 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:22:23 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,13 @@ t_tokens	*fill_struct_cmds(t_cmds *cmds, t_tokens *tokens, t_utils *utils)
 t_tokens	*analyzer(t_tokens *tokens, int	*exit_status)
 {
 	t_tokens	*new_tokens;
+	int			status;
 	t_tokens	*tmp;
 
-	*exit_status = syntax_error_handler(tokens);
-	if (*exit_status == 258)
+	status = syntax_error_handler(tokens);
+	if (status == 258)
 	{
+		*exit_status = status;
 		free_tokens(tokens);
 		return (NULL);
 	}

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 15:48:07 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/07 07:53:22 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	init_global(t_global **global, char **env)
 		exit (-1);
 	(*global)->exit_status = 0;
 	(*global)->env = create_env(env);
+	// (void)env;
+	// (*global)->env = NULL;
 	(*global)->export = _export((*global)->env);
+	// (*global)->export = NULL;
 	return (0);
 }
 

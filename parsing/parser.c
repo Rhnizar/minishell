@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 20:33:58 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 15:36:56 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:14:27 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	fill_global_struct(t_global **global, char *line)
 	if (fill_list_cmds(&lst_cmd, updated_tokens) == -1)
 	{
 		free_tokens(updated_tokens);
-		free(*global);
 		return (-1);
 	}
 	(*global)->all_commands = lst_cmd;
