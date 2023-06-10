@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:03:23 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/07 19:20:43 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/10 12:37:58 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	exitt(t_args *args)
 		if (args->next->next && check_arg(args->next->str) == 0)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-			exit(1);
+			// exit(1);
 		}
 		if (check_arg(args->next->str) == 1)
 		{

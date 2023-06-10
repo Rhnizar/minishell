@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/09 16:38:53 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/10 19:09:58 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct s_global
 {
 	int			exit_status;
 	pid_t		*pid;
-	int			tube[4];
+	int			pipe[2];
+	int			fd;
 	t_env		*env;
 	t_env		*export;
 	t_cmdshell	*all_commands;
@@ -91,9 +92,15 @@ void	echo(t_global *global, t_args *args);
 // void	handle_one_command(t_global *global, t_cmdshell **all_cmds);
 // void	execution(t_global **global);
 
-void	handle_one_command(t_global *global, t_cmdshell *all_cmds);
-void	execution(t_global *global);
-void	sig_handl(int sig);
+void		handle_one_command(t_global *global, t_cmdshell *all_cmds);
+void		execution(t_global *global);
+t_recipe	prepare_command(t_global *global, t_cmdshell *all_cmds);
+void		sig_handl(int sig);
+void		builtins(t_global *global, t_cmdshell *all_cmds);
+int			is_builtin(char *token);
+/*======== pipe ===========*/
+void	create_pipes(t_global *global);
+void	close_pipes(t_global *global);
 
 
 

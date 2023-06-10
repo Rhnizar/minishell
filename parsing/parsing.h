@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 20:04:43 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/10 12:52:45 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_cmdshell
 {
 	t_cmds				*cmds;
 	struct s_cmdshell	*next;
+	struct s_cmdshell	*prev;
 }	t_cmdshell;
 
 /*========= start token =============*/
@@ -163,6 +164,6 @@ void			print_export(t_env *export);
 int				search_var(t_env *export, char *var);
 void			edit_value(t_env *env, t_env *export, char *str);
 void			edit_value2(t_env *exp_or_env, char *var, size_t equal, char *str);
-void			add_to_export_or_print(t_env *env, t_env *export, t_args *args);
+void			add_to_export_or_print(t_env **env, t_env **export, t_args *args);
 
 #endif

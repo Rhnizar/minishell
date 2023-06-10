@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:03:26 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/31 19:44:18 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/10 12:55:38 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds)
 		return ;
 	new->cmds = cmds;
 	new->next = NULL;
+	new->prev = NULL;
 	if (!(*lst))
 	{
 		*lst = new;
@@ -31,6 +32,7 @@ void	add_cmd_to_list(t_cmdshell **lst, t_cmds *cmds)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 int	init_struct_cmds(t_cmds **cmds)
