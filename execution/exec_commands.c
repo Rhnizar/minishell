@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/11 13:13:25 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:19:52 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ void	execution(t_global *global)
 		global->pid[i++] = pid;
 		all_cmds = all_cmds->next;
 	}
+	close(global->pipe[0]);
+	close(global->pipe[1]);
 	i = 0;
 	while(i != count)
 	{
-		close(global->pipe[0]);
-		close(global->pipe[1]);
 		waitpid(global->pid[i++], NULL, 0);
-		printf("here\n");
+		// printf("here\n");
 	}
 	if (exit_status == 2)
 		global->exit_status = 130;

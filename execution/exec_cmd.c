@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/11 12:49:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:21:38 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,19 @@ void	not_builtin_pipe(t_global *global, t_cmdshell *all_cmds)
 	signal(SIGINT, SIG_DFL);
 	if (all_cmds->cmds->operator == PIPE)
 	{
-		dup2(global->fd, 0);
+		// printf("here1 [%s]\n", all_cmds->cmds->args->str);
+		if (all_cmds->prev->cmds->operator != PIPE)
+			dup2(global->fd, 0);
 		dup2(global->pipe[1], 1);
 		close(global->pipe[0]);
+		close(global->pipe[1]);
 	}
-	else if (all_cmds->prev && all_cmds->prev->cmds->operator == PIPE)
+	if (all_cmds->prev && all_cmds->prev->cmds->operator == PIPE)
 	{
+		// printf("here222 [%s]\n", all_cmds->cmds->args->str);
 		dup2(global->pipe[0], 0);
 		close(global->pipe[1]);
+		close(global->pipe[0]);
 	}
 	recipe = prepare_command(global, all_cmds);
 	if (execve(recipe.command, recipe.args, recipe.envp) == -1)
