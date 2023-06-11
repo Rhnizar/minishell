@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/11 11:33:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:20:00 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_redis	*redis_expander(t_global *global, t_redis *redis)
 		global->env, global->exit_status))
 			return (NULL);
 	}
-	else
+	else if (redis)
 		fill_list_redis(&new_redis, remove_quotes(redis->str), redis->type);
 	return (new_redis);
 }

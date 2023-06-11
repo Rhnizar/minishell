@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/11 11:44:09 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:19:07 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv, char **env)
 	int			tmp_gr;
 	t_args		*args;
 	int			fd;
-	// t_redis		*redis;
+	t_redis		*redis;
 
 	signal(SIGINT, sig_handl);
 	signal(SIGQUIT, SIG_IGN);
@@ -112,23 +112,20 @@ int	main(int argc, char **argv, char **env)
 			if (fill_global_struct(&global, line) == -1)
 				continue ;
 			
-			// execution(&global);
-			// test wildcard
 			args = args_expander(global, global->all_commands->cmds->args);
-			printf("--------[arguments]--------\n");
-			while(args)
-			{
-				printf("%s\n", args->str);
-				args = args->next;
-			}
-			
-			// redis = redis_expander(global, global->all_commands->cmds->redis);
-			// printf("--------[redirections]--------\n");
-			// while (redis)
+			// printf("--------[arguments]--------\n");
+			// while(args)
 			// {
-			// 	printf("value: [%s]\ttype: [%d]\n", redis->str, redis->type);
-			// 	redis = redis->next;
+			// 	printf("%s\n", args->str);
+			// 	args = args->next;
 			// }
+			redis = redis_expander(global, global->all_commands->cmds->redis);
+			printf("--------[redirections]--------\n");
+			while (redis)
+			{
+				printf("value: [%s]\ttype: [%d]\n", redis->str, redis->type);
+				redis = redis->next;
+			}
 			// global->all_commands->cmds->args = args_expander(global);
 			// args = global->all_commands->cmds->args;
 			// printf("----------------\n");
