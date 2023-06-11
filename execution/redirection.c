@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:15:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/10 10:26:02 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/10 12:17:34 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	here_doc(char *delimiter)
 	char	*line;
 	int		fd;
 
+	unlink ("/tmp/here_doc.txt");
 	fd = open ("/tmp/here_doc.txt", O_CREAT|O_WRONLY|O_TRUNC, 0644);
-	printf("value: %d\n", fd);
 	if (fd == -1)
 		return (print_error(NULL, NULL, -1), -1);
 	while (1)
@@ -91,13 +91,9 @@ int	here_doc(char *delimiter)
 		free(line);
 	}
 	free(line);
-	printf("value: %d\n", fd);
-	if (close (fd) != -1)
-	{
-		printf("here\n");
+	if (close (fd) == -1)
 		return (print_error(NULL, NULL, -1), -1);
-	}
-	fd = open ("/tmp/here_doc.txt", O_CREAT|O_RDONLY|O_TRUNC, 0644);
+	fd = open ("/tmp/here_doc.txt", O_RDONLY, 0644);
 	if (fd == -1)
 		return (print_error(NULL, NULL, -1), -1);
 	return (fd);

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:30:45 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/09 11:24:12 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:33:29 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,31 @@ static int	split_quote_case(char *token, int *j, char	**to_split)
 	return (0);
 }
 
+int	implant_nonprint(char **to_split, char *token, int *j)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strchr(" \t", token[i]))
+	{
+		while (token[i] && ft_strchr(" \t", token[i]))
+			i++;
+		if (!token[i])
+			return (1);
+		(*to_split) = join_to_str((*to_split), '\x07');
+		(*to_split) = join_to_str((*to_split), token[i]);
+	}
+	else if (ft_strchr("\"'", token[i]))
+	{
+		if (split_quote_case(&token[i], &i, to_split))
+			return (1);
+	}
+	else
+		(*to_split) = join_to_str((*to_split), token[i]);
+	*j += i;
+	return (0);
+}
+
 char	**split_expended(char *token)
 {
 	char	*to_split;
@@ -81,52 +106,10 @@ char	**split_expended(char *token)
 	to_split = ((i = 0), NULL);
 	while (token[i])
 	{
-		if (ft_strchr(" \t", token[i]))
-		{
-			while (token[i] && ft_strchr(" \t", token[i]))
-				i++;
-			if (!token[i])
-				break ;
-			to_split = join_to_str(to_split, '\x07');
-			to_split = join_to_str(to_split, token[i]);
-		}
-		else if (ft_strchr("\"'", token[i]))
-		{
-			if (split_quote_case(&token[i], &i, &to_split))
-				break ;
-		}
-		else
-			to_split = join_to_str(to_split, token[i]);
+		if (implant_nonprint(&to_split, &token[i], &i))
+			break ;
 		i++;
 	}
 	split = ft_split(to_split, '\x07');
 	return (free(to_split), split);
-}
-
-t_tokens	*expantion_tokenizer(char *token)
-{
-	t_tokens	*tokens;
-	char		**output;
-	char		*to_split;
-	int			i;
-
-	to_split = ((i = 0), NULL);
-	while (token[i])
-	{
-		if (!ft_isalnum(token[i]) && token[i] != '_')
-		{
-			to_split = join_to_str(to_split, '\x07');
-			to_split = join_to_str(to_split, token[i]);
-			to_split = join_to_str(to_split, '\x07');
-		}
-		else
-			to_split = join_to_str(to_split, token[i]);
-		i++;
-	}
-	i = 0;
-	tokens = NULL;
-	output = ft_split(to_split, '\x07');
-	while (output[i])
-		create_tokens(&tokens, ft_strdup(output[i++]));
-	return (free(to_split), free_double_ptr(output), tokens);
 }

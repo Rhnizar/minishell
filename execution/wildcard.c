@@ -6,57 +6,57 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:24:48 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/07 12:28:05 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/11 11:13:25 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// static t_tokens	*wildcard_tokenizer(char *token)
-// {
-// 	t_tokens	*tokens;
-// 	char		**output;
-// 	char		*to_split;
-// 	int			i;
+int	skip_asterisks(char	*str)
+{
+	int	i;
 
-// 	to_split = ((i = 0), NULL);
-// 	while (token[i])
-// 	{
-// 		if (token[i] == '*')
-// 		{
-// 			to_split = join_to_str(to_split, '\x07');
-// 			to_split = join_to_str(to_split, token[i]);
-// 			to_split = join_to_str(to_split, '\x07');
-// 		}
-// 		else
-// 			to_split = join_to_str(to_split, token[i]);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	tokens = NULL;
-// 	output = ft_split(to_split, '\x07');
-// 	while (output[i])
-// 		create_tokens(&tokens, ft_strdup(output[i++]));
-// 	return (free(to_split), free_double_ptr(output), tokens);
-// }
+	i = 0;
+	while (str[i] == '*')
+		i++;
+	return (i);
+}
 
-// char	*find_match(char *to_handle, char *entity_name)
-// {
-// 	t_tokens	*tokens;
+int	is_match(char *str, char *pattern)
+{
+	t_vars	vars;
 
-// 	tokens = wildcard_tokenizer(to_handle);
-// }
+	vars.last_p = ((vars.last_s = -1), -1);
+	vars.i = ((vars.j = 0), 0);
+	while (str[vars.i])
+	{
+		if (pattern[vars.j] == str[vars.i])
+			vars.i += ((vars.j++), 1);
+		else if (pattern[vars.j] == '*')
+		{
+			vars.last_s = ((vars.last_p = vars.j), vars.i);
+			vars.j++;
+		}
+		else if (vars.last_p != -1)
+		{
+			vars.j = ((vars.i = vars.last_s + 1), vars.last_p + 1);
+			vars.last_s++;
+		}
+		else
+			return (0);
+	}
+	vars.j += skip_asterisks(&pattern[vars.j]);
+	return (pattern[vars.j] == '\0');
+}
 
 t_tokens	*wildcard(char *arg)
 {
 	struct dirent	*entity;
-	// t_tokens		*tokens;
+	t_tokens		*tokens;
 	DIR 			*dir;
-	// char			*ret;
 
-	(void)	arg;
 	dir = opendir(".");
-	// tokens = NULL;
+	tokens = NULL;
 	if (dir == NULL)
 		return (NULL);
 	while (1)
@@ -64,18 +64,9 @@ t_tokens	*wildcard(char *arg)
 		entity = readdir(dir);
 		if (entity == NULL)
 			break ;
-		// ret = find_match(arg, entity->d_name);
-		// if (ret)
-		// 	create_tokens(&tokens, ret);
-		// printf("%s\n", entity->d_name);
+		if (is_match(entity->d_name, arg))
+			create_tokens(&tokens, ft_strdup(entity->d_name));
 	}
 	closedir(dir);
-	return (NULL);
-	// return (tokens);
+	return (tokens);
 }
-
-// int main()
-// {
-// 	wildcard();
-// 	return (0);
-// }

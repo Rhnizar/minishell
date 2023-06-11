@@ -123,3 +123,11 @@ ls <|>df
 
 export var='*'
 ls $var
+
+
+
+//handle the case when unseting The PATH varibales it should give as this error bellow
+
+c2r9p6:karim_branch kchaouki$ ls
+bash: sed: No such file or directory
+bash: ls: No such file or directory
