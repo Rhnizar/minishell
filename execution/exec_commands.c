@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/10 23:48:42 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/11 13:13:25 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,21 @@ void	execution(t_global *global)
 			exec_cmd(global, all_cmds);
 			return ;
 		}
-		// if (all_cmds->prev && all_cmds->prev->cmds->operator == PIPE)
-		// {
-		// 	global->fd = dup(global->pipe[0]);
-		// 	close(global->pipe[0]);
-		// 	close(global->pipe[1]);
-		// }
-		create_pipes(global);
+		if (all_cmds->cmds->operator == PIPE)
+		{
+			if (all_cmds->prev && all_cmds->prev->cmds->operator == PIPE)
+			{
+				global->fd = dup(global->pipe[0]);
+				close(global->pipe[0]);
+				close(global->pipe[1]);
+			}
+			create_pipes(global);
+		}
 		pid = fork();
 		if (pid == -1)
 		{
-			printf("error the fork \n");
-			exit(1);
+			global_free(global);
+			print_error(NULL, NULL, 1);
 		}
 		if (pid == 0)
 		{
@@ -85,16 +88,16 @@ void	execution(t_global *global)
 	i = 0;
 	while(i != count)
 	{
+		close(global->pipe[0]);
+		close(global->pipe[1]);
 		waitpid(global->pid[i++], NULL, 0);
+		printf("here\n");
 	}
-	close(global->pipe[0]);
-	close(global->pipe[1]);
 	if (exit_status == 2)
 		global->exit_status = 130;
 	else
 		global->exit_status = exit_status >> 8;
 	signal(SIGINT, sig_handl);
-		
 	// while (all_cmds)
 	// {
 	// 	all_cmds->cmds->args = args_expander(global, all_cmds->cmds->args);

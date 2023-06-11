@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/10 12:40:18 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/11 13:15:53 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	main(int argc, char **argv, char **env)
 	tmp_gr = 0;
 	while (1)
 	{
+		global->fd = 0;
 		dup2(fd, 0);
 		rl_catch_signals = 1;
 		if (g_r != tmp_gr)

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/10 23:42:14 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:49:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	exec_cmd(t_global *global, t_cmdshell *all_cmds)
 void	not_builtin_pipe(t_global *global, t_cmdshell *all_cmds)
 {
 	t_recipe	recipe;
-	
+
 	signal(SIGINT, SIG_DFL);
 	if (all_cmds->cmds->operator == PIPE)
 	{
