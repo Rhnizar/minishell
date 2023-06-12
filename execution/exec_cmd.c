@@ -6,112 +6,101 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/11 18:21:38 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:12:56 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	not_builtin(t_global *global, t_cmdshell *all_cmds)
+// void	not_builtin(t_global *global, t_cmdshell *all_cmds)
+// {
+// 	int			exit_status;
+// 	t_recipe	recipe;
+// 	pid_t		pid;
+
+// 	exit_status = 0;
+// 	signal(SIGINT, SIG_IGN);
+// 	pid = fork();
+// 	if (pid == -1)
+// 	{
+// 		global_free(global);
+// 		print_error(NULL, NULL, 1);
+// 	}
+// 	else if (pid == 0)
+// 	{
+// 		signal(SIGINT, SIG_DFL);
+// 		recipe = prepare_command(global, all_cmds);
+// 		if (execve(recipe.command, recipe.args, recipe.envp) == -1)
+// 		{
+// 			global_free(global);
+// 			print_error(NULL, NULL, 1);
+// 		}
+// 	}
+// 	waitpid(pid, &exit_status, 0);
+// 	if (exit_status == 2)
+// 		global->exit_status = 130;
+// 	else
+// 		global->exit_status = exit_status >> 8;
+// 	signal(SIGINT, sig_handl);
+// }
+
+void	not_builtin(t_global *global, t_cmdshell *all_cmds, int i, int count)
 {
 	int			exit_status;
-	t_recipe	recipe;
-	pid_t		pid;
 
 	exit_status = 0;
 	signal(SIGINT, SIG_IGN);
-	pid = fork();
-	if (pid == -1)
+	global->pid[i] = fork();
+	if (global->pid[i] == -1)
 	{
 		global_free(global);
 		print_error(NULL, NULL, 1);
 	}
-	if (pid == 0)
+	else if (global->pid[i] == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		recipe = prepare_command(global, all_cmds);
-		if (execve(recipe.command, recipe.args, recipe.envp) == -1)
-		{
-			global_free(global);
-			print_error(NULL, NULL, 1);
-		}
+		exec_cmd_with_pipe(global, all_cmds, i, count);
 	}
-	waitpid(pid, &exit_status, 0);
-	if (exit_status == 2)
-		global->exit_status = 130;
-	else
-		global->exit_status = exit_status >> 8;
-	signal(SIGINT, sig_handl);
+	if (i > 0)
+        close(global->prev_fd);
+    if (i < count)
+        global->prev_fd = global->pipe[0];
+    close(global->pipe[1]);
 }
 
-void	exec_cmd(t_global *global, t_cmdshell *all_cmds)
+void	with_pipe(t_global *global, int i, int count)
 {
-	if (all_cmds->cmds->args)
-	{
-		if (is_builtin(all_cmds->cmds->args->str))
-		{
-			builtins(global, all_cmds);
-		}
-		else
-			not_builtin(global, all_cmds);
-	}
+	if (i > 0)
+    {
+        dup2(global->prev_fd, 0);
+        close (global->prev_fd);
+    }
+	if (i < count - 1)
+    {
+        dup2(global->pipe[1], 1);
+        close (global->pipe[1]);
+    }
+	close(global->pipe[0]);
 }
 
-void	not_builtin_pipe(t_global *global, t_cmdshell *all_cmds)
+void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, int i, int count)
 {
 	t_recipe	recipe;
 
-	signal(SIGINT, SIG_DFL);
-	if (all_cmds->cmds->operator == PIPE)
+	if (count > 1)
+		with_pipe(global, i, count);
+	if (is_builtin(all_cmds->cmds->args->str))
 	{
-		// printf("here1 [%s]\n", all_cmds->cmds->args->str);
-		if (all_cmds->prev->cmds->operator != PIPE)
-			dup2(global->fd, 0);
-		dup2(global->pipe[1], 1);
-		close(global->pipe[0]);
-		close(global->pipe[1]);
+		builtins(global, all_cmds);
+		exit(global->exit_status);
 	}
-	if (all_cmds->prev && all_cmds->prev->cmds->operator == PIPE)
+	else
 	{
-		// printf("here222 [%s]\n", all_cmds->cmds->args->str);
-		dup2(global->pipe[0], 0);
-		close(global->pipe[1]);
-		close(global->pipe[0]);
-	}
-	recipe = prepare_command(global, all_cmds);
-	if (execve(recipe.command, recipe.args, recipe.envp) == -1)
-	{
-		global_free(global);
-		print_error(NULL, NULL, 1);
-	}
-}
-
-void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds)
-{
-	if (all_cmds->cmds->args)
-	{
-		if (is_builtin(all_cmds->cmds->args->str))
-		{
-			if (all_cmds->cmds->operator == PIPE)
-			{
-				dup2(global->pipe[1], 1);
-				close(global->pipe[0]);
-				close(global->pipe[1]);
-				builtins(global, all_cmds);
-				exit(0);
-			}
-			else if (all_cmds->prev && all_cmds->prev->cmds->operator == PIPE)
-			{
-				dup2(global->pipe[0], 0);
-				close(global->pipe[0]);
-				close(global->pipe[1]);
-				builtins(global, all_cmds);
-				exit(0);
-			}
-			else
-				builtins(global, all_cmds);
-		}
-		else
-			not_builtin_pipe(global, all_cmds);
+		recipe = prepare_command(global, all_cmds);
+    	if (execve(recipe.command, recipe.args, recipe.envp) == -1)
+    	{
+    	    global_free(global);
+    	    print_error(NULL, NULL, 1);
+    	}
 	}
 }

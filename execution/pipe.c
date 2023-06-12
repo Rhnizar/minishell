@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:25:56 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/10 18:20:11 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/11 22:01:28 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	create_pipes(t_global *global)
 void	close_pipes(t_global *global)
 {
 	(void)global;
-	// close(global->pipe[0]);
-	// close(global->pipe[1]);
+	close(global->pipe[0]);
+	close(global->pipe[1]);
 	// close(global->pipe[2]);
 	// close(global->pipe[3]);
 	// int	i;

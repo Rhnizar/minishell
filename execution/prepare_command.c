@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:20:27 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/09 20:23:17 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:12:37 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	**get_args(t_cmdshell *cmd)
 		tmp = tmp->next;
 	}
 	output[i] = NULL;
-	return (output);	
+	return (output);
 }
 
 t_recipe	prepare_command(t_global *global, t_cmdshell *all_cmds)

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/10 20:09:38 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:01:13 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_global(t_global **global, char **env)
 	(*global)->exit_status = 0;
 	(*global)->env = create_env(env);
 	(*global)->export = _export((*global)->env);
-	(*global)->fd = 0;
+	(*global)->prev_fd = -1;
 	return (0);
 }
 
