@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/12 19:12:56 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:52:34 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,15 @@ void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, int i, int count
 
 	if (count > 1)
 		with_pipe(global, i, count);
-	if (is_builtin(all_cmds->cmds->args->str))
+	if (all_cmds->cmds->args && is_builtin(all_cmds->cmds->args->str))
 	{
 		builtins(global, all_cmds);
 		exit(global->exit_status);
 	}
 	else
 	{
+		if (manage_redirection(global, all_cmds->cmds->redis))
+			exit(1);
 		recipe = prepare_command(global, all_cmds);
     	if (execve(recipe.command, recipe.args, recipe.envp) == -1)
     	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:30:32 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/06 12:12:43 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:35:14 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	add_to_env(t_env **env, char *var, char *value)
 	if (!new)
 	{
 		free_env(*env);
-		return ;
+		print_error(NULL, NULL, 1);
 	}
 	new->var = var;
 	new->value = value;

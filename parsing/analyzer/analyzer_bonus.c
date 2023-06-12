@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 22:36:28 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 15:50:15 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:32:31 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*join_with_space(char *old, char *arg)
 
 	output = malloc(ft_strlen(old) + ft_strlen(arg) + 2);
 	if (!output)
-		return (NULL);
+		print_error(NULL, NULL, 1);
 	i = 0;
 	j = 0;
 	while (old && old[j])

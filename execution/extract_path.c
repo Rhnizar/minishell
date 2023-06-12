@@ -6,11 +6,10 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/08 17:58:47 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:35:54 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
 #include "../minishell.h"
 
 /* join a given path with a given command */
@@ -21,7 +20,7 @@ static char	*ft_join_command_path(char *path, char *cmd)
 
 	output = malloc(ft_strlen(cmd) + ft_strlen(path) + 2);
 	if (!output)
-		return (NULL);
+		print_error(NULL, NULL, 1);
 	i = 0;
 	while (path && *path)
 		output[i++] = *path++;
@@ -38,6 +37,7 @@ char	*valid_command_path(char **paths, char *cmd)
 	char	*command_path;
 
 	command_path = NULL;
+	// still need to be handled
 	if (access(cmd, F_OK) == 0 && ft_strchr(cmd, '/') && access(cmd, X_OK) == -1)
 	{
 		print_error(EPD, cmd, 126);

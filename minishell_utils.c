@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/12 16:01:13 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:34:40 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	init_global(t_global **global, char **env)
 {
 	*global = malloc(sizeof(t_global));
 	if (!*global)
-		exit (-1);
+		print_error(NULL, NULL, 1);
 	(*global)->exit_status = 0;
 	(*global)->env = create_env(env);
 	(*global)->export = _export((*global)->env);
@@ -34,7 +34,7 @@ char	*join_to_str(char *str, char c)
 	else
 		output = malloc(ft_strlen(str) + 2);
 	if (!output)
-		return (NULL);
+		print_error(NULL, NULL, 1);
 	i = 0;
 	while (str && str[i])
 	{

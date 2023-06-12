@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/12 19:33:56 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:39:59 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	fill_exit_status(t_global *global, int count)
 void	exec_cmd(t_global *global, t_cmdshell *cmd, int i, int count)
 {
 	cmd->cmds->args = args_expander(global, cmd->cmds->args);
-	if (count == 1 && is_builtin(cmd->cmds->args->str))
+	if (count == 1 && cmd->cmds->args && is_builtin(cmd->cmds->args->str))
 	{
 		builtins(global, cmd);
 		return ;
 	}
 	if (i < count - 1)
-		create_pipes(global);
+		create_pipe(global);
 	not_builtin(global, cmd, i, count);
 }
 
@@ -97,6 +97,49 @@ int	count_or(t_cmdshell *cmds)
 	return (count);
 }
 
+// char	*remove_parantheces(char *str)
+// {
+// 	char	*output;
+// 	int		count;
+// 	int		i;
+// 	int		j;
+
+// 	i = 1;
+// 	j = 0;
+// 	count = ft_strlen(str);
+// 	output = malloc(sizeof(char) * count - 1);
+// 	if (!output)
+// 		print_error(NULL, NULL, 1);
+// 	while (i < count - 1)
+// 		output[j++] = str[i++];
+// 	output[j] = '\0';
+// 	return (output);
+// }
+
+// void	run_subshell(t_global *global, char *subshell)
+// {
+// 	pid_t	pid;
+// 	int		status;
+
+// 	status = 0;
+// 	pid = fork();
+// 	if (pid == -1)
+// 	{
+// 		global_free(global);
+// 		print_error(NULL, NULL, 1);
+// 	}
+// 	else if (pid == 0)
+// 	{
+// 		//call subshell
+// 		// remove_parantheces(subshell);
+// 	}
+// 	waitpid(pid, &status, 0);
+// 	if (status == 2)
+// 		global->exit_status = 130;
+// 	else
+// 		global->exit_status = status >> 8;
+// }
+
 void	execution(t_global *global)
 {	
 	t_cmdshell	*all_cmds;
@@ -106,7 +149,10 @@ void	execution(t_global *global)
 	cou_or = count_or(all_cmds);
 	while (1)
 	{
-		all_cmds = exec_cmds(global, all_cmds);
+		// if (all_cmds->cmds->subshell)
+		// 	run_subshell(global, all_cmds->cmds->subshell);
+		// else
+			all_cmds = exec_cmds(global, all_cmds);
 		if (all_cmds)
 		{
 			if (global->exit_status == 0 && all_cmds->prev->cmds->operator == AND)

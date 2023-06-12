@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 12:36:49 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:33:33 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	split_and_fill_list(char *output, t_tokens **tokens)
 	i = 0;
 	check = malloc(sizeof(t_check));
 	if (!check)
-		return (-1);
+		print_error(NULL, NULL, 1);
 	if (init_check(check, output) == -1)
 		return (-1);
 	fill_with_nonpr_char(check);

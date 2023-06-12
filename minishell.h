@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/12 17:53:23 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/12 22:23:37 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ typedef	struct s_recipe
 t_args		*args_expander(t_global *global, t_args	*args);
 t_redis		*redis_expander(t_global *global, t_redis *redis);
 
+int			fill_global_struct(t_global **global, char *line, int flag);
+// int			fill_global_struct(t_global **global, char *line);
 
-int			fill_global_struct(t_global **global, char *line);
+
 int			init_global(t_global **global, char **env);
 /*------- all free --------*/
 void		free_double_ptr(char **str);
@@ -101,9 +103,10 @@ int			is_builtin(char *token);
 // void		exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds);
 void		exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, int i, int count);
 /*======== pipe ===========*/
-void		create_pipes(t_global *global);
-void		close_pipes(t_global *global);
+void		create_pipe(t_global *global);
+void		close_pipe(t_global *global);
 void		not_builtin(t_global *global, t_cmdshell *all_cmds, int i, int count);
+int			manage_redirection(t_global *global, t_redis *redis);
 
 
 
