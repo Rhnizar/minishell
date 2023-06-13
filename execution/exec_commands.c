@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/13 15:02:06 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:01:41 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,50 +46,42 @@ void	fill_exit_status(t_global *global, int count)
 	signal(SIGINT, sig_handl);
 }
 
-void	exec_cmd(t_global *global, t_cmdshell *cmd, int i, int count)
+void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
 {
-	cmd->cmds->args = args_expander(global, cmd->cmds->args);
 	if (count == 1 && cmd->cmds->args && is_builtin(cmd->cmds->args->str))
 	{
 		builtins(global, cmd);
 		return ;
 	}
-	if (i < count - 1)
-		create_pipe(global);
 	if (cmd->cmds->subshell)
 		run_subshell(global, cmd->cmds->subshell, i, count);
 	else
-	{
 		not_builtin(global, cmd, i, count);
-		fill_exit_status(global, count);
-	}
-	if (i > 0)
-        close(global->prev_fd);
-    if (i < count)
-        global->prev_fd = global->pipe[0];
-	if (i < count - 1)
-		close(global->pipe[1]);
 }
 
-t_cmdshell	*exec_cmds(t_global *global, t_cmdshell *all_cmds)
+t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
 {
 	int			count;
 	int			i;
 
-	count = count_nbr_commands(all_cmds);
 	i = 0;
+	count = count_nbr_commands(all_cmds);
 	global->pid = malloc(sizeof(pid_t) * count);
 	if (!global->pid)
 		print_error(NULL, NULL, 1);
 	global->prev_fd = -1;
 	while (all_cmds && i != count)
 	{
-		exec_cmd(global, all_cmds, i, count);
+		if (i < count - 1)
+			create_pipe(global);
+		all_cmds->cmds->args = args_expander(global, all_cmds->cmds->args);
+		exec_one_command(global, all_cmds, i, count);	
+		if (count > 1)
+			close_pipe(global, count, i);
 		i++;
 		all_cmds = all_cmds->next;
 	}
-	// printf("HEREEE: %d\n", global->exit_status);
-	// fill_exit_status(global, count);
+	fill_exit_status(global, count);
 	return (all_cmds);
 }
 
@@ -140,7 +132,7 @@ void	execution(t_global *global)
 	cou_or = count_or(all_cmds);
 	while (1)
 	{
-		all_cmds = exec_cmds(global, all_cmds);
+		all_cmds = exec_commands(global, all_cmds);
 		if (all_cmds)
 		{
 			if (_execution(global, &all_cmds, cou_or) == 2)
@@ -152,5 +144,3 @@ void	execution(t_global *global)
 			break ;
 	}
 }
-
-// echo a || echo b && echo c

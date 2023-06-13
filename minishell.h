@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/13 12:16:30 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:05:55 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,13 @@ t_recipe	prepare_command(t_global *global, t_cmdshell *all_cmds);
 void		sig_handl(int sig);
 void		builtins(t_global *global, t_cmdshell *all_cmds);
 int			is_builtin(char *token);
-// void		exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds);
-void		exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, int i, int count);
 /*======== pipe ===========*/
 void		create_pipe(t_global *global);
-void		close_pipe(t_global *global);
+void		close_pipe(t_global *global, int count, int i);
 void		not_builtin(t_global *global, t_cmdshell *all_cmds, int i, int count);
 int			manage_redirection(t_global *global, t_redis *redis);
 
 void	run_subshell(t_global *global, char *subshell,int i ,int count);
-void	fill_pipe(t_global *global, int i, int count);
+void	read_write_pipe(t_global *global, int i, int count);
 
 #endif

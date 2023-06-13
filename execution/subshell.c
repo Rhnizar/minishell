@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:42:07 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/13 15:02:56 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:06:41 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,24 @@ static char	*remove_parantheces(char *str)
 
 void	run_subshell(t_global *global, char *subshell,int i ,int count)
 {
-	pid_t	pid;
 	int		status;
 	t_global	*new_global;
 
 	status = 0;
 	signal(SIGINT, SIG_IGN);
-	pid = fork();
-	if (pid == -1)
+	global->pid[i] = fork();
+	if (global->pid[i] == -1)
 	{
 		global_free(global);
 		print_error(NULL, NULL, 1);
 	}
-	else if (pid == 0)
+	else if (global->pid[i] == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		if (i < count - 1)
-			fill_pipe(global, i, count);
+		read_write_pipe(global, i, count);
 		init_global(&new_global, get_env(global->env));
 		fill_global_struct(&new_global, remove_parantheces(subshell), 0);
 		execution(new_global);
-		if (new_global->exit_status == 130)
-			exit (2);
-		else
-			exit(new_global->exit_status);
+		exit(new_global->exit_status);
 	}
-	waitpid(pid, &status, 0);
-	if ((status >> 8) == 2)
-		global->exit_status = 130;
-	else
-		global->exit_status = status >> 8;
-	signal(SIGINT, sig_handl);
 }
-
