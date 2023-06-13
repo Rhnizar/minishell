@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:16:37 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/11 11:32:27 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:52:09 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	add_expanded_to_args(t_args **args, char *expended)
 		return ;
 	split = split_expended(expended);
 	i = 0;
-	while (split[i])
+	while (split && split[i])
 	{
 		if (ft_strchr(split[i], '*'))
 			wildcard_into_args(args, split[i]);
@@ -50,7 +50,8 @@ static void	add_expanded_to_args(t_args **args, char *expended)
 			fill_list_args(args, remove_quotes(split[i]));
 		i++;
 	}
-	free_double_ptr(split);
+	if (split)
+		free_double_ptr(split);
 }
 
 static void	expanded_into_args(t_args **args, char *token, t_global *global)
