@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/12 23:52:34 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:13:18 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ void	not_builtin(t_global *global, t_cmdshell *all_cmds, int i, int count)
 		signal(SIGINT, SIG_DFL);
 		exec_cmd_with_pipe(global, all_cmds, i, count);
 	}
-	if (i > 0)
-        close(global->prev_fd);
-    if (i < count)
-        global->prev_fd = global->pipe[0];
-    close(global->pipe[1]);
+	// if (i > 0)
+    //     close(global->prev_fd);
+    // if (i < count)
+    //     global->prev_fd = global->pipe[0];
+    // close(global->pipe[1]);
 }
 
-void	with_pipe(t_global *global, int i, int count)
+void	fill_pipe(t_global *global, int i, int count)
 {
 	if (i > 0)
     {
@@ -88,7 +88,7 @@ void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, int i, int count
 	t_recipe	recipe;
 
 	if (count > 1)
-		with_pipe(global, i, count);
+		fill_pipe(global, i, count);
 	if (all_cmds->cmds->args && is_builtin(all_cmds->cmds->args->str))
 	{
 		builtins(global, all_cmds);
@@ -96,8 +96,7 @@ void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, int i, int count
 	}
 	else
 	{
-		if (manage_redirection(global, all_cmds->cmds->redis))
-			exit(1);
+		// if (manage_redirection(global, all_cmds->cmds->redis))
 		recipe = prepare_command(global, all_cmds);
     	if (execve(recipe.command, recipe.args, recipe.envp) == -1)
     	{

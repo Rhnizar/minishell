@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redis_expantion_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/11 18:19:36 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:18:18 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	wildcard_into_redis(t_redis **redis, char *to_handle, int type)
 	return (0);
 }
 
-static int	add_expanded_to_redis(t_redis **redis, char *expended, \
+int	add_expanded_to_redis(t_redis **redis, char *expended, \
 char *token, int type)
 {
 	char		**split;
@@ -53,33 +53,6 @@ char *token, int type)
 	return (free_double_ptr(split), 0);
 }
 
-static int	expanded_into_redis(t_redis **redis, t_redis *old_redis, \
-t_env *env, int exit_status)
-{
-	t_tokens	*tokens;
-	t_tokens	*tmp;
-	char		*output;
-
-	tokens = expantion_tokenizer(old_redis->str);
-	output = ((tmp = tokens), NULL);
-	while (tmp)
-	{
-		if (!ft_strcmp(tmp->str, "$"))
-		{
-			output = expantion_dollar_case(&tmp, env, output, exit_status);
-			if (!tmp->next)
-				break ;
-		}
-		else if (!ft_strcmp(tmp->str, "'") || !ft_strcmp(tmp->str, "\""))
-			output = expantion_quote_case(&tmp, env, output, exit_status);
-		else
-			output = ft_strjoin(output, tmp->str);
-		tmp = tmp->next;
-	}
-	if (add_expanded_to_redis(redis, output, old_redis->str, old_redis->type))
-		return (free_tokens(tokens), free(output), 1);
-	return (free_tokens(tokens), free(output), 0);
-}
 
 t_redis	*redis_expander(t_global *global, t_redis *redis)
 {

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/12 22:21:03 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:18:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	EXECUTION_H
 # define EXECUTION_H
 
-#include "../minishell.h"
+// #include "../minishell.h"
 
 typedef struct s_vars
 {
@@ -40,6 +40,11 @@ t_tokens	*expantion_tokenizer(char *token);
 char		*get_value(char *to_expand, t_env *env);
 char		*expantion_quote_case(t_tokens **tmp, t_env *env, char *old, int exit_status);
 char		*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old, int exit_status);
+void		add_expanded_to_args(t_args **args, char *expended);
+int			add_expanded_to_redis(t_redis **redis, char *expended, \
+			char *token, int type);
+int			expanded_into_redis(t_redis **redis, t_redis *old_redis, \
+			t_env *env, int exit_status);
 int			skipp_dollar(t_tokens **tmp, int *count_dollar, char **output);
 t_tokens	*expention_wildcard_case(char *to_handle);
 char		**split_expended(char *token);

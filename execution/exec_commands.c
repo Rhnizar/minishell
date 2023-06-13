@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/12 23:39:59 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/13 15:02:06 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	count_nbr_commands(t_cmdshell *all_cmds)
 
 	tmp = all_cmds;
 	count = 0;
-	while (tmp && (tmp->cmds->operator == PIPE || tmp->cmds->operator == -1 \
-		|| tmp->cmds->operator == AND || tmp->cmds->operator == OR))
+	while (tmp)
 	{
 		count++;
 		if (tmp->cmds->operator == AND || tmp->cmds->operator == OR)
@@ -57,7 +56,19 @@ void	exec_cmd(t_global *global, t_cmdshell *cmd, int i, int count)
 	}
 	if (i < count - 1)
 		create_pipe(global);
-	not_builtin(global, cmd, i, count);
+	if (cmd->cmds->subshell)
+		run_subshell(global, cmd->cmds->subshell, i, count);
+	else
+	{
+		not_builtin(global, cmd, i, count);
+		fill_exit_status(global, count);
+	}
+	if (i > 0)
+        close(global->prev_fd);
+    if (i < count)
+        global->prev_fd = global->pipe[0];
+	if (i < count - 1)
+		close(global->pipe[1]);
 }
 
 t_cmdshell	*exec_cmds(t_global *global, t_cmdshell *all_cmds)
@@ -77,7 +88,8 @@ t_cmdshell	*exec_cmds(t_global *global, t_cmdshell *all_cmds)
 		i++;
 		all_cmds = all_cmds->next;
 	}
-	fill_exit_status(global, count);
+	// printf("HEREEE: %d\n", global->exit_status);
+	// fill_exit_status(global, count);
 	return (all_cmds);
 }
 
@@ -97,51 +109,30 @@ int	count_or(t_cmdshell *cmds)
 	return (count);
 }
 
-// char	*remove_parantheces(char *str)
-// {
-// 	char	*output;
-// 	int		count;
-// 	int		i;
-// 	int		j;
-
-// 	i = 1;
-// 	j = 0;
-// 	count = ft_strlen(str);
-// 	output = malloc(sizeof(char) * count - 1);
-// 	if (!output)
-// 		print_error(NULL, NULL, 1);
-// 	while (i < count - 1)
-// 		output[j++] = str[i++];
-// 	output[j] = '\0';
-// 	return (output);
-// }
-
-// void	run_subshell(t_global *global, char *subshell)
-// {
-// 	pid_t	pid;
-// 	int		status;
-
-// 	status = 0;
-// 	pid = fork();
-// 	if (pid == -1)
-// 	{
-// 		global_free(global);
-// 		print_error(NULL, NULL, 1);
-// 	}
-// 	else if (pid == 0)
-// 	{
-// 		//call subshell
-// 		// remove_parantheces(subshell);
-// 	}
-// 	waitpid(pid, &status, 0);
-// 	if (status == 2)
-// 		global->exit_status = 130;
-// 	else
-// 		global->exit_status = status >> 8;
-// }
+int	_execution(t_global *global, t_cmdshell **all_cmds, int cou_or)
+{
+	if (global->exit_status == 0 && (*all_cmds)->prev->cmds->operator == AND)
+		return (2);
+	else if (global->exit_status != 0 && (*all_cmds)->prev->cmds->operator == AND)
+	{
+		if (cou_or != 0)
+		{
+			while((*all_cmds)->cmds->operator != OR)
+				(*all_cmds) = (*all_cmds)->next;
+			(*all_cmds) = (*all_cmds)->next;
+			return (2);
+		}
+		return (1);
+	}
+	else if (global->exit_status == 0 && (*all_cmds)->prev->cmds->operator == OR)
+		return (1);
+	else if (global->exit_status != 0 && (*all_cmds)->prev->cmds->operator == OR)
+		return (2);
+	return (1);
+}
 
 void	execution(t_global *global)
-{	
+{
 	t_cmdshell	*all_cmds;
 	int			cou_or;
 
@@ -149,33 +140,17 @@ void	execution(t_global *global)
 	cou_or = count_or(all_cmds);
 	while (1)
 	{
-		// if (all_cmds->cmds->subshell)
-		// 	run_subshell(global, all_cmds->cmds->subshell);
-		// else
-			all_cmds = exec_cmds(global, all_cmds);
+		all_cmds = exec_cmds(global, all_cmds);
 		if (all_cmds)
 		{
-			if (global->exit_status == 0 && all_cmds->prev->cmds->operator == AND)
+			if (_execution(global, &all_cmds, cou_or) == 2)
 				continue ;
-			else if (global->exit_status != 0 && all_cmds->prev->cmds->operator == AND)
-			{
-				if (cou_or != 0)
-				{
-					while(all_cmds->cmds->operator != OR)
-						all_cmds = all_cmds->next;
-					all_cmds = all_cmds->next;
-					continue ;
-				}
+			else
 				break ;
-			}
-			else if (global->exit_status == 0 && all_cmds->prev->cmds->operator == OR)
-				break ;
-			else if (global->exit_status != 0 && all_cmds->prev->cmds->operator == OR)
-				continue ;
 		}
 		else
 			break ;
 	}
 }
 
-//ls | cat -e| wcc -l && ls || echo test  hadi khasha lkhdma
+// echo a || echo b && echo c
