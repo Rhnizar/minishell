@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/13 22:05:55 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:51:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,10 @@ int			manage_redirection(t_global *global, t_redis *redis);
 void	run_subshell(t_global *global, char *subshell,int i ,int count);
 void	read_write_pipe(t_global *global, int i, int count);
 
+
+/*-------- and or ----------*/
+int	or(t_global *global, t_cmdshell **all_cmds, int cou_and);
+int	and(t_global *global, t_cmdshell **all_cmds, int cou_or);
+int	count_and(t_cmdshell *cmds);
+int	count_or(t_cmdshell *cmds);
 #endif

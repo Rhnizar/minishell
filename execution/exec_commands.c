@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/13 22:01:41 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:52:11 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
 		if (i < count - 1)
 			create_pipe(global);
 		all_cmds->cmds->args = args_expander(global, all_cmds->cmds->args);
-		exec_one_command(global, all_cmds, i, count);	
+		exec_one_command(global, all_cmds, i, count);
 		if (count > 1)
 			close_pipe(global, count, i);
 		i++;
@@ -85,21 +85,6 @@ t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
 	return (all_cmds);
 }
 
-int	count_or(t_cmdshell *cmds)
-{
-	t_cmdshell	*tmp_cmds;
-	int			count;
-
-	tmp_cmds = cmds;
-	count = 0;
-	while (tmp_cmds)
-	{
-		if (tmp_cmds->cmds->operator == OR)
-			count++;
-		tmp_cmds  = tmp_cmds->next;
-	}
-	return (count);
-}
 
 int	_execution(t_global *global, t_cmdshell **all_cmds, int cou_or)
 {
@@ -127,16 +112,24 @@ void	execution(t_global *global)
 {
 	t_cmdshell	*all_cmds;
 	int			cou_or;
+	int			cou_and;
 
 	all_cmds = global->all_commands;
 	cou_or = count_or(all_cmds);
+	cou_and = count_and(all_cmds);
 	while (1)
 	{
 		all_cmds = exec_commands(global, all_cmds);
 		if (all_cmds)
 		{
-			if (_execution(global, &all_cmds, cou_or) == 2)
+			if (and(global, &all_cmds, cou_or) == 2)
 				continue ;
+			else if (and(global, &all_cmds, cou_or) == 1)
+				break ;
+			else if (or(global, &all_cmds, cou_and) == 2)
+				continue;
+			else if (or(global, &all_cmds, cou_and) == 1)
+				break;
 			else
 				break ;
 		}
