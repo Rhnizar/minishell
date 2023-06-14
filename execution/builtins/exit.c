@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:03:23 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/10 12:37:58 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:19:16 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_arg(char *str)
 	return (0);
 }
 
-void	exitt(t_args *args)
+void	exitt(t_global *global, t_args *args)
 {
 	if (args)
 	{
@@ -73,9 +73,9 @@ void	exitt(t_args *args)
 		if (args->next->next && check_arg(args->next->str) == 0)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-			// exit(1);
+			global->exit_status = 1;
 		}
-		if (check_arg(args->next->str) == 1)
+		else if (check_arg(args->next->str) == 1)
 		{
 			error_message(args->next->str);
 			exit(255);

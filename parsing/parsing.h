@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 09:42:25 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:13:32 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_cmds
 {
 	t_redis	*redis;
 	t_args	*args;
+	int		fd_herdoc;
 	int		operator;
 	char	*subshell;
 }				t_cmds;
@@ -149,7 +150,5 @@ void			fill_list_args(t_args **lst, char *str);
 t_tokens		*fill_struct_cmds(t_cmds *cmds, \
 	t_tokens *tokens, t_utils *utils);
 /*========= end parser =============*/
-
-
 
 #endif

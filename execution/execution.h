@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 09:30:11 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:26:04 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	EXECUTION_H
 # define EXECUTION_H
-
-// #include "../minishell.h"
 
 typedef struct s_vars
 {
@@ -23,16 +21,13 @@ typedef struct s_vars
 	int		last_p;
 }	t_vars;
 
-char	*valid_command_path(char **paths, char *cmd);
-char	**get_paths(t_env *env);
-char	**get_env(t_env *env);
+char		*valid_command_path(char **paths, char *cmd);
+char		**get_paths(t_env *env);
+char		**get_env(t_env *env);
 
-int		input_redirection(char *infile);
-int		output_redirection(char *outfile);
-int		append_output(char *outfile);
-int		here_doc(char *delimiter);
-
-void	print_error(char *msg, char *arg, int status);
+int			input_redirection(char *infile);
+int			output_redirection(char *outfile);
+int			append_output(char *outfile);
 
 /*========= start expender =============*/
 char		*remove_quotes(char *str);
@@ -52,13 +47,5 @@ int			count_split(char **split);
 int			is_wildcard(char *str);
 t_tokens	*wildcard(char	*arg);
 /*========= end expender =============*/
-
-/*========== unset ==============*/
-// void	unset(t_env **env, t_env **export, t_args *args);
-// int		identifier(char *str, char *exp_uns);
-
-
-
-
 
 # endif

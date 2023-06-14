@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/13 23:28:52 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:07:17 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,21 @@ char	*valid_command_path(char **paths, char *cmd)
 
 	command_path = NULL;
 	// still need to be handled
-	if (access(cmd, F_OK) == 0 && ft_strchr(cmd, '/') && access(cmd, X_OK) == -1)
-	{
-		print_error(EPD, cmd, 126);
-		return (NULL);
-	}
+	// if (access(cmd, F_OK) == 0 && ft_strchr(cmd, '/') && access(cmd, X_OK) == -1)
+	// {
+	// 	print_error(EPD, cmd, 126);
+	// 	return (NULL);
+	// }
 	if (ft_strchr(cmd, '/'))
 	{
-		if (access(cmd, F_OK) == -1)
-			print_error(ENSFD, cmd, 127);
-		if (access(cmd, F_OK) == 0)
-			print_error(EIAD, cmd, 126);
-		return (NULL);
+		return (cmd);
+	// 	if (access(cmd, F_OK) == -1)
+	// 		print_error(ENSFD, cmd, 127);
+	// 	if (access(cmd, F_OK) == 0)
+	// 		print_error(EIAD, cmd, 126);
+	// 	return (NULL);
 	}
-	while (*paths)
+	while (paths && *paths)
 	{
 		command_path = ft_join_command_path(*paths, cmd);
 		if (access(command_path, F_OK) == 0)
@@ -60,9 +61,43 @@ char	*valid_command_path(char **paths, char *cmd)
 		command_path = NULL;
 		paths++;
 	}
+	if (!paths)
+	{
+		command_path = ft_join_command_path(".", cmd);
+		if (access(command_path, F_OK) == 0)
+			return (command_path);
+	}
 	if (!command_path)
 		print_error(ECNF, cmd, 127);
 	return (NULL);
+}
+
+char	*handle_current_dir(char *to_handle)
+{
+	char	*output;
+	int		i;
+
+	i = 0;
+	output = NULL;
+	while (to_handle[i])
+	{
+		if (i == 0 && to_handle[i] == ':')
+			output = join_to_str(output, '.');
+		else if (to_handle[i] == ':' && to_handle[i + 1] && to_handle[i + 1] == ':')
+		{
+			output = join_to_str(output, to_handle[i++]);
+			output = join_to_str(output, '.');
+		}
+		else if (to_handle[i] == ':' && to_handle[i + 1] == '\0')
+		{
+			output = join_to_str(output, ':');
+			output = join_to_str(output, '.');
+		}
+		output = join_to_str(output, to_handle[i]);
+		i++;
+	}
+	free(to_handle);
+	return (output);
 }
 
 char	**get_paths(t_env *env)
@@ -73,7 +108,8 @@ char	**get_paths(t_env *env)
 			break ;
 		env = env->next;
 	}
-	if (!env)
+	if (env == NULL)
 		return (NULL);
+	env->value = handle_current_dir(env->value);
 	return (ft_split(env->value, ':'));
 }

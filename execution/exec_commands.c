@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 11:44:42 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:23:08 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,22 @@ void	fill_exit_status(t_global *global, int count)
 
 void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
 {
+	int	fd_tmp;
+
+	fd_tmp = -1;
 	if (count == 1 && cmd->cmds->args && is_builtin(cmd->cmds->args->str))
 	{
+		fd_tmp = manage_redirection_builtins(global, cmd);
 		builtins(global, cmd);
+		if (fd_tmp != -1)
+		{
+			dup2(fd_tmp, 1);
+			close (fd_tmp);
+		}
 		return ;
 	}
 	if (cmd->cmds->subshell)
-		run_subshell(global, cmd->cmds->subshell, i, count);
+		run_subshell(global, cmd, i, count);
 	else
 		not_builtin(global, cmd, i, count);
 }
@@ -84,6 +93,9 @@ t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
 		exec_one_command(global, all_cmds, i, count);
 		if (count > 1)
 			close_pipe(global, count, i);
+		if (all_cmds->cmds->fd_herdoc != -2 && \
+		close (all_cmds->cmds->fd_herdoc) == -1)
+			print_error(NULL, NULL, 1);
 		i++;
 		all_cmds = all_cmds->next;
 	}

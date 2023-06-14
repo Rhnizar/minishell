@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:24:48 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/12 23:03:13 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:21:47 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_tokens	*wildcard(char *arg)
 {
 	struct dirent	*entity;
 	t_tokens		*tokens;
-	DIR 			*dir;
+	DIR				*dir;
 
 	dir = opendir(".");
 	tokens = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redis_expantion_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/13 11:18:18 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:14:27 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char *token, int type)
 		fill_list_redis(redis, remove_quotes(split[0]), type);
 	return (free_double_ptr(split), 0);
 }
-
 
 t_redis	*redis_expander(t_global *global, t_redis *redis)
 {

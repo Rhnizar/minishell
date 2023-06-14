@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 20:33:58 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/13 12:03:03 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 18:48:52 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	fill_list_cmds(t_cmdshell **lst, t_tokens *tokens)
 	return (0);
 }
 
-int	fill_global_struct(t_global **global, char *line, int flag)
+int	fill_global_struct(t_global **global, char *line)
 {
 	t_tokens	*tokens;
 	t_tokens	*updated_tokens;
@@ -50,37 +50,13 @@ int	fill_global_struct(t_global **global, char *line, int flag)
 	lst_cmd = NULL;
 	if (split_and_fill_list(line, &tokens) == -1)
 		return (-1);
-	if (flag == 1)
-		updated_tokens = analyzer(tokens, &(*global)->exit_status);
-	else
-		updated_tokens = tokens;
+	updated_tokens = analyzer(tokens, &(*global)->exit_status);
 	if (fill_list_cmds(&lst_cmd, updated_tokens) == -1)
 	{
 		free_tokens(updated_tokens);
 		return (-1);
 	}
 	(*global)->all_commands = lst_cmd;
+	run_heredocs(*global);
 	return (0);
 }
-
-// int	fill_global_struct(t_global **global, char *line)
-// {
-// 	t_tokens	*tokens;
-// 	t_tokens	*updated_tokens;
-// 	t_cmdshell	*lst_cmd;
-
-// 	lst_cmd = NULL;
-// 	if (split_and_fill_list(line, &tokens) == -1)
-// 		return (-1);
-// 	// if (!(*global)->all_commands)
-// 		updated_tokens = analyzer(tokens, &(*global)->exit_status);
-// 	// else
-// 	// 	updated_tokens = tokens;
-// 	if (fill_list_cmds(&lst_cmd, updated_tokens) == -1)
-// 	{
-// 		free_tokens(updated_tokens);
-// 		return (-1);
-// 	}
-// 	(*global)->all_commands = lst_cmd;
-// 	return (0);
-// }

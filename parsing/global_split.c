@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/12 21:33:33 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/14 18:55:04 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	split_and_fill_list(char *output, t_tokens **tokens)
 	t_check		*check;
 
 	*tokens = NULL;
+	split = NULL;
 	i = 0;
 	check = malloc(sizeof(t_check));
 	if (!check)
@@ -89,7 +90,7 @@ int	split_and_fill_list(char *output, t_tokens **tokens)
 	split = ft_split(check->ot, '\x07');
 	free(check->ot);
 	free(check);
-	while (split[i])
+	while (split && split[i])
 		create_tokens(tokens, ft_strdup(split[i++]));
 	free_double_ptr(split);
 	return (0);

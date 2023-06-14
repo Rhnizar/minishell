@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:03:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 15:38:01 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:36:07 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_double_ptr(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 		free (str[i++]);
 	free(str);
 }

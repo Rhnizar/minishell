@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 09:41:23 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:26:45 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef	struct s_recipe
 }	t_recipe;
 
 
-int			fill_global_struct(t_global **global, char *line, int flag);
+int			fill_global_struct(t_global **global, char *line);
 
 int			init_global(t_global **global, char **env);
 /*------- all free --------*/
@@ -74,7 +74,7 @@ void		free_tokens(t_tokens *tokens);
 void		free_token_utils(t_utils *utils, t_tokens *tokens);
 
 /*========== builtins ==============*/
-void	exitt(t_args *args);
+void	exitt(t_global *global, t_args *args);
 void	pwd(t_global *global);
 void	cd(t_global *global, t_args	*args, t_env *export);
 void	echo(t_global *global, t_args *args);
@@ -102,25 +102,36 @@ void		sig_handl(int sig);
 /*---------- pipe --------------*/
 void		create_pipe(t_global *global);
 void		close_pipe(t_global *global, int count, int i);
-void		read_write_pipe(t_global *global, int i, int count);
+void		read_write_pipe(t_global *global, t_cmdshell *cmd, int i, int count);
 /*----------- args expand ---------*/
 t_args		*args_expander(t_global *global, t_args	*args);
 void		expanded_into_args(t_args **args, char *token, t_global *global);
 /*----------- redis expand ---------*/
 t_redis		*redis_expander(t_global *global, t_redis *redis);
 int			manage_redirection(t_global *global, t_redis *redis);
+int			open_redis(t_global *global, t_redis *redis, int *fd_read, int *fd_write);
+int			manage_redirection_builtins(t_global *global, t_cmdshell *cmd);
+
 
 void		builtins(t_global *global, t_cmdshell *all_cmds);
 void		not_builtin(t_global *global, t_cmdshell *all_cmds, int i, int count);
 
-void		run_subshell(t_global *global, char *subshell,int i ,int count);
+void		run_subshell(t_global *global, t_cmdshell *cmd, int i, int count);
 int			is_builtin(char *token);
 /*-------- and or ----------*/
-int	or(t_global *global, t_cmdshell **all_cmds, int cou_and);
-int	and(t_global *global, t_cmdshell **all_cmds, int cou_or);
-int	count_and(t_cmdshell *cmds);
-int	count_or(t_cmdshell *cmds);
+int			or(t_global *global, t_cmdshell **all_cmds, int cou_and);
+int			and(t_global *global, t_cmdshell **all_cmds, int cou_or);
+int			count_and(t_cmdshell *cmds);
+int			count_or(t_cmdshell *cmds);
 
 /*=========== end execution ==============*/
+
+
+void		run_heredocs(t_global *global);
+int			close_herdocs(t_cmdshell *commands, int stop);
+
+
+void		print_error(char *msg, char *arg, int status);
+
 
 #endif

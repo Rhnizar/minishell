@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/14 10:26:48 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 18:50:00 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **env)
 				add_history(line);
 			else
 				continue ;
-			if (fill_global_struct(&global, line, 1) == -1)
+			if (fill_global_struct(&global, line) == -1)
 				continue ;
 			// if (fill_global_struct(&global, line) == -1)
 			// 	continue ;

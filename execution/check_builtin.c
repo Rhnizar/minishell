@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:24:38 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/14 09:48:45 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:20:36 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	builtins(t_global *global, t_cmdshell *all_cmds)
 	if (ft_strncmp("unset", command, ft_strlen("unset")) == 0)
 		unset(&global->env, &global->export, args);
 	if (ft_strncmp("exit", command, ft_strlen("exit")) == 0)
-		exitt(args);
+		exitt(global, args);
 	if (ft_strncmp("pwd", command, ft_strlen("pwd")) == 0)
 		pwd(global);
 	if (ft_strncmp("cd", command, ft_strlen("cd")) == 0)

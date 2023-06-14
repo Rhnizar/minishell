@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/14 11:12:06 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 18:04:09 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, \
 {
 	t_recipe	recipe;
 
-	if (count > 1)
-		read_write_pipe(global, i, count);
+	read_write_pipe(global, all_cmds, i, count);
+	if (manage_redirection(global, all_cmds->cmds->redis))
+		exit(1);
 	if (all_cmds->cmds->args && is_builtin(all_cmds->cmds->args->str))
 	{
 		builtins(global, all_cmds);
@@ -26,8 +27,6 @@ void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, \
 	}
 	else
 	{
-		if (manage_redirection(global, all_cmds->cmds->redis))
-			printf("redis\n");
 		recipe = prepare_command(global, all_cmds);
 		if (execve(recipe.command, recipe.args, recipe.envp) == -1)
 		{
