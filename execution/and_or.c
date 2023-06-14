@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 23:02:43 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/13 23:52:50 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 09:48:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	count_or(t_cmdshell *cmds)
 	{
 		if (tmp_cmds->cmds->operator == OR)
 			count++;
-		tmp_cmds  = tmp_cmds->next;
+		tmp_cmds = tmp_cmds->next;
 	}
 	return (count);
 }
@@ -39,7 +39,7 @@ int	count_and(t_cmdshell *cmds)
 	{
 		if (tmp_cmds->cmds->operator == AND)
 			count++;
-		tmp_cmds  = tmp_cmds->next;
+		tmp_cmds = tmp_cmds->next;
 	}
 	return (count);
 }
@@ -48,11 +48,12 @@ int	and(t_global *global, t_cmdshell **all_cmds, int cou_or)
 {
 	if (global->exit_status == 0 && (*all_cmds)->prev->cmds->operator == AND)
 		return (2);
-	else if (global->exit_status != 0 && (*all_cmds)->prev->cmds->operator == AND)
+	else if (global->exit_status != 0 && \
+		(*all_cmds)->prev->cmds->operator == AND)
 	{
 		if (cou_or != 0)
 		{
-			while(*all_cmds && (*all_cmds)->cmds->operator != OR)
+			while (*all_cmds && (*all_cmds)->cmds->operator != OR)
 				(*all_cmds) = (*all_cmds)->next;
 			if (*all_cmds)
 				(*all_cmds) = (*all_cmds)->next;
@@ -67,11 +68,12 @@ int	or(t_global *global, t_cmdshell **all_cmds, int cou_and)
 {
 	if (global->exit_status != 0 && (*all_cmds)->prev->cmds->operator == OR)
 		return (2);
-	else if (global->exit_status == 0 && (*all_cmds)->prev->cmds->operator == OR)
+	else if (global->exit_status == 0 && \
+		(*all_cmds)->prev->cmds->operator == OR)
 	{
 		if (cou_and != 0)
 		{
-			while(*all_cmds && (*all_cmds)->cmds->operator != AND)
+			while (*all_cmds && (*all_cmds)->cmds->operator != AND)
 				(*all_cmds) = (*all_cmds)->next;
 			if (*all_cmds)
 				(*all_cmds) = (*all_cmds)->next;

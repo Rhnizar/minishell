@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/13 23:52:11 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:44:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,14 @@ void	fill_exit_status(t_global *global, int count)
 	int	i;
 	int	exit_status;
 
-	exit_status = 0;
 	i = 0;
+	exit_status = 0;
+	if (count == 1 && global->all_commands->cmds->args \
+		&& is_builtin(global->all_commands->cmds->args->str))
+	{
+		free(global->pid);
+		return ;
+	}
 	while (i != count)
 		waitpid(global->pid[i++], &exit_status, 0);
 	if (exit_status == 2)
@@ -66,7 +72,7 @@ t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
 
 	i = 0;
 	count = count_nbr_commands(all_cmds);
-	global->pid = malloc(sizeof(pid_t) * count);
+	global->pid = ft_calloc(count, sizeof(pid_t));
 	if (!global->pid)
 		print_error(NULL, NULL, 1);
 	global->prev_fd = -1;
@@ -83,29 +89,6 @@ t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
 	}
 	fill_exit_status(global, count);
 	return (all_cmds);
-}
-
-
-int	_execution(t_global *global, t_cmdshell **all_cmds, int cou_or)
-{
-	if (global->exit_status == 0 && (*all_cmds)->prev->cmds->operator == AND)
-		return (2);
-	else if (global->exit_status != 0 && (*all_cmds)->prev->cmds->operator == AND)
-	{
-		if (cou_or != 0)
-		{
-			while((*all_cmds)->cmds->operator != OR)
-				(*all_cmds) = (*all_cmds)->next;
-			(*all_cmds) = (*all_cmds)->next;
-			return (2);
-		}
-		return (1);
-	}
-	else if (global->exit_status == 0 && (*all_cmds)->prev->cmds->operator == OR)
-		return (1);
-	else if (global->exit_status != 0 && (*all_cmds)->prev->cmds->operator == OR)
-		return (2);
-	return (1);
 }
 
 void	execution(t_global *global)
@@ -127,10 +110,8 @@ void	execution(t_global *global)
 			else if (and(global, &all_cmds, cou_or) == 1)
 				break ;
 			else if (or(global, &all_cmds, cou_and) == 2)
-				continue;
+				continue ;
 			else if (or(global, &all_cmds, cou_and) == 1)
-				break;
-			else
 				break ;
 		}
 		else

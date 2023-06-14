@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:24:38 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/10 11:28:18 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 09:48:45 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void builtins(t_global *global, t_cmdshell *all_cmds)
+void	builtins(t_global *global, t_cmdshell *all_cmds)
 {
 	char	*command;
 	t_args	*args;

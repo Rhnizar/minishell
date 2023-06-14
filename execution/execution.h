@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/13 11:18:42 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 09:30:11 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_tokens	*wildcard(char	*arg);
 /*========= end expender =============*/
 
 /*========== unset ==============*/
-void	unset(t_env **env, t_env **export, t_args *args);
-int		identifier(char *str, char *exp_uns);
+// void	unset(t_env **env, t_env **export, t_args *args);
+// int		identifier(char *str, char *exp_uns);
 
 
 

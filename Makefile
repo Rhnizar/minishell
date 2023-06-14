@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/13 23:16:55 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/06/14 11:40:54 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,6 @@ EXECUTION = execution/expention/expantion_utils.c \
 			execution/redirections.c \
 			execution/manage_redirections.c \
 			execution/exec_commands.c \
-			execution/exec_one_command.c \
 			execution/extract_path.c \
 			execution/get_env.c \
 			execution/prepare_command.c \
@@ -81,7 +80,7 @@ OBJS_B = $(SRCS_B:.c=.o)
 RDL = -lreadline \
 	  -L/goinfre/rrhnizar/brew/opt/readline/lib
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 CCe = cc
 

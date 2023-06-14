@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/13 22:52:35 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/14 10:26:48 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,43 +39,6 @@ void	sig_handl(int sig)
 		g_r += 1;
 	}
 }
-
-// void builtins(t_global *global, char *line)
-// {
-// 	if (ft_strncmp("export", line, ft_strlen("export")) == 0)
-// 		add_to_export_or_print(global->env, global->export, global->all_commands->cmds->args);
-// 	if (ft_strncmp("env", line, ft_strlen("env")) == 0)
-// 		print_env(global->env);
-// 	if (ft_strncmp("unset", line, ft_strlen("unset")) == 0)
-// 		unset(&global->env, &global->export, global->all_commands->cmds->args);
-// 	if (ft_strncmp("exit", line, ft_strlen("exit")) == 0)
-// 		exitt(global->all_commands->cmds->args);
-// 	if (ft_strncmp("pwd", line, ft_strlen("pwd")) == 0)
-// 		pwd(global);
-// 	if (ft_strncmp("cd", line, ft_strlen("cd")) == 0)
-// 		cd(global, global->all_commands->cmds->args, global->export);
-// 	if (ft_strncmp("echo", line, ft_strlen("echo")) == 0)
-// 		echo(global->all_commands->cmds->args);
-// }
-
-// void builtins(t_global **global, char *line)
-// {
-// 	if (ft_strncmp("export", line, ft_strlen("export")) == 0)
-// 		add_to_export_or_print((*global)->env, (*global)->export, (*global)->all_commands->cmds->args);
-// 	if (ft_strncmp("env", line, ft_strlen("env")) == 0)
-// 		print_env((*global)->env);
-// 	if (ft_strncmp("unset", line, ft_strlen("unset")) == 0)
-// 		unset(&(*global)->env, &(*global)->export, (*global)->all_commands->cmds->args);
-// 	if (ft_strncmp("exit", line, ft_strlen("exit")) == 0)
-// 		exitt((*global)->all_commands->cmds->args);
-// 	if (ft_strncmp("pwd", line, ft_strlen("pwd")) == 0)
-// 		pwd(*global);
-// 	if (ft_strncmp("cd", line, ft_strlen("cd")) == 0)
-// 		cd(*global, (*global)->all_commands->cmds->args, (*global)->export);
-// 	if (ft_strncmp("echo", line, ft_strlen("echo")) == 0)
-// 		echo((*global)->all_commands->cmds->args);
-// 	printf("[%d]\n", (*global)->exit_status);
-// }
 
 int	main(int argc, char **argv, char **env)
 {

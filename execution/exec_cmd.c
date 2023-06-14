@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/13 22:04:49 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:12:06 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, int i, int count)
+void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, \
+	int i, int count)
 {
 	t_recipe	recipe;
 
@@ -25,21 +26,19 @@ void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, int i, int count
 	}
 	else
 	{
-		// if (manage_redirection(global, all_cmds->cmds->redis))
+		if (manage_redirection(global, all_cmds->cmds->redis))
+			printf("redis\n");
 		recipe = prepare_command(global, all_cmds);
-    	if (execve(recipe.command, recipe.args, recipe.envp) == -1)
-    	{
-    	    global_free(global);
-    	    print_error(NULL, NULL, 1);
-    	}
+		if (execve(recipe.command, recipe.args, recipe.envp) == -1)
+		{
+			global_free(global);
+			print_error(NULL, NULL, 1);
+		}
 	}
 }
 
 void	not_builtin(t_global *global, t_cmdshell *all_cmds, int i, int count)
 {
-	int			exit_status;
-
-	exit_status = 0;
 	signal(SIGINT, SIG_IGN);
 	global->pid[i] = fork();
 	if (global->pid[i] == -1)
@@ -53,4 +52,3 @@ void	not_builtin(t_global *global, t_cmdshell *all_cmds, int i, int count)
 		exec_cmd_with_pipe(global, all_cmds, i, count);
 	}
 }
-

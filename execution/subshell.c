@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:42:07 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/13 22:06:41 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:05:02 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ static char	*remove_parantheces(char *str)
 	return (output);
 }
 
-void	run_subshell(t_global *global, char *subshell,int i ,int count)
+void	run_subshell(t_global *global, char *subshell, int i, int count)
 {
-	int		status;
 	t_global	*new_global;
+	char		*rem_par;
 
-	status = 0;
 	signal(SIGINT, SIG_IGN);
 	global->pid[i] = fork();
 	if (global->pid[i] == -1)
@@ -46,11 +45,14 @@ void	run_subshell(t_global *global, char *subshell,int i ,int count)
 	}
 	else if (global->pid[i] == 0)
 	{
+		rem_par = remove_parantheces(subshell);
 		signal(SIGINT, SIG_DFL);
 		read_write_pipe(global, i, count);
 		init_global(&new_global, get_env(global->env));
-		fill_global_struct(&new_global, remove_parantheces(subshell), 0);
+		fill_global_struct(&new_global, rem_par, 0);
 		execution(new_global);
+		free_commands(new_global->all_commands);
+		free(rem_par);
 		exit(new_global->exit_status);
 	}
 }
