@@ -6,17 +6,34 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:35:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 17:01:48 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:28:55 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	here_doc(char *delimiter)
+static char	*herdoc_expander(t_global *global, char *line)
+{
+	t_args	*arg;
+	t_args	*new_arg;
+	char	*output;
+
+	fill_list_args(&arg, ft_strdup(line));
+	if (ft_strchr(line, '"') || ft_strchr(line, '\''))
+		return (ft_strdup(line));
+	else
+		new_arg = args_expander(global, arg);
+	output = ft_strdup(new_arg->str);
+	free_args(new_arg);
+	return (output);
+}
+
+static int	here_doc(t_global *global, char *delimiter)
 {
 	char	*line;
 	int		fd[2];
 	int		read_fd;
+	char	*expanded_line;
 
 	if (pipe(fd) == -1)
 		return (print_error(NULL, NULL, -1), -1);
@@ -28,8 +45,10 @@ static int	here_doc(char *delimiter)
 		line = readline("> ");
 		if (ft_strcmp(line, delimiter) == 0)
 			break ;
-		ft_putstr_fd(line, fd[1]);
+		expanded_line = herdoc_expander(global, line);
+		ft_putstr_fd(expanded_line, fd[1]);
 		ft_putstr_fd("\n", fd[1]);
+		free(expanded_line);
 		free(line);
 	}
 	free(line);
@@ -38,7 +57,7 @@ static int	here_doc(char *delimiter)
 	return (read_fd);
 }
 
-static int	get_last_heredoc(t_redis *redis)
+static int	get_last_heredoc(t_global *global, t_redis *redis)
 {
 	t_redis	*tmp;
 	int		fd_new;
@@ -53,7 +72,7 @@ static int	get_last_heredoc(t_redis *redis)
 		{
 			if (fd_prev != -1 && close (fd_prev) == -1)
 				return (print_error(NULL, NULL, -1), -1);
-			fd_new = here_doc(tmp->str);
+			fd_new = here_doc(global, tmp->str);
 			fd_prev = fd_new;
 			if (fd_new == -1)
 				return (-1);
@@ -70,24 +89,7 @@ void	run_heredocs(t_global *global)
 	tmp = global->all_commands;
 	while (tmp)
 	{
-		tmp->cmds->fd_herdoc = get_last_heredoc(tmp->cmds->redis);
+		tmp->cmds->fd_herdoc = get_last_heredoc(global, tmp->cmds->redis);
 		tmp = tmp->next;
 	}
-}
-
-int	close_herdocs(t_cmdshell *commands, int stop)
-{
-	t_cmdshell	*tmp;
-	int			i;
-
-	i = 0;
-	tmp = commands;
-	while (tmp && i < stop)
-	{
-		if (tmp->cmds->fd_herdoc != -2 && close (tmp->cmds->fd_herdoc) == -1)
-			return (1);
-		i++;
-		tmp = tmp->next;
-	}
-	return (0);
 }

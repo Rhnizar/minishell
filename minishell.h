@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 20:26:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:28:36 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int			count_or(t_cmdshell *cmds);
 
 
 void		run_heredocs(t_global *global);
-int			close_herdocs(t_cmdshell *commands, int stop);
 
 
 void		print_error(char *msg, char *arg, int status);
