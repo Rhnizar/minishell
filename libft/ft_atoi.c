@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:48:33 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/11 11:52:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:58:39 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_atoi(const char *str)
 {
-	long	sign;
+	int		sign;
 	long	ret;
 	int		i;
 

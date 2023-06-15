@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expantion.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/23 16:29:18 by kchaouki         ###   ########.fr       */
+/*   Created: 2023/06/06 12:25:35 by rrhnizar          #+#    #+#             */
+/*   Updated: 2023/06/15 21:27:58 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-$USER
-"$USER"
-'$USER'
-"'$USER'"
-'"$USER"'
+void	pwd(t_global *global)
+{
+	char	cu_wo_di[PATH_MAX];
+
+	if (getcwd(cu_wo_di, sizeof(cu_wo_di)) != NULL)
+		printf("%s\n", cu_wo_di);
+	else
+	{
+		perror("minishell");
+		global->exit_status = 1;
+	}
+}

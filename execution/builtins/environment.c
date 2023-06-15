@@ -6,28 +6,13 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:30:32 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:29:12 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:35:14 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	free_env(t_env *env)
-{
-	t_env	*tmp;
-	t_env	*tmp2;
-
-	tmp = env;
-	while (tmp)
-	{
-		tmp2 = tmp->next;
-		free (tmp->content);
-		free (tmp);
-		tmp = tmp2;
-	}
-}
-
-static void	add_to_env(t_env **env, char *content)
+void	add_to_env(t_env **env, char *var, char *value)
 {
 	t_env	*new;
 	t_env	*tmp;
@@ -36,10 +21,12 @@ static void	add_to_env(t_env **env, char *content)
 	if (!new)
 	{
 		free_env(*env);
-		return ;
+		print_error(NULL, NULL, 1);
 	}
-	new->content = content;
+	new->var = var;
+	new->value = value;
 	new->next = NULL;
+	new->prev = NULL;
 	if (!*env)
 	{
 		*env = new;
@@ -49,6 +36,17 @@ static void	add_to_env(t_env **env, char *content)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
+}
+
+size_t	find_equale(char *str)
+{
+	size_t	count;
+
+	count = 0;
+	while (str[count] && str[count] != '=')
+		count++;
+	return (count);
 }
 
 t_env	*create_env(char **envp)
@@ -58,41 +56,21 @@ t_env	*create_env(char **envp)
 	env = NULL;
 	while (*envp)
 	{
-		add_to_env(&env, strdup(*envp));
+		add_to_env(&env, ft_substr(*envp, 0, find_equale(*envp)), \
+		ft_strdup(ft_strchr(*envp, '=') + 1));
 		envp++;
 	}
 	return (env);
 }
 
-static int	count_env_variables(t_env *env)
+void	print_env(t_env *env)
 {
-	t_env	*tmp;
-	int		count;
+	t_env	*tmp_env;
 
-	count = 0;
-	tmp = env;
-	while (tmp)
+	tmp_env = env;
+	while (tmp_env)
 	{
-		count++;
-		tmp = tmp->next;
+		printf("%s=%s\n", tmp_env->var, tmp_env->value);
+		tmp_env = tmp_env->next;
 	}
-	return (count);
-}
-
-char	**env_to_double_ptr(t_env *env)
-{
-	char	**output;
-	int		i;
-
-	output = malloc(sizeof(char *) * (count_env_variables(env) + 1));
-	if (!output)
-		return (NULL);
-	i = 0;
-	while (env)
-	{
-		output[i++] = ft_strdup(env->content);
-		env = env->next;
-	}
-	output[i] = NULL;
-	return (output);
 }

@@ -3,84 +3,135 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/04 11:07:08 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 20:08:50 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// void	create_pipes(t_pipex *pipex)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < (pipex->cmd_num - 1))
-// 	{
-// 		if (pipe(pipex->tubs + (2 * i)) == -1)
-// 		{
-// 			ft_free_all(pipex);
-// 			print_error(NULL, NULL, 1);
-// 		}
-// 		i++;
-// 	}
-// }
-
-// void	close_pipes(t_pipex *pipex)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (++i < (pipex->cmd_num - 1) * 2)
-// 	{
-// 		if (close (pipex->tubs[i]) == -1)
-// 		{
-// 			ft_free_all(pipex);
-// 			print_error(NULL, NULL, 1);
-// 		}
-// 	}
-// }
-
-// void	ft_wait(t_pipex pipex)
-// {
-// 	int	status_code;
-
-// 	pipex.cmd_id = -1;
-// 	status_code = 0;
-// 	while (++(pipex.cmd_id) < pipex.cmd_num)
-// 		waitpid(pipex.pid[pipex.cmd_id], &status_code, 0);
-// 	if ((status_code >> 8) > 0)
-// 		exit(status_code >> 8);
-// }
-
-void	exec_commands(t_list *cmd_list)
+int	count_nbr_commands(t_cmdshell *all_cmds)
 {
-	while (cmd_list)
+	t_cmdshell	*tmp;
+	int			count;
+
+	tmp = all_cmds;
+	count = 0;
+	while (tmp)
 	{
-		cmd_list = cmd_list->next;
+		count++;
+		if (tmp->cmds->operator == AND || tmp->cmds->operator == OR)
+			break ;
+		tmp = tmp->next;
 	}
-	// create_pipes(&pipex);
-	// while (++(pipex.cmd_id) < pipex.cmd_num)
-	// {
-	// 	pipex.pid[pipex.cmd_id] = fork();
-	// 	if (pipex.pid[pipex.cmd_id] == -1)
-	// 	{
-	// 		ft_free_all(&pipex);
-	// 		print_error(NULL, NULL, 1);
-	// 	}
-	// 	if (pipex.pid[pipex.cmd_id] == 0)
-	// 	{
-	// 		manage_pipes(&pipex);
-	// 		get_commands(&pipex);
-	// 		if (execve(pipex.valid_path, pipex.cmd_args, pipex.env) == -1)
-	// 		{
-	// 			ft_free_all(&pipex);
-	// 			print_error(NULL, NULL, 1);
-	// 		}
-	// 	}
-	// }
-	// close_pipes(&pipex);
-	// ft_wait(pipex);
+	return (count);
+}
+
+void	fill_exit_status(t_global *global, int count)
+{
+	int	i;
+	int	exit_status;
+
+	i = 0;
+	exit_status = 0;
+	if (count == 1 && global->all_commands->cmds->args \
+		&& is_builtin(global->all_commands->cmds->args->str))
+	{
+		free(global->pid);
+		return ;
+	}
+	while (i != count)
+		waitpid(global->pid[i++], &exit_status, 0);
+	if (exit_status == 2)
+		global->exit_status = 130;
+	else
+		global->exit_status = exit_status >> 8;
+	free(global->pid);
+	signal(SIGINT, sig_handl);
+}
+
+void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
+{
+	int	fd_tmp;
+
+	fd_tmp = -1;
+	if (count == 1 && cmd->cmds->args && is_builtin(cmd->cmds->args->str))
+	{
+		fd_tmp = manage_redirection_builtins(global, cmd);
+		if (fd_tmp == -2)
+			global->exit_status = 1;
+		else
+		{
+			builtins(global, cmd);
+			if (fd_tmp != -1)
+			{
+				dup2(fd_tmp, 1);
+				close (fd_tmp);
+			}
+		}
+		return ;
+	}
+	if (cmd->cmds->subshell)
+		run_subshell(global, cmd, i, count);
+	else
+		not_builtin(global, cmd, i, count);
+}
+
+t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
+{
+	int			count;
+	int			i;
+
+	i = 0;
+	count = count_nbr_commands(all_cmds);
+	global->pid = ft_calloc(count, sizeof(pid_t));
+	if (!global->pid)
+		print_error(NULL, NULL, 1);
+	global->prev_fd = -1;
+	while (all_cmds && i != count)
+	{
+		if (i < count - 1)
+			create_pipe(global);
+		all_cmds->cmds->args = args_expander(global, all_cmds->cmds->args);
+		exec_one_command(global, all_cmds, i, count);
+		if (count > 1)
+			close_pipe(global, count, i);
+		if (all_cmds->cmds->fd_herdoc != -2 && \
+		close (all_cmds->cmds->fd_herdoc) == -1)
+			print_error(NULL, NULL, 1);
+		i++;
+		all_cmds = all_cmds->next;
+	}
+	fill_exit_status(global, count);
+	return (all_cmds);
+}
+
+void	execution(t_global *global)
+{
+	t_cmdshell	*all_cmds;
+	int			cou_or;
+	int			cou_and;
+
+	all_cmds = global->all_commands;
+	cou_or = count_or(all_cmds);
+	cou_and = count_and(all_cmds);
+	while (1)
+	{
+		all_cmds = exec_commands(global, all_cmds);
+		if (all_cmds)
+		{
+			if (and(global, &all_cmds, cou_or) == 2)
+				continue ;
+			else if (and(global, &all_cmds, cou_or) == 1)
+				break ;
+			else if (or(global, &all_cmds, cou_and) == 2)
+				continue ;
+			else if (or(global, &all_cmds, cou_and) == 1)
+				break ;
+		}
+		else
+			break ;
+	}
 }

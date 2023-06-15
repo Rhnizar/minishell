@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:47:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/23 16:28:31 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:31:30 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	create_tokens(t_tokens **lst, char *str)
 
 	new = malloc(sizeof(t_tokens));
 	if (!new)
-		return ;
+		print_error(NULL, NULL, 1);
 	new->str = str;
 	new->next = NULL;
 	new->prev = NULL;
@@ -29,25 +29,10 @@ void	create_tokens(t_tokens **lst, char *str)
 		return ;
 	}
 	tmp = *lst;
-	while(tmp->next)
+	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
 	new->prev = tmp;
-}
-
-void	free_tokens(t_tokens *tokens)
-{
-	t_tokens	*tmp;
-	t_tokens	*tmp2;
-
-	tmp = tokens;
-	while (tmp)
-	{
-		tmp2 = tmp->next;
-		free (tmp->str);
-		free (tmp);
-		tmp = tmp2;
-	}
 }
 
 int	count_tokens(t_tokens *tokens)

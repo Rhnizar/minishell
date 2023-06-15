@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/05/28 14:45:05 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/15 21:29:47 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	here_doc_error_case(char *delimiter)
 	{
 		line = readline("> ");
 		if (!line)
-			break;
+			break ;
 		if (ft_strcmp(line, delimiter) == 0)
 			break ;
 		free(line);

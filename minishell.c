@@ -6,43 +6,57 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/05/28 14:08:43 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/15 20:52:49 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// CTRL + C ===> SIGINT
-// CTRL + D ===> EOF and SIGQUIT
-// CTRL + \ ===> SIGQUIT
+void	ctl_ter(void)
+{
+	struct termios	ter;
 
+	tcgetattr(0, &ter);
+	ter.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, 0, &ter);
+}
 
+int	g_r;
 void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (g_r == 0)
+			write(1, "\n", 1);
+		rl_catch_signals = 0;
+		close(0);
+		g_r += 1;
 	}
-	if (sig == SIGQUIT)
-		rl_redisplay();
 }
-
 
 int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-	(void)env;
 	char		*line;
 	t_global	*global;
+	int			tmp_gr;
+	int			fd;
 
 	signal(SIGINT, sig_handl);
-	signal(SIGQUIT, sig_handl);
+	signal(SIGQUIT, SIG_IGN);
+	ctl_ter();
+	init_global(&global, env);
+	fd = dup(0);
+	g_r = 0;
+	tmp_gr = 0;
 	while (1)
 	{
+		dup2(fd, 0);
+		rl_catch_signals = 1;
+		if (g_r != tmp_gr)
+			global->exit_status = 1;
+		tmp_gr = g_r;
 		line = readline("minishell ~ ");
 		if (line)
 		{
@@ -50,35 +64,21 @@ int	main(int argc, char **argv, char **env)
 				add_history(line);
 			else
 				continue ;
-			if (fill_global_struct(&global, line, env) == -1)
+			if (fill_global_struct(&global, line) == -1)
 				continue ;
-			printf("\n--------------------------------------------------------------------------\n");
-			while (global->all_commands)
-			{
-				printf("cmd ==> %s\n", global->all_commands->cmds->cmd);
-				printf("subshell ===> %s\n", global->all_commands->cmds->subshell);
-				printf("operator ===> %d\n", global->all_commands->cmds->operator);
-				printf("\n=======  all arguments  =======\n");
-				while(global->all_commands->cmds->args)
-				{
-					printf("arg : %s\n", global->all_commands->cmds->args->str);
-					global->all_commands->cmds->args = global->all_commands->cmds->args->next;
-				}
-				printf("\n======= all redirections =======\n");
-				while(global->all_commands->cmds->redis)
-				{
-					printf("red : %s\n", global->all_commands->cmds->redis->str);
-					printf("type red : %d\n", global->all_commands->cmds->redis->type);
-					printf("-----------------------------\n");
-					global->all_commands->cmds->redis = global->all_commands->cmds->redis->next;
-				}
-				global->all_commands = global->all_commands->next;
-				printf("\n---------------------------------END CMD-----------------------------------------\n");
-			}
+			execution(global);
+			free_commands(global->all_commands);
+			free(line);
 		}
 		else
-			break;
+		{
+			if (rl_catch_signals == 0)
+				continue ;
+			else
+				break ;
+		}
 	}
+	global_free(global);
 	printf("exit\n");
 	return (0);
 }
