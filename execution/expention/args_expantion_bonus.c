@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_expantion_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:16:37 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 10:23:29 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 11:06:45 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	add_expanded_to_args(t_args **args, char *expended)
 		if (ft_strchr(split[i], '*'))
 			wildcard_into_args(args, split[i]);
 		else
-			fill_list_args(args, remove_quotes(split[i]));
+			fill_list_args(args, ft_strdup(split[i]));
 		i++;
 	}
 	if (split)

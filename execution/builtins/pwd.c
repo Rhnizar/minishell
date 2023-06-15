@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:25:35 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/07 12:56:52 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/15 21:27:58 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	pwd(t_global *global)
 		printf("%s\n", cu_wo_di);
 	else
 	{
-		perror("bash");
+		perror("minishell");
 		global->exit_status = 1;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 20:33:58 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 18:48:52 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 20:15:24 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	fill_global_struct(t_global **global, char *line)
 		return (-1);
 	}
 	(*global)->all_commands = lst_cmd;
-	run_heredocs(*global);
+	if (run_heredocs(*global))
+		return (-1);
 	return (0);
 }

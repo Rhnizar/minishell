@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 20:23:08 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 20:08:50 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,16 @@ void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
 	if (count == 1 && cmd->cmds->args && is_builtin(cmd->cmds->args->str))
 	{
 		fd_tmp = manage_redirection_builtins(global, cmd);
-		builtins(global, cmd);
-		if (fd_tmp != -1)
+		if (fd_tmp == -2)
+			global->exit_status = 1;
+		else
 		{
-			dup2(fd_tmp, 1);
-			close (fd_tmp);
+			builtins(global, cmd);
+			if (fd_tmp != -1)
+			{
+				dup2(fd_tmp, 1);
+				close (fd_tmp);
+			}
 		}
 		return ;
 	}

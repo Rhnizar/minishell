@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redis_expantion_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 20:14:27 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 11:05:37 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	wildcard_into_redis(t_redis **redis, char *to_handle, int type)
 		print_error(EAMBGRD, to_handle, -1);
 		return (free_tokens(tokens), 1);
 	}
-	fill_list_redis(redis, remove_quotes(tokens->str), type);
+	fill_list_redis(redis, ft_strdup(tokens->str), type);
 	free_tokens(tokens);
 	return (0);
 }
@@ -49,7 +49,7 @@ char *token, int type)
 			return (free_double_ptr(split), 1);
 	}
 	else
-		fill_list_redis(redis, remove_quotes(split[0]), type);
+		fill_list_redis(redis, ft_strdup(split[0]), type);
 	return (free_double_ptr(split), 0);
 }
 

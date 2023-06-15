@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:24:38 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/14 20:20:36 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 12:43:33 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	builtins(t_global *global, t_cmdshell *all_cmds)
 	args = all_cmds->cmds->args;
 	command = all_cmds->cmds->args->str;
 	if (ft_strncmp("export", command, ft_strlen("export")) == 0)
-		add_to_export_or_print(&global->env, &global->export, args);
+		add_to_export_or_print(global, &global->env, &global->export, args);
 	if (ft_strncmp("env", command, ft_strlen("env")) == 0)
 		print_env(global->env);
 	if (ft_strncmp("unset", command, ft_strlen("unset")) == 0)
-		unset(&global->env, &global->export, args);
+		unset(global, &global->env, &global->export, args);
 	if (ft_strncmp("exit", command, ft_strlen("exit")) == 0)
 		exitt(global, args);
 	if (ft_strncmp("pwd", command, ft_strlen("pwd")) == 0)

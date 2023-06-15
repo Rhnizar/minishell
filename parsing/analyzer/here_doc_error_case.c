@@ -6,13 +6,12 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/04 18:58:37 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/15 21:29:47 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//need to add signal handler and remove fork
 static void	here_doc_error_case(char *delimiter)
 {
 	char	*line;

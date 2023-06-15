@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:03:23 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/14 20:19:16 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 21:18:45 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ static void	error_message(char *arg)
 	ft_putstr_fd(": numeric argument required\n", 2);
 }
 
-static long	my_ft_atoi(char *str)
+unsigned long	my_ft_atoi(char *str, int sign)
 {
-	int					sign;
 	unsigned long		ret;
 	int					i;
 
 	ret = 0;
-	sign = 1;
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
@@ -39,7 +37,8 @@ static long	my_ft_atoi(char *str)
 	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
 	{
 		ret = ret * 10 + str[i++] - '0';
-		if ((sign == -1 && ret - 1 > LONG_MAX) || (ret > LONG_MAX && sign == 1))
+		if (ret > 0 && ((sign == -1 && ret - 1 > LONG_MAX) \
+			|| (ret > LONG_MAX && sign == 1)))
 		{
 			error_message(str);
 			return (255);
@@ -53,13 +52,18 @@ int	check_arg(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
-	{
-		if (ft_isalpha(str[i]) == 1 || (str[i] == '-' && i != 0) \
-			|| (str[i] == '+' && i != 0))
-			return (1);
+	while (str[i] == ' ' || str[i] == '\t')
 		i++;
-	}
+	if (str[i] == '\0')
+		return (1);
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (ft_isdigit(str[i]))
+		i++;
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	if (str[i] != '\0')
+		return (1);
 	return (0);
 }
 
@@ -81,6 +85,6 @@ void	exitt(t_global *global, t_args *args)
 			exit(255);
 		}
 		else
-			exit(my_ft_atoi(args->next->str));
+			exit(my_ft_atoi(args->next->str, 1));
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 12:32:56 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/14 13:31:19 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 21:25:46 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ void	unset_var(t_env **env_exp, char *var)
 	free(del_node);
 }
 
-void	unset(t_env **env, t_env **export, t_args *args)
+void	call_unset(t_env **env, t_env **export, char *str)
+{
+	unset_var(export, str);
+	unset_var(env, str);
+}
+
+void	unset(t_global *global, t_env **env, t_env **export, t_args *args)
 {
 	t_args	*tmp_args;
 
@@ -58,12 +64,15 @@ void	unset(t_env **env, t_env **export, t_args *args)
 				if (identifier(tmp_args->str, "unset") == 1)
 				{
 					if (tmp_args->str[0] == '#')
+					{
+						global->exit_status = 0;
 						break ;
+					}
 					tmp_args = tmp_args->next;
+					global->exit_status = 1;
 					continue ;
 				}
-				unset_var(export, tmp_args->str);
-				unset_var(env, tmp_args->str);
+				call_unset(env, export, tmp_args->str);
 				tmp_args = tmp_args->next;
 			}
 		}

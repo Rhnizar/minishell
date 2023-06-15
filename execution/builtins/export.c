@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/10 11:33:19 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/15 21:29:10 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	add_env_exp2(t_env **export, t_env **env, char *str, size_t equal)
 
 static void	error_message(char *arg, char *message)
 {
-	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": `", 2);
 	ft_putstr_fd(message, 2);
@@ -67,7 +67,7 @@ int	identifier(char *str, char *exp_uns)
 	return (0);
 }
 
-void	add_env_exp3(t_env **env, t_env **export, t_args *arg)
+void	add_env_exp3(t_env **env, t_env **export, t_args *arg, int *check_exit)
 {
 	size_t		equal;
 	char		*var;
@@ -78,6 +78,7 @@ void	add_env_exp3(t_env **env, t_env **export, t_args *arg)
 		{
 			if (arg->str[0] == '#')
 				break ;
+			*check_exit = 1;
 			arg = arg->next;
 			continue ;
 		}
@@ -95,18 +96,25 @@ void	add_env_exp3(t_env **env, t_env **export, t_args *arg)
 	}
 }
 
-void	add_to_export_or_print(t_env **env, t_env **export, t_args *args)
+void	add_to_export_or_print(t_global *global, t_env **env, \
+	t_env **export, t_args *args)
 {
 	t_args		*arg;
+	int			check_exit;
 
+	check_exit = 0;
 	if (args)
 	{
 		if (!args->next || (args->next && args->next->str[0] == '#'))
+		{
 			print_export(*export);
+			global->exit_status = 0;
+		}
 		else
 		{
 			arg = args->next;
-			add_env_exp3(env, export, arg);
+			add_env_exp3(env, export, arg, &check_exit);
+			global->exit_status = check_exit;
 		}
 	}
 }

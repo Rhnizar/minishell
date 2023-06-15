@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 08:22:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/08 18:11:26 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:08:55 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,40 +45,27 @@ static void	error_message(char *arg, char *message)
 	ft_putstr_fd("\n", 2);
 }
 
-void	check_dir(t_global *global, char *dir, char *cu_wo_di, char *str)
-{
-	if (chdir(str) == -1)
-	{
-		dir = ft_strjoin(ft_strdup(cu_wo_di), "/");
-		dir = ft_strjoin(dir, str);
-		if (chdir(dir) == -1)
-		{
-			error_message(str, strerror(errno));
-			global->exit_status = 1;
-		}
-		else
-			global->exit_status = 0;
-		free(dir);
-	}
-	else
-		global->exit_status = 0;
-}
-
 void	cd(t_global *global, t_args	*args, t_env *export)
 {
-	char	cu_wo_di[PATH_MAX];
 	char	*dir;
 
 	dir = NULL;
 	if (args && args->next)
 	{
-		if (getcwd(cu_wo_di, sizeof(cu_wo_di)) != NULL)
-			check_dir(global, dir, cu_wo_di, args->next->str);
-		else
+		if (chdir(args->next->str) == -1)
 		{
-			perror("minishell");
-			global->exit_status = 1;
+			dir = ft_strjoin(ft_strdup("./"), args->next->str);
+			if (chdir(dir) == -1)
+			{
+				error_message(args->next->str, strerror(errno));
+				global->exit_status = 1;
+			}
+			else
+				global->exit_status = 0;
+			free(dir);
 		}
+		else
+			global->exit_status = 0;
 	}
 	else
 		cd_no_arg(global, args, export);
