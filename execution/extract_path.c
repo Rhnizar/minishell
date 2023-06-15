@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 21:10:32 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/15 22:11:42 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,29 @@ static char	*ft_join_command_path(char *path, char *cmd)
 	return (output);
 }
 
+/* Check the existance of a command and it's permission*/
+int	check_permission(char *cmd)
+{
+	struct stat	file_state;
+
+	lstat(cmd, &file_state);
+	if (S_ISDIR(file_state.st_mode))
+		print_error(EIAD, cmd, 126);
+	if (!S_ISREG(file_state.st_mode))
+		print_error(NULL, cmd, 126);
+	if (access(cmd, X_OK) == -1)
+		print_error(EPD, cmd, 126);
+	return (1);
+}
+
 /* get the exact command path */
 char	*valid_command_path(char **paths, char *cmd)
 {
 	char	*command_path;
 
 	command_path = NULL;
-	// still need to be handled
-	// if (access(cmd, F_OK) == 0 && ft_strchr(cmd, '/') && access(cmd, X_OK) == -1)
-	// {
-	// 	print_error(EPD, cmd, 126);
-	// 	return (NULL);
-	// }
-	if (ft_strchr(cmd, '/'))
-	{
+	if (ft_strchr(cmd, '/') && check_permission(cmd))
 		return (cmd);
-	// 	if (access(cmd, F_OK) == -1)
-	// 		print_error(ENSFD, cmd, 127);
-	// 	if (access(cmd, F_OK) == 0)
-	// 		print_error(EIAD, cmd, 126);
-	// 	return (NULL);
-	}
 	while (paths && *paths)
 	{
 		command_path = ft_join_command_path(*paths, cmd);
@@ -83,7 +85,8 @@ char	*handle_current_dir(char *to_handle)
 	{
 		if (i == 0 && to_handle[i] == ':')
 			output = join_to_str(output, '.');
-		else if (to_handle[i] == ':' && to_handle[i + 1] && to_handle[i + 1] == ':')
+		else if (to_handle[i] == ':' && to_handle[i + 1] \
+		&& to_handle[i + 1] == ':')
 		{
 			output = join_to_str(output, to_handle[i++]);
 			output = join_to_str(output, '.');

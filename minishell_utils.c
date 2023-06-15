@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/13 11:35:22 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/15 22:12:10 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,36 @@ char	*join_to_str(char *str, char c)
 	return (output);
 }
 
-void	print_error(char *msg, char *arg, int status)
+static void	detect_error(char *msg, char *arg)
 {
 	char	*error_msg;
 
-	if (msg && !arg)
-		ft_putstr_fd(msg, 2);
-	else if (!msg && !arg)
+	if (!msg && !arg)
 	{
 		error_msg = ft_strjoin(ft_strdup("minishell: "), strerror(errno));
 		ft_putstr_fd(error_msg, 2);
 		ft_putchar_fd('\n', 2);
 		free (error_msg);
 	}
+	else if (!msg && arg)
+	{
+		arg = ft_strjoin(ft_strdup("minishell: "), arg);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putchar_fd('\n', 2);
+		free (arg);
+	}
+}
+
+void	print_error(char *msg, char *arg, int status)
+{
+	char	*error_msg;
+
+	if (msg && !arg)
+		ft_putstr_fd(msg, 2);
+	else if ((!msg && !arg) || (!msg && arg))
+		detect_error(msg, arg);
 	else
 	{
 		arg = ft_strjoin(ft_strdup("minishell: "), arg);
