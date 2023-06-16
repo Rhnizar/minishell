@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 11:07:55 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/16 18:03:11 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 22:05:11 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ t_env *env, int exit_status)
 		if (!ft_strcmp(tmp->str, "$"))
 		{
 			output = expantion_dollar_case(&tmp, env, output, exit_status);
-			if (!tmp->next)
+			if (!tmp)
 				break ;
+			exit (1);
 		}
 		else if (!ft_strcmp(tmp->str, "'") || !ft_strcmp(tmp->str, "\""))
 			output = expantion_quote_case(&tmp, env, output, exit_status);

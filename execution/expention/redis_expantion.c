@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 20:05:42 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 21:11:29 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 int	has_space_only(char *str)
 {
 	int	i;
-
+	char	*new;
 	i = 0;
-	while (str && (str[i] == ' ' || str[i] == '\t'))
+	new = remove_quotes(str);
+	while (new && (new[i] == ' ' || new[i] == '\t'))
 		i++;
-	if (str && i > 0 && str[i] == 0)
-		return (1);
-	return (0);
+	if (new && i > 0 && new[i] == 0)
+		return (free(new), 1);
+	return (free(new), 0);
 }
 
 int	add_expanded_to_redis(t_redis **redis, char *expended, \
