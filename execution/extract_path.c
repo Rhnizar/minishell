@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 22:11:42 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/15 23:52:43 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_permission(char *cmd)
 	if (S_ISDIR(file_state.st_mode))
 		print_error(EIAD, cmd, 126);
 	if (!S_ISREG(file_state.st_mode))
-		print_error(NULL, cmd, 126);
+		print_error(NULL, cmd, 127);
 	if (access(cmd, X_OK) == -1)
 		print_error(EPD, cmd, 126);
 	return (1);

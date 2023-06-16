@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/15 22:18:51 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/06/15 22:32:29 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,8 +78,8 @@ OBJS_B = $(SRCS_B:.c=.o)
 
 #214 leaks the readline
 
-RDL = -lreadline \
-	  -L/goinfre/kchaouki/brew/opt/readline/lib
+RDL = -lreadline 
+# -L/goinfre/kchaouki/brew/opt/readline/lib
 
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
@@ -90,7 +90,8 @@ all: $(LIBFT) $(NAME)
 $(LIBFT):
 	make -C libft && make clean -C libft
 %.o : %.c
-	$(CCe) $(FLAGS) -I/goinfre/kchaouki/brew/opt/readline/include -c $< -o $@
+	$(CCe) $(FLAGS) -c $< -o $@
+# $(CCe) $(FLAGS) -I/goinfre/kchaouki/brew/opt/readline/include -c $< -o $@
 
 $(NAME): $(OBJS_M) minishell.h
 	$(CCe) $(FLAGS) $(OBJS_M) $(RDL) $(LIBFT) -o $(NAME)

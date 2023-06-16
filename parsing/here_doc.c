@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:35:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 20:15:15 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/16 00:34:25 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*herdoc_expander(t_global *global, char *line)
+static char	*herdoc_expander(t_global *global, char *line, char *delem)
 {
 	t_args	*arg;
 	t_args	*new_arg;
 	char	*output;
 
 	arg = NULL;
-	fill_list_args(&arg, ft_strdup(line));
-	if (ft_strchr(line, '"') || ft_strchr(line, '\''))
+	if (ft_strchr(delem, '"') || ft_strchr(delem, '\''))
 		return (ft_strdup(line));
 	else
+	{
+		fill_list_args(&arg, ft_strdup(line));
 		new_arg = args_expander(global, arg);
+	}
 	output = ft_strdup(new_arg->str);
 	free_args(new_arg);
 	return (output);
@@ -35,6 +37,7 @@ static int	here_doc(t_global *global, char *delimiter)
 	int		fd[2];
 	int		read_fd;
 	char	*expanded_line;
+	char	*delem;
 
 	if (pipe(fd) == -1)
 		return (print_error(NULL, NULL, -1), -1);
@@ -42,19 +45,21 @@ static int	here_doc(t_global *global, char *delimiter)
 	if (close (fd[0]) == -1)
 		return (print_error(NULL, NULL, -1), -1);
 	expanded_line = NULL;
+	delem = remove_quotes(delimiter);
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
 			return (-3);
-		if (ft_strcmp(line, delimiter) == 0)
+		if (ft_strcmp(line, delem) == 0)
 			break ;
-		expanded_line = herdoc_expander(global, line);
+		expanded_line = herdoc_expander(global, line, delimiter);
 		ft_putstr_fd(expanded_line, fd[1]);
 		ft_putstr_fd("\n", fd[1]);
 		free(expanded_line);
 		free(line);
 	}
+	free(delem);
 	free(line);
 	if (close (fd[1]) == -1)
 		return (print_error(NULL, NULL, -1), -1);

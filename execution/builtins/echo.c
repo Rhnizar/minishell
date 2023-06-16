@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 09:07:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/08 21:45:41 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/16 00:51:47 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,23 @@ int	check_opt(char *str)
 void	echo2(t_args *tmp_args)
 {
 	int	r;
+	int	check;
 
 	r = 0;
+	check = 0;
 	while (tmp_args)
 	{
-		if (check_opt(tmp_args->str) == 1)
+		while (check_opt(tmp_args->str) == 1 && check == 0)
 		{
 			r = 1;
 			tmp_args = tmp_args->next;
 			continue ;
 		}
 		if (tmp_args->next)
+		{
+			check = 1;
 			printf("%s ", tmp_args->str);
+		}
 		else
 			printf("%s", tmp_args->str);
 		tmp_args = tmp_args->next;

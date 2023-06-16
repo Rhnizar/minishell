@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:20:27 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/15 22:11:55 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 00:09:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ t_recipe	prepare_command(t_global *global, t_cmdshell *all_cmds)
 
 	output.command = NULL;
 	paths = get_paths(global->env);
-	if (!all_cmds->cmds->args)
+	if (all_cmds->cmds->args == NULL)
 		exit(0);
+	if (all_cmds->cmds->args->str[0] == '\0')
+		print_error(ECNF, all_cmds->cmds->args->str, 127);
 	output.args = get_args(all_cmds);
 	output.command = valid_command_path(paths, output.args[0]);
 	free_double_ptr(paths);
