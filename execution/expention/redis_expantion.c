@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 21:11:29 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 00:12:18 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,44 @@ int	has_space_only(char *str)
 	return (free(new), 0);
 }
 
+// char	*remove_spaces(char *str)
+// {
+// 	char	*output;
+// 	int		i;
+
+// 	i = 0;
+// 	output = NULL;
+// 	while (str[i] && (str[i] == '\t' || str[i] == ' '))
+// 		i++;
+// 	while (str[i])
+// 		output = join_to_str(output, str[i++]);
+// 	i = ft_strlen(output);
+// 	while (str[i] && (str[i] == '\t' || str[i] == ' '))
+// 		i--;
+	
+// 	free(str);
+// 	return (output);
+// }
+
 int	add_expanded_to_redis(t_redis **redis, char *expended, \
 char *token, int type)
 {
 	char		**split;
 
-	if ((expended == NULL || expended[0] == '\0' || has_space_only(expended)) && type <= 3 && type != 1)
+	if ((expended == NULL || expended[0] == '\0' || has_space_only(expended)))
 	{
 		print_error(EAMBGRD, token, -1);
 		return (1);
 	}
 	split = split_expended(expended);
-	if (type <= 3 && type != 1 && count_split(split) > 1)
+	if (count_split(split) > 1)
 	{
 		print_error(EAMBGRD, token, -1);
 		return (free_double_ptr(split), 1);
 	}
 	else if (split)
 		fill_list_redis(redis, remove_quotes(split[0]), type);
+		// fill_list_redis(redis, ft_strtrim(remove_quotes(split[0]), " \t"), type);
 	return (free_double_ptr(split), 0);
 }
 

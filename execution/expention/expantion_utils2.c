@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:30:45 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 11:13:32 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 00:27:36 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,14 @@ static int	split_quote_case(char *token, int *j, char	**to_split)
 	if (!token[i])
 		return (1);
 	(*to_split) = join_to_str((*to_split), token[i]);
+	// if (i == 1)
+	// {
+	// 	i++;
+	// 	while (token[i] && ft_strchr(" \t", token[i]))
+	// 		(*to_split) = join_to_str((*to_split), token[i++]);
+	// 	if (!token[i])
+	// 		return (1);
+	// }
 	(*j) += i;
 	return (0);
 }

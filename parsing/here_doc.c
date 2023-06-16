@@ -6,28 +6,45 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:35:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 00:34:25 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 00:23:51 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static char	*expanded_into_heredoc(char *token, t_global *global)
+{
+	t_tokens	*tokens;
+	t_tokens	*tmp;
+	char		*output;
+
+	tokens = expantion_tokenizer(token);
+	output = ((tmp = tokens), NULL);
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->str, "$"))
+		{
+			output = expantion_dollar_case(&tmp, global->env, \
+			output, global->exit_status);
+			if (!tmp)
+				break ;
+		}
+		else
+			output = ft_strjoin(output, tmp->str);
+		tmp = tmp->next;
+	}
+	free_tokens(tokens);
+	return (output);
+}
+
 static char	*herdoc_expander(t_global *global, char *line, char *delem)
 {
-	t_args	*arg;
-	t_args	*new_arg;
 	char	*output;
 
-	arg = NULL;
 	if (ft_strchr(delem, '"') || ft_strchr(delem, '\''))
 		return (ft_strdup(line));
 	else
-	{
-		fill_list_args(&arg, ft_strdup(line));
-		new_arg = args_expander(global, arg);
-	}
-	output = ft_strdup(new_arg->str);
-	free_args(new_arg);
+		output = expanded_into_heredoc(line, global);
 	return (output);
 }
 

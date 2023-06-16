@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 21:12:31 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:37:11 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,17 @@ char *token, int type)
 {
 	char		**split;
 
-	if ((expended == NULL || expended[0] == '\0' || has_space_only(expended)) && type <= 3 && type != 1)
+	if ((expended == NULL || expended[0] == '\0' || has_space_only(expended)))
 	{
 		print_error(EAMBGRD, token, -1);
 		return (1);
 	}
 	split = split_expended(expended);
-	if (type <= 3 && type != 1 && count_split(split) > 1)
+	if (count_split(split) > 1)
 	{
 		print_error(EAMBGRD, token, -1);
 		return (free_double_ptr(split), 1);
 	}
-	
 	if (split && ft_strchr(split[0], '*'))
 	{
 		if (wildcard_into_redis(redis, split[0], type))
