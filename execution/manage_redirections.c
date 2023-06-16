@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:41:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 14:37:33 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:08:14 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int *fd_read, int *fd_write)
 
 	new_redi = NULL;
 	new_redi = redis_expander(global, tmp);
+	if (tmp && new_redi == NULL)
+		return (-1);
 	if (tmp->type == FILE_IN)
 	{
 		if (*fd_read != -1)

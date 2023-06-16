@@ -1,7 +1,12 @@
 pwd >> b$ //redis for builting sigv
 
+redis for builtins
+<< eof echo < bar
+
+embig:
+echo a > $space
+
 expantion:
-$_x
 // echo foo$a"bar" => foo bbar
 
 

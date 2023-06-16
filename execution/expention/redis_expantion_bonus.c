@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redis_expantion_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 11:05:37 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:19:32 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char *token, int type)
 {
 	char		**split;
 
-	if (!expended && type <= 3 && type != 1)
+	if ((expended == NULL || expended[0] == '\0') && type <= 3 && type != 1)
 	{
 		print_error(EAMBGRD, token, -1);
 		return (1);
@@ -43,7 +43,7 @@ char *token, int type)
 		print_error(EAMBGRD, token, -1);
 		return (free_double_ptr(split), 1);
 	}
-	if (ft_strchr(split[0], '*'))
+	if (split && ft_strchr(split[0], '*'))
 	{
 		if (wildcard_into_redis(redis, split[0], type))
 			return (free_double_ptr(split), 1);
