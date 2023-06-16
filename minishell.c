@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/15 23:13:00 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:34:19 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ int	main(int argc, char **argv, char **env)
 			global->exit_status = 1;
 		tmp_gr = g_r;
 		line = readline("minishell ~ ");
+		// if (isatty(0))
+		// else
+		// {
+			// line = get_next_line(0);
+			// line = ft_strtrim(line, "\n");
+		// }
 		if (line)
 		{
 			if (line[0] != 0)

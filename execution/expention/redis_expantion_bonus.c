@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 11:19:32 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 20:05:35 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,47 @@ static int	wildcard_into_redis(t_redis **redis, char *to_handle, int type)
 	return (0);
 }
 
+int	has_space_only(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && (str[i] == ' ' || str[i] == '\t'))
+		i++;
+	if (str && i > 0 && str[i] == 0)
+		return (1);
+	return (0);
+}
+
+// int	check_ambiguous(char *str)
+// {
+// 	int	i;
+
+// 	if ((expended == NULL || expended[i] == '\0' || has_space_only(remove_quotes(expended))) && type <= 3 && type != 1)
+// 	{
+// 		print_error(EAMBGRD, token, -1);
+// 		return (1);
+// 	}
+// 	split = split_expended(expended);
+// 	if (type <= 3 && type != 1 && count_split(split) > 1)
+// 	{
+// 		print_error(EAMBGRD, token, -1);
+// 		return (free_double_ptr(split), 1);
+// 	}
+// 	i = 0;
+// 	while (str && str[i] == ' ' || str[i] = '\t')
+// 		i++;
+// 	if (str && && i > 0 && str[i] == 0)
+// 		return (1);
+// 	return (0);
+// }
+
 int	add_expanded_to_redis(t_redis **redis, char *expended, \
 char *token, int type)
 {
 	char		**split;
 
-	if ((expended == NULL || expended[0] == '\0') && type <= 3 && type != 1)
+	if ((expended == NULL || expended[0] == '\0' || has_space_only(remove_quotes(expended))) && type <= 3 && type != 1)
 	{
 		print_error(EAMBGRD, token, -1);
 		return (1);
@@ -43,6 +78,7 @@ char *token, int type)
 		print_error(EAMBGRD, token, -1);
 		return (free_double_ptr(split), 1);
 	}
+	
 	if (split && ft_strchr(split[0], '*'))
 	{
 		if (wildcard_into_redis(redis, split[0], type))

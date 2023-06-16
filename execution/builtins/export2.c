@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:19:01 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/06 10:11:15 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:51:47 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,19 @@ void	print_export(t_env *export)
 	while (tmp_export)
 	{
 		if (tmp_export->value != NULL)
-			printf("declare -x %s=\"%s\"\n", tmp_export->var, tmp_export->value);
-		else
-			printf("declare -x %s\n", tmp_export->var);
+        {
+            ft_putstr_fd("declare -x ", 1);
+            ft_putstr_fd(tmp_export->var, 1);
+            ft_putstr_fd("=\"", 1);
+            ft_putstr_fd(tmp_export->value, 1);
+            ft_putstr_fd("\"\n", 1);
+        }
+        else
+        {
+            ft_putstr_fd("declare -x ", 1);
+            ft_putstr_fd(tmp_export->var, 1);
+            ft_putstr_fd("\n", 1);
+        }
 		tmp_export = tmp_export->next;
 	}
 }

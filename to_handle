@@ -18,3 +18,8 @@ cat$
 export _@=foo
 
 
+
+minishell ~ export o="k"
+minishell ~ export p="$o"
+minishell ~ echo $p
+"k"

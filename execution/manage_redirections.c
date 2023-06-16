@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:41:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 11:08:14 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:05:35 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,23 +92,20 @@ int	manage_redirection_builtins(t_global *global, t_cmdshell *cmd)
 {
 	int	fd_read;
 	int	fd_write;
-	int	fd_tmp;
+	int	stdout_copy;
 
 	fd_read = -2;
 	fd_write = -2;
-	fd_tmp = -1;
-	if (cmd->cmds->fd_herdoc != -2)
-		close (cmd->cmds->fd_herdoc);
+	stdout_copy = -2;
 	if (open_redis(global, cmd->cmds->redis, &fd_read, &fd_write))
 		return (-2);
 	if (fd_read != -1)
 		close (fd_read);
 	if (fd_write != -1)
 	{
-		fd_tmp = dup(1);
+		stdout_copy = dup(1);
 		dup2(fd_write, 1);
-	}
-	if (fd_write != -1)
 		close (fd_write);
-	return (fd_tmp);
+	}
+	return (stdout_copy);
 }

@@ -6,18 +6,30 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 11:22:01 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 20:05:42 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	has_space_only(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && (str[i] == ' ' || str[i] == '\t'))
+		i++;
+	if (str && i > 0 && str[i] == 0)
+		return (1);
+	return (0);
+}
 
 int	add_expanded_to_redis(t_redis **redis, char *expended, \
 char *token, int type)
 {
 	char		**split;
 
-	if ((expended == NULL || expended[0] == '\0') && type <= 3 && type != 1)
+	if ((expended == NULL || expended[0] == '\0' || has_space_only(expended)) && type <= 3 && type != 1)
 	{
 		print_error(EAMBGRD, token, -1);
 		return (1);

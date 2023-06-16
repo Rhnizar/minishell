@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 00:38:09 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 20:16:11 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static char	*handle_non_alnum(char	*output, t_tokens **tmp, int exit_status)
 		output = ft_strjoin(output, status);
 		free (status);
 	}
+	else if (!ft_strcmp((*tmp)->str, "@"))
+		return (output);
 	else
 	{
 		output = ft_strjoin(output, (*tmp)->prev->str);

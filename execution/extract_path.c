@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 23:52:43 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:53:44 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char	*valid_command_path(char **paths, char *cmd)
 		command_path = ft_join_command_path(".", cmd);
 		if (access(command_path, F_OK) == 0)
 			return (command_path);
+		else
+			print_error(ENSFD, cmd, 127);
 	}
 	if (!command_path)
 		print_error(ECNF, cmd, 127);

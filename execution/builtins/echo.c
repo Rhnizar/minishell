@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 09:07:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/16 00:51:47 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:15:22 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,15 @@ void	echo2(t_args *tmp_args)
 		if (tmp_args->next)
 		{
 			check = 1;
-			printf("%s ", tmp_args->str);
+			ft_putstr_fd(tmp_args->str, 1);
+			ft_putstr_fd(" ", 1);
 		}
 		else
-			printf("%s", tmp_args->str);
+			ft_putstr_fd(tmp_args->str, 1);
 		tmp_args = tmp_args->next;
 	}
 	if (r == 0)
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 }
 
 void	echo(t_global *global, t_args *args)
@@ -68,7 +69,7 @@ void	echo(t_global *global, t_args *args)
 			echo2(tmp_args);
 		}
 		else
-			printf("\n");
+			ft_putstr_fd("\n", 1);
 		global->exit_status = 0;
 	}
 }
