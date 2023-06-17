@@ -6,22 +6,14 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 11:49:41 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:58:41 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ctl_ter(void)
-{
-	struct termios	ter;
-
-	tcgetattr(0, &ter);
-	ter.c_lflag &= ~ECHOCTL;
-	tcsetattr(0, 0, &ter);
-}
-
 int	g_r;
+
 void	sig_handl(int sig)
 {
 	if (sig == SIGINT)
@@ -61,18 +53,24 @@ int	minishell(t_global *global)
 	return (2);
 }
 
+int	finish(t_global *global)
+{
+	int	final_exit;
+
+	final_exit = global->exit_status;
+	global_free(global);
+	ft_putstr_fd("exit\n", 2);
+	return (final_exit);
+}
+
 int	main(int argc, char **argv, char **env)
 {
-	(void) argc;
-	(void) argv;
 	t_global	*global;
 	int			tmp_gr;
 	int			fd;
-	int			final_exit;
 
-	signal(SIGINT, sig_handl);
-	signal(SIGQUIT, SIG_IGN);
-	ctl_ter();
+	(void) argc;
+	(void) argv;
 	init_global(&global, env);
 	fd = dup(0);
 	g_r = 0;
@@ -89,8 +87,5 @@ int	main(int argc, char **argv, char **env)
 		else
 			break ;
 	}
-	final_exit = global->exit_status;
-	global_free(global);
-	printf("exit\n");
-	return (final_exit);
+	return (finish(global));
 }

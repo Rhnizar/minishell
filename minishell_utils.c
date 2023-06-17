@@ -6,14 +6,26 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:39:59 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 11:49:51 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:57:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	ctl_ter(void)
+{
+	struct termios	ter;
+
+	tcgetattr(0, &ter);
+	ter.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, 0, &ter);
+}
+
 int	init_global(t_global **global, char **env)
 {
+	signal(SIGINT, sig_handl);
+	signal(SIGQUIT, SIG_IGN);
+	ctl_ter();
 	*global = malloc(sizeof(t_global));
 	if (!*global)
 		print_error(NULL, NULL, 1);
@@ -22,6 +34,7 @@ int	init_global(t_global **global, char **env)
 	(*global)->export = _export((*global)->env);
 	(*global)->prev_fd = -1;
 	(*global)->all_commands = NULL;
+	(*global)->pid = NULL;
 	return (0);
 }
 

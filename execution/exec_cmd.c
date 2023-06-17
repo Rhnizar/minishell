@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 12:11:43 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:31:16 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, \
 {
 	t_recipe	recipe;
 
-	(void) i;
-	(void) count;
-	// read_write_pipe(global, all_cmds, i, count);
-	// if (manage_redirection(global, all_cmds->cmds->redis))
-	// 	exit(1);
+	read_write_pipe(global, all_cmds, i, count);
+	if (manage_redirection(global, all_cmds->cmds->redis))
+		exit(1);
 	if (all_cmds->cmds->args && is_builtin(all_cmds->cmds->args->str))
 	{
 		builtins(global, all_cmds);
@@ -51,5 +49,17 @@ void	not_builtin(t_global *global, t_cmdshell *all_cmds, int i, int count)
 	{
 		signal(SIGINT, SIG_DFL);
 		exec_cmd_with_pipe(global, all_cmds, i, count);
+	}
+}
+
+void	alloc_pid(t_global *global, t_cmdshell *all_cmds, int count)
+{
+	if (count == 1 && is_builtin(all_cmds->cmds->args->str))
+		global->pid = NULL;
+	else
+	{
+		global->pid = ft_calloc(count, sizeof(pid_t));
+		if (!global->pid)
+			print_error(NULL, NULL, 1);
 	}
 }

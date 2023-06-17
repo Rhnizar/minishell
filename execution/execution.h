@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 01:16:56 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:35:31 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	EXECUTION_H
+#ifndef EXECUTION_H
 # define EXECUTION_H
 
 typedef struct s_vars
@@ -33,8 +33,10 @@ int			append_output(char *outfile);
 char		*remove_quotes(char *str);
 t_tokens	*expantion_tokenizer(char *token);
 char		*get_value(char *to_expand, t_env *env);
-char		*expantion_quote_case(t_tokens **tmp, t_env *env, char *old, int exit_status);
-char		*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old, int exit_status);
+char		*expantion_quote_case(t_tokens **tmp, t_env *env, char *old, \
+	int exit_status);
+char		*expantion_dollar_case(t_tokens **tmp, t_env *env, char *old, \
+	int exit_status);
 void		add_expanded_to_args(t_args **args, char *expended);
 int			add_expanded_to_redis(t_redis **redis, char *expended, \
 			char *token, int type);
@@ -50,4 +52,4 @@ int			has_space_only(char *str);
 char		*redis_value(char **split);
 /*========= end expender =============*/
 
-# endif
+#endif
