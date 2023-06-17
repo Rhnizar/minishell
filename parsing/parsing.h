@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 20:13:32 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:19:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <string.h>
 # include <fcntl.h>
 # include <sys/errno.h>
@@ -148,7 +146,7 @@ void			check_node1(t_cmds **cmd, t_tokens *tmp, t_utils *utils);
 void			fill_list_redis(t_redis **lst, char *str, int type);
 void			fill_list_args(t_args **lst, char *str);
 t_tokens		*fill_struct_cmds(t_cmds *cmds, \
-	t_tokens *tokens, t_utils *utils);
+				t_tokens *tokens, t_utils *utils);
 /*========= end parser =============*/
 
 #endif

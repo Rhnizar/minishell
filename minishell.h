@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 14:57:20 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:18:28 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <dirent.h>
 # include <sys/stat.h>
 
-# define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\
-/usr/local/munki"
 # define EIAD ": is a directory\n"
 # define ENSFD ": No such file or directory\n"
 # define ECNF ": command not found\n"
@@ -52,13 +50,6 @@ typedef struct s_global
 	t_env		*export;
 	t_cmdshell	*all_commands;
 }			t_global;
-
-typedef struct s_recipe
-{
-	char	*command;
-	char	**args;
-	char	**envp;
-}	t_recipe;
 
 int			init_global(t_global **global, char **env);
 int			fill_global_struct(t_global **global, char *line);

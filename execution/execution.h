@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 14:35:31 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:18:34 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ typedef struct s_vars
 	int		last_s;
 	int		last_p;
 }	t_vars;
+
+typedef struct s_recipe
+{
+	char	*command;
+	char	**args;
+	char	**envp;
+}	t_recipe;
 
 char		*valid_command_path(char **paths, char *cmd);
 char		**get_paths(t_env *env);
