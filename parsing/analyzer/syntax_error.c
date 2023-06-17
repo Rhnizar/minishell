@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:56:35 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 17:41:07 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:02:40 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	syntax_error_handler(t_tokens *tokens)
 		tmp = tmp->next;
 	}
 	if (check.par > 0)
-		return (here_doc_befor_error(check.all_tokens, check.index_par), \
+		return (free_double_ptr(check.sep), \
+		here_doc_befor_error(check.all_tokens, check.index_par), \
 		syntx_error("("), 258);
 	return (free_double_ptr(check.sep), 0);
 }

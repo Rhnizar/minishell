@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 17:56:14 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:16:44 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	execution(t_global *global)
 	all_cmds = global->all_commands;
 	cou_or = count_or(all_cmds);
 	cou_and = count_and(all_cmds);
-	while (1)
+	while (all_cmds)
 	{
 		all_cmds = exec_commands(global, all_cmds);
 		if (all_cmds)

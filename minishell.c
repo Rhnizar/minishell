@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 18:17:10 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:17:40 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	minishell(t_global *global)
 		else
 			return (2);
 		if (fill_global_struct(&global, line) == -1)
-			return (2);
+			return (free(line), 2);
 		execution(global);
 		free_commands(global->all_commands);
 		free(line);

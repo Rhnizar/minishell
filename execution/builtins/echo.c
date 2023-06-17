@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 09:07:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 17:31:00 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:22:14 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ int	check_opt(char *str)
 	return (1);
 }
 
-void	echo2(t_args *tmp_args)
+void	echo2(t_args *tmp_args, int check)
 {
 	int	r;
-	int	check;
 
 	r = 0;
-	check = 0;
 	while (tmp_args)
 	{
 		while (check_opt(tmp_args->str) == 1 && check == 0)
@@ -70,7 +68,7 @@ void	echo(t_global *global, t_args *args)
 		if (args->next)
 		{
 			tmp_args = args->next;
-			echo2(tmp_args);
+			echo2(tmp_args, 0);
 		}
 		else
 			ft_putstr_fd("\n", 1);
