@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 11:07:55 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 01:16:42 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 08:28:49 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ void	expanded_into_args(t_args **args, char *token, t_global *global)
 	{
 		if (!ft_strcmp(tmp->str, "$"))
 		{
+			output = join_to_str(output, '\x01');
 			output = expantion_dollar_case(&tmp, global->env, \
 			output, global->exit_status);
+			output = join_to_str(output, '\x01');
 			if (!tmp)
 				break ;
 		}

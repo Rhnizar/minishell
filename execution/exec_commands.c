@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 13:05:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 08:37:12 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,9 @@ void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
 		if (stdout_copy == -2)
 			global->exit_status = 1;
 		else
-		{
 			builtins(global, cmd);
-			dup2(stdout_copy, 1);
-			close (stdout_copy);
-		}
+		dup2(stdout_copy, 1);
+		close (stdout_copy);
 		return ;
 	}
 	else if (cmd->cmds->subshell)
