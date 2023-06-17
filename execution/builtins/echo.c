@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 09:07:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/16 15:15:22 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:12:12 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	echo2(t_args *tmp_args)
 		{
 			r = 1;
 			tmp_args = tmp_args->next;
+			if (!tmp_args)
+				return ;
 			continue ;
 		}
 		if (tmp_args->next)
