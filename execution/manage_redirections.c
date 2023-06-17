@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:41:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 08:37:27 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:55:25 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	open_redis(t_global *global, t_redis *redis, int *fd_read, int *fd_write)
 	tmp = redis;
 	last = 0;
 	while (tmp)
-	{	
+	{
 		if (tmp->type != HEREDOC)
 		{
 			last = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 01:35:40 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:00:25 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ static char	*handle_non_alnum(char	*output, t_tokens **tmp, int exit_status)
 {
 	char	*status;
 
-	if (!ft_strcmp((*tmp)->str, "\"") || !ft_strcmp((*tmp)->str, "'"))
+	if ((*tmp) && (!ft_strcmp((*tmp)->str, "\"") \
+	|| !ft_strcmp((*tmp)->str, "'")))
 		(*tmp) = (*tmp)->prev;
-	else if (!ft_strcmp((*tmp)->str, "?"))
+	else if ((*tmp) && !ft_strcmp((*tmp)->str, "?"))
 	{
 		status = ft_itoa(exit_status);
 		output = ft_strjoin(output, status);
 		free (status);
 	}
-	else if (!ft_strcmp((*tmp)->str, "@"))
+	else if ((*tmp) && !ft_strcmp((*tmp)->str, "@"))
 		return (output);
 	else
 	{
@@ -105,7 +106,7 @@ char *old, int exit_status)
 	char	*output;
 
 	output = NULL;
-	if (!ft_strcmp((*tmp)->str, "'"))
+	if ((*tmp) && !ft_strcmp((*tmp)->str, "'"))
 	{
 		output = ft_strjoin(output, (*tmp)->str);
 		(*tmp) = (*tmp)->next;
@@ -118,7 +119,7 @@ char *old, int exit_status)
 		}
 		output = ft_strjoin(output, (*tmp)->str);
 	}
-	if (!ft_strcmp((*tmp)->str, "\""))
+	if ((*tmp) && !ft_strcmp((*tmp)->str, "\""))
 		output = double_quote_case(tmp, env, exit_status);
 	return (ft_strjoin(old, output));
 }

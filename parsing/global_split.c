@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/14 18:55:04 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:38:43 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	fill_with_nonpr_char(t_check *check)
 	int	i;
 
 	i = 0;
-	while (check->str[i])
+	while (check->str && check->str[i])
 	{
 		check->sid = find_separator(check->split, &check->str[i]);
 		if (check->str[i] == '"' || check->str[i] == '\'')

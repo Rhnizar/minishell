@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:30:45 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 11:15:13 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:46:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*remove_quotes(char *str)
 	i = -1;
 	quote = NULL;
 	output = NULL;
-	while (str[++i])
+	while (str && str[++i])
 	{
 		while (str[i] && !ft_strchr("\"'", str[i]))
 			output = join_to_str(output, str[i++]);

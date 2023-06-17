@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 09:07:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 17:12:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:31:00 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	check_opt(char *str)
 
 	i = 1;
 	if (str[0] != '-')
+		return (0);
+	else if (str[0] == '-' && str[1] == '\0')
 		return (0);
 	while (str[i])
 	{

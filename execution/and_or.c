@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 23:02:43 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/14 09:48:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:59:55 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	count_and(t_cmdshell *cmds)
 
 int	and(t_global *global, t_cmdshell **all_cmds, int cou_or)
 {
-	if (global->exit_status == 0 && (*all_cmds)->prev->cmds->operator == AND)
+	if (global->exit_status == 0 && (*all_cmds) && \
+	(*all_cmds)->prev->cmds->operator == AND)
 		return (2);
 	else if (global->exit_status != 0 && \
 		(*all_cmds)->prev->cmds->operator == AND)
@@ -66,7 +67,8 @@ int	and(t_global *global, t_cmdshell **all_cmds, int cou_or)
 
 int	or(t_global *global, t_cmdshell **all_cmds, int cou_and)
 {
-	if (global->exit_status != 0 && (*all_cmds)->prev->cmds->operator == OR)
+	if (global->exit_status != 0 && (*all_cmds) && \
+	(*all_cmds)->prev->cmds->operator == OR)
 		return (2);
 	else if (global->exit_status == 0 && \
 		(*all_cmds)->prev->cmds->operator == OR)

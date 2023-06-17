@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:56:35 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/01 13:09:45 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:41:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_separator(char *token, char **sep)
 	int	i;
 
 	i = -1;
-	while (sep[++i])
+	while (sep && sep[++i])
 	{
 		if (ft_strnstr(token, sep[i], ft_strlen(sep[i])))
 			return (i);
@@ -42,7 +42,7 @@ static int	check_quotes(char *token)
 
 	i = -1;
 	quote = NULL;
-	while (token[++i])
+	while (token && token[++i])
 	{
 		while (token[i] && !ft_strchr("\"'", token[i]))
 			i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 15:53:44 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:57:47 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*handle_current_dir(char *to_handle)
 
 	i = 0;
 	output = NULL;
-	while (to_handle[i])
+	while (to_handle && to_handle[i])
 	{
 		if (i == 0 && to_handle[i] == ':')
 			output = join_to_str(output, '.');

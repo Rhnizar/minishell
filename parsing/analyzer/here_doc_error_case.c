@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:05 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 21:29:47 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:40:37 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	here_doc_befor_error(t_tokens *tokens, int index)
 	here_docs = ((j = 0), NULL);
 	while (tmp && j < index)
 	{
-		if (ft_strnstr(tmp->str, "<<", 2))
+		if (tmp && ft_strnstr(tmp->str, "<<", 2))
 		{
 			tmp = tmp->next;
 			j++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:24:48 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 20:21:47 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:51:44 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_tokens	*wildcard(char *arg)
 			break ;
 		if (arg[0] != '.' && entity->d_name[0] == '.')
 			continue ;
-		if (is_match(entity->d_name, arg))
+		if (arg && is_match(entity->d_name, arg))
 			create_tokens(&tokens, ft_strdup(entity->d_name));
 	}
 	closedir(dir);

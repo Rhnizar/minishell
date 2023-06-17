@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_split_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:10:53 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/01 15:44:04 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:43:44 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	find_separator(char **sep, char *str)
 	j = 0;
 	output = NULL;
 	sp_id = -1;
-	while (sep[j])
+	while (sep && sep[j])
 	{
 		output = ft_strnstr(str, sep[j], ft_strlen(sep[j]));
 		if (output != NULL)

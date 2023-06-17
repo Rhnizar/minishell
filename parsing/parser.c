@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 20:33:58 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 20:15:24 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:43:13 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	fill_list_cmds(t_cmdshell **lst, t_tokens *tokens)
 		if (!cmds)
 		{
 			free_token_utils(utils, tokens);
-			return (-1);
+			exit (1);
 		}
 		(utils)->sp_id = -1;
 		init_struct_cmds(&cmds);

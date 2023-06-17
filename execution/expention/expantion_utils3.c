@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 07:50:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 11:16:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:51:13 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_tokens	*expantion_tokenizer(char *token)
 	int			i;
 
 	to_split = ((i = 0), NULL);
-	while (token[i])
+	while (token && token[i])
 	{
 		if (!ft_isalnum(token[i]) && token[i] != '_')
 		{
@@ -62,7 +62,7 @@ t_tokens	*expantion_tokenizer(char *token)
 	i = 0;
 	tokens = NULL;
 	output = ft_split(to_split, '\x07');
-	while (output[i])
+	while (output && output[i])
 		create_tokens(&tokens, ft_strdup(output[i++]));
 	return (free(to_split), free_double_ptr(output), tokens);
 }
@@ -97,7 +97,7 @@ int	is_wildcard(char *str)
 
 	i = -1;
 	quote = NULL;
-	while (str[++i])
+	while (str && str[++i])
 	{
 		while (str[i] && !ft_strchr("\"'", str[i]))
 		{

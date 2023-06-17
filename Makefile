@@ -6,7 +6,7 @@
 #    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/17 15:17:01 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/06/17 18:18:27 by rrhnizar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,7 @@ all: $(LIBFT) $(NAME)
 
 $(LIBFT):
 	make -C libft && make clean -C libft
+
 %.o : %.c
 	$(CCe) $(FLAGS) -I/goinfre/rrhnizar/brew/opt/readline/include -c $< -o $@
 

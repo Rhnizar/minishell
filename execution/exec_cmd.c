@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 14:31:16 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:18:49 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	not_builtin(t_global *global, t_cmdshell *all_cmds, int i, int count)
 
 void	alloc_pid(t_global *global, t_cmdshell *all_cmds, int count)
 {
-	if (count == 1 && is_builtin(all_cmds->cmds->args->str))
+	if (all_cmds->cmds->args && count == 1 && \
+	is_builtin(all_cmds->cmds->args->str))
 		global->pid = NULL;
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 14:31:12 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:56:14 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,10 @@ void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
 		}
 		return ;
 	}
-	else if (cmd->cmds->subshell)
-	{
+	else if (cmd->cmds && cmd->cmds->subshell)
 		run_subshell(global, cmd, i, count);
-	}
 	else
-	{
 		not_builtin(global, cmd, i, count);
-	}
 }
 
 t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
