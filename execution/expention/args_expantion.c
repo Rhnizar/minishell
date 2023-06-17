@@ -6,11 +6,28 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 08:30:09 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:19:29 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+char	*remove_nonprint(char *str)
+{
+	char	*output;
+	int		i;
+
+	i = 0;
+	output = NULL;
+	while (str[i])
+	{
+		if (str[i] != '\x01')
+			output = join_to_str(output, str[i]);
+		if (str[i])
+		i++;
+	}
+	return (output);
+}
 
 void	add_expanded_to_args(t_args **args, char *expended)
 {
@@ -24,7 +41,7 @@ void	add_expanded_to_args(t_args **args, char *expended)
 	while (split && split[i])
 	{
 		if (ft_strchr(split[i], '\x01'))
-			fill_list_args(args, ft_strtrim(split[i], "\x01"));
+			fill_list_args(args, remove_nonprint(split[i]));
 		else
 			fill_list_args(args, remove_quotes(split[i]));
 		i++;
