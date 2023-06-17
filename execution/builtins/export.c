@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:34:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/15 21:29:10 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 01:37:27 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	identifier(char *str, char *exp_uns)
 	{
 		if (ft_isalnum(str[i]) == 0)
 		{
-			if (str[i] != '_')
+			if (str[i] != '_' || (str[i] == '_' && str[i + 1] != 0 \
+			&& ft_isalnum(str[i + 1]) == 0))
 			{
 				error_message(exp_uns, str);
 				return (1);

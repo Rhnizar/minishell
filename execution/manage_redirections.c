@@ -3,30 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:41:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 14:37:33 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 01:45:07 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	_open_redis(t_global *global, t_redis *tmp, \
-int *fd_read, int *fd_write)
+static int	__open_redis(t_redis *tmp, t_redis *new_redi, int *fd_write)
 {
-	t_redis	*new_redi;
-
-	new_redi = NULL;
-	new_redi = redis_expander(global, tmp);
-	if (tmp->type == FILE_IN)
-	{
-		if (*fd_read != -1)
-			close (*fd_read);
-		(*fd_read) = input_redirection(new_redi->str);
-		if ((*fd_read) == -1)
-			return (-1);
-	}
 	if (tmp->type == FILE_OUT || tmp->type == FILE_APPEND)
 	{
 		if (*fd_write != -1)
@@ -38,6 +25,28 @@ int *fd_read, int *fd_write)
 		if ((*fd_write) == -1)
 			return (-1);
 	}
+	return (0);
+}
+
+static int	_open_redis(t_global *global, t_redis *tmp, \
+int *fd_read, int *fd_write)
+{
+	t_redis	*new_redi;
+
+	new_redi = NULL;
+	new_redi = redis_expander(global, tmp);
+	if (tmp && new_redi == NULL)
+		return (-1);
+	if (tmp->type == FILE_IN)
+	{
+		if (*fd_read != -1)
+			close (*fd_read);
+		(*fd_read) = input_redirection(new_redi->str);
+		if ((*fd_read) == -1)
+			return (-1);
+	}
+	if (__open_redis(tmp, new_redi, fd_write))
+		return (-1);
 	free_redis(new_redi);
 	return (0);
 }
@@ -90,23 +99,20 @@ int	manage_redirection_builtins(t_global *global, t_cmdshell *cmd)
 {
 	int	fd_read;
 	int	fd_write;
-	int	fd_tmp;
+	int	stdout_copy;
 
 	fd_read = -2;
 	fd_write = -2;
-	fd_tmp = -1;
-	if (cmd->cmds->fd_herdoc != -2)
-		close (cmd->cmds->fd_herdoc);
+	stdout_copy = -2;
 	if (open_redis(global, cmd->cmds->redis, &fd_read, &fd_write))
 		return (-2);
 	if (fd_read != -1)
 		close (fd_read);
 	if (fd_write != -1)
 	{
-		fd_tmp = dup(1);
+		stdout_copy = dup(1);
 		dup2(fd_write, 1);
-	}
-	if (fd_write != -1)
 		close (fd_write);
-	return (fd_tmp);
+	}
+	return (stdout_copy);
 }

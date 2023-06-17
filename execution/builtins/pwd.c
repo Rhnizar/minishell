@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:25:35 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/15 21:27:58 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:25:32 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void	pwd(t_global *global)
 	char	cu_wo_di[PATH_MAX];
 
 	if (getcwd(cu_wo_di, sizeof(cu_wo_di)) != NULL)
-		printf("%s\n", cu_wo_di);
+	{
+		ft_putstr_fd(cu_wo_di, 1);
+		ft_putstr_fd("\n", 1);
+		global->exit_status = 0;
+	}
 	else
 	{
 		perror("minishell");

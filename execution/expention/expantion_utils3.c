@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 07:50:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/11 11:53:42 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 01:35:12 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,23 @@ t_tokens	*expantion_tokenizer(char *token)
 int	count_split(char **split)
 {
 	int	count;
+	int	i;
 
 	count = 0;
-	while (split && split[count])
-		count++;
+	i = 0;
+	while (split && split[i])
+	{
+		if ((split[i][0] == '\'' && split[i][1] == '\'' \
+			&& split[i][2] == '\0') || \
+			(split[i][0] == '\"' && split[i][1] == '\"' \
+			&& split[i][2] == '\0'))
+			i++;
+		else
+		{
+			count++;
+			i++;
+		}
+	}
 	return (count);
 }
 

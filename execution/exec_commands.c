@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 20:08:50 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:05:45 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,23 @@ void	fill_exit_status(t_global *global, int count)
 
 void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
 {
-	int	fd_tmp;
+	int	stdout_copy;
 
-	fd_tmp = -1;
+	stdout_copy = -1;
 	if (count == 1 && cmd->cmds->args && is_builtin(cmd->cmds->args->str))
 	{
-		fd_tmp = manage_redirection_builtins(global, cmd);
-		if (fd_tmp == -2)
+		stdout_copy = manage_redirection_builtins(global, cmd);
+		if (stdout_copy == -2)
 			global->exit_status = 1;
 		else
 		{
 			builtins(global, cmd);
-			if (fd_tmp != -1)
-			{
-				dup2(fd_tmp, 1);
-				close (fd_tmp);
-			}
+			dup2(stdout_copy, 1);
+			close (stdout_copy);
 		}
 		return ;
 	}
-	if (cmd->cmds->subshell)
+	else if (cmd->cmds->subshell)
 		run_subshell(global, cmd, i, count);
 	else
 		not_builtin(global, cmd, i, count);

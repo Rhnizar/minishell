@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_expantion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 11:06:58 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/16 22:07:49 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	add_expanded_to_args(t_args **args, char *expended)
 	i = 0;
 	while (split && split[i])
 	{
-		fill_list_args(args, ft_strdup(split[i]));
+		fill_list_args(args, remove_quotes(split[i]));
 		i++;
 	}
 	if (split)

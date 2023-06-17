@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 11:07:55 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/13 11:21:13 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 01:16:42 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	has_space_only(char *str)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = remove_quotes(str);
+	while (new && (new[i] == ' ' || new[i] == '\t'))
+		i++;
+	if (new && i > 0 && new[i] == 0)
+		return (free(new), 1);
+	return (free(new), 0);
+}
+
+char	*redis_value(char **split)
+{
+	char		*output;
+	char		*final_output;
+	int			i;
+
+	output = NULL;
+	i = 0;
+	while (split[i])
+		output = ft_strjoin(output, split[i++]);
+	final_output = remove_quotes(output);
+	free(output);
+	return (final_output);
+}
 
 int	expanded_into_redis(t_redis **redis, t_redis *old_redis, \
 t_env *env, int exit_status)
@@ -26,7 +55,7 @@ t_env *env, int exit_status)
 		if (!ft_strcmp(tmp->str, "$"))
 		{
 			output = expantion_dollar_case(&tmp, env, output, exit_status);
-			if (!tmp->next)
+			if (!tmp)
 				break ;
 		}
 		else if (!ft_strcmp(tmp->str, "'") || !ft_strcmp(tmp->str, "\""))

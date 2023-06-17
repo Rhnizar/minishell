@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/14 20:26:04 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 01:16:56 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char		**split_expended(char *token);
 int			count_split(char **split);
 int			is_wildcard(char *str);
 t_tokens	*wildcard(char	*arg);
+int			has_space_only(char *str);
+char		*redis_value(char **split);
 /*========= end expender =============*/
 
 # endif

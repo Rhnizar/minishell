@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 09:07:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/08 21:45:41 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:15:22 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,30 @@ int	check_opt(char *str)
 void	echo2(t_args *tmp_args)
 {
 	int	r;
+	int	check;
 
 	r = 0;
+	check = 0;
 	while (tmp_args)
 	{
-		if (check_opt(tmp_args->str) == 1)
+		while (check_opt(tmp_args->str) == 1 && check == 0)
 		{
 			r = 1;
 			tmp_args = tmp_args->next;
 			continue ;
 		}
 		if (tmp_args->next)
-			printf("%s ", tmp_args->str);
+		{
+			check = 1;
+			ft_putstr_fd(tmp_args->str, 1);
+			ft_putstr_fd(" ", 1);
+		}
 		else
-			printf("%s", tmp_args->str);
+			ft_putstr_fd(tmp_args->str, 1);
 		tmp_args = tmp_args->next;
 	}
 	if (r == 0)
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 }
 
 void	echo(t_global *global, t_args *args)
@@ -63,7 +69,7 @@ void	echo(t_global *global, t_args *args)
 			echo2(tmp_args);
 		}
 		else
-			printf("\n");
+			ft_putstr_fd("\n", 1);
 		global->exit_status = 0;
 	}
 }

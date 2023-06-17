@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/11 11:42:23 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 01:35:40 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static char	*handle_non_alnum(char	*output, t_tokens **tmp, int exit_status)
 		output = ft_strjoin(output, status);
 		free (status);
 	}
+	else if (!ft_strcmp((*tmp)->str, "@"))
+		return (output);
 	else
 	{
 		output = ft_strjoin(output, (*tmp)->prev->str);
@@ -63,9 +65,10 @@ char *old, int exit_status)
 			return (output);
 		return (ft_strjoin(old, output));
 	}
-	if (!ft_isalnum((*tmp)->str[0]))
+	if (!ft_isalnum((*tmp)->str[0]) && (*tmp)->str[0] != '_')
 		output = handle_non_alnum(output, tmp, exit_status);
-	else if (ft_isalnum((*tmp)->str[0]) && count_dollar % 2 != 0)
+	else if ((ft_isalnum((*tmp)->str[0]) || \
+	(*tmp)->str[0] == '_') && count_dollar % 2 != 0)
 		output = handle_alnum(env, output, old, (*tmp)->str);
 	else
 		output = ft_strjoin(output, (*tmp)->str);

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:30:32 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/12 21:35:14 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:26:35 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ void	print_env(t_env *env)
 	tmp_env = env;
 	while (tmp_env)
 	{
-		printf("%s=%s\n", tmp_env->var, tmp_env->value);
+		ft_putstr_fd(tmp_env->var, 1);
+		ft_putstr_fd("=", 1);
+		ft_putstr_fd(tmp_env->value, 1);
+		ft_putstr_fd("\n", 1);
 		tmp_env = tmp_env->next;
 	}
 }

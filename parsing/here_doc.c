@@ -3,30 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:35:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/15 20:15:15 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 01:44:10 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*herdoc_expander(t_global *global, char *line)
+static char	*expanded_into_heredoc(char *token, t_global *global)
 {
-	t_args	*arg;
-	t_args	*new_arg;
+	t_tokens	*tokens;
+	t_tokens	*tmp;
+	char		*output;
+
+	tokens = expantion_tokenizer(token);
+	output = ((tmp = tokens), NULL);
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->str, "$"))
+		{
+			output = expantion_dollar_case(&tmp, global->env, \
+			output, global->exit_status);
+			if (!tmp)
+				break ;
+		}
+		else
+			output = ft_strjoin(output, tmp->str);
+		tmp = tmp->next;
+	}
+	free_tokens(tokens);
+	return (output);
+}
+
+void	herdoc_expander(t_global *global, char *line, char *delem, int fd)
+{
 	char	*output;
 
-	arg = NULL;
-	fill_list_args(&arg, ft_strdup(line));
-	if (ft_strchr(line, '"') || ft_strchr(line, '\''))
-		return (ft_strdup(line));
+	output = NULL;
+	if (ft_strchr(delem, '"') || ft_strchr(delem, '\''))
+	{
+		ft_putstr_fd(line, fd);
+		ft_putstr_fd("\n", fd);
+	}
 	else
-		new_arg = args_expander(global, arg);
-	output = ft_strdup(new_arg->str);
-	free_args(new_arg);
-	return (output);
+	{
+		output = expanded_into_heredoc(line, global);
+		ft_putstr_fd(output, fd);
+		ft_putstr_fd("\n", fd);
+	}
+	free(output);
 }
 
 static int	here_doc(t_global *global, char *delimiter)
@@ -34,31 +61,27 @@ static int	here_doc(t_global *global, char *delimiter)
 	char	*line;
 	int		fd[2];
 	int		read_fd;
-	char	*expanded_line;
+	char	*delem;
 
 	if (pipe(fd) == -1)
 		return (print_error(NULL, NULL, -1), -1);
 	read_fd = dup(fd[0]);
 	if (close (fd[0]) == -1)
 		return (print_error(NULL, NULL, -1), -1);
-	expanded_line = NULL;
+	delem = remove_quotes(delimiter);
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
 			return (-3);
-		if (ft_strcmp(line, delimiter) == 0)
+		if (ft_strcmp(line, delem) == 0)
 			break ;
-		expanded_line = herdoc_expander(global, line);
-		ft_putstr_fd(expanded_line, fd[1]);
-		ft_putstr_fd("\n", fd[1]);
-		free(expanded_line);
+		herdoc_expander(global, line, delimiter, fd[1]);
 		free(line);
 	}
-	free(line);
 	if (close (fd[1]) == -1)
 		return (print_error(NULL, NULL, -1), -1);
-	return (read_fd);
+	return (free(delem), free(line), read_fd);
 }
 
 static int	get_last_heredoc(t_global *global, t_redis *redis)
