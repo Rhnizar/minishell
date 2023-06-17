@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 23:37:11 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 01:17:45 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,6 @@ static int	wildcard_into_redis(t_redis **redis, char *to_handle, int type)
 	fill_list_redis(redis, ft_strdup(tokens->str), type);
 	free_tokens(tokens);
 	return (0);
-}
-
-int	has_space_only(char *str)
-{
-	int	i;
-	char	*new;
-	i = 0;
-	new = remove_quotes(str);
-	while (new && (new[i] == ' ' || new[i] == '\t'))
-		i++;
-	if (new && i > 0 && new[i] == 0)
-		return (free(new), 1);
-	return (free(new), 0);
 }
 
 int	add_expanded_to_redis(t_redis **redis, char *expended, \
@@ -61,8 +48,8 @@ char *token, int type)
 		if (wildcard_into_redis(redis, split[0], type))
 			return (free_double_ptr(split), 1);
 	}
-	else
-		fill_list_redis(redis, ft_strdup(split[0]), type);
+	else if (split)
+		fill_list_redis(redis, redis_value(split), type);
 	return (free_double_ptr(split), 0);
 }
 

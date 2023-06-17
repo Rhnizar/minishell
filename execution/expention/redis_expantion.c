@@ -6,43 +6,11 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 00:12:18 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 01:16:35 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-int	has_space_only(char *str)
-{
-	int	i;
-	char	*new;
-	i = 0;
-	new = remove_quotes(str);
-	while (new && (new[i] == ' ' || new[i] == '\t'))
-		i++;
-	if (new && i > 0 && new[i] == 0)
-		return (free(new), 1);
-	return (free(new), 0);
-}
-
-// char	*remove_spaces(char *str)
-// {
-// 	char	*output;
-// 	int		i;
-
-// 	i = 0;
-// 	output = NULL;
-// 	while (str[i] && (str[i] == '\t' || str[i] == ' '))
-// 		i++;
-// 	while (str[i])
-// 		output = join_to_str(output, str[i++]);
-// 	i = ft_strlen(output);
-// 	while (str[i] && (str[i] == '\t' || str[i] == ' '))
-// 		i--;
-	
-// 	free(str);
-// 	return (output);
-// }
 
 int	add_expanded_to_redis(t_redis **redis, char *expended, \
 char *token, int type)
@@ -61,8 +29,7 @@ char *token, int type)
 		return (free_double_ptr(split), 1);
 	}
 	else if (split)
-		fill_list_redis(redis, remove_quotes(split[0]), type);
-		// fill_list_redis(redis, ft_strtrim(remove_quotes(split[0]), " \t"), type);
+		fill_list_redis(redis, redis_value(split), type);
 	return (free_double_ptr(split), 0);
 }
 
