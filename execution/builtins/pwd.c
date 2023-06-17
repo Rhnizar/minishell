@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:25:35 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/16 15:25:32 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:33:39 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,22 @@ void	pwd(t_global *global)
 		perror("minishell");
 		global->exit_status = 1;
 	}
+}
+
+void	print_value(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (ft_strchr("`$\"", str[i]))
+		{
+			ft_putchar_fd('\\', 1);
+			ft_putchar_fd(str[i], 1);
+		}
+		else
+			ft_putchar_fd(str[i], 1);
+		i++;
+	}	
 }

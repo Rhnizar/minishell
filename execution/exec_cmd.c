@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/15 19:04:41 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:11:43 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, \
 {
 	t_recipe	recipe;
 
-	read_write_pipe(global, all_cmds, i, count);
-	if (manage_redirection(global, all_cmds->cmds->redis))
-		exit(1);
+	(void) i;
+	(void) count;
+	// read_write_pipe(global, all_cmds, i, count);
+	// if (manage_redirection(global, all_cmds->cmds->redis))
+	// 	exit(1);
 	if (all_cmds->cmds->args && is_builtin(all_cmds->cmds->args->str))
 	{
 		builtins(global, all_cmds);

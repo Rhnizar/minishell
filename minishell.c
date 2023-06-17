@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 01:43:14 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:49:41 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,43 @@ void	sig_handl(int sig)
 	{
 		if (g_r == 0)
 			write(1, "\n", 1);
-		// rl_catch_signals = 0;
+		rl_catch_signals = 0;
 		close(0);
 		g_r += 1;
 	}
+}
+
+int	minishell(t_global *global)
+{
+	char		*line;
+
+	line = readline("minishell ~ ");
+	if (line)
+	{
+		if (line[0] != 0)
+			add_history(line);
+		else
+			return (2);
+		if (fill_global_struct(&global, line) == -1)
+			return (2);
+		execution(global);
+		free_commands(global->all_commands);
+		free(line);
+	}
+	else
+	{
+		if (rl_catch_signals == 0)
+			return (2);
+		else
+			return (1);
+	}
+	return (2);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	(void) argc;
 	(void) argv;
-	char		*line;
 	t_global	*global;
 	int			tmp_gr;
 	int			fd;
@@ -54,33 +80,17 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		dup2(fd, 0);
-		// rl_catch_signals = 1;
+		rl_catch_signals = 1;
 		if (g_r != tmp_gr)
 			global->exit_status = 1;
 		tmp_gr = g_r;
-		line = readline("minishell ~ ");
-		if (line)
-		{
-			if (line[0] != 0)
-				add_history(line);
-			else
-				continue ;
-			if (fill_global_struct(&global, line) == -1)
-				continue ;
-			execution(global);
-			free_commands(global->all_commands);
-			free(line);
-		}
+		if (minishell(global) == 2)
+			continue ;
 		else
-		{
-			// if (rl_catch_signals == 0)
-			// 	continue ;
-			// else
-				break ;
-		}
+			break ;
 	}
 	final_exit = global->exit_status;
 	global_free(global);
-	// printf("exit\n");
+	printf("exit\n");
 	return (final_exit);
 }

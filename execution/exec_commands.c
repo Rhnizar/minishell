@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 08:37:12 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:32:06 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,12 @@ void	fill_exit_status(t_global *global, int count)
 
 	i = 0;
 	exit_status = 0;
-	if (count == 1 && global->all_commands->cmds->args \
-		&& is_builtin(global->all_commands->cmds->args->str))
-	{
-		free(global->pid);
-		return ;
-	}
-	while (i != count)
+	while (i != count && global->pid != NULL)
 		waitpid(global->pid[i++], &exit_status, 0);
 	if (exit_status == 2)
 		global->exit_status = 130;
 	else
 		global->exit_status = exit_status >> 8;
-	free(global->pid);
 	signal(SIGINT, sig_handl);
 }
 
@@ -63,15 +56,21 @@ void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
 		if (stdout_copy == -2)
 			global->exit_status = 1;
 		else
+		{
 			builtins(global, cmd);
-		dup2(stdout_copy, 1);
-		close (stdout_copy);
+			dup2(stdout_copy, 1);
+			close (stdout_copy);
+		}
 		return ;
 	}
 	else if (cmd->cmds->subshell)
+	{
 		run_subshell(global, cmd, i, count);
+	}
 	else
+	{
 		not_builtin(global, cmd, i, count);
+	}
 }
 
 t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
@@ -81,9 +80,14 @@ t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
 
 	i = 0;
 	count = count_nbr_commands(all_cmds);
-	global->pid = ft_calloc(count, sizeof(pid_t));
-	if (!global->pid)
-		print_error(NULL, NULL, 1);
+	if (count == 1 && is_builtin(all_cmds->cmds->args->str))
+		global->pid = NULL;
+	else
+	{
+		global->pid = ft_calloc(count, sizeof(pid_t));
+		if (!global->pid)
+			print_error(NULL, NULL, 1);
+	}
 	global->prev_fd = -1;
 	while (all_cmds && i != count)
 	{
@@ -100,6 +104,7 @@ t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
 		all_cmds = all_cmds->next;
 	}
 	fill_exit_status(global, count);
+	free(global->pid);
 	return (all_cmds);
 }
 

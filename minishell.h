@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/16 15:56:06 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:49:26 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,24 +76,25 @@ void		free_tokens(t_tokens *tokens);
 void		free_token_utils(t_utils *utils, t_tokens *tokens);
 
 /*========== builtins ==============*/
-void	exitt(t_global *global, t_args *args);
-void	pwd(t_global *global);
-void	cd(t_global *global, t_args	*args, t_env *export);
-void	echo(t_global *global, t_args *args);
+void		exitt(t_global *global, t_args *args);
+void		pwd(t_global *global);
+void		cd(t_global *global, t_args	*args, t_env *export);
+void		echo(t_global *global, t_args *args);
 /*--------- unset ------------------*/
-void	unset(t_global *global, t_env **env, t_env **export, t_args *args);
-int		identifier(char *str, char *exp_uns);
+void		unset(t_global *global, t_env **env, t_env **export, t_args *args);
+int			identifier(char *str, char *exp_uns);
 /*------------- enviroment -------------*/
-void			add_to_env(t_env **env, char *var, char *value);
-size_t			find_equale(char *str);
-void			print_env(t_env *env);
+void		add_to_env(t_env **env, char *var, char *value);
+size_t		find_equale(char *str);
+void		print_env(t_env *env);
 /*----------- export -------------------*/
-t_env			*_export(t_env *env);
-void			print_export(t_env *export);
-int				search_var(t_env *export, char *var);
-void			edit_value(t_env *env, t_env *export, char *str);
-void			edit_value2(t_env *exp_or_env, char *var, size_t equal, char *str);
-void			add_to_export_or_print(t_global *global, t_env **env, t_env **export, t_args *args);
+t_env		*_export(t_env *env);
+void		print_export(t_env *export);
+int			search_var(t_env *export, char *var);
+void		edit_value(t_env *env, t_env *export, char *str);
+void		edit_value2(t_env *exp_or_env, char *var, size_t equal, char *str);
+void		add_to_export_or_print(t_global *global, t_env **env, t_env **export, t_args *args);
+void		print_value(char *str);
 /*========== end builtins ==============*/
 
 /*=========== execution ================*/
@@ -130,7 +131,6 @@ int			count_or(t_cmdshell *cmds);
 
 
 int			run_heredocs(t_global *global);
-
 
 void		print_error(char *msg, char *arg, int status);
 

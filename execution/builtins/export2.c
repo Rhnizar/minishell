@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:19:01 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 01:36:47 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:33:34 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,6 @@ t_env	*_export(t_env *env)
 	return (export);
 }
 
-void	print_value(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-	{
-		if (ft_strchr("`$\"", str[i]))
-		{
-			ft_putchar_fd('\\', 1);
-			ft_putchar_fd(str[i], 1);
-		}
-		else
-			ft_putchar_fd(str[i], 1);
-		i++;
-	}	
-}
-
 void	print_export(t_env *export)
 {
 	t_env	*tmp_export;
@@ -58,7 +40,6 @@ void	print_export(t_env *export)
 			ft_putstr_fd(tmp_export->var, 1);
 			ft_putstr_fd("=\"", 1);
 			print_value(tmp_export->value);
-			// ft_putstr_fd(tmp_export->value, 1);
 			ft_putstr_fd("\"\n", 1);
 		}
 		else
