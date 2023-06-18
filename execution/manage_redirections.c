@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:41:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 17:55:25 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:37:58 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	__open_redis(t_redis *tmp, t_redis *new_redi, int *fd_write)
 {
 	if (tmp->type == FILE_OUT || tmp->type == FILE_APPEND)
 	{
-		if (*fd_write != -1)
+		if (*fd_write > 0)
 			close (*fd_write);
 		if (tmp->type == FILE_OUT)
 			(*fd_write) = output_redirection(new_redi->str);
@@ -39,16 +39,15 @@ int *fd_read, int *fd_write)
 		return (-1);
 	if (tmp->type == FILE_IN)
 	{
-		if (*fd_read != -1)
+		if (*fd_read > 0)
 			close (*fd_read);
 		(*fd_read) = input_redirection(new_redi->str);
 		if ((*fd_read) == -1)
-			return (-1);
+			return (free_redis(new_redi), -1);
 	}
 	if (__open_redis(tmp, new_redi, fd_write))
-		return (-1);
-	free_redis(new_redi);
-	return (0);
+		return (free_redis(new_redi), -1);
+	return (free_redis(new_redi), 0);
 }
 
 int	open_redis(t_global *global, t_redis *redis, int *fd_read, int *fd_write)
@@ -72,7 +71,7 @@ int	open_redis(t_global *global, t_redis *redis, int *fd_read, int *fd_write)
 	}
 	if (last == 1)
 	{
-		if (*fd_read != -1)
+		if (*fd_read > 0)
 			close (*fd_read);
 		*fd_read = -1;
 	}
@@ -106,9 +105,9 @@ int	manage_redirection_builtins(t_global *global, t_cmdshell *cmd)
 	stdout_copy = dup(1);
 	if (open_redis(global, cmd->cmds->redis, &fd_read, &fd_write))
 		return (-2);
-	if (fd_read > 2)
+	if (fd_read > 0)
 		close (fd_read);
-	if (fd_write > 2)
+	if (fd_write > 0)
 	{
 		dup2(fd_write, 1);
 		close (fd_write);

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:19:01 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 11:33:34 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/18 13:29:00 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ void	edit_value(t_env *env, t_env *export, char *str)
 	var = ft_substr(str, 0, equal);
 	edit_value2(export, var, equal, str);
 	edit_value2(env, var, equal, str);
+	free(var);
 }

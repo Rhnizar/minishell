@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:35:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 01:44:10 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/18 14:24:42 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	here_doc(t_global *global, char *delimiter)
 	{
 		line = readline("> ");
 		if (!line)
-			return (-3);
+			return (free(delem), -3);
 		if (ft_strcmp(line, delem) == 0)
 			break ;
 		herdoc_expander(global, line, delimiter, fd[1]);

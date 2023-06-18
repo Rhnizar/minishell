@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 18:00:25 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/18 13:45:34 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ char *old, int exit_status)
 	{
 		if (!old)
 			return (output);
-		return (ft_strjoin(old, output));
+		new = ft_strjoin(old, output);
+		return (free (output), new);
 	}
 	if (!ft_isalnum((*tmp)->str[0]) && (*tmp)->str[0] != '_')
 		output = handle_non_alnum(output, tmp, exit_status);
@@ -104,6 +105,7 @@ char	*expantion_quote_case(t_tokens **tmp, t_env *env, \
 char *old, int exit_status)
 {
 	char	*output;
+	char	*new;
 
 	output = NULL;
 	if ((*tmp) && !ft_strcmp((*tmp)->str, "'"))
@@ -121,5 +123,6 @@ char *old, int exit_status)
 	}
 	if ((*tmp) && !ft_strcmp((*tmp)->str, "\""))
 		output = double_quote_case(tmp, env, exit_status);
-	return (ft_strjoin(old, output));
+	new = ft_strjoin(old, output);
+	return (free (output), new);
 }

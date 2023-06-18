@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 19:16:44 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/18 11:57:56 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	fill_exit_status(t_global *global, int count)
 	}
 	free(global->pid);
 	signal(SIGINT, sig_handl);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)

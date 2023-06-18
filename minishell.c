@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:20:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 19:17:40 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/18 18:06:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	sig_handl(int sig)
 int	minishell(t_global *global)
 {
 	char		*line;
+	int			ret;
 
 	line = readline("minishell ~ ");
 	if (line)
@@ -36,12 +37,13 @@ int	minishell(t_global *global)
 		if (line[0] != 0)
 			add_history(line);
 		else
-			return (2);
-		if (fill_global_struct(&global, line) == -1)
 			return (free(line), 2);
+		ret = fill_global_struct(&global, line);
+		if (ret == -1)
+			return (free_commands(global->all_commands), free(line), 2);
+		if (ret == -2)
+			return (free (line), 2);
 		execution(global);
-		free_commands(global->all_commands);
-		free(line);
 	}
 	else
 	{
@@ -50,7 +52,7 @@ int	minishell(t_global *global)
 		else
 			return (1);
 	}
-	return (2);
+	return (free_commands(global->all_commands), free(line), 2);
 }
 
 int	finish(t_global *global)

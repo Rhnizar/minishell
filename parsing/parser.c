@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 20:33:58 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 19:13:29 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:14:04 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	fill_global_struct(t_global **global, char *line)
 		return (-1);
 	updated_tokens = analyzer(tokens, &(*global)->exit_status);
 	if (!updated_tokens)
-		return (-1);
+		return (-2);
 	if (fill_list_cmds(&lst_cmd, updated_tokens) == -1)
 	{
 		free_tokens(updated_tokens);
