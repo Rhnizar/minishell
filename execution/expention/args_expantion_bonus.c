@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:16:37 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 08:34:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:31:05 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,7 @@ void	add_expanded_to_args(t_args **args, char *expended)
 		if (ft_strchr(split[i], '*'))
 			wildcard_into_args(args, split[i]);
 		else
-		{
-			if (ft_strchr(split[i], '\x01'))
-				fill_list_args(args, ft_strtrim(split[i], "\x01"));
-			else
-				fill_list_args(args, remove_quotes(split[i]));
-		}
+			fill_list_args(args, filter_expanded(split[i], -1));
 		i++;
 	}
 	if (split)

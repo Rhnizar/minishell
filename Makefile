@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+         #
+#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/18 18:07:53 by rrhnizar         ###   ########.fr        #
+#    Updated: 2023/06/18 20:32:35 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ EXECUTION = execution/expention/expantion_utils.c \
 		  	execution/expention/expantion_utils2.c \
 		  	execution/expention/expantion_utils3.c \
 		  	execution/expention/expantion_utils4.c \
+			execution/expention/expantion_utils5.c \
 			execution/builtins/environment.c \
 			execution/builtins/export.c \
 			execution/builtins/export2.c \
@@ -75,7 +76,7 @@ OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
 
 RDL = -lreadline \
-	-L/goinfre/rrhnizar/brew/opt/readline/lib
+	-L/goinfre/kchaouki/brew/opt/readline/lib
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -87,7 +88,7 @@ $(LIBFT):
 	make -C libft && make clean -C libft
 
 %.o : %.c
-	$(CCe) $(FLAGS) -I/goinfre/rrhnizar/brew/opt/readline/include -c $< -o $@
+	$(CCe) $(FLAGS) -I/goinfre/kchaouki/brew/opt/readline/include -c $< -o $@
 
 $(NAME): $(OBJS_M) minishell.h
 	$(CCe) $(FLAGS) $(OBJS_M) $(RDL) $(LIBFT) -o $(NAME)

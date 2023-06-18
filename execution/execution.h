@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 15:18:34 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:31:39 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int			is_wildcard(char *str);
 t_tokens	*wildcard(char	*arg);
 int			has_space_only(char *str);
 char		*redis_value(char **split);
+char		*filter_expanded(char *str, int i);
+
 /*========= end expender =============*/
 
 #endif
