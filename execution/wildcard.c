@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:24:48 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 17:51:44 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:50:17 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ t_tokens	*wildcard(char *arg)
 			create_tokens(&tokens, ft_strdup(entity->d_name));
 	}
 	closedir(dir);
+	if (!tokens)
+		create_tokens(&tokens, ft_strdup(arg));
 	return (tokens);
 }

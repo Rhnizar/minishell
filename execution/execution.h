@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 17:42:43 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:40:08 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char		*get_value(char *to_expand, t_env *env);
 void		add_expanded_to_args(t_args **args, char *expended);
 int			add_expanded_to_redis(t_redis **redis, char *expended, \
 			char *token, int type);
+char		*handle_non_alnum(char	*output, t_tokens **tmp, int exit_status);
+char		*handle_alnum(t_env *env, char *output, char *str, int flag);
 int			skipp_dollar(t_tokens **tmp, int *count_dollar, char **output);
 t_tokens	*expention_wildcard_case(char *to_handle);
 char		**split_expended(char *token);
@@ -52,7 +54,7 @@ t_tokens	*wildcard(char	*arg);
 int			has_space_only(char *str);
 char		**prepare_to_fill(t_redis **redis, int type, char *expended);
 char		*filter_expanded(char *str, int i);
-char		*remove_nonprint(char *str);
+char		*remove_nonprint(char *str, char *charset);
 char		*add_nonprintable(char *str);
 
 /*========= end expender =============*/

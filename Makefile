@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:39:56 by kchaouki          #+#    #+#              #
-#    Updated: 2023/06/19 18:47:29 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/06/19 21:49:40 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ OBJS_B = $(SRCS_B:.c=.o)
 RDL = -lreadline \
 	-L/goinfre/kchaouki/brew/opt/readline/lib
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 CCe = cc
 

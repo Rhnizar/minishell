@@ -6,11 +6,25 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:02:59 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 16:38:28 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:17:06 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	has_space_only(char *str)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = remove_quotes(str);
+	while (new && new[i] == '\x07')
+		i++;
+	if (new && i > 0 && new[i] == 0)
+		return (free(new), 1);
+	return (free(new), 0);
+}
 
 char	*add_nonprintable(char *str)
 {
@@ -28,23 +42,6 @@ char	*add_nonprintable(char *str)
 		i++;
 	}
 	free (str);
-	return (output);
-}
-
-char	*remove_nonprint(char *str)
-{
-	char	*output;
-	int		i;
-
-	i = 0;
-	output = NULL;
-	while (str && str[i])
-	{
-		if (str[i] != '\x01')
-			output = join_to_str(output, str[i]);
-		i++;
-	}
-	free(str);
 	return (output);
 }
 

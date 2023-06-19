@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:33:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 20:05:58 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:53:02 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	int		j;
 
-	i = 0;
-	j = 0;
-	ret_split = NULL;
+	ret_split = ((i = 0), (j = 0), NULL);
 	ret_split = malloc(sizeof(char *) * (word_count((char *)s, c) + 1));
 	if (!ret_split)
 		return (0);

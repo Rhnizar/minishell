@@ -6,24 +6,41 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 11:07:55 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/19 17:00:56 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:38:43 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	has_space_only(char *str)
+static int	is_in_charset(char c, char *charset)
 {
-	char	*new;
+	int	i;
+
+	i = 0;
+	while (charset[i])
+	{
+		if (c == charset[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*remove_nonprint(char *str, char *charset)
+{
+	char	*output;
 	int		i;
 
 	i = 0;
-	new = remove_quotes(str);
-	while (new && new[i] == '\x07')
+	output = NULL;
+	while (str && str[i])
+	{
+		if (str[i] != is_in_charset(str[i], charset))
+			output = join_to_str(output, str[i]);
 		i++;
-	if (new && i > 0 && new[i] == 0)
-		return (free(new), 1);
-	return (free(new), 0);
+	}
+	free(str);
+	return (output);
 }
 
 int	expanded_into_redis(t_global *global, t_redis **redis, t_redis *old_redis)

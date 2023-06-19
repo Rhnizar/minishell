@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 07:50:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 17:00:37 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:47:19 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	is_wildcard(char *str)
 	{
 		while (str[i] && !ft_strchr("\"'", str[i]))
 		{
+			printf("BAH: %c\n", str[i]);
 			if (str[i] == '*')
 				return (1);
 			i++;
@@ -107,8 +108,10 @@ t_tokens	*expention_wildcard_case(char *to_handle)
 {
 	t_tokens	*tokens;
 
-	if (is_wildcard(to_handle))
+	tokens = NULL;
+	if (!ft_strchr(to_handle, '\x02'))
 		return (wildcard(to_handle));
-	create_tokens(&tokens, ft_strdup(to_handle));
+	printf("here\n");
+	create_tokens(&tokens, remove_nonprint(ft_strdup(to_handle), "\x02"));
 	return (tokens);
 }
