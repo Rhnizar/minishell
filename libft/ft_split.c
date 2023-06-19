@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:33:16 by kchaouki          #+#    #+#             */
-/*   Updated: 2022/10/14 17:11:03 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 20:05:58 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	word_count(char *str, char c)
 
 	count = 0;
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		while (str[i] == c)
 			i++;
@@ -38,13 +38,13 @@ static char	*alloc_word_mem(char *str, char c)
 	char	*ret_word;
 
 	count_letters = 0;
-	while (str[count_letters] != c && str[count_letters])
+	while (str && str[count_letters] != c && str[count_letters])
 		count_letters++;
 	ret_word = (char *)malloc(count_letters * sizeof(char) + 1);
 	if (!ret_word)
 		return (0);
 	i = 0;
-	while (i < count_letters)
+	while (str && i < count_letters)
 	{
 		ret_word[i] = str[i];
 		i++;
@@ -72,10 +72,11 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
+	ret_split = NULL;
 	ret_split = malloc(sizeof(char *) * (word_count((char *)s, c) + 1));
 	if (!ret_split)
 		return (0);
-	while (s[i])
+	while (s && s[i])
 	{
 		while (s[i] == c)
 			i++;
