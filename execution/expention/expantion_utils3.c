@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 07:50:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 22:47:19 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:54:58 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ t_tokens	*expention_wildcard_case(char *to_handle)
 	tokens = NULL;
 	if (!ft_strchr(to_handle, '\x02'))
 		return (wildcard(to_handle));
-	printf("here\n");
 	create_tokens(&tokens, remove_nonprint(ft_strdup(to_handle), "\x02"));
 	return (tokens);
 }
