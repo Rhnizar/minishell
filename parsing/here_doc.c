@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:35:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/18 14:24:42 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:20:20 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static char	*expanded_into_heredoc(char *token, t_global *global)
 	{
 		if (!ft_strcmp(tmp->str, "$"))
 		{
-			output = expantion_dollar_case(&tmp, global->env, \
-			output, global->exit_status);
+			output = expantion_dollar_case(global, &tmp, output, 1);
 			if (!tmp)
 				break ;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 11:07:55 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/18 13:09:47 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:00:56 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,14 @@ int	has_space_only(char *str)
 
 	i = 0;
 	new = remove_quotes(str);
-	while (new && (new[i] == ' ' || new[i] == '\t'))
+	while (new && new[i] == '\x07')
 		i++;
 	if (new && i > 0 && new[i] == 0)
 		return (free(new), 1);
 	return (free(new), 0);
 }
 
-char	*redis_value(char **split)
-{
-	char		*output;
-	char		*final_output;
-	int			i;
-
-	output = NULL;
-	i = 0;
-	while (split[i])
-		output = ft_strjoin(output, split[i++]);
-	final_output = remove_quotes(output);
-	free(output);
-	return (final_output);
-}
-
-int	expanded_into_redis(t_redis **redis, t_redis *old_redis, \
-t_env *env, int exit_status)
+int	expanded_into_redis(t_global *global, t_redis **redis, t_redis *old_redis)
 {
 	t_tokens	*tokens;
 	t_tokens	*tmp;
@@ -54,12 +38,12 @@ t_env *env, int exit_status)
 	{
 		if (!ft_strcmp(tmp->str, "$"))
 		{
-			output = expantion_dollar_case(&tmp, env, output, exit_status);
+			output = expantion_dollar_case(global, &tmp, output, 1);
 			if (!tmp)
 				break ;
 		}
 		else if (!ft_strcmp(tmp->str, "'") || !ft_strcmp(tmp->str, "\""))
-			output = expantion_quote_case(&tmp, env, output, exit_status);
+			output = expantion_quote_case(global, &tmp, output, 0);
 		else
 			output = ft_strjoin(output, tmp->str);
 		tmp = tmp->next;
@@ -72,8 +56,7 @@ t_env *env, int exit_status)
 static void	lkmala(t_global *global, t_tokens **tmp, char **output)
 {
 	*output = join_to_str(*output, '\x01');
-	*output = expantion_dollar_case(tmp, global->env, \
-	*output, global->exit_status);
+	*output = expantion_dollar_case(global, tmp, *output, 1);
 	*output = join_to_str(*output, '\x01');
 }
 
@@ -94,8 +77,7 @@ void	expanded_into_args(t_args **args, char *token, t_global *global)
 				break ;
 		}
 		else if (!ft_strcmp(tmp->str, "'") || !ft_strcmp(tmp->str, "\""))
-			output = expantion_quote_case(&tmp, global->env, output, \
-			global->exit_status);
+			output = expantion_quote_case(global, &tmp, output, 0);
 		else
 			output = ft_strjoin(output, tmp->str);
 		tmp = tmp->next;

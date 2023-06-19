@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:02:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/18 20:31:24 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:23:52 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,21 @@
 void	add_expanded_to_args(t_args **args, char *expended)
 {
 	char		**split;
+	char		*new_expended;
 	int			i;
 
+	split = NULL;
 	if (!expended)
 		return ;
-	split = split_expended(expended);
+	new_expended = filter_expanded(expended, -1);
+	new_expended = remove_nonprint(new_expended);
+	if (new_expended)
+		split = ft_split(new_expended, '\x07');
 	i = 0;
 	while (split && split[i])
-		fill_list_args(args, filter_expanded(split[i++], -1));
-	if (split)
-		free_double_ptr(split);
+		fill_list_args(args, ft_strdup(split[i++]));
+	free(new_expended);
+	free_double_ptr(split);
 }
 
 t_args	*args_expander(t_global *global, t_args	*args)

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:16:04 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/18 18:27:02 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:39:35 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*handle_non_alnum(char	*output, t_tokens **tmp, int exit_status)
 	return (output);
 }
 
-char	*handle_alnum(t_env *env, char *output, char *old, char *str)
+static char	*handle_alnum(t_env *env, char *output, char *str, int flag)
 {
 	char	*value;
 
@@ -44,16 +44,18 @@ char	*handle_alnum(t_env *env, char *output, char *old, char *str)
 	else
 	{
 		value = get_value(str, env);
-		if (!value && !old)
+		if (!value)
 			return (NULL);
+		if (flag)
+			value = add_nonprintable(value);
 		output = ft_strjoin(output, value);
 		free(value);
 	}
 	return (output);
 }
 
-char	*expantion_dollar_case(t_tokens **tmp, t_env *env, \
-char *old, int exit_status)
+char	*expantion_dollar_case(t_global *global, t_tokens **tmp, \
+char *old, int flag)
 {
 	char	*output;
 	char	*new;
@@ -68,17 +70,17 @@ char *old, int exit_status)
 		return (free (output), new);
 	}
 	if (!ft_isalnum((*tmp)->str[0]) && (*tmp)->str[0] != '_')
-		output = handle_non_alnum(output, tmp, exit_status);
+		output = handle_non_alnum(output, tmp, global->exit_status);
 	else if ((ft_isalnum((*tmp)->str[0]) || \
 	(*tmp)->str[0] == '_') && count_dollar % 2 != 0)
-		output = handle_alnum(env, output, old, (*tmp)->str);
+		output = handle_alnum(global->env, output, (*tmp)->str, flag);
 	else
 		output = ft_strjoin(output, (*tmp)->str);
 	new = ft_strjoin(old, output);
 	return (free(output), new);
 }
 
-static char	*double_quote_case(t_tokens **tmp, t_env *env, int exit_status)
+static char	*double_quote_case(t_global *global, t_tokens **tmp, int flag)
 {
 	char	*output;
 
@@ -89,7 +91,7 @@ static char	*double_quote_case(t_tokens **tmp, t_env *env, int exit_status)
 	{
 		if (!ft_strcmp((*tmp)->str, "$"))
 		{
-			output = expantion_dollar_case(tmp, env, output, exit_status);
+			output = expantion_dollar_case(global, tmp, output, flag);
 			if (!(*tmp) || !ft_strcmp((*tmp)->str, "\""))
 				break ;
 		}
@@ -101,8 +103,8 @@ static char	*double_quote_case(t_tokens **tmp, t_env *env, int exit_status)
 	return (output);
 }
 
-char	*expantion_quote_case(t_tokens **tmp, t_env *env, \
-char *old, int exit_status)
+char	*expantion_quote_case(t_global *global, t_tokens **tmp, \
+char *old, int flag)
 {
 	char	*output;
 	char	*new;
@@ -122,7 +124,7 @@ char *old, int exit_status)
 		output = ft_strjoin(output, (*tmp)->str);
 	}
 	if ((*tmp) && !ft_strcmp((*tmp)->str, "\""))
-		output = double_quote_case(tmp, env, exit_status);
+		output = double_quote_case(global, tmp, flag);
 	new = ft_strjoin(old, output);
 	return (free (output), new);
 }

@@ -6,11 +6,47 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:02:59 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/18 20:28:15 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:38:28 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+char	*add_nonprintable(char *str)
+{
+	char	*output;
+	int		i;
+
+	i = 0;
+	output = NULL;
+	while (str && str[i])
+	{
+		if (ft_strchr(" \t", str[i]))
+			output = join_to_str(output, '\x07');
+		else
+			output = join_to_str(output, str[i]);
+		i++;
+	}
+	free (str);
+	return (output);
+}
+
+char	*remove_nonprint(char *str)
+{
+	char	*output;
+	int		i;
+
+	i = 0;
+	output = NULL;
+	while (str && str[i])
+	{
+		if (str[i] != '\x01')
+			output = join_to_str(output, str[i]);
+		i++;
+	}
+	free(str);
+	return (output);
+}
 
 static int	handle_nonprintable(char **output, char *str)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:30:45 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 17:46:07 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:40:05 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,62 +57,17 @@ char	*remove_quotes(char *str)
 	return (output);
 }
 
-static int	split_quote_case(char *token, int *j, char	**to_split)
+char	**prepare_to_fill(t_redis **redis, int type, char *expended)
 {
-	int	i;
+	char		**split;
+	char		*new_expended;
 
-	i = 0;
-	(*to_split) = join_to_str((*to_split), token[i++]);
-	while (token[i] && !ft_strchr("\"'", token[i]))
-		(*to_split) = join_to_str((*to_split), token[i++]);
-	if (!token[i])
-		return (1);
-	(*to_split) = join_to_str((*to_split), token[i]);
-	(*j) += i;
-	return (0);
-}
-
-int	implant_nonprint(char **to_split, char *token, int *j)
-{
-	int	i;
-
-	i = 0;
-	if (ft_strchr(" \t", token[i]))
-	{
-		while (token[i] && ft_strchr(" \t", token[i]))
-			i++;
-		if (!token[i])
-			return (1);
-		(*to_split) = join_to_str((*to_split), '\x07');
-		(*to_split) = join_to_str((*to_split), token[i]);
-	}
-	else if (ft_strchr("\"'", token[i]))
-	{
-		if (split_quote_case(&token[i], &i, to_split))
-			return (1);
-	}
-	else
-		(*to_split) = join_to_str((*to_split), token[i]);
-	*j += i;
-	return (0);
-}
-
-char	**split_expended(char *token)
-{
-	char	*to_split;
-	char	**split;
-	int		i;
-
-	to_split = NULL;
 	split = NULL;
-	i = 0;
-	while (token && token[i])
-	{
-		if (implant_nonprint(&to_split, &token[i], &i))
-			break ;
-		i++;
-	}
-	if (to_split)
-		split = ft_split(to_split, '\x07');
-	return (free(to_split), split);
+	new_expended = filter_expanded(expended, -1);
+	new_expended = remove_nonprint(new_expended);
+	if (new_expended)
+		split = ft_split(new_expended, '\x07');
+	else
+		fill_list_redis(redis, ft_strdup(""), type);
+	return (free(new_expended), split);
 }

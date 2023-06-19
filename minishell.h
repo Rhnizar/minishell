@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:40:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 15:18:28 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:28:54 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,12 @@ void		read_write_pipe(t_global *global, t_cmdshell *cmd, \
 /*----------- args expand ---------*/
 t_args		*args_expander(t_global *global, t_args	*args);
 void		expanded_into_args(t_args **args, char *token, t_global *global);
+char		*expantion_dollar_case(t_global *global, t_tokens **tmp, \
+			char *old, int flag);
+char		*expantion_quote_case(t_global *global, t_tokens **tmp, \
+			char *old, int flag);
+int			expanded_into_redis(t_global *global, t_redis **redis, \
+			t_redis *old_redis);
 
 /*----------- redis expand ---------*/
 t_redis		*redis_expander(t_global *global, t_redis *redis);

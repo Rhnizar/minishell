@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 07:50:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 17:51:13 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:00:37 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,10 @@ t_tokens	*expantion_tokenizer(char *token)
 int	count_split(char **split)
 {
 	int	count;
-	int	i;
 
 	count = 0;
-	i = 0;
-	while (split && split[i])
-	{
-		if ((split[i][0] == '\'' && split[i][1] == '\'' \
-			&& split[i][2] == '\0') || \
-			(split[i][0] == '\"' && split[i][1] == '\"' \
-			&& split[i][2] == '\0'))
-			i++;
-		else
-		{
-			count++;
-			i++;
-		}
-	}
+	while (split && split[count])
+		count++;
 	return (count);
 }
 

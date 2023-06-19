@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:13:15 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 01:17:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:44:35 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char *token, int type)
 		print_error(EAMBGRD, token, -1);
 		return (1);
 	}
-	split = split_expended(expended);
+	split = prepare_to_fill(redis, type, expended);
 	if (count_split(split) > 1)
 	{
 		print_error(EAMBGRD, token, -1);
@@ -49,7 +49,7 @@ char *token, int type)
 			return (free_double_ptr(split), 1);
 	}
 	else if (split)
-		fill_list_redis(redis, redis_value(split), type);
+		fill_list_redis(redis, ft_strdup(split[0]), type);
 	return (free_double_ptr(split), 0);
 }
 
@@ -61,8 +61,7 @@ t_redis	*redis_expander(t_global *global, t_redis *redis)
 	if (redis && (ft_strchr(redis->str, '$') \
 	|| ft_strchr(redis->str, '*')) && redis->type != 1)
 	{
-		if (expanded_into_redis(&new_redis, redis, \
-		global->env, global->exit_status))
+		if (expanded_into_redis(global, &new_redis, redis))
 			return (NULL);
 	}
 	else if (redis)
