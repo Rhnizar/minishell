@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 11:07:55 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/19 22:38:43 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:27:23 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	expanded_into_redis(t_global *global, t_redis **redis, t_redis *old_redis)
 	return (free_tokens(tokens), free(output), 0);
 }
 
-static void	lkmala(t_global *global, t_tokens **tmp, char **output)
+static void	sequel(t_global *global, t_tokens **tmp, char **output)
 {
 	*output = join_to_str(*output, '\x01');
 	*output = expantion_dollar_case(global, tmp, *output, 1);
@@ -89,7 +89,7 @@ void	expanded_into_args(t_args **args, char *token, t_global *global)
 	{
 		if (!ft_strcmp(tmp->str, "$"))
 		{
-			lkmala(global, &tmp, &output);
+			sequel(global, &tmp, &output);
 			if (!tmp)
 				break ;
 		}

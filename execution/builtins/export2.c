@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:19:01 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/18 13:29:00 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:41:31 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	edit_value2(t_env *exp_or_env, char *var, size_t equal, char *str)
 		tmp_exp_env = tmp_exp_env->next;
 	}
 	if (!tmp_exp_env)
-		add_to_env(&exp_or_env, var, ft_strdup((ft_strchr(str, '=') + 1)));
+		add_to_env(&exp_or_env, ft_strdup(var), \
+			ft_strdup((ft_strchr(str, '=') + 1)));
 }
 
 void	edit_value(t_env *env, t_env *export, char *str)
