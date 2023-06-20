@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 07:50:54 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 22:54:58 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:24:01 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,33 +75,6 @@ int	count_split(char **split)
 	while (split && split[count])
 		count++;
 	return (count);
-}
-
-int	is_wildcard(char *str)
-{
-	char	*quote;
-	int		i;
-
-	i = -1;
-	quote = NULL;
-	while (str && str[++i])
-	{
-		while (str[i] && !ft_strchr("\"'", str[i]))
-		{
-			printf("BAH: %c\n", str[i]);
-			if (str[i] == '*')
-				return (1);
-			i++;
-		}
-		if (!str[i])
-			break ;
-		quote = ft_strchr("\"'", str[i]);
-		if (str[i + 1])
-			i++;
-		while (str[i] && quote[0] != str[i])
-			i++;
-	}
-	return (0);
 }
 
 t_tokens	*expention_wildcard_case(char *to_handle)

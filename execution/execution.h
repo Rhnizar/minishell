@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:19 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 22:40:08 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:23:21 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,12 @@ int			skipp_dollar(t_tokens **tmp, int *count_dollar, char **output);
 t_tokens	*expention_wildcard_case(char *to_handle);
 char		**split_expended(char *token);
 int			count_split(char **split);
-int			is_wildcard(char *str);
-t_tokens	*wildcard(char	*arg);
-int			has_space_only(char *str);
-char		**prepare_to_fill(t_redis **redis, int type, char *expended);
 char		*filter_expanded(char *str, int i);
+char		**prepare_to_fill(t_redis **redis, int type, char *expended);
+int			has_space_only(char *str);
 char		*remove_nonprint(char *str, char *charset);
 char		*add_nonprintable(char *str);
-
+t_tokens	*wildcard(char	*arg);
 /*========= end expender =============*/
 
 #endif

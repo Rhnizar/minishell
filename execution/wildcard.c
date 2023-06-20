@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:24:48 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 22:50:17 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:20:29 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	skip_asterisks(char	*str)
+static int	skip_asterisks(char	*str)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ int	skip_asterisks(char	*str)
 	return (i);
 }
 
-int	is_match(char *str, char *pattern)
+static int	is_match(char *str, char *pattern)
 {
 	t_vars	vars;
 

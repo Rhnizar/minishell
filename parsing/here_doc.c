@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:35:00 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 13:20:20 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:10:33 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*expanded_into_heredoc(char *token, t_global *global)
 	return (output);
 }
 
-void	herdoc_expander(t_global *global, char *line, char *delem, int fd)
+static void	herdoc_expander(t_global *global, char *line, char *delem, int fd)
 {
 	char	*output;
 

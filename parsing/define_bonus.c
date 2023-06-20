@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   define_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:25 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/19 20:34:22 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:16:34 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	check_subshell(char *str)
+static int	check_subshell(char *str)
 {
 	int	i;
 

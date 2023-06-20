@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:09:13 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/17 17:38:43 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:13:45 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	check_quote(t_check *check, int *i)
+static void	check_quote(t_check *check, int *i)
 {
 	if (check->str[*i] == '"' && check->sq == 0 && check->dq == 0)
 		dq_sq(check, i, &check->dq);
@@ -32,7 +32,7 @@ void	check_quote(t_check *check, int *i)
 		check->ot = join_to_str(check->ot, check->str[*i]);
 }
 
-void	check_space_tab(t_check *check, int *i)
+static void	check_space_tab(t_check *check, int *i)
 {
 	while (check->str[*i] && (check->str[*i] == ' ' || check->str[*i] == '\t'))
 		(*i)++;
@@ -44,7 +44,7 @@ void	check_space_tab(t_check *check, int *i)
 		(*i)--;
 }
 
-void	fill_with_nonpr_char(t_check *check)
+static void	fill_with_nonpr_char(t_check *check)
 {
 	int	i;
 

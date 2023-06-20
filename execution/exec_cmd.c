@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:30 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/18 12:01:50 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:28:10 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, \
+static void	exec_cmd_with_pipe(t_global *global, t_cmdshell *all_cmds, \
 	int i, int count)
 {
 	t_recipe	recipe;

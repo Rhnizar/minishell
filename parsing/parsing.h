@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:09:38 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/17 15:19:07 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:24:48 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,8 @@ typedef struct s_cmdshell
 /*========= start token =============*/
 int				split_and_fill_list(char *output, t_tokens **tokens);
 int				init_check(t_check	*check, char *read_line);
-void			fill_with_nonpr_char(t_check *check);
 int				find_separator(char **sep, char *str);
-void			check_quote(t_check *check, int *i);
 char			*join_to_str(char *str, char c);
-void			check_space_tab(t_check *check, int *i);
 void			create_tokens(t_tokens **lst, char *str);
 void			dq_sq(t_check *check, int *i, int *dq_or_sq);
 /*========= end token =============*/

@@ -6,11 +6,21 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 08:56:35 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/18 15:12:24 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:19:05 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	syntx_error(char *arg)
+{
+	ft_putstr_fd(ESYNTX, 2);
+	if (arg[0] == '\"' || arg[0] == '\"')
+		ft_putchar_fd(*arg, 2);
+	else
+		ft_putstr_fd(arg, 2);
+	ft_putstr_fd("\'\n", 2);
+}
 
 int	is_separator(char *token, char **sep)
 {
@@ -23,16 +33,6 @@ int	is_separator(char *token, char **sep)
 			return (i);
 	}
 	return (-1);
-}
-
-void	syntx_error(char *arg)
-{
-	ft_putstr_fd(ESYNTX, 2);
-	if (arg[0] == '\"' || arg[0] == '\"')
-		ft_putchar_fd(*arg, 2);
-	else
-		ft_putstr_fd(arg, 2);
-	ft_putstr_fd("\'\n", 2);
 }
 
 static int	check_quotes(char *token)

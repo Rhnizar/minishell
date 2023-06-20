@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/20 11:54:59 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:22:05 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*ft_join_command_path(char *path, char *cmd)
 }
 
 /* Check the existance of a command and it's permission*/
-int	check_permission(char *cmd)
+static int	check_permission(char *cmd)
 {
 	struct stat	file_state;
 
@@ -76,7 +76,7 @@ char	*valid_command_path(char **paths, char *cmd)
 	return (NULL);
 }
 
-char	*handle_current_dir(char *to_handle)
+static char	*handle_current_dir(char *to_handle)
 {
 	char	*output;
 	int		i;

@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/20 11:24:19 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:31:53 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	count_nbr_commands(t_cmdshell *all_cmds)
+static int	count_nbr_commands(t_cmdshell *all_cmds)
 {
 	t_cmdshell	*tmp;
 	int			count;
@@ -29,7 +29,7 @@ int	count_nbr_commands(t_cmdshell *all_cmds)
 	return (count);
 }
 
-void	fill_exit_status(t_global *global, int count)
+static void	fill_exit_status(t_global *global, int count)
 {
 	int	i;
 	int	exit_status;
@@ -50,7 +50,8 @@ void	fill_exit_status(t_global *global, int count)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
+static void	exec_one_command(t_global *global, t_cmdshell *cmd, \
+int i, int count)
 {
 	int	stdout_copy;
 
@@ -74,7 +75,7 @@ void	exec_one_command(t_global *global, t_cmdshell *cmd, int i, int count)
 		not_builtin(global, cmd, i, count);
 }
 
-t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
+static t_cmdshell	*exec_commands(t_global *global, t_cmdshell *all_cmds)
 {
 	int			count;
 	int			i;
