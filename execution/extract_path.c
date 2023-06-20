@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:11:01 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/19 20:48:34 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:54:59 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	**get_paths(t_env *env)
 	if (env == NULL)
 		return (NULL);
 	if (env->value[0] == '\0')
-		return (ft_split("rr", ' '));
+		return (ft_split("\x05\x05", ' '));
 	env->value = handle_current_dir(env->value);
 	return (ft_split(env->value, ':'));
 }

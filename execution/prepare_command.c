@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:20:27 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/19 20:47:12 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:55:19 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_recipe	prepare_command(t_global *global, t_cmdshell *all_cmds)
 		exit(0);
 	if (all_cmds->cmds->args->str[0] == '\0')
 		print_error(ECNF, all_cmds->cmds->args->str, 127);
-	if (paths && !ft_strcmp(paths[0], "rr"))
+	if (paths && !ft_strcmp(paths[0], "\x05\x05"))
 		print_error(ENSFD, all_cmds->cmds->args->str, 127);
 	output.args = get_args(all_cmds);
 	output.command = valid_command_path(paths, output.args[0]);
