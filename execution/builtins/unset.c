@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 12:32:56 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/15 21:25:46 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:55:48 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,24 @@ void	unset(t_global *global, t_env **env, t_env **export, t_args *args)
 	t_args	*tmp_args;
 
 	tmp_args = args;
-	if (tmp_args)
+	global->exit_status = 0;
+	if (tmp_args && tmp_args->next)
 	{
-		if (tmp_args->next)
+		while (tmp_args)
 		{
-			while (tmp_args)
+			if (identifier(tmp_args->str, "unset") == 1)
 			{
-				if (identifier(tmp_args->str, "unset") == 1)
+				if (tmp_args->str[0] == '#')
 				{
-					if (tmp_args->str[0] == '#')
-					{
-						global->exit_status = 0;
-						break ;
-					}
-					tmp_args = tmp_args->next;
-					global->exit_status = 1;
-					continue ;
+					global->exit_status = 0;
+					break ;
 				}
-				call_unset(env, export, tmp_args->str);
 				tmp_args = tmp_args->next;
+				global->exit_status = 1;
+				continue ;
 			}
+			call_unset(env, export, tmp_args->str);
+			tmp_args = tmp_args->next;
 		}
 	}
 }

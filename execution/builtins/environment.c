@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:30:32 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/16 15:26:35 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:37:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,31 @@ t_env	*create_env(char **envp)
 	return (env);
 }
 
-void	print_env(t_env *env)
+void	print_env(t_global *global)
 {
 	t_env	*tmp_env;
+	t_env	*tmp_env2;
 
-	tmp_env = env;
-	while (tmp_env)
+	tmp_env = global->env;
+	tmp_env2 = global->env;
+	while (tmp_env2)
 	{
-		ft_putstr_fd(tmp_env->var, 1);
-		ft_putstr_fd("=", 1);
-		ft_putstr_fd(tmp_env->value, 1);
-		ft_putstr_fd("\n", 1);
-		tmp_env = tmp_env->next;
+		if (ft_strcmp(tmp_env2->var, "PATH") == 0)
+		{
+			while (tmp_env)
+			{
+				ft_putstr_fd(tmp_env->var, 1);
+				ft_putstr_fd("=", 1);
+				ft_putstr_fd(tmp_env->value, 1);
+				ft_putstr_fd("\n", 1);
+				tmp_env = tmp_env->next;
+			}
+			global->exit_status = 0;
+			return ;
+		}
+		tmp_env2 = tmp_env2->next;
 	}
+	global->exit_status = 127;
+	if (!tmp_env2)
+		ft_putstr_fd("minishell: env: No such file or directory\n", 2);
 }

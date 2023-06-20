@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:24:38 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/06/15 12:43:33 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:52:03 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	builtins(t_global *global, t_cmdshell *all_cmds)
 	if (ft_strncmp("export", command, ft_strlen("export")) == 0)
 		add_to_export_or_print(global, &global->env, &global->export, args);
 	if (ft_strncmp("env", command, ft_strlen("env")) == 0)
-		print_env(global->env);
+		print_env(global);
 	if (ft_strncmp("unset", command, ft_strlen("unset")) == 0)
 		unset(global, &global->env, &global->export, args);
 	if (ft_strncmp("exit", command, ft_strlen("exit")) == 0)
