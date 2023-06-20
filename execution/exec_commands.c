@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:01:31 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/06/18 11:57:56 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:24:19 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	fill_exit_status(t_global *global, int count)
 	{
 		while (i != count)
 			waitpid(global->pid[i++], &exit_status, 0);
-		if (exit_status == 2)
-			global->exit_status = 130;
+		if (exit_status == 2 || exit_status == 3)
+			global->exit_status = 128 + exit_status;
 		else
 			global->exit_status = exit_status >> 8;
 	}
