@@ -1,1 +1,10 @@
-# minishell
+![minishell-01](https://github.com/Rhnizar/minishell/assets/64803406/f5848a91-2d2d-43ed-824a-c6aa4e297c0a)
+![minishell-02](https://github.com/Rhnizar/minishell/assets/64803406/e1ecfc53-fbc2-4365-8c7f-9b20b0a821be)
+![minishell-03](https://github.com/Rhnizar/minishell/assets/64803406/aa0f483a-1df4-4455-af91-234cfc091826)
+![minishell-04](https://github.com/Rhnizar/minishell/assets/64803406/28ecf386-a4da-4c10-af7b-88403d9cf7c1)
+![minishell-05](https://github.com/Rhnizar/minishell/assets/64803406/e7226e45-cdb1-4547-93d0-254f5e2a609e)
+![minishell-06](https://github.com/Rhnizar/minishell/assets/64803406/15f761f6-1fbe-4d71-860e-cd63678c218c)
+![minishell-07](https://github.com/Rhnizar/minishell/assets/64803406/6e09154c-2d7c-4801-ad78-8c6f6377ec47)
+![minishell-08](https://github.com/Rhnizar/minishell/assets/64803406/487693fb-3678-46af-b745-4cdc70d3a376)
+![minishell-09](https://github.com/Rhnizar/minishell/assets/64803406/f4ca85c6-8211-4668-b9b9-6502655fdcc8)
+![minishell-10](https://github.com/Rhnizar/minishell/assets/64803406/c4c652b0-cd99-431f-923a-4d9c01c3d910)
